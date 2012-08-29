@@ -1,0 +1,220 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: spider catalog\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-07-22 14:49+0400\n"
+"PO-Revision-Date: 2012-07-22 14:54+0400\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-KeywordsList: _;gettext;gettext_noop;__\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-Language: French\n"
+"X-Poedit-SearchPath-0: C:\\wamp\\www\\wordpress\\wp-content\\plugins\\catalog\n"
+
+#: C:\wamp\www\wordpress\wp-content\plugins\catalog/front_end_functions
+#: .html.php:259
+msgid "Back to Catalog"
+msgstr "Retour au catalogue"
+
+#: C:\wamp\www\wordpress\wp-content\plugins\catalog/front_end_functions
+#: .html.php:281
+#: .html.php:298
+#: .html.php:1151
+#: .html.php:1173
+#: .html.php:1912
+#: .html.php:1940
+msgid "Not rated Yet."
+msgstr "Pas encore noté."
+
+#: C:\wamp\www\wordpress\wp-content\plugins\catalog/front_end_functions
+#: .html.php:288
+#: .html.php:289
+#: .html.php:290
+#: .html.php:291
+#: .html.php:292
+#: .html.php:1160
+#: .html.php:1161
+#: .html.php:1162
+#: .html.php:1163
+#: .html.php:1164
+#: .html.php:1925
+#: .html.php:1926
+#: .html.php:1927
+#: .html.php:1928
+#: .html.php:1929
+msgid "Rated."
+msgstr "Évalué."
+
+#: C:\wamp\www\wordpress\wp-content\plugins\catalog/front_end_functions
+#: .html.php:300
+#: .html.php:1100
+#: .html.php:1943
+#: C:\wamp\www\wordpress\wp-content\plugins\catalog/star_rate.php:72
+msgid "Rating"
+msgstr "classement"
+
+#: C:\wamp\www\wordpress\wp-content\plugins\catalog/front_end_functions
+#: .html.php:300
+#: .html.php:1176
+#: .html.php:1943
+#: C:\wamp\www\wordpress\wp-content\plugins\catalog/star_rate.php:72
+msgid "You have already rated this product."
+msgstr "Vous avez déjà noté ce produit."
+
+#: C:\wamp\www\wordpress\wp-content\plugins\catalog/front_end_functions
+#: .html.php:365
+#: .html.php:1253
+#: .html.php:1884
+msgid "Market Price:"
+msgstr "Prix ​​du marché:"
+
+#: C:\wamp\www\wordpress\wp-content\plugins\catalog/front_end_functions
+#: .html.php:370
+#: .html.php:1139
+#: .html.php:1984
+msgid "Category:"
+msgstr "Catégorie:"
+
+#: C:\wamp\www\wordpress\wp-content\plugins\catalog/front_end_functions
+#: .html.php:435
+msgid "Add your review here"
+msgstr "Donnez votre avis ici"
+
+#: C:\wamp\www\wordpress\wp-content\plugins\catalog/front_end_functions
+#: .html.php:451
+#: .html.php:1097
+msgid "Name"
+msgstr "nom"
+
+#: C:\wamp\www\wordpress\wp-content\plugins\catalog/front_end_functions
+#: .html.php:457
+msgid "Message:"
+msgstr "message:"
+
+#: C:\wamp\www\wordpress\wp-content\plugins\catalog/front_end_functions
+#: .html.php:470
+msgid "Please enter the code:"
+msgstr "Please enter the code"
+
+#: C:\wamp\www\wordpress\wp-content\plugins\catalog/front_end_functions
+#: .html.php:474
+msgid "Send"
+msgstr "envoyer"
+
+#: C:\wamp\www\wordpress\wp-content\plugins\catalog/front_end_functions
+#: .html.php:474
+msgid "The Name field is required."
+msgstr "Le champ nom est obligatoire."
+
+#: C:\wamp\www\wordpress\wp-content\plugins\catalog/front_end_functions
+#: .html.php:474
+msgid "The Message field is required."
+msgstr "Le champ message est obligatoire."
+
+#: C:\wamp\www\wordpress\wp-content\plugins\catalog/front_end_functions
+#: .html.php:474
+#: .html.php:497
+msgid "Sorry, the code you entered was invalid."
+msgstr "Désolé, le code que vous avez entré n'est pas valide."
+
+#: C:\wamp\www\wordpress\wp-content\plugins\catalog/front_end_functions
+#: .html.php:493
+msgid "The review has been added successfully."
+msgstr "L'examen a été ajouté avec succès."
+
+#: C:\wamp\www\wordpress\wp-content\plugins\catalog/front_end_functions
+#: .html.php:504
+msgid "Author:"
+msgstr "Auteur:"
+
+#: C:\wamp\www\wordpress\wp-content\plugins\catalog/front_end_functions
+#: .html.php:1052
+#: .html.php:1772
+msgid "Choose Category"
+msgstr "choisir une catégorie"
+
+#: C:\wamp\www\wordpress\wp-content\plugins\catalog/front_end_functions
+#: .html.php:1054
+#: .html.php:1774
+msgid "All"
+msgstr "tous"
+
+#: C:\wamp\www\wordpress\wp-content\plugins\catalog/front_end_functions
+#: .html.php:1075
+#: .html.php:1796
+msgid "Search"
+msgstr "Rechercher"
+
+#: C:\wamp\www\wordpress\wp-content\plugins\catalog/front_end_functions
+#: .html.php:1077
+#: .html.php:1798
+msgid "Go"
+msgstr "aller"
+
+#: C:\wamp\www\wordpress\wp-content\plugins\catalog/front_end_functions
+#: .html.php:1077
+msgid "Reset"
+msgstr "remettre"
+
+#: C:\wamp\www\wordpress\wp-content\plugins\catalog/front_end_functions
+#: .html.php:1095
+msgid "Product"
+msgstr "produit"
+
+#: C:\wamp\www\wordpress\wp-content\plugins\catalog/front_end_functions
+#: .html.php:1107
+msgid "Parameters"
+msgstr "Paramètres"
+
+#: C:\wamp\www\wordpress\wp-content\plugins\catalog/front_end_functions
+#: .html.php:1110
+msgid "Description"
+msgstr "description"
+
+#: C:\wamp\www\wordpress\wp-content\plugins\catalog/front_end_functions
+#: .html.php:1114
+msgid "Price"
+msgstr "​​prix"
+
+#: C:\wamp\www\wordpress\wp-content\plugins\catalog/front_end_functions
+#: .html.php:1176
+msgid "Rating:"
+msgstr "Note:"
+
+#: C:\wamp\www\wordpress\wp-content\plugins\catalog/front_end_functions
+#: .html.php:1240
+#: .html.php:2065
+msgid "More"
+msgstr "plus"
+
+#: C:\wamp\www\wordpress\wp-content\plugins\catalog/front_end_functions
+#: .html.php:1303
+#: .html.php:2138
+msgid "First"
+msgstr "première"
+
+#: C:\wamp\www\wordpress\wp-content\plugins\catalog/front_end_functions
+#: .html.php:1313
+#: .html.php:2148
+msgid "Prev"
+msgstr "Précédent"
+
+#: C:\wamp\www\wordpress\wp-content\plugins\catalog/front_end_functions
+#: .html.php:1343
+#: .html.php:2178
+msgid "Next"
+msgstr "prochain"
+
+#: C:\wamp\www\wordpress\wp-content\plugins\catalog/front_end_functions
+#: .html.php:1351
+#: .html.php:2186
+msgid "Last"
+msgstr "dernier"
+
+#: C:\wamp\www\wordpress\wp-content\plugins\catalog/elements/sqlmultilistx.php:3
+msgid "select.genericlist"
+msgstr "select.genericlist"
+

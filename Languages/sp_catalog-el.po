@@ -1,0 +1,220 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: spider catalog\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-07-22 15:28+0400\n"
+"PO-Revision-Date: 2012-07-22 15:49+0400\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-KeywordsList: _;gettext;gettext_noop;__\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-Language: Greek\n"
+"X-Poedit-SearchPath-0: C:\\wamp\\www\\wordpress\\wp-content\\plugins\\catalog\n"
+
+#: C:\wamp\www\wordpress\wp-content\plugins\catalog/front_end_functions
+#: .html.php:259
+msgid "Back to Catalog"
+msgstr "Επιστροφή στον κατάλογο"
+
+#: C:\wamp\www\wordpress\wp-content\plugins\catalog/front_end_functions
+#: .html.php:281
+#: .html.php:298
+#: .html.php:1151
+#: .html.php:1173
+#: .html.php:1912
+#: .html.php:1940
+msgid "Not rated Yet."
+msgstr "Δεν έχει βαθμολογηθεί ακόμα."
+
+#: C:\wamp\www\wordpress\wp-content\plugins\catalog/front_end_functions
+#: .html.php:288
+#: .html.php:289
+#: .html.php:290
+#: .html.php:291
+#: .html.php:292
+#: .html.php:1160
+#: .html.php:1161
+#: .html.php:1162
+#: .html.php:1163
+#: .html.php:1164
+#: .html.php:1925
+#: .html.php:1926
+#: .html.php:1927
+#: .html.php:1928
+#: .html.php:1929
+msgid "Rated."
+msgstr "Ονομαστική."
+
+#: C:\wamp\www\wordpress\wp-content\plugins\catalog/front_end_functions
+#: .html.php:300
+#: .html.php:1100
+#: .html.php:1943
+#: C:\wamp\www\wordpress\wp-content\plugins\catalog/star_rate.php:72
+msgid "Rating"
+msgstr "εκτίμηση"
+
+#: C:\wamp\www\wordpress\wp-content\plugins\catalog/front_end_functions
+#: .html.php:300
+#: .html.php:1176
+#: .html.php:1943
+#: C:\wamp\www\wordpress\wp-content\plugins\catalog/star_rate.php:72
+msgid "You have already rated this product."
+msgstr "Έχετε ήδη βαθμολογήσει αυτό το προϊόν."
+
+#: C:\wamp\www\wordpress\wp-content\plugins\catalog/front_end_functions
+#: .html.php:365
+#: .html.php:1253
+#: .html.php:1884
+msgid "Market Price:"
+msgstr "Τιμή αγοράς:"
+
+#: C:\wamp\www\wordpress\wp-content\plugins\catalog/front_end_functions
+#: .html.php:370
+#: .html.php:1139
+#: .html.php:1984
+msgid "Category:"
+msgstr "Κατηγορία:"
+
+#: C:\wamp\www\wordpress\wp-content\plugins\catalog/front_end_functions
+#: .html.php:435
+msgid "Add your review here"
+msgstr "Προσθέστε εδώ την κριτική σου"
+
+#: C:\wamp\www\wordpress\wp-content\plugins\catalog/front_end_functions
+#: .html.php:451
+#: .html.php:1097
+msgid "Name"
+msgstr "όνομα"
+
+#: C:\wamp\www\wordpress\wp-content\plugins\catalog/front_end_functions
+#: .html.php:457
+msgid "Message:"
+msgstr "Μήνυμα:"
+
+#: C:\wamp\www\wordpress\wp-content\plugins\catalog/front_end_functions
+#: .html.php:470
+msgid "Please enter the code:"
+msgstr "Παρακαλώ εισάγετε τον κωδικό:"
+
+#: C:\wamp\www\wordpress\wp-content\plugins\catalog/front_end_functions
+#: .html.php:474
+msgid "Send"
+msgstr "Αποστολή"
+
+#: C:\wamp\www\wordpress\wp-content\plugins\catalog/front_end_functions
+#: .html.php:474
+msgid "The Name field is required."
+msgstr "Το πεδίο Όνομα απαιτείται."
+
+#: C:\wamp\www\wordpress\wp-content\plugins\catalog/front_end_functions
+#: .html.php:474
+msgid "The Message field is required."
+msgstr "Το πεδίο Μήνυμα απαιτείται."
+
+#: C:\wamp\www\wordpress\wp-content\plugins\catalog/front_end_functions
+#: .html.php:474
+#: .html.php:497
+msgid "Sorry, the code you entered was invalid."
+msgstr "Λυπούμαστε, ο κωδικός σας ήταν άκυρο."
+
+#: C:\wamp\www\wordpress\wp-content\plugins\catalog/front_end_functions
+#: .html.php:493
+msgid "The review has been added successfully."
+msgstr "Η αναθεώρηση έχει προστεθεί με επιτυχία."
+
+#: C:\wamp\www\wordpress\wp-content\plugins\catalog/front_end_functions
+#: .html.php:504
+msgid "Author:"
+msgstr "Συγγραφέας:"
+
+#: C:\wamp\www\wordpress\wp-content\plugins\catalog/front_end_functions
+#: .html.php:1052
+#: .html.php:1772
+msgid "Choose Category"
+msgstr "Επιλέξτε Κατηγορία"
+
+#: C:\wamp\www\wordpress\wp-content\plugins\catalog/front_end_functions
+#: .html.php:1054
+#: .html.php:1774
+msgid "All"
+msgstr "όλα"
+
+#: C:\wamp\www\wordpress\wp-content\plugins\catalog/front_end_functions
+#: .html.php:1075
+#: .html.php:1796
+msgid "Search"
+msgstr "Αναζήτηση"
+
+#: C:\wamp\www\wordpress\wp-content\plugins\catalog/front_end_functions
+#: .html.php:1077
+#: .html.php:1798
+msgid "Go"
+msgstr "πάω"
+
+#: C:\wamp\www\wordpress\wp-content\plugins\catalog/front_end_functions
+#: .html.php:1077
+msgid "Reset"
+msgstr "επαναφορά"
+
+#: C:\wamp\www\wordpress\wp-content\plugins\catalog/front_end_functions
+#: .html.php:1095
+msgid "Product"
+msgstr "προϊόν"
+
+#: C:\wamp\www\wordpress\wp-content\plugins\catalog/front_end_functions
+#: .html.php:1107
+msgid "Parameters"
+msgstr "Παράμετροι"
+
+#: C:\wamp\www\wordpress\wp-content\plugins\catalog/front_end_functions
+#: .html.php:1110
+msgid "Description"
+msgstr "περιγραφή"
+
+#: C:\wamp\www\wordpress\wp-content\plugins\catalog/front_end_functions
+#: .html.php:1114
+msgid "Price"
+msgstr "τιμή"
+
+#: C:\wamp\www\wordpress\wp-content\plugins\catalog/front_end_functions
+#: .html.php:1176
+msgid "Rating:"
+msgstr "Βαθμολογία:"
+
+#: C:\wamp\www\wordpress\wp-content\plugins\catalog/front_end_functions
+#: .html.php:1240
+#: .html.php:2065
+msgid "More"
+msgstr "περισσότερο"
+
+#: C:\wamp\www\wordpress\wp-content\plugins\catalog/front_end_functions
+#: .html.php:1303
+#: .html.php:2138
+msgid "First"
+msgstr "πρώτα"
+
+#: C:\wamp\www\wordpress\wp-content\plugins\catalog/front_end_functions
+#: .html.php:1313
+#: .html.php:2148
+msgid "Prev"
+msgstr "Προηγούμενο"
+
+#: C:\wamp\www\wordpress\wp-content\plugins\catalog/front_end_functions
+#: .html.php:1343
+#: .html.php:2178
+msgid "Next"
+msgstr "Επόμενη"
+
+#: C:\wamp\www\wordpress\wp-content\plugins\catalog/front_end_functions
+#: .html.php:1351
+#: .html.php:2186
+msgid "Last"
+msgstr "Τελευταία"
+
+#: C:\wamp\www\wordpress\wp-content\plugins\catalog/elements/sqlmultilistx.php:3
+msgid "select.genericlist"
+msgstr "select.genericlist"
+
