@@ -8,7 +8,7 @@ Stable tag: trunk
 License: GPLv2 or later  
 License URI: http://www.gnu.org/licenses/gpl-2.0.html  
   
-Spider Catalog for WordPress is a convenient tool for organizing the products represented on your website into catalogs. Each product on the catalog is assigned with a relevant category, which makes it easier for the customers to search and identify the needed products within the catalog.  
+Spider Catalog for WordPress is a convenient tool for organizing the products represented on your website into catalogs.
   
 == Description ==  
   
