@@ -96,3 +96,10 @@ After downloading the ZIP file
   
 Once the plugin is activated, you'll notice a menu on the left called "Spider Catalog".  
 If any problem occurs with Spider Catalog, please contact us info@web-dorado.com.  
+
+== Screenshots ==
+1.  Spider Catalog  - Category view  
+2.  Spider Catalog  - Products view 
+3.  Spider Catalog  - Add a category  
+4.  Spider Catalog  - Global Options  
+5.  Spider Catalog  - Product PageOptions
