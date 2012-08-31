@@ -14,7 +14,8 @@ Spider Catalog for WordPress is a convenient tool for organizing the products re
   
 ###[Spider Catalog](http://web-dorado.com/products/spider-catalog-wordpress.html)  
   
-Spider Catalog for WordPress is a convenient tool for organizing the products represented on your website into catalogs. Each product on the catalog is assigned with a relevant category, which makes it easier for the customers to search and identify the needed products within the catalog. It is possible to add an unlimited number of parameters for each of the categories in the catalog in order to allow a detailed representation of the product on the catalog. Moreover, each product on the catalog can be accompanied with an image. Customers are provided with the possibility of rating the products available on the catalog, as well as writing customer reviews that will appear under the catalog products.  
+Spider Catalog for WordPress is a convenient tool for organizing the products represented on your website into catalogs. Each product on the catalog is assigned with a relevant category, which makes it easier for the customers to search and identify the needed products within the catalog. It is possible to add an unlimited number of parameters for each of the categories in the catalog in order to allow a detailed representation of the product on the catalog. Moreover, each product on the catalog can be accompanied with an image. Customers are provided with the possibility of rating the products available on the catalog, as well as writing customer reviews that will appear under the catalog products.
+###If you want to customize the design of the catalog, you can buy the commercial version[here.](http://web-dorado.com/products/spider-catalog-wordpress.html) Color, font, size and design of each element of the catalog are customizable in the commercial version.        
   
 = Features of Spider Catalog: =  
 = Possibility to make the following customizations: =  
