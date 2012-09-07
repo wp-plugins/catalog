@@ -273,7 +273,7 @@ function add_upload(id_upload){
 				var a_element=document.createElement('a');
 				a_element.setAttribute("class","button lu_upload_button");
 				a_element.setAttribute("id","upload_href_"+count_of_elements);
-				a_element.setAttribute("href","javascript:narek('"+count_of_elements+"')");
+				a_element.setAttribute("onclick","narek('"+count_of_elements+"')");
 				a_element.appendChild(upload_button_texnod);
 				
 				
@@ -407,13 +407,13 @@ $i=0;
 if($images[0] || $count_ord!=1)
 for($i=0;$i<$count_ord;$i++){ ?>
 <div id="upload_div_<?php echo $i+1; ?>">
-<input type="text"  id="image_no_<?php echo $i+1; ?>" value="<?php echo stripslashes($images[$i]) ?>" onchange="add_upload('<?php echo $i+1; ?>');" class="text_input" style="width:200px;"><a id="upload_href_<?php echo $i+1; ?>" class="button lu_upload_button" href="javascript:narek('<?php echo $i+1; ?>');">Select</a><input type="button" value="X" title="Delete" onclick="remov_upload('<?php echo $i+1; ?>')" /><br>
+<input type="text"  id="image_no_<?php echo $i+1; ?>" value="<?php echo stripslashes($images[$i]) ?>" onchange="add_upload('<?php echo $i+1; ?>');" class="text_input" style="width:200px;"><a id="upload_href_<?php echo $i+1; ?>" class="button lu_upload_button" onclick="narek('<?php echo $i+1; ?>')" >Select</a><input type="button" value="X" title="Delete" onclick="remov_upload('<?php echo $i+1; ?>')" /><br>
 </div>
 
 <?php }?>
 
 <div id="upload_div_<?php echo $i+1; ?>">
-<input type="text"  id="image_no_<?php echo $i+1; ?>" value="<?php echo stripslashes($images[$i]) ?>" onchange="add_upload('<?php echo $i+1; ?>');" class="text_input" style="width:200px;"><a id="upload_href_<?php echo $i+1; ?>" class="button lu_upload_button" href="javascript:narek('<?php echo $i+1; ?>');">Select</a><input type="button" value="X" title="Delete" onclick="remov_upload('<?php echo $i+1; ?>')" /><br>
+<input type="text"  id="image_no_<?php echo $i+1; ?>" value="<?php echo stripslashes($images[$i]) ?>" onchange="add_upload('<?php echo $i+1; ?>');" class="text_input" style="width:200px;"><a id="upload_href_<?php echo $i+1; ?>" class="button lu_upload_button" onclick="narek('<?php echo $i+1; ?>')">Select</a><input type="button" value="X" title="Delete" onclick="remov_upload('<?php echo $i+1; ?>')" /><br>
 </div>
 </td>
 <tr>
@@ -667,7 +667,7 @@ function add_upload(id_upload){
 				var a_element=document.createElement('a');
 				a_element.setAttribute("class","button lu_upload_button");
 				a_element.setAttribute("id","upload_href_"+count_of_elements);
-				a_element.setAttribute("href","javascript:narek('"+count_of_elements+"')");
+				a_element.setAttribute("onclick","narek('"+count_of_elements+"')");
 				a_element.appendChild(upload_button_texnod);
 				
 				
@@ -798,7 +798,7 @@ function create_images_tags()
 <tr>
 <td id="img__uploads">
 <div id="upload_div_1">
-<input type="text"  id="image_no_1" onchange="add_upload('1');" class="text_input" style="width:200px;"><a id="upload_href_1" class="button lu_upload_button" href="javascript:narek('1');">Select</a><input type="button" value="X" title="Delete" onclick="remov_upload('1')" /><br>
+<input type="text"  id="image_no_1" onchange="add_upload('1');" class="text_input" style="width:200px;"><a id="upload_href_1" class="button lu_upload_button" onclick="narek('<?php echo $i+1; ?>')">Select</a><input type="button" value="X" title="Delete" onclick="remov_upload('1')" /><br>
 </div>
 </td>
 <tr>
