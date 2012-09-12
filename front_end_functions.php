@@ -265,8 +265,10 @@ function showPublishedProducts_1($cat_id=1,$show_cat_det=1,$cels_or_list='')
 		
 		if($prod_name!="")
 		{
-		$query_count .= " and ".$wpdb->prefix."spidercatalog_products.name like '%".$prod_name."%' ";
-		$query .= " and ".$wpdb->prefix."spidercatalog_products.name like '%".$prod_name."%' ";
+		
+		$query_count .= " and (".$wpdb->prefix."spidercatalog_products.name like '%".$prod_name."%' or ".$wpdb->prefix."spidercatalog_products.description like '%".$prod_name."%' )  ";
+		$query .= " and (".$wpdb->prefix."spidercatalog_products.name like '%".$prod_name."%' or ".$wpdb->prefix."spidercatalog_products.description like '%".$prod_name."%' )  ";
+		
 		}
 		
 		$query .= "order by ".$wpdb->prefix."spidercatalog_products.ordering limit ".(($page_num-1)*$prod_in_page).",".$prod_in_page."  ";
