@@ -45,7 +45,7 @@ add_shortcode('Spider_Catalog_Product', 'Spider_Catalog_Single_product_shotrcode
 
 //// singl product
  function   spider_cat_Products_list($id,$details,$type){
-	require_once("front_end_functions .html.php");
+	require_once("front_end_functions.html.php");
 	require_once("front_end_functions.php");
 	if(isset($_GET['product_id'])){
 		if(isset($_GET['view']))
@@ -76,7 +76,7 @@ add_shortcode('Spider_Catalog_Product', 'Spider_Catalog_Single_product_shotrcode
 	 {
 		 
 		 
-		 	require_once("front_end_functions .html.php");
+		 	require_once("front_end_functions.html.php");
 			require_once("front_end_functions.php");
 			return front_end_single_product($id);
 	

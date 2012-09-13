@@ -1285,7 +1285,7 @@ echo '</table></td>';
 
 if($params[ 'list_show_description' ])
 {	
-   $description = explode('<hr id="system-readmore" />', stripslashes($row->description));
+   $description = explode('<!--more-->', stripslashes($row->description));
    echo '<td style="border-width:'.$params[ 'border_width' ].'px;border-color:'.$params[ 'border_color' ].';border-style:'.$params[ 'border_style' ].';border-top:none; border-left:none;padding:10px">
    <div id="prodDescription" style="'. (($params['description_size_list'] != '') ? ('font-size:' . $params['description_size_list'] . 'px;') : '') .'">' . $description[0] . ' </div>
    <div id="prodMore"  style="'. (($params['description_size_list'] != '') ? ('font-size:' . $params['description_size_list'] . 'px;') : '') .'"><a href="'.$permalink_for_sp_cat.'&product_id=' . $row->id . '&view=showproduct&page_num=' . $page_num . '&back=1'.'" style="' . (($params['hyperlink_color'] != '') ? ('color:' . $params['hyperlink_color'] . ';') : '') . '">' . __('More','sp_catalog') . '</a></div>
@@ -2080,7 +2080,7 @@ if ($params['price'] and $row->cost != 0 and $row->cost != '')
     }
     
     
-    $description = explode('<hr id="system-readmore" />', stripslashes($row->description));
+    $description = explode('<!--more-->', stripslashes($row->description));
     
     
     
