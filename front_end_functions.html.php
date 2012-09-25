@@ -2,7 +2,7 @@
 
 
 function html_front_end_single_product($rows,$reviews_rows, $option, $params,$category_name,$rev_page,$reviews_count,$rating,$voted){
- ob_start();
+   ob_start();
 ?>
 <div>
 <?php if($params['enable_rating']): ?>
@@ -156,6 +156,8 @@ textarea {
   -webkit-border-radius: 3px;
   -moz-border-radius: 3px;
   border-radius: 3px;
+
+
   -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
   -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
   box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
@@ -335,13 +337,13 @@ if(!($row->image_url!="" and $row->image_url!=";"))
 {
 	$imgurl[0]=plugins_url("Front_images/noimage.jpg",__FILE__)."";
 
-	echo '<tr><td colspan="2" id="prod_main_picture_container" valign="top"><div style="border: #CCCCCC solid 2px;padding:5px;background-color:white;"><div id="prod_main_picture" style="width:'.($params['large_picture_width']).'px;height:'.($params['large_picture_height']).'px; background:url('.plugins_url("picture.php",__FILE__).'?url='.$imgurl[0].'&height='.$params['large_picture_height'].'&width='.$params['large_picture_width'].'&reverse=1) center no-repeat;">&nbsp;</div></div></td></tr>';
+	echo '<tr><td colspan="2" id="prod_main_picture_container" valign="top"><div style="border: #CCCCCC solid 2px;padding:5px;background-color:white;"><div id="prod_main_picture" style="width:'.($params['large_picture_width']).'px;height:'.($params['large_picture_height']).'px; background:url('.plugins_url("picture.php",__FILE__).'?url='.urlencode($imgurl[0]).'&height='.$params['large_picture_height'].'&width='.$params['large_picture_width'].'&reverse=1) center no-repeat;">&nbsp;</div></div></td></tr>';
 }
 else
 	echo '<tr><td colspan="2" id="prod_main_picture_container" valign="top">
 <div style="border: #CCCCCC solid 2px;padding:5px;background-color:white;">
 <a href="'.$imgurl[0].'" target="_blank" id="prod_main_picture_a" style="text-decoration:none;">
-<div id="prod_main_picture" style="width:'.($params['large_picture_width']).'px;height:'.($params['large_picture_height']).'px; background:url('.plugins_url("picture.php",__FILE__).'?url='.$imgurl[0].'&height='.$params['large_picture_height'].'&width='.$params['large_picture_width'].'&reverse=1) center no-repeat;">&nbsp;</div></a></div>
+<div id="prod_main_picture" style="width:'.($params['large_picture_width']).'px;height:'.($params['large_picture_height']).'px; background:url('.plugins_url("picture.php",__FILE__).'?url='.urlencode($imgurl[0]).'&height='.$params['large_picture_height'].'&width='.$params['large_picture_width'].'&reverse=1) center no-repeat;">&nbsp;</div></a></div>
 </td></tr>';
 echo'
 <tr><td style="text-align:justify;">';
@@ -353,7 +355,7 @@ foreach($imgurl as $img)
 {
 if($img!=='')
 {
-$small_images_str.='<a href="'.$img.'" target="_blank"><img src="'.plugins_url("picture.php",__FILE__).'?url='.$img.'&height=50" vspace="0" hspace="0" onMouseOver="prod_change_picture(\''.$img.'\',this,'.$params['large_picture_width'].','.$params['large_picture_height'].');" /></a>
+$small_images_str.='<a href="'.$img.'" target="_blank"><img src="'.plugins_url("picture.php",__FILE__).'?url='.urlencode($img).'&height=50" vspace="0" hspace="0" onMouseOver="prod_change_picture(\''.$img.'\',this,'.$params['large_picture_width'].','.$params['large_picture_height'].');" /></a>
 ';
 $small_images_count++;
 }
@@ -607,14 +609,11 @@ echo "&nbsp;...&nbsp;&nbsp;&nbsp;<a href=\"$link\" style=\"$navstyle\">last</a>"
 var SpiderCatOFOnLoad = window.onload;
 window.onload = SpiderCatAddToOnload;
 </script>
-<?php
- $content=ob_get_contents();
+<?php 
+$content=ob_get_contents();
                 ob_end_clean();
                 return $content;
-
-
-
- }
+}
 
 
 
@@ -703,7 +702,7 @@ window.onload = SpiderCatAddToOnload;
 
 function front_end_catalog_list($rows, $option,$params,$page_num,$prod_count,$prod_in_page,$ratings,$voted,$categories,$category_list,$params1,$cat_rows,$cat_id)
 {
- ob_start();
+   ob_start();
 $pos = strrpos(get_permalink(), "?");
 $permalink_for_sp_cat="";
 if($pos)
@@ -1050,7 +1049,7 @@ if($cat_rows[0]->cat_image_url!="" and $cat_rows[0]->cat_image_url!=";")
 			<tr><td colspan="2" id="prod_main_picture_container" valign="top">
 			<div style="border: #CCCCCC solid 2px;padding:5px;background-color:white;">
 			<a href="'.$imgurl[0].'" target="_blank" id="prod_main_picture_a" style="text-decoration:none;">
-			<div id="prod_main_picture" style="width:'.($params[ 'category_picture_width' ]).'px;height:'.($params[ 'category_picture_height' ]).'px; background:url('.plugins_url("picture.php",__FILE__).'?url='.$imgurl[0].'&height='.$params[ 'category_picture_height' ].'&width='.$params[ 'category_picture_width' ].'&reverse=1) center no-repeat;">&nbsp;</div></a></div>
+			<div id="prod_main_picture" style="width:'.($params[ 'category_picture_width' ]).'px;height:'.($params[ 'category_picture_height' ]).'px; background:url('.plugins_url("picture.php",__FILE__).'?url='.urlencode($imgurl[0]).'&height='.$params[ 'category_picture_height' ].'&width='.$params[ 'category_picture_width' ].'&reverse=1) center no-repeat;">&nbsp;</div></a></div>
 			</td></tr>';
 
 	echo'<tr><td style="text-align:justify;">';
@@ -1062,7 +1061,7 @@ foreach($imgurl as $img)
 {
 if($img!=='')
 {
-$small_images_str.='<a href="'.$img.'" target="_blank"><img src="'.plugins_url('picture.php',__FILE__).'?url='.$img.'&height=50" vspace="0" hspace="0" onMouseOver="prod_change_picture(\''.$img.'\',this,'.$params[ 'category_picture_width' ].','.$params[ 'category_picture_height' ].');" /></a>
+$small_images_str.='<a href="'.$img.'" target="_blank"><img src="'.plugins_url('picture.php',__FILE__).'?url='.urlencode($img).'&height=50" vspace="0" hspace="0" onMouseOver="prod_change_picture(\''.$img.'\',this,'.$params[ 'category_picture_width' ].','.$params[ 'category_picture_height' ].');" /></a>
 ';
 $small_images_count++;
 }
@@ -1179,10 +1178,10 @@ echo'<tr>';
     
 	
 if (!($row->image_url != "" and $row->image_url != ";"))
-       echo '<td style=" vertical-align: top !important; padding:0px;border-width:'.$params[ 'border_width' ].'px;border-color:'.$params[ 'border_color' ].';border-style:'.$params[ 'border_style' ].';border-top:none; border-left:none;"><img style="border: #CCC solid 2px; margin:10px" src="'.plugins_url("picture.php",__FILE__).'?url='.plugins_url("Front_images/noimage.jpg",__FILE__).'&width=' . $params['list_picture_width'] . '&height=' . $params['list_picture_height'] . '" />
+       echo '<td style=" vertical-align: top !important; padding:0px;border-width:'.$params[ 'border_width' ].'px;border-color:'.$params[ 'border_color' ].';border-style:'.$params[ 'border_style' ].';border-top:none; border-left:none;"><img style="border: #CCC solid 2px; margin:10px" src="'.plugins_url("picture.php",__FILE__).'?url='.urlencode(plugins_url("Front_images/noimage.jpg",__FILE__)).'&width=' . $params['list_picture_width'] . '&height=' . $params['list_picture_height'] . '" />
 </td>';
 else
-        echo '<td style=" vertical-align: top !important; border-width:'.$params[ 'border_width' ].'px;border-color:'.$params[ 'border_color' ].';border-style:'.$params[ 'border_style' ].';border-top:none; border-left:none;"><a href="' . $imgurl[0] . '" target="_blank"><img style="border: #CCC solid 2px; margin:10px" src="'.plugins_url("picture.php",__FILE__).'?url=' . $imgurl[0] . '&width=' . $params['list_picture_width'] . '&height=' . $params['list_picture_height'] . '" /></a></td>';
+        echo '<td style=" vertical-align: top !important; border-width:'.$params[ 'border_width' ].'px;border-color:'.$params[ 'border_color' ].';border-style:'.$params[ 'border_style' ].';border-top:none; border-left:none;"><a href="' . $imgurl[0] . '" target="_blank"><img style="border: #CCC solid 2px; margin:10px" src="'.plugins_url("picture.php",__FILE__).'?url=' .urlencode( $imgurl[0]) . '&width=' . $params['list_picture_width'] . '&height=' . $params['list_picture_height'] . '" /></a></td>';
 
 echo '<td style="'.(($params[ 'name_price_size_list']!='')?('font-size:'.$params[ 'name_price_size_list'].'px;'):'').' border-width:'.$params[ 'border_width' ].'px;border-color:'.$params[ 'border_color'].';border-style:'.$params[ 'border_style' ].';border-top:none; border-left:none;"><a href="'.$permalink_for_sp_cat. '&product_id=' . $row->id . '&view=showproduct&page_num=' . $page_num . '&back=1'.'" style="' . (($params['hyperlink_color'] != '') ? ('color:' . $params['hyperlink_color'] . ';') : '') . '">' . $row->name . '</a>';
 
@@ -1391,12 +1390,14 @@ var SpiderCatOFOnLoad = window.onload;
 window.onload = SpiderCatAddToOnload;
 </script>
 <?php
-$content=ob_get_contents();
-                ob_end_clean();
-                return $content;	
 	
+	$content=ob_get_contents();
+                ob_end_clean();
+                return $content;
 	
 }
+
+
 
 
 
@@ -1476,8 +1477,8 @@ $content=ob_get_contents();
 
 function front_end_catalog_cells($rows, $option,$params,$page_num,$prod_count,$prod_in_page,$ratings,$voted,$categories,$category_list,$params1,$cat_rows,$cat_id){
 
+        ob_start();
 
- ob_start();
 
 
 $pos = strrpos(get_permalink(), "?");
@@ -1759,7 +1760,7 @@ if($cat_rows[0]->cat_image_url!="" and $cat_rows[0]->cat_image_url!=";")
 			<tr><td colspan="2" id="prod_main_picture_container" valign="top">
 			<div style="border: #CCCCCC solid 2px;padding:5px;background-color:white;">
 			<a href="'.$imgurl[0].'" target="_blank" id="prod_main_picture_a" style="text-decoration:none;">
-			<div id="prod_main_picture" style="width:'.($params[ 'category_picture_width']).'px;height:'.($params[ 'category_picture_height']).'px; background:url('.plugins_url("picture.php",__FILE__).'?url='.$imgurl[0].'&height='.$params[ 'category_picture_height'].'&width='.$params[ 'category_picture_width'].'&reverse=1) center no-repeat;">&nbsp;</div></a></div>
+			<div id="prod_main_picture" style="width:'.($params[ 'category_picture_width']).'px;height:'.($params[ 'category_picture_height']).'px; background:url('.plugins_url("picture.php",__FILE__).'?url='.urlencode($imgurl[0]).'&height='.$params[ 'category_picture_height'].'&width='.$params[ 'category_picture_width'].'&reverse=1) center no-repeat;">&nbsp;</div></a></div>
 			</td></tr>';
 
 	echo'<tr><td style="text-align:justify;">';
@@ -1771,7 +1772,7 @@ foreach($imgurl as $img)
 {
 if($img!=='')
 {
-$small_images_str.='<a href="'.$img.'" target="_blank"><img src="'.plugins_url("picture.php",__FILE__).'?url='.$img.'&height=50" vspace="0" hspace="0" onMouseOver="prod_change_picture(\''.$img.'\',this,'.$params[ 'category_picture_width'].','.$params[ 'category_picture_height'].');" /></a>
+$small_images_str.='<a href="'.$img.'" target="_blank"><img src="'.plugins_url("picture.php",__FILE__).'?url='.urlencode($img).'&height=50" vspace="0" hspace="0" onMouseOver="prod_change_picture(\''.$img.'\',this,'.$params[ 'category_picture_width'].','.$params[ 'category_picture_height'].');" /></a>
 ';
 $small_images_count++;
 }
@@ -1890,12 +1891,12 @@ foreach ($rows as $row)
         
         
         
-        echo '<td style="padding:10px;"><img src="'.plugins_url("picture.php",__FILE__).'?url=' . $imgurl[0] . '&width=' . $params['small_picture_width'] . '&height=' . $params['small_picture_height'] . '" />
+        echo '<td style="padding:10px;"><img src="'.plugins_url("picture.php",__FILE__).'?url=' . urlencode($imgurl[0]) . '&width=' . $params['small_picture_width'] . '&height=' . $params['small_picture_height'] . '" />
 
 </td>';
       }
     else
-        echo '<td style="padding:10px;"><a href="' . $imgurl[0] . '" target="_blank"><img src="'.plugins_url("picture.php",__FILE__).'?url=' . $imgurl[0] . '&width=' . $params['small_picture_width'] . '&height=' . $params['small_picture_height'] . '" /></a></td>';
+        echo '<td style="padding:10px;"><a href="' . $imgurl[0] . '" target="_blank"><img src="'.plugins_url("picture.php",__FILE__).'?url=' . urlencode($imgurl[0]) . '&width=' . $params['small_picture_width'] . '&height=' . $params['small_picture_height'] . '" /></a></td>';
     
     
     
@@ -2209,7 +2210,6 @@ window.onload = SpiderCatAddToOnload;
 <?php
 $content=ob_get_contents();
                 ob_end_clean();
-			
                 return $content;
 }
 
