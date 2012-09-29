@@ -79,7 +79,7 @@ Vietnamese (vi)
   
 == Installation ==  
   
-####Thank you for your interest in [Spider Catalog](http://web-dorado.com/products/wordpress-catalog.html).  
+####Thank you for your interest in Spider [WordPress Catalog](http://web-dorado.com/products/wordpress-catalog.html).  
   
 Minimum requirements:  
   
