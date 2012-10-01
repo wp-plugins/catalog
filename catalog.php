@@ -3,7 +3,7 @@
 /*
 Plugin Name: Spider Catalog
 Plugin URI: http://web-dorado.com/
-Version: 1.0.1
+Version: 1.1
 Author: http://web-dorado.com/
 License: GNU/GPLv3 http://www.gnu.org/licenses/gpl-3.0.html
 */
@@ -38,7 +38,63 @@ function Spider_Catalog_Single_product_shotrcode($atts) {
 add_shortcode('Spider_Catalog_Product', 'Spider_Catalog_Single_product_shotrcode');
 
 
+/////////////// Filter catalog
 
+
+
+function catalog_after_search_results($query){
+	global $wpdb;
+	if(isset($_REQUEST['s']) && $_REQUEST['s']){
+	$serch_word=htmlspecialchars(stripslashes($_REQUEST['s']));
+	$query=str_replace($wpdb->prefix."posts.post_content",gen_string_catalog_search($serch_word,$wpdb->prefix.'posts.post_content')." ".$wpdb->prefix."posts.post_content",$query);
+	}
+    return $query;
+
+}
+add_filter( 'posts_request', 'catalog_after_search_results');
+
+
+function gen_string_catalog_search($serch_word,$wordpress_query_post)
+{
+	$string_search='';
+
+	global $wpdb;
+	if($serch_word){
+	$rows_category=$wpdb->get_results("SELECT * FROM ".$wpdb->prefix."spidercatalog_product_categories WHERE (description LIKE '%".$serch_word."%') OR (name LIKE '%".$serch_word."%')");
+	
+	$count_cat_rows=count($rows_category);
+	if($count_cat_rows){ 
+		$string_search .=$wordpress_query_post.' LIKE \'%[Spider_Catalog_Category id="ALL_CAT" details="1" type=""]%\' OR ';
+	}
+	for($i=0;$i<$count_cat_rows;$i++){
+		$string_search .=$wordpress_query_post.' LIKE \'%[Spider_Catalog_Category id="'.$rows_category[$i]->id.'" details="1" type=""]%\' OR '.$wordpress_query_post.' LIKE \'%[Spider_Catalog_Category id="'.$rows_category[$i]->id.'" details="1" type="list"]%\' OR ';
+	}
+	
+	
+	
+	
+	$rows_category=$wpdb->get_results("SELECT * FROM ".$wpdb->prefix."spidercatalog_product_categories WHERE (name LIKE '%".$serch_word."%')");
+	$count_cat_rows=count($rows_category);
+	for($i=0;$i<$count_cat_rows;$i++){
+		$string_search .=$wordpress_query_post.' LIKE \'%[Spider_Catalog_Category id="'.$rows_category[$i]->id.'" details="0" type=""]%\' OR '.$wordpress_query_post.' LIKE \'%[Spider_Catalog_Category id="'.$rows_category[$i]->id.'" details="0" type="list"]%\' OR ';
+	}
+	
+	$rows_single=$wpdb->get_results("SELECT * FROM ".$wpdb->prefix."spidercatalog_products WHERE name LIKE '%".$serch_word."%'");
+	
+	$count_sing_rows=count($rows_single);
+	if($count_sing_rows){		
+		for($i=0;$i<$count_sing_rows;$i++)
+		{
+			$string_search .=$wordpress_query_post.' LIKE \'%[Spider_Catalog_Product id="'.$rows_single[$i]->id.'"]%\' OR ';
+		}
+	
+	}
+	}
+	return 	$string_search;
+}
+
+
+///////////////////// end filter
 
 
 

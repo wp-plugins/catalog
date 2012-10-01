@@ -22,6 +22,8 @@ if ($params['rounded_corners']):
 <style type="text/css">
 select.spidercataloginput{
 margin: 0 0 24px 0 !important;
+top: -11px !important;
+position: relative;
 }
 
 #productMainDiv
@@ -156,6 +158,8 @@ textarea {
   -webkit-border-radius: 3px;
   -moz-border-radius: 3px;
   border-radius: 3px;
+
+
 
 
   -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
@@ -337,13 +341,13 @@ if(!($row->image_url!="" and $row->image_url!=";"))
 {
 	$imgurl[0]=plugins_url("Front_images/noimage.jpg",__FILE__)."";
 
-	echo '<tr><td colspan="2" id="prod_main_picture_container" valign="top"><div style="border: #CCCCCC solid 2px;padding:5px;background-color:white;"><div id="prod_main_picture" style="width:'.($params['large_picture_width']).'px;height:'.($params['large_picture_height']).'px; background:url('.plugins_url("picture.php",__FILE__).'?url='.urlencode($imgurl[0]).'&height='.$params['large_picture_height'].'&width='.$params['large_picture_width'].'&reverse=1) center no-repeat;">&nbsp;</div></div></td></tr>';
+	echo '<tr><td colspan="2" id="prod_main_picture_container" valign="top"><div style="border: #CCCCCC solid 2px;padding:5px;background-color:white;"><div id="prod_main_picture" style="width:'.($params['large_picture_width']).'px;height:'.($params['large_picture_height']).'px; background:url('.plugins_url("picture.php",__FILE__).'?url='.$imgurl[0].'&height='.$params['large_picture_height'].'&width='.$params['large_picture_width'].'&reverse=1) center no-repeat;">&nbsp;</div></div></td></tr>';
 }
 else
 	echo '<tr><td colspan="2" id="prod_main_picture_container" valign="top">
 <div style="border: #CCCCCC solid 2px;padding:5px;background-color:white;">
 <a href="'.$imgurl[0].'" target="_blank" id="prod_main_picture_a" style="text-decoration:none;">
-<div id="prod_main_picture" style="width:'.($params['large_picture_width']).'px;height:'.($params['large_picture_height']).'px; background:url('.plugins_url("picture.php",__FILE__).'?url='.urlencode($imgurl[0]).'&height='.$params['large_picture_height'].'&width='.$params['large_picture_width'].'&reverse=1) center no-repeat;">&nbsp;</div></a></div>
+<div id="prod_main_picture" style="width:'.($params['large_picture_width']).'px;height:'.($params['large_picture_height']).'px; background:url('.plugins_url("picture.php",__FILE__).'?url='.$imgurl[0].'&height='.$params['large_picture_height'].'&width='.$params['large_picture_width'].'&reverse=1) center no-repeat;">&nbsp;</div></a></div>
 </td></tr>';
 echo'
 <tr><td style="text-align:justify;">';
@@ -355,7 +359,7 @@ foreach($imgurl as $img)
 {
 if($img!=='')
 {
-$small_images_str.='<a href="'.$img.'" target="_blank"><img src="'.plugins_url("picture.php",__FILE__).'?url='.urlencode($img).'&height=50" vspace="0" hspace="0" onMouseOver="prod_change_picture(\''.$img.'\',this,'.$params['large_picture_width'].','.$params['large_picture_height'].');" /></a>
+$small_images_str.='<a href="'.$img.'" target="_blank"><img src="'.plugins_url("picture.php",__FILE__).'?url='.$img.'&height=50" vspace="0" hspace="0" onMouseOver="prod_change_picture(\''.$img.'\',this,'.$params['large_picture_width'].','.$params['large_picture_height'].');" /></a>
 ';
 $small_images_count++;
 }
@@ -559,20 +563,29 @@ else
 
 
 
+?>
+<script>
+function submit_catal(page_link)
+{
+	document.getElementById('cat_form_page_nav').setAttribute('action',page_link);
+	document.getElementById('cat_form_page_nav').submit();
+}
 
+</script>
+<?php 
 
 
 $link = ($permalink_for_sp_cat .$url . '&rev_page= ');
 	if($rev_page>5){
 	$link = ($permalink_for_sp_cat.$url . '&rev_page=1#rev');
 echo "
-&nbsp;&nbsp;<a href=\"$link\" style=\"$navstyle\">first</a>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;...&nbsp";
+&nbsp;&nbsp;<a href=\"javascript:submit_catal('{$link}')\" style=\"$navstyle\">first</a>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;...&nbsp";
 }
 	
 	 if($rev_page>1)
 		{
 			$link = ($permalink_for_sp_cat. $url . '&rev_page='.($rev_page-1).'#rev');
-			echo "&nbsp;&nbsp;<a href=\"$link\" style=\"$navstyle\">prev</a>&nbsp;&nbsp;";
+			echo "&nbsp;&nbsp;<a href=\"javascript:submit_catal('{$link}')\" style=\"$navstyle\">prev</a>&nbsp;&nbsp;";
 		}
 	
 	for ($i=$rev_page-4; $i<($rev_page+5); $i++)
@@ -583,7 +596,7 @@ echo "
 			if($i==$rev_page)
 				echo "<span style='font-weight:bold !important; color:#000000 !important; ".(($params['text_size_small'] != '') ? ('font-size:' . $params['text_size_small'] . 'px !important;') : 'font-size:12px !important;')."'>&nbsp;$i&nbsp;</span>";
 			else
-				echo "<a href=\"$link\" style=\"$navstyle\">&nbsp;$i&nbsp;</a>";
+				echo "<a href=\"javascript:submit_catal('{$link}')\" style=\"$navstyle\">&nbsp;$i&nbsp;</a>";
 		 }
 	 }
 	 
@@ -591,12 +604,12 @@ echo "
 	if($rev_page<$r)
 		{
 			$link = ($permalink_for_sp_cat. $url . '&rev_page='.($rev_page+1).'#rev');
-			echo "&nbsp;&nbsp;<a href=\"$link\" style=\"$navstyle\">next</a>&nbsp;&nbsp;";
+			echo "&nbsp;&nbsp;<a href=\"javascript:submit_catal('{$link}')\" style=\"$navstyle\">next</a>&nbsp;&nbsp;";
 		}
 if(($r-$rev_page)>4)
 {
 $link = ($permalink_for_sp_cat.$url . '&rev_page='.$r.'#rev');
-echo "&nbsp;...&nbsp;&nbsp;&nbsp;<a href=\"$link\" style=\"$navstyle\">last</a>";
+echo "&nbsp;...&nbsp;&nbsp;&nbsp;<a href=\"javascript:submit_catal('{$link}')\" style=\"$navstyle\">last</a>";
 }
 
 	echo '</div>';
@@ -745,6 +758,8 @@ if ($params['rounded_corners']):
 <style type="text/css">
 select.spidercataloginput{
 margin: 0 0 24px 0 !important;
+top: -11px !important;
+position: relative;
 }
 #CatalogSearchBox, .spidercatalogbutton, .spidercataloginput
 {
@@ -752,12 +767,15 @@ margin: 0 0 24px 0 !important;
 	-webkit-border-radius: 8px !important;
 	-moz-border-radius: 8px !important;
 	border-radius: 8px !important;
+	text-align: right !important;
 	
 }
 #CatalogSearchBox
 {
 	margin-bottom:10px !important;
+	text-align: right !important;
 }
+
 #productMainDiv, #productCartFull, .spidercatalogbutton, .spidercataloginput
 {
 -webkit-border-radius: 8px;
@@ -1049,7 +1067,7 @@ if($cat_rows[0]->cat_image_url!="" and $cat_rows[0]->cat_image_url!=";")
 			<tr><td colspan="2" id="prod_main_picture_container" valign="top">
 			<div style="border: #CCCCCC solid 2px;padding:5px;background-color:white;">
 			<a href="'.$imgurl[0].'" target="_blank" id="prod_main_picture_a" style="text-decoration:none;">
-			<div id="prod_main_picture" style="width:'.($params[ 'category_picture_width' ]).'px;height:'.($params[ 'category_picture_height' ]).'px; background:url('.plugins_url("picture.php",__FILE__).'?url='.urlencode($imgurl[0]).'&height='.$params[ 'category_picture_height' ].'&width='.$params[ 'category_picture_width' ].'&reverse=1) center no-repeat;">&nbsp;</div></a></div>
+			<div id="prod_main_picture" style="width:'.($params[ 'category_picture_width' ]).'px;height:'.($params[ 'category_picture_height' ]).'px; background:url('.plugins_url("picture.php",__FILE__).'?url='.$imgurl[0].'&height='.$params[ 'category_picture_height' ].'&width='.$params[ 'category_picture_width' ].'&reverse=1) center no-repeat;">&nbsp;</div></a></div>
 			</td></tr>';
 
 	echo'<tr><td style="text-align:justify;">';
@@ -1061,7 +1079,7 @@ foreach($imgurl as $img)
 {
 if($img!=='')
 {
-$small_images_str.='<a href="'.$img.'" target="_blank"><img src="'.plugins_url('picture.php',__FILE__).'?url='.urlencode($img).'&height=50" vspace="0" hspace="0" onMouseOver="prod_change_picture(\''.$img.'\',this,'.$params[ 'category_picture_width' ].','.$params[ 'category_picture_height' ].');" /></a>
+$small_images_str.='<a href="'.$img.'" target="_blank"><img src="'.plugins_url('picture.php',__FILE__).'?url='.$img.'&height=50" vspace="0" hspace="0" onMouseOver="prod_change_picture(\''.$img.'\',this,'.$params[ 'category_picture_width' ].','.$params[ 'category_picture_height' ].');" /></a>
 ';
 $small_images_count++;
 }
@@ -1092,13 +1110,23 @@ echo'<td valign="top">
 
 if (($params["choose_category"] and !($params1['categories'] > 0)) or $params["search_by_name"])
   {
-    echo '<form action="" method="post" name="cat_form">
+	     if(is_home())
+	   {
+		   echo "aaaaaaaaaaaaaaaaaa";
+		   $page_link=site_url();
+	   }
+	   else
+	   {
+		   $page_link=get_permalink();
+	   }
+	 
+    echo '<form action="'. $page_link.'" method="post" name="cat_form" id="cat_form_page_nav">
 <input type="hidden" name="page_num"	value="1">
 <div class="CatalogSearchBox">';
 
 if ($params["choose_category"] and !($params1['categories'] > 0))
 {
-	echo __('Choose Category','sp_catalog') . '&nbsp;
+	echo '<span style="top: -11px; position: relative;">'.__('Choose Category','sp_catalog') . '&nbsp</span>
 		<select id="cat_id" name="cat_id" class="spidercataloginput" size="1" onChange="this.form.submit();"> 
 		<option value="0">' . __('All','sp_catalog') . '</option> ';
     
@@ -1178,10 +1206,10 @@ echo'<tr>';
     
 	
 if (!($row->image_url != "" and $row->image_url != ";"))
-       echo '<td style=" vertical-align: top !important; padding:0px;border-width:'.$params[ 'border_width' ].'px;border-color:'.$params[ 'border_color' ].';border-style:'.$params[ 'border_style' ].';border-top:none; border-left:none;"><img style="border: #CCC solid 2px; margin:10px" src="'.plugins_url("picture.php",__FILE__).'?url='.urlencode(plugins_url("Front_images/noimage.jpg",__FILE__)).'&width=' . $params['list_picture_width'] . '&height=' . $params['list_picture_height'] . '" />
+       echo '<td style=" vertical-align: top !important; padding:0px;border-width:'.$params[ 'border_width' ].'px;border-color:'.$params[ 'border_color' ].';border-style:'.$params[ 'border_style' ].';border-top:none; border-left:none;"><img style="border: #CCC solid 2px; margin:10px" src="'.plugins_url("picture.php",__FILE__).'?url='.plugins_url("Front_images/noimage.jpg",__FILE__).'&width=' . $params['list_picture_width'] . '&height=' . $params['list_picture_height'] . '" />
 </td>';
 else
-        echo '<td style=" vertical-align: top !important; border-width:'.$params[ 'border_width' ].'px;border-color:'.$params[ 'border_color' ].';border-style:'.$params[ 'border_style' ].';border-top:none; border-left:none;"><a href="' . $imgurl[0] . '" target="_blank"><img style="border: #CCC solid 2px; margin:10px" src="'.plugins_url("picture.php",__FILE__).'?url=' .urlencode( $imgurl[0]) . '&width=' . $params['list_picture_width'] . '&height=' . $params['list_picture_height'] . '" /></a></td>';
+        echo '<td style=" vertical-align: top !important; border-width:'.$params[ 'border_width' ].'px;border-color:'.$params[ 'border_color' ].';border-style:'.$params[ 'border_style' ].';border-top:none; border-left:none;"><a href="' . $imgurl[0] . '" target="_blank"><img style="border: #CCC solid 2px; margin:10px" src="'.plugins_url("picture.php",__FILE__).'?url=' . $imgurl[0] . '&width=' . $params['list_picture_width'] . '&height=' . $params['list_picture_height'] . '" /></a></td>';
 
 echo '<td style="'.(($params[ 'name_price_size_list']!='')?('font-size:'.$params[ 'name_price_size_list'].'px;'):'').' border-width:'.$params[ 'border_width' ].'px;border-color:'.$params[ 'border_color'].';border-style:'.$params[ 'border_style' ].';border-top:none; border-left:none;"><a href="'.$permalink_for_sp_cat. '&product_id=' . $row->id . '&view=showproduct&page_num=' . $page_num . '&back=1'.'" style="' . (($params['hyperlink_color'] != '') ? ('color:' . $params['hyperlink_color'] . ';') : '') . '">' . $row->name . '</a>';
 
@@ -1313,6 +1341,16 @@ if(count($rows))
 echo '</table>';
 ?>
 
+<script>
+function submit_catal(page_link)
+{
+	document.getElementById('cat_form_page_nav').setAttribute('action',page_link);
+	document.getElementById('cat_form_page_nav').submit();
+}
+
+</script>
+
+
 <div id="spidercatalognavigation" style="text-align:center;">
   <?php
 
@@ -1329,7 +1367,7 @@ if ($prod_count > $prod_in_page and $prod_in_page > 0)
         $link = $permalink_for_sp_cat . $url . '&page_num=1';
         
         echo "
-&nbsp;&nbsp;<a href=\"$link\" style=\"$navstyle\">".__('First','sp_catalog')."</a>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;...&nbsp";
+&nbsp;&nbsp;<a href=\"javascript:submit_catal('{$link}')\" style=\"$navstyle\">".__('First','sp_catalog')."</a>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;...&nbsp";
         
       }
     
@@ -1339,7 +1377,7 @@ if ($prod_count > $prod_in_page and $prod_in_page > 0)
       {
         $link = $permalink_for_sp_cat . $url . '&page_num=' . ($page_num - 1);
         
-        echo "&nbsp;&nbsp;<a href=\"$link\" style=\"$navstyle\">".__('Prev','sp_catalog')."</a>&nbsp;&nbsp;";
+        echo "&nbsp;&nbsp;<a href=\"javascript:submit_catal('{$link}')\" style=\"$navstyle\">".__('Prev','sp_catalog')."</a>&nbsp;&nbsp;";
         
       }
     
@@ -1355,7 +1393,7 @@ if ($prod_count > $prod_in_page and $prod_in_page > 0)
                 echo "<span style='font-weight:bold;color:#000000'>&nbsp;$i&nbsp;</span>";
             
             else
-                echo "<a href=\"$link\" style=\"$navstyle\">&nbsp;$i&nbsp;</a>";
+                echo "<a href=\"javascript:submit_catal('{$link}')\" style=\"$navstyle\">&nbsp;$i&nbsp;</a>";
             
           }
         
@@ -1369,7 +1407,7 @@ if ($prod_count > $prod_in_page and $prod_in_page > 0)
       {
         $link = $permalink_for_sp_cat .$url . '&page_num=' . ($page_num + 1);
         
-        echo "&nbsp;&nbsp;<a href=\"$link\" style=\"$navstyle\">".__('Next','sp_catalog')."</a>&nbsp;&nbsp;";
+        echo "&nbsp;&nbsp;<a href=\"javascript:submit_catal('{$link}')\" style=\"$navstyle\">".__('Next','sp_catalog')."</a>&nbsp;&nbsp;";
         
       }
     
@@ -1377,7 +1415,7 @@ if ($prod_count > $prod_in_page and $prod_in_page > 0)
       {
         $link = $permalink_for_sp_cat . $url . '&page_num=' . $r;
         
-        echo "&nbsp;...&nbsp;&nbsp;&nbsp;<a href=\"$link\" style=\"$navstyle\">".__('Last','sp_catalog')."</a>";
+        echo "&nbsp;...&nbsp;&nbsp;&nbsp;<a href=\"javascript:submit_catal('{$link}')\" style=\"$navstyle\">".__('Last','sp_catalog')."</a>";
         
       }
     
@@ -1516,6 +1554,8 @@ if ($params['rounded_corners']):
 <style type="text/css">
 select.spidercataloginput{
 margin: 0 0 24px 0 !important;
+top: -11px !important;
+position: relative;
 }
 #productMainDiv, .spidercatalogbutton, .spidercataloginput
 {
@@ -1760,7 +1800,7 @@ if($cat_rows[0]->cat_image_url!="" and $cat_rows[0]->cat_image_url!=";")
 			<tr><td colspan="2" id="prod_main_picture_container" valign="top">
 			<div style="border: #CCCCCC solid 2px;padding:5px;background-color:white;">
 			<a href="'.$imgurl[0].'" target="_blank" id="prod_main_picture_a" style="text-decoration:none;">
-			<div id="prod_main_picture" style="width:'.($params[ 'category_picture_width']).'px;height:'.($params[ 'category_picture_height']).'px; background:url('.plugins_url("picture.php",__FILE__).'?url='.urlencode($imgurl[0]).'&height='.$params[ 'category_picture_height'].'&width='.$params[ 'category_picture_width'].'&reverse=1) center no-repeat;">&nbsp;</div></a></div>
+			<div id="prod_main_picture" style="width:'.($params[ 'category_picture_width']).'px;height:'.($params[ 'category_picture_height']).'px; background:url('.plugins_url("picture.php",__FILE__).'?url='.$imgurl[0].'&height='.$params[ 'category_picture_height'].'&width='.$params[ 'category_picture_width'].'&reverse=1) center no-repeat;">&nbsp;</div></a></div>
 			</td></tr>';
 
 	echo'<tr><td style="text-align:justify;">';
@@ -1772,7 +1812,7 @@ foreach($imgurl as $img)
 {
 if($img!=='')
 {
-$small_images_str.='<a href="'.$img.'" target="_blank"><img src="'.plugins_url("picture.php",__FILE__).'?url='.urlencode($img).'&height=50" vspace="0" hspace="0" onMouseOver="prod_change_picture(\''.$img.'\',this,'.$params[ 'category_picture_width'].','.$params[ 'category_picture_height'].');" /></a>
+$small_images_str.='<a href="'.$img.'" target="_blank"><img src="'.plugins_url("picture.php",__FILE__).'?url='.$img.'&height=50" vspace="0" hspace="0" onMouseOver="prod_change_picture(\''.$img.'\',this,'.$params[ 'category_picture_width'].','.$params[ 'category_picture_height'].');" /></a>
 ';
 $small_images_count++;
 }
@@ -1792,19 +1832,26 @@ echo'<td valign="top">
 </tr></table></div>';
 
 }
-
 ?>
-<div id="productMainDiv" style="text-align:center; width:<?php echo  2*$params['product_cell_width']+70 ?>px">
+<div id="productMainDiv" style="text-align:center; width:<?php echo $params['count_of_product_in_the_row']*$params['product_cell_width']+$params['count_of_product_in_the_row']*35 ?>px">
 <?php
 
 if (($params["choose_category"] and !($params1['categories'] > 0)) or $params["search_by_name"])
   {
-    echo '<form action="" method="post" name="cat_form">
+	   if(is_home())
+	   {
+		   $page_link=site_url();
+	   }
+	   else
+	   {
+		   $page_link=get_permalink();
+	   }
+    echo '<form action="'.$page_link.'" method="post" name="cat_form" id="cat_form_page_nav">
 <input type="hidden" name="page_num"	value="1">
 <div class="CatalogSearchBox">';
 if ($params["choose_category"] and !($params1['categories'] > 0))
 {
-	echo __('Choose Category','sp_catalog') . '&nbsp;
+	echo '<span style="top: -11px; position: relative;">'.__('Choose Category','sp_catalog') . '&nbsp</span>
 		<select id="cat_id" name="cat_id" class="spidercataloginput" size="1" onChange="this.form.submit();"> 
 		<option value="0">' . __('All','sp_catalog') . '</option> ';
     
@@ -1830,13 +1877,13 @@ $prod_name='';
 echo '<br />
 <label for="prod_name">' . __('Search','sp_catalog') . '</label>&nbsp;
 <input type="text" id="prod_name" name="prod_name" class="spidercataloginput" value="'.$prod_name.'"> 
-	<input type="button" ondblclick="this.form.submit()" value="'. __('Go','sp_catalog') .'" class="spidercatalogbutton" style="background-color:'.$params[ 'button_background_color'].'; color:'.$params[ 'button_color'].'; width:inherit;"><input type="button" value="'. __('Reset','sp_catalog') .'" onClick="cat_form_reset(this.form);" class="spidercatalogbutton" style="background-color:'.$params[ 'button_background_color'].'; color:'.$params[ 'button_color'].'; width:inherit;">';
+	<input type="button" onclick="this.form.submit()"  value="'. __('Go','sp_catalog') .'" class="spidercatalogbutton" style="background-color:'.$params[ 'button_background_color'].'; color:'.$params[ 'button_color'].'; width:inherit;"><input type="button" value="'. __('Reset','sp_catalog') .'" onClick="cat_form_reset(this.form);" class="spidercatalogbutton" style="background-color:'.$params[ 'button_background_color'].'; color:'.$params[ 'button_color'].'; width:inherit;">';
 }
 echo '</div></form>';
 }
 
 if(count($rows))
-echo '<table cellpadding="0" cellspacing="0" id="productMainTable" style="width:'. (2*$params['product_cell_width']+40).'"><tr>';
+echo '<table cellpadding="0" cellspacing="0" id="productMainTable" style="width:'. ($params['count_of_product_in_the_row']*$params['product_cell_width']+$params['count_of_product_in_the_row']*20).'px"><tr>';
 
 foreach ($rows as $row)
   {
@@ -1891,12 +1938,12 @@ foreach ($rows as $row)
         
         
         
-        echo '<td style="padding:10px;"><img src="'.plugins_url("picture.php",__FILE__).'?url=' . urlencode($imgurl[0]) . '&width=' . $params['small_picture_width'] . '&height=' . $params['small_picture_height'] . '" />
+        echo '<td style="padding:10px;"><img src="'.plugins_url("picture.php",__FILE__).'?url=' . $imgurl[0] . '&width=' . $params['small_picture_width'] . '&height=' . $params['small_picture_height'] . '" />
 
 </td>';
       }
     else
-        echo '<td style="padding:10px;"><a href="' . $imgurl[0] . '" target="_blank"><img src="'.plugins_url("picture.php",__FILE__).'?url=' . urlencode($imgurl[0]) . '&width=' . $params['small_picture_width'] . '&height=' . $params['small_picture_height'] . '" /></a></td>';
+        echo '<td style="padding:10px;"><a href="' . $imgurl[0] . '" target="_blank"><img src="'.plugins_url("picture.php",__FILE__).'?url=' . $imgurl[0] . '&width=' . $params['small_picture_width'] . '&height=' . $params['small_picture_height'] . '" /></a></td>';
     
     
     
@@ -2107,7 +2154,14 @@ if ($params['price'] and $row->cost != 0 and $row->cost != '')
 if(count($rows))
 echo '</tr></table>';
 ?>
+<script>
+function submit_catal(page_link)
+{
+	document.getElementById('cat_form_page_nav').setAttribute('action',page_link);
+	document.getElementById('cat_form_page_nav').submit();
+}
 
+</script>
 <div id="spidercatalognavigation" style="text-align:center;">
 
     <?php
@@ -2147,7 +2201,7 @@ if ($prod_count > $prod_in_page and $prod_in_page > 0)
         
         echo "
 
-&nbsp;&nbsp;<a href=\"$link\" style=\"$navstyle\">".__('First','sp_catalog')."</a>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;...&nbsp";
+&nbsp;&nbsp;<a href=\"javascript:submit_catal('{$link}')\" style=\"$navstyle\">".__('First','sp_catalog')."</a>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;...&nbsp";
         
       }
     
@@ -2157,7 +2211,7 @@ if ($prod_count > $prod_in_page and $prod_in_page > 0)
       {
         $link = $permalink_for_sp_cat . $url . '&page_num=' . ($page_num - 1);
         
-        echo "&nbsp;&nbsp;<a href=\"$link\" style=\"$navstyle\">".__('Prev','sp_catalog')."</a>&nbsp;&nbsp;";
+        echo "&nbsp;&nbsp;<a href=\"javascript:submit_catal('{$link}')\" style=\"$navstyle\">".__('Prev','sp_catalog')."</a>&nbsp;&nbsp;";
         
       }
     
@@ -2173,7 +2227,7 @@ if ($prod_count > $prod_in_page and $prod_in_page > 0)
                 echo "<span style='font-weight:bold !important; color:#000000 !important; ".(($params['text_size_small'] != '') ? ('font-size:' . ($params['text_size_small']+4) . 'px !important;') : 'font-size:16px !important;') ."' >&nbsp;$i&nbsp;</span>";
             
             else
-                echo "<a href=\"$link\" style=\"$navstyle\">&nbsp;$i&nbsp;</a>";
+                echo "<a href=\"javascript:submit_catal('{$link}')\" style=\"$navstyle\">&nbsp;$i&nbsp;</a>";
             
           }
         
@@ -2187,7 +2241,7 @@ if ($prod_count > $prod_in_page and $prod_in_page > 0)
       {
         $link = $permalink_for_sp_cat . $url . '&page_num=' . ($page_num + 1);
         
-        echo "&nbsp;&nbsp;<a href=\"$link\" style=\"$navstyle\">".__('Next','sp_catalog')."</a>&nbsp;&nbsp;";
+        echo "&nbsp;&nbsp;<a href=\"javascript:submit_catal('{$link}')\" style=\"$navstyle\">".__('Next','sp_catalog')."</a>&nbsp;&nbsp;";
         
       }
     
@@ -2195,7 +2249,7 @@ if ($prod_count > $prod_in_page and $prod_in_page > 0)
       {
         $link = $permalink_for_sp_cat . $url . '&page_num=' . $r;
         
-        echo "&nbsp;...&nbsp;&nbsp;&nbsp;<a href=\"$link\" style=\"$navstyle\">".__('Last','sp_catalog')."</a>";
+        echo "&nbsp;...&nbsp;&nbsp;&nbsp;<a href=\"javascript:submit_catal('{$link}')\" style=\"$navstyle\">".__('Last','sp_catalog')."</a>";
         
       }
     
