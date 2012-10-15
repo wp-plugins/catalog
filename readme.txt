@@ -14,10 +14,10 @@ Spider Catalog for WordPress is a convenient tool for organizing the products re
   
 ###Spider  [WordPress Catalog](http://web-dorado.com/products/wordpress-catalog.html)  
   
-Spider Catalog for WordPress is a convenient tool for organizing the products represented on your website into catalogs. Each product on the catalog is assigned with a relevant category, which makes it easier for the customers to search and identify the needed products within the catalog. It is possible to add an unlimited number of parameters for each of the categories in the catalog in order to allow a detailed representation of the product on the catalog. Moreover, each product on the catalog can be accompanied with an image. Customers are provided with the possibility of rating the products available on the catalog, as well as writing customer reviews that will appear under the catalog products.
+Spider WordPress Product Catalog plugin is a convenient tool for organizing the products represented on your website into catalogs. Each product on the catalog is assigned with a relevant category, which makes it easier for the customers to search and identify the needed products within the WordPress catalog. It is possible to add an unlimited number of parameters for each of the categories in the catalog in order to allow a detailed representation of the product on the catalog. Moreover, each product on the catalog can be accompanied with an image. Customers are provided with the possibility of rating the products available on the catalog, as well as writing customer reviews that will appear under the catalog products.
 ###If you want to customize the design of the catalog, you can buy the commercial version [ here.](http://web-dorado.com/products/wordpress-catalog.html) Color, font, size and design of each element of the catalog are customizable in the commercial version.        
   
-= Features of Spider  [WordPress Catalog](http://web-dorado.com/products/wordpress-catalog.html): =  
+= Features of Spider  [WordPress Product Catalog](http://web-dorado.com/products/wordpress-catalog.html): =  
 = Possibility to make the following customizations: =  
   
 * Enable/disable product ratings and customer reviews for the products on the catalog.  
@@ -87,7 +87,7 @@ Minimum requirements:
 * PHP 5.x  
 * MySQL 5.x  
   
-After downloading the ZIP file  
+After downloading the [Wordpress Product Catalog](http://wordpress.org/extend/plugins/catalog/) ZIP file  
 1.  Login to your WordPress site administrator panel and head over the 'Plugins' menu  
 2.  Click 'Add New'  
 3.  Choose the 'Upload' option  
@@ -96,11 +96,11 @@ After downloading the ZIP file
 6.  Once it is complete, activate the plugin.  
   
 Once the plugin is activated, you'll notice a menu on the left called "Spider Catalog".  
-If any problem occurs with Spider Catalog, please contact us info@web-dorado.com.  
+If any problem occurs with Spider [Wordpress Catalog](http://wordpress.org/extend/plugins/catalog/), please contact us info@web-dorado.com.  
 
 == Screenshots ==
 1.  Spider Catalog  - Category view  
 2.  Spider Catalog  - Products view 
-3.  Spider Catalog  - Add a category  
+3.  Spider [Wordpress Catalog](http://wordpress.org/extend/plugins/catalog/)  - Add a category  
 4.  Spider Catalog  - Global Options  
-5.  Spider Catalog  - Product PageOptions
+5.  Spider [Wordpress Product Catalog](http://wordpress.org/extend/plugins/catalog/)  - Product Page Options

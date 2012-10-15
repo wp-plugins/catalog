@@ -1,7 +1,7 @@
 <?php 
 
 /*
-Plugin Name: Spider Catalog
+Plugin Name: WordPress Catalog
 Plugin URI: http://web-dorado.com/
 Version: 1.1
 Author: http://web-dorado.com/
