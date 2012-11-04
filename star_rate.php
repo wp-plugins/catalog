@@ -53,7 +53,7 @@ starrating();
 					exit();
 				}
 
-	$query= "SELECT AVG(vote_value) as rating FROM ".$wpdb->prefix."spidercatalog_product_votes  WHERE product_id = '".$product_id."' ";
+	$query= $wpdb->prepare( "SELECT AVG(vote_value) as rating FROM ".$wpdb->prefix."spidercatalog_product_votes  WHERE product_id = %d ",$product_id);
 	$row1 = $wpdb->get_var($query);
 
 	$rating=substr($row1,0,3);

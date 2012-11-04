@@ -1,6 +1,19 @@
 <?php 
 
 
+function catal_secure_for_scripts($key)
+   {
+       $_POST[$key] = htmlspecialchars(stripslashes($_POST[$key]));
+       $_POST[$key] = str_ireplace("script", "blocked", $_POST[$key]);
+       $_POST[$key] = mysql_escape_string($_POST[$key]);
+       return $_POST[$key];
+   }
+
+
+
+
+
+
 
 function front_end_single_product($id)
 {
@@ -31,12 +44,12 @@ function front_end_single_product($id)
 			$category_id=$row->category_id;
 		}
 
-		$query= "SELECT * FROM ".$wpdb->prefix."spidercatalog_product_categories WHERE id = '".$category_id."' ";
+		$query= $wpdb->prepare("SELECT * FROM ".$wpdb->prefix."spidercatalog_product_categories WHERE id = %d ",$category_id);
 
 		$row1 = $wpdb->get_row($query);
 		$category_name=$row1->name;
-		$full_name=$_POST['full_name'];
-		$message_text=$_POST['message_text'];
+		$full_name=catal_secure_for_scripts('full_name');
+		$message_text=catal_secure_for_scripts('message_text');
 
 
 
@@ -77,12 +90,12 @@ function front_end_single_product($id)
 
 				
 	$reviews_perpage=$params['reviews_perpage'];
-					$query = "SELECT name,content FROM ".$wpdb->prefix."spidercatalog_product_reviews where product_id='$product_id' order by id desc  limit ".(($rev_page-1)*$reviews_perpage).",$reviews_perpage ";
+					$query = $wpdb->prepare("SELECT name,content FROM ".$wpdb->prefix."spidercatalog_product_reviews where product_id='$product_id' order by id desc  limit %d,%d ",(($rev_page-1)*$reviews_perpage),$reviews_perpage);
 					
 					$reviews_rows = $wpdb->get_results($query);
 					
 
-	$query_count = "SELECT count(".$wpdb->prefix."spidercatalog_product_reviews.id) as reviews_count FROM ".$wpdb->prefix."spidercatalog_product_reviews  WHERE product_id='".$product_id."' ";
+	$query_count =  $wpdb->prepare("SELECT count(".$wpdb->prefix."spidercatalog_product_reviews.id) as reviews_count FROM ".$wpdb->prefix."spidercatalog_product_reviews  WHERE product_id=%d",$product_id);
 
 	$row = $wpdb->get_row($query_count);
 	//print_r($row);
@@ -90,7 +103,7 @@ function front_end_single_product($id)
 
 
 
-	$query= "SELECT AVG(vote_value) as rating FROM ".$wpdb->prefix."spidercatalog_product_votes  WHERE product_id = '$product_id' ";
+	$query= $wpdb->prepare("SELECT AVG(vote_value) as rating FROM ".$wpdb->prefix."spidercatalog_product_votes  WHERE product_id = %d",$product_id);
 
 
 
@@ -98,7 +111,7 @@ function front_end_single_product($id)
 
 		$rating=substr($row1,0,3);
 
-		$query= "SELECT vote_value FROM ".$wpdb->prefix."spidercatalog_product_votes  WHERE product_id = '$product_id' and remote_ip='".$_SERVER['REMOTE_ADDR']."' ";
+		$query= $wpdb->prepare("SELECT vote_value FROM ".$wpdb->prefix."spidercatalog_product_votes  WHERE product_id = %d and remote_ip='".$_SERVER['REMOTE_ADDR']."' ",$product_id);
 		$voted=count($wpdb->get_col($query));
 
 		return html_front_end_single_product($rows,$reviews_rows, $option, $params,$category_name,$rev_page,$reviews_count,$rating,$voted);
@@ -234,14 +247,14 @@ function showPublishedProducts_1($cat_id=1,$show_cat_det=1,$cels_or_list='')
 		if($params1['categories']>0)
 		{
 		
-		$query_count = "SELECT count(".$wpdb->prefix."spidercatalog_products.id) as prod_count FROM ".$wpdb->prefix."spidercatalog_products left join ".$wpdb->prefix."spidercatalog_product_categories on ".$wpdb->prefix."spidercatalog_products.category_id=".$wpdb->prefix."spidercatalog_product_categories.id WHERE 
-		".$wpdb->prefix."spidercatalog_products.published = '1'  and ".$wpdb->prefix."spidercatalog_products.category_id='".$params1['categories']."' ";
+		$query_count = $wpdb->prepare( "SELECT count(".$wpdb->prefix."spidercatalog_products.id) as prod_count FROM ".$wpdb->prefix."spidercatalog_products left join ".$wpdb->prefix."spidercatalog_product_categories on ".$wpdb->prefix."spidercatalog_products.category_id=".$wpdb->prefix."spidercatalog_product_categories.id WHERE 
+		".$wpdb->prefix."spidercatalog_products.published = '1'  and ".$wpdb->prefix."spidercatalog_products.category_id= %d",$params1['categories']);
 		
-		$query = "SELECT ".$wpdb->prefix."spidercatalog_products.*, ".$wpdb->prefix."spidercatalog_product_categories.name as cat_name,".$wpdb->prefix."spidercatalog_product_categories.category_image_url as cat_image_url,".$wpdb->prefix."spidercatalog_product_categories.description as cat_description FROM ".$wpdb->prefix."spidercatalog_products left join ".$wpdb->prefix."spidercatalog_product_categories on ".$wpdb->prefix."spidercatalog_products.category_id=".$wpdb->prefix."spidercatalog_product_categories.id WHERE
+		$query = $wpdb->prepare( "SELECT ".$wpdb->prefix."spidercatalog_products.*, ".$wpdb->prefix."spidercatalog_product_categories.name as cat_name,".$wpdb->prefix."spidercatalog_product_categories.category_image_url as cat_image_url,".$wpdb->prefix."spidercatalog_product_categories.description as cat_description FROM ".$wpdb->prefix."spidercatalog_products left join ".$wpdb->prefix."spidercatalog_product_categories on ".$wpdb->prefix."spidercatalog_products.category_id=".$wpdb->prefix."spidercatalog_product_categories.id WHERE
 		
-		".$wpdb->prefix."spidercatalog_products.published = '1'  and ".$wpdb->prefix."spidercatalog_products.category_id='".$params1['categories']."' ";
+		".$wpdb->prefix."spidercatalog_products.published = '1'  and ".$wpdb->prefix."spidercatalog_products.category_id= %d",$params1['categories']);
 		
-		$cat_query= "SELECT ".$wpdb->prefix."spidercatalog_product_categories.name as cat_name,".$wpdb->prefix."spidercatalog_product_categories.category_image_url as cat_image_url,".$wpdb->prefix."spidercatalog_product_categories.description as cat_description FROM ".$wpdb->prefix."spidercatalog_product_categories WHERE published = '1' and id='".$params1['categories']."'  ";
+		$cat_query= $wpdb->prepare( "SELECT ".$wpdb->prefix."spidercatalog_product_categories.name as cat_name,".$wpdb->prefix."spidercatalog_product_categories.category_image_url as cat_image_url,".$wpdb->prefix."spidercatalog_product_categories.description as cat_description FROM ".$wpdb->prefix."spidercatalog_product_categories WHERE published = '1' and id= %d ",$params1['categories']);
 		
 		}
 		
@@ -257,31 +270,34 @@ function showPublishedProducts_1($cat_id=1,$show_cat_det=1,$cels_or_list='')
 			
 		if($cat_id!=0)
 		{
+			if(is_numeric($cat_id)){
 		$query_count .= " and ".$wpdb->prefix."spidercatalog_products.category_id='".$cat_id."' ";
 		$query .= " and ".$wpdb->prefix."spidercatalog_products.category_id='".$cat_id."' ";
 		$cat_query.=" and id='".$cat_id."' ";
+			}
 		}
 		}
 		
 		if($prod_name!="")
 		{
-		$query_count .= " and (".$wpdb->prefix."spidercatalog_products.name like '%".$prod_name."%' or ".$wpdb->prefix."spidercatalog_products.description like '%".$prod_name."%' )  ";
-		$query .= " and (".$wpdb->prefix."spidercatalog_products.name like '%".$prod_name."%' or ".$wpdb->prefix."spidercatalog_products.description like '%".$prod_name."%' )  ";
+		$query_count .= " and (".$wpdb->prefix."spidercatalog_products.name like %s or ".$wpdb->prefix."spidercatalog_products.description like %s )  ";
+		$query .= " and (".$wpdb->prefix."spidercatalog_products.name like %s or ".$wpdb->prefix."spidercatalog_products.description like %s )  ";
 		}
 		
-		$query .= "order by ".$wpdb->prefix."spidercatalog_products.ordering limit ".(($page_num-1)*$prod_in_page).",".$prod_in_page."  ";
+		$query .= " order by ".$wpdb->prefix."spidercatalog_products.ordering limit ".(($page_num-1)*$prod_in_page).",".$prod_in_page."  ";
 		
 		$row = $wpdb->get_var($query_count);
 		
 		$prod_count=$row;
 		
+				if($prod_name!="")
+		{ 
 		
-
+		$query=$wpdb->prepare( $query,"%".$prod_name."%","%".$prod_name."%");
+		$query_count =$wpdb->prepare($query_count,"%".$prod_name."%","%".$prod_name."%");
+		}
 		
-		$rows = $wpdb->get_results($query);
-
-		
-		
+		$rows = $wpdb->get_results( $query);
 		
 
 
@@ -291,17 +307,17 @@ function showPublishedProducts_1($cat_id=1,$show_cat_det=1,$cels_or_list='')
 		foreach($rows as $row)
 		{
 			$id=$row->id;
-			$query= "SELECT AVG(vote_value) as rating FROM ".$wpdb->prefix."spidercatalog_product_votes  WHERE product_id = '".$id."' ";
+			$query= $wpdb->prepare("SELECT AVG(vote_value) as rating FROM ".$wpdb->prefix."spidercatalog_product_votes  WHERE product_id = %d ",$id);
 		
 			$row1 = $wpdb->get_var($query);
 			$ratings[$id]=substr($row1,0,3);
-			$query= "SELECT vote_value FROM ".$wpdb->prefix."spidercatalog_product_votes  WHERE product_id = '".$id."' and remote_ip='".$_SERVER['REMOTE_ADDR']."' ";
+			$query= $wpdb->prepare("SELECT vote_value FROM ".$wpdb->prefix."spidercatalog_product_votes  WHERE product_id = %d and remote_ip='".$_SERVER['REMOTE_ADDR']."' ",$id);
 
 		
 			$num_rows = $wpdb->get_var($query);
 			$voted[$id]=$num_rows;
 		
-			$query= "SELECT * FROM ".$wpdb->prefix."spidercatalog_product_categories WHERE id = '".$row->category_id."' ";	
+			$query= $wpdb->prepare("SELECT * FROM ".$wpdb->prefix."spidercatalog_product_categories WHERE id = %d ",$row->category_id);	
 			$row2 = $wpdb->get_row($query);	
 			$categories[$row2->id]=$row2->name;			
 			}
