@@ -259,10 +259,10 @@ function SpiderCatAddToOnload()
 			for ( i = 0; i < document.getElementsByTagName( 'a' ).length; i++ )
 				if(document.getElementsByTagName( 'a' )[i].target=="spiderbox" || ((allImagesQ || spiderShop) && (document.getElementsByTagName( 'a' )[i].href.substr(document.getElementsByTagName( 'a' )[i].href.length-4)==".jpg" || document.getElementsByTagName( 'a' )[i].href.substr(document.getElementsByTagName( 'a' )[i].href.length-4)==".png" || document.getElementsByTagName( 'a' )[i].href.substr(document.getElementsByTagName( 'a' )[i].href.length-4)==".gif" || document.getElementsByTagName( 'a' )[i].href.substr(document.getElementsByTagName( 'a' )[i].href.length-4)==".bmp" || document.getElementsByTagName( 'a' )[i].href.substr(document.getElementsByTagName( 'a' )[i].href.length-4)==".JPG" || document.getElementsByTagName( 'a' )[i].href.substr(document.getElementsByTagName( 'a' )[i].href.length-4)==".PNG" || document.getElementsByTagName( 'a' )[i].href.substr(document.getElementsByTagName( 'a' )[i].href.length-4)==".GIF" || document.getElementsByTagName( 'a' )[i].href.substr(document.getElementsByTagName( 'a' )[i].href.length-4)==".BMP"))) 
 					{
-
-						listOfImages[listOfImages.length]=document.getElementsByTagName( 'a' )[i].href;
+						if(listOfImages.indexOf(document.getElementsByTagName( 'a' )[i].href)===-1)
+							listOfImages[listOfImages.length]=document.getElementsByTagName( 'a' )[i].href;
 						document.getElementsByTagName( 'a' )[i].href="javascript:showPictureAnimated('"+document.getElementsByTagName( 'a' )[i].href+"')";						document.getElementsByTagName( 'a' )[i].style.cursor="url('<?php echo urldecode($_GET['juriroot']); ?>/spiderBox/cursor_magnifier_plus.cur'),pointer";						
-                        document.getElementsByTagName( 'a' )[i].target="";
+						document.getElementsByTagName( 'a' )[i].target="";
 						
 					}
 
