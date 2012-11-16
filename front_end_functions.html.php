@@ -567,8 +567,14 @@ else
 <script>
 function submit_catal(page_link)
 {
+	if(document.getElementById('cat_form_page_nav')){
 	document.getElementById('cat_form_page_nav').setAttribute('action',page_link);
 	document.getElementById('cat_form_page_nav').submit();
+	}
+	else
+	{
+		window.location.href=page_link;
+	}
 }
 
 </script>
@@ -1344,8 +1350,14 @@ echo '</table>';
 <script>
 function submit_catal(page_link)
 {
+	if(document.getElementById('cat_form_page_nav')){
 	document.getElementById('cat_form_page_nav').setAttribute('action',page_link);
 	document.getElementById('cat_form_page_nav').submit();
+	}
+	else
+	{
+		window.location.href=page_link;
+	}
 }
 
 </script>
@@ -2157,8 +2169,14 @@ echo '</tr></table>';
 <script>
 function submit_catal(page_link)
 {
+	if(document.getElementById('cat_form_page_nav')){
 	document.getElementById('cat_form_page_nav').setAttribute('action',page_link);
 	document.getElementById('cat_form_page_nav').submit();
+	}
+	else
+	{
+		window.location.href=page_link;
+	}
 }
 
 </script>
