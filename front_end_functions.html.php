@@ -281,7 +281,7 @@ if($params['spider_catalog_product_page_width']!='')
 echo '<div id="productMainDiv" style="'.$widt_spider_cat_prod_page.' border-width:'.$params['border_width'].'px;border-color:'.$params['border_color'].';border-style:'.$params['border_style'].';'.(($params['text_size_big']!='')?('font-size:'.$params['text_size_big'].'px;'):'').(($params['text_color']!='')?('color:'.$params['text_color'].';'):'').(($params['background_color']!='')?('background-color:'.$params['background_color'].';'):'').'">';
 
 
-$imgurl=explode(";",$row->image_url);
+
 
 echo '<div id="prodTitle" style="'.(($params['title_color']!='')?('color:'.$params['title_color'].';'):'').(($params['title_background_color']!='')?('background-color:'.$params['title_background_color'].';'):'').'padding:0px;"><table id="spider_caltalog_top_table" border="0" cellspacing="0" cellpadding="0" width="100%"><tr><td  style="padding:7px !important;font-size:'.$params['title_size_big'].'px;">' . stripslashes($row->name).'</td>';
 
@@ -336,30 +336,44 @@ echo '</tr></table></div>
 <table id="prodMiddle" style="border:inherit !impotrtant" cellspacing="0" cellpadding="0"><tr>
 <tr><td valign="top" width="280">
 <table id="spider_catalog_image_table" cellpadding="0" cellspacing="5" border="0" style="margin:0px;">';
-
-if(!($row->image_url!="" and $row->image_url!=";"))
+$imgurl=explode(";;;",$row->image_url);
+if(!($row->image_url!="" and $row->image_url!="******0;;;"))
 {
-	$imgurl[0]=plugins_url("Front_images/noimage.jpg",__FILE__)."";
+	$imgurl[0]=plugins_url("Front_images/noimage.jpg",__FILE__);
 
-	echo '<tr><td colspan="2" id="prod_main_picture_container" valign="top"><div style="border: #CCCCCC solid 2px;padding:5px;background-color:white;"><div id="prod_main_picture" style="width:'.($params['large_picture_width']).'px;height:'.($params['large_picture_height']).'px; background:url('.plugins_url("picture.php",__FILE__).'?url='.$imgurl[0].'&height='.$params['large_picture_height'].'&width='.$params['large_picture_width'].'&reverse=1) center no-repeat;">&nbsp;</div></div></td></tr>';
+	echo '<tr><td colspan="2" id="prod_main_picture_container" valign="top"><div style="border: #CCCCCC solid 2px;padding:5px;background-color:white;"><div id="prod_main_picture" style="width:'.($params['large_picture_width']).'px;height:'.($params['large_picture_height']).'px; background:url('.$imgurl[0].'&height='.$params['large_picture_height'].'&width='.$params['large_picture_width'].'&reverse=1) center no-repeat;background-size:contain;">&nbsp;</div></div></td></tr>';
 }
-else
+else{
+	$imgurl[0]=explode('******',$imgurl[0]);
 	echo '<tr><td colspan="2" id="prod_main_picture_container" valign="top">
 <div style="border: #CCCCCC solid 2px;padding:5px;background-color:white;">
-<a href="'.$imgurl[0].'" target="_blank" id="prod_main_picture_a" style="text-decoration:none;">
-<div id="prod_main_picture" style="width:'.($params['large_picture_width']).'px;height:'.($params['large_picture_height']).'px; background:url('.plugins_url("picture.php",__FILE__).'?url='.$imgurl[0].'&height='.$params['large_picture_height'].'&width='.$params['large_picture_width'].'&reverse=1) center no-repeat;">&nbsp;</div></a></div>
+<a href="'.$imgurl[0][0].'" target="_blank" id="prod_main_picture_a" style="text-decoration:none;">
+<div id="prod_main_picture" style="width:'.($params['large_picture_width']).'px;height:'.($params['large_picture_height']).'px; background:url('.$imgurl[0][0].') center no-repeat;background-size:contain;">&nbsp;</div></a></div>
 </td></tr>';
+}
 echo'
 <tr><td style="text-align:justify;">';
 
 $small_images_str='';
 $small_images_count=0;
-
+$imgurl=explode(";;;",$row->image_url);
 foreach($imgurl as $img)
 {
-if($img!=='')
+	
+if($img!=='******0')
 {
-$small_images_str.='<a href="'.$img.'" target="_blank"><img src="'.plugins_url("picture.php",__FILE__).'?url='.$img.'&height=50" vspace="0" hspace="0" onMouseOver="prod_change_picture(\''.$img.'\',this,'.$params['large_picture_width'].','.$params['large_picture_height'].');" /></a>
+	
+	$image_with_atach_id=explode('******',$img);
+	if($image_with_atach_id[1])
+	{
+		$array_with_sizes=wp_get_attachment_image_src( $image_with_atach_id[1], 'thumbnail' );
+	$attach_url=$array_with_sizes[0];
+	}
+	else{
+	$attach_url=$image_with_atach_id[0];
+	}
+	$img=$image_with_atach_id[0];
+$small_images_str.='<a href="'.$img.'" target="_blank"><img style="width:50px;heigth:50px" src="'.$attach_url.'" vspace="0" hspace="0" onMouseOver="prod_change_picture(\''.$img.'\',this,'.$params['large_picture_width'].','.$params['large_picture_height'].');" /></a>
 ';
 $small_images_count++;
 }
@@ -1062,18 +1076,19 @@ echo '<div id="productMainDiv" style="'.$category_details_width.'border-width:'.
 echo '<div id="prodTitle" style="'.(($params[ 'title_color' ]!='')?('color:'.$params[ 'title_color' ].';'):'').(($params[ 'title_background_color' ]!='')?('background-color:'.$params[ 'title_background_color' ].';'):'').'padding:10px;font-size:'.$params[ 'category_title_size' ].'px;">' .$cat_rows[0]->cat_name.'</div>';
 
 
-$imgurl=explode(";",$cat_rows[0]->cat_image_url);
+$imgurl=explode(";;;",$cat_rows[0]->cat_image_url);
 echo '<table id="category" border="0" cellspacing="10" cellpadding="10">
 <tr>';
 
-if($cat_rows[0]->cat_image_url!="" and $cat_rows[0]->cat_image_url!=";")
+if($cat_rows[0]->cat_image_url!="" and $cat_rows[0]->cat_image_url!="******0;;;")
 {
+	$url_for_image=explode('******',$imgurl[0]);
 	echo '<td valign="top">
 			<table cellpadding="0" cellspacing="5" border="0" style="margin:0px;">
 			<tr><td colspan="2" id="prod_main_picture_container" valign="top">
 			<div style="border: #CCCCCC solid 2px;padding:5px;background-color:white;">
-			<a href="'.$imgurl[0].'" target="_blank" id="prod_main_picture_a" style="text-decoration:none;">
-			<div id="prod_main_picture" style="width:'.($params[ 'category_picture_width' ]).'px;height:'.($params[ 'category_picture_height' ]).'px; background:url('.plugins_url("picture.php",__FILE__).'?url='.$imgurl[0].'&height='.$params[ 'category_picture_height' ].'&width='.$params[ 'category_picture_width' ].'&reverse=1) center no-repeat;">&nbsp;</div></a></div>
+			<a href="'.$url_for_image[0].'" target="_blank" id="prod_main_picture_a" style="text-decoration:none;">
+			<div id="prod_main_picture" style="width:'.($params[ 'category_picture_width' ]).'px;height:'.($params[ 'category_picture_height' ]).'px; background:url('.$url_for_image[0].') center no-repeat; background-size: contain;">&nbsp;</div></a></div>
 			</td></tr>';
 
 	echo'<tr><td style="text-align:justify;">';
@@ -1083,9 +1098,23 @@ $small_images_count=0;
 
 foreach($imgurl as $img)
 {
-if($img!=='')
+if($img!=='******0')
 {
-$small_images_str.='<a href="'.$img.'" target="_blank"><img src="'.plugins_url('picture.php',__FILE__).'?url='.$img.'&height=50" vspace="0" hspace="0" onMouseOver="prod_change_picture(\''.$img.'\',this,'.$params[ 'category_picture_width' ].','.$params[ 'category_picture_height' ].');" /></a>
+	
+	
+$image_and_atach=explode('******',$img);
+$img=$image_and_atach[0];	
+	$atach=$image_and_atach[1];
+if($atach)
+{
+	$array_with_sizes=wp_get_attachment_image_src( $atach, 'thumbnail' );
+	$attach_url=$array_with_sizes[0];
+}
+else
+{
+	$attach_url=$image_and_atach[0];	
+}
+$small_images_str.='<a href="'.$img.'" target="_blank"><img style="width:50px;heigth:50px" src="'.$attach_url.'" vspace="0" hspace="0" onMouseOver="prod_change_picture(\''.$img.'\',this,'.$params[ 'category_picture_width' ].','.$params[ 'category_picture_height' ].');" /></a>
 ';
 $small_images_count++;
 }
@@ -1118,7 +1147,7 @@ if (($params["choose_category"] and !($params1['categories'] > 0)) or $params["s
   {
 	     if(is_home())
 	   {
-		   echo "aaaaaaaaaaaaaaaaaa";
+		
 		   $page_link=site_url();
 	   }
 	   else
@@ -1201,21 +1230,31 @@ echo '</tr>';
 
 foreach ($rows as $row)
 {
-$imgurl=explode(";",$row->image_url);
+$imgurl=explode(";;;",$row->image_url);
+$image_and_atach=explode('******',$imgurl[0]);
+$image=$image_and_atach[0];
+$atach=$image_and_atach[1];
+if($atach)
+{
+	$array_with_sizes=wp_get_attachment_image_src( $atach, 'thumbnail' );
+	$attach_url=$array_with_sizes[0];
+}
+else
+{
+	$attach_url=$image;	
+}
 
-if (!($row->image_url != "" and $row->image_url != ";"))
+
+if (!($row->image_url != "" and $row->image_url != "******0;;;"))
 $imgurl[0]=plugins_url("Front_images/noimage.jpg",__FILE__);
 
-echo'<tr>';
-
-    $imgurl = explode(";", $row->image_url);
-    
+echo'<tr>'; 
 	
-if (!($row->image_url != "" and $row->image_url != ";"))
-       echo '<td style=" vertical-align: top !important; padding:0px;border-width:'.$params[ 'border_width' ].'px;border-color:'.$params[ 'border_color' ].';border-style:'.$params[ 'border_style' ].';border-top:none; border-left:none;"><img style="border: #CCC solid 2px; margin:10px" src="'.plugins_url("picture.php",__FILE__).'?url='.plugins_url("Front_images/noimage.jpg",__FILE__).'&width=' . $params['list_picture_width'] . '&height=' . $params['list_picture_height'] . '" />
+if (!($row->image_url != "" and $row->image_url != "*****0;;;"))
+       echo '<td style=" vertical-align: top !important; padding:0px;border-width:'.$params[ 'border_width' ].'px;border-color:'.$params[ 'border_color' ].';border-style:'.$params[ 'border_style' ].';border-top:none; border-left:none;"><img style="border: #CCC solid 2px; margin:10px" src="'.plugins_url("Front_images/noimage.jpg",__FILE__).'" />
 </td>';
 else
-        echo '<td style=" vertical-align: top !important; border-width:'.$params[ 'border_width' ].'px;border-color:'.$params[ 'border_color' ].';border-style:'.$params[ 'border_style' ].';border-top:none; border-left:none;"><a href="' . $imgurl[0] . '" target="_blank"><img style="border: #CCC solid 2px; margin:10px" src="'.plugins_url("picture.php",__FILE__).'?url=' . $imgurl[0] . '&width=' . $params['list_picture_width'] . '&height=' . $params['list_picture_height'] . '" /></a></td>';
+        echo '<td style=" vertical-align: top !important; border-width:'.$params[ 'border_width' ].'px;border-color:'.$params[ 'border_color' ].';border-style:'.$params[ 'border_style' ].';border-top:none; border-left:none;"><a href="' . $image . '" target="_blank"><img style="border: #CCC solid 2px; margin:10px; width:'. $params['list_picture_width'] .'px; height:'. $params['list_picture_height'] .'px" src="'.$attach_url.'" /></a></td>';
 
 echo '<td style="'.(($params[ 'name_price_size_list']!='')?('font-size:'.$params[ 'name_price_size_list'].'px;'):'').' border-width:'.$params[ 'border_width' ].'px;border-color:'.$params[ 'border_color'].';border-style:'.$params[ 'border_style' ].';border-top:none; border-left:none;"><a href="'.$permalink_for_sp_cat. '&product_id=' . $row->id . '&view=showproduct&page_num=' . $page_num . '&back=1'.'" style="' . (($params['hyperlink_color'] != '') ? ('color:' . $params['hyperlink_color'] . ';') : '') . '">' . $row->name . '</a>';
 
@@ -1801,18 +1840,19 @@ echo '<div id="productMainDiv" class="S_P_productMainDiv" style="'.(($params[ 'c
 echo '<div id="prodTitle" style="'.(($params[ 'title_color']!='')?('color:'.$params[ 'title_color'].';'):'').(($params[ 'title_background_color']!='')?('background-color:'.$params[ 'title_background_color'].';'):'').'padding:10px;font-size:'.$params[ 'category_title_size'].'px;">' .$cat_rows[0]->cat_name.'</div>';
 
 
-$imgurl=explode(";",$cat_rows[0]->cat_image_url);
+$imgurl=explode(";;;",$cat_rows[0]->cat_image_url);
+$askofenn=explode('******',$imgurl[0]);
 echo '<table id="category" border="0" cellspacing="10" cellpadding="10">
 <tr>';
 
-if($cat_rows[0]->cat_image_url!="" and $cat_rows[0]->cat_image_url!=";")
+if($cat_rows[0]->cat_image_url!="" and $cat_rows[0]->cat_image_url!="******0;;;")
 {
 	echo '<td valign="top">
 			<table cellpadding="0" cellspacing="5" border="0" style="margin:0px;">
 			<tr><td colspan="2" id="prod_main_picture_container" valign="top">
 			<div style="border: #CCCCCC solid 2px;padding:5px;background-color:white;">
-			<a href="'.$imgurl[0].'" target="_blank" id="prod_main_picture_a" style="text-decoration:none;">
-			<div id="prod_main_picture" style="width:'.($params[ 'category_picture_width']).'px;height:'.($params[ 'category_picture_height']).'px; background:url('.plugins_url("picture.php",__FILE__).'?url='.$imgurl[0].'&height='.$params[ 'category_picture_height'].'&width='.$params[ 'category_picture_width'].'&reverse=1) center no-repeat;">&nbsp;</div></a></div>
+			<a href="'.$askofenn[0].'" target="_blank" id="prod_main_picture_a" style="text-decoration:none;">
+			<div id="prod_main_picture" style="width:'.($params[ 'category_picture_width']).'px;height:'.($params[ 'category_picture_height']).'px; background:url('.$askofenn[0].') center no-repeat; background-size: contain">&nbsp;</div></a></div>
 			</td></tr>';
 
 	echo'<tr><td style="text-align:justify;">';
@@ -1822,9 +1862,23 @@ $small_images_count=0;
 
 foreach($imgurl as $img)
 {
-if($img!=='')
+	$image_and_atach=explode('******',$img);
+	
+	$atach=$image_and_atach[1];
+if($atach)
 {
-$small_images_str.='<a href="'.$img.'" target="_blank"><img src="'.plugins_url("picture.php",__FILE__).'?url='.$img.'&height=50" vspace="0" hspace="0" onMouseOver="prod_change_picture(\''.$img.'\',this,'.$params[ 'category_picture_width'].','.$params[ 'category_picture_height'].');" /></a>
+	$array_with_sizes=wp_get_attachment_image_src( $atach, 'thumbnail' );
+	$attach_url=$array_with_sizes[0];
+}
+else
+{
+	$attach_url=$image_and_atach[0];	
+}
+
+	
+if($image_and_atach[0]!=='')
+{
+$small_images_str.='<a href="'.$image_and_atach[0].'" target="_blank"><img style="width:50px; heigth=50px" src="'.$attach_url.'" vspace="0" hspace="0" onMouseOver="prod_change_picture(\''.$image_and_atach[0].'\',this,'.$params[ 'category_picture_width'].','.$params[ 'category_picture_height'].');" /></a>
 ';
 $small_images_count++;
 }
@@ -1912,7 +1966,7 @@ foreach ($rows as $row)
     
     
     
-    $imgurl = explode(";", $row->image_url);
+    $imgurl = explode(";;;", $row->image_url);
     
     
     
@@ -1938,7 +1992,7 @@ foreach ($rows as $row)
     
     
     
-    if (!($row->image_url != "" and $row->image_url != ";"))
+    if (!($row->image_url != "" and $row->image_url != "******0;;;"))
       {
         $imgurl[0] = plugins_url("Front_images/noimage.jpg",__FILE__);
         
@@ -1950,14 +2004,27 @@ foreach ($rows as $row)
         
         
         
-        echo '<td style="padding:10px;"><img src="'.plugins_url("picture.php",__FILE__).'?url=' . $imgurl[0] . '&width=' . $params['small_picture_width'] . '&height=' . $params['small_picture_height'] . '" />
+        echo '<td style="padding:10px;"><img style="width:' . $params['small_picture_width'] . 'px; height=' . $params['small_picture_height'] . 'px" src="'. $imgurl[0] . '" />
 
 </td>';
       }
-    else
-        echo '<td style="padding:10px;"><a href="' . $imgurl[0] . '" target="_blank"><img src="'.plugins_url("picture.php",__FILE__).'?url=' . $imgurl[0] . '&width=' . $params['small_picture_width'] . '&height=' . $params['small_picture_height'] . '" /></a></td>';
+    else{
+		
+		$askofen=explode('******',$imgurl[0]);
+		
+		if($askofen[1])
+		{
+			$array_with_sizes=wp_get_attachment_image_src( $askofen[1], 'thumbnail' );
+			$attach_url=$array_with_sizes[0];
+		}
+		else
+		{
+			$attach_url=$askofen[0];
+		}
+		$imgurl[0]=$askofen[0];
+        echo '<td style="padding:10px;"><a href="' . $imgurl[0] . '" target="_blank"><img style="width:'. $params['small_picture_width'] . 'px; height:' . $params['small_picture_height'] . 'px" src="'.$attach_url.'" /></a></td>';
     
-    
+	}
     
     
     

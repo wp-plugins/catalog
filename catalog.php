@@ -3,7 +3,7 @@
 /*
 Plugin Name: WordPress Catalog
 Plugin URI: http://web-dorado.com/
-Version: 1.2.2
+Version: 1.3
 Author: http://web-dorado.com/
 License: GNU/GPLv3 http://www.gnu.org/licenses/gpl-3.0.html
 */
@@ -264,6 +264,7 @@ function Spider_Catalog_options_panel(){
 		$page_prad=  add_submenu_page( 'Categories_Spider_Catalog', 'Products', 'Products', 'manage_options', 'Products_Spider_Catalog', 'Products_Spider_Catalog');
 					 add_submenu_page( 'Categories_Spider_Catalog', 'Global Options', 'Global Options', 'manage_options', 'Options_Catalog_global', 'Options_Catalog_global');
  		$page_option=add_submenu_page( 'Categories_Spider_Catalog', 'Styles and Colors', 'Styles and Colors', 'manage_options', 'Options_Catalog_styles', 'Options_Catalog_styles');
+  					 add_submenu_page( 'Categories_Spider_Catalog', 'Licensing', 'Licensing', 'manage_options', 'Spider_catalog_Licensing', 'Spider_catalog_Licensing');
   add_submenu_page( 'Categories_Spider_Catalog', 'Uninstall Spider_Catalog ', 'Uninstall  Spider Catalog', 'manage_options', 'Uninstall_Spider_Catalog', 'Uninstall_Spider_Catalog');
   
   add_action('admin_print_styles-' . $page_cat, 'Spider_Category_admin_script');
@@ -303,8 +304,33 @@ function Spider_option_admin_script()
 
 
 
+//////////////////////////////////////////
+//           LICENS
+/////////////////////////////////////
+function Spider_catalog_Licensing(){
+	
+	?>
+    <div style="width:95%">
+    <p>
+	This plugin is the non-commercial version of the Spider Catalog. If you want to customize to the styles and colors of your website,than you need to buy a license.
+Purchasing a license will add possibility to customize the styles and colors, global options of the Spider Catalog. 
 
-
+ </p>
+<br /><br />
+<a href="http://webdorado.org/files/fromSpiderCatalog.php" class="button-primary" target="_blank">Purchase a License</a>
+<br /><br /><br />
+<p>After the purchasing the commercial version follow this steps:</p>
+<ol>
+	<li>Deactivate Spider Catalog Plugin</li>
+	<li>Delete Spider Catalog Plugin</li>
+	<li>Install the downloaded commercial version of the plugin</li>
+</ol>
+</div>
+<?php
+    
+    
+	
+	}
 
 
 
@@ -766,7 +792,7 @@ $sql_spidercatalog_params="
 CREATE TABLE IF NOT EXISTS `".$wpdb->prefix."spidercatalog_params`(
  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
  `name` varchar(50) 
-CHARACTER SET utf8 NOT NULL,
+	CHARACTER SET utf8 NOT NULL,
   `title` varchar(200) CHARACTER SET utf8 NOT NULL,
  `description` text CHARACTER SET utf8 NOT NULL,
   `value` varchar(200) CHARACTER SET utf8 NOT NULL,
@@ -781,7 +807,7 @@ CREATE TABLE IF NOT EXISTS `".$wpdb->prefix."spidercatalog_products` (
   `name` varchar(100) DEFAULT NULL,
  `category_id` int(11) unsigned DEFAULT NULL,
  `description` text,
-  `image_url` varchar(2000) DEFAULT NULL,
+  `image_url` text,
   `cost` decimal(11,2) unsigned DEFAULT NULL,
   `market_cost` decimal(11,2) unsigned 
 
@@ -799,7 +825,7 @@ $sql_spidercatalog_product_categories="
 CREATE TABLE IF NOT EXISTS `".$wpdb->prefix."spidercatalog_product_categories` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(200) NOT NULL,
-  `category_image_url` varchar(2000) NOT NULL,
+  `category_image_url` text,
   `description` text,
   `param` text,
   `ordering` int(11) NOT NULL,
@@ -918,7 +944,7 @@ INSERT INTO
 
 600 Hz Sub Field Drive , DVB-T, DVB-C, RCA, RGB, VGA, HDMI x2, Scart, SD card</p>', 
 
-'http://demo.web-dorado.com/components/com_spidercatalog/images/sampleimages/7_19977_1324390185.jpg;;;http://demo.web-dorado.com/components/com_spidercatalog/images/sampleimages/11448_2.jpg;;;http://demo.web-dorado.com/components/com_spidercatalog/images/sampleimages/panasonictx-pr50u30.jpg', '950.00', '1000.00', 'par_TV 
+'http://demo.web-dorado.com/components/com_spidercatalog/images/sampleimages/7_19977_1324390185.jpg******0;;;http://demo.web-dorado.com/components/com_spidercatalog/images/sampleimages/11448_2.jpg******0;;;http://demo.web-dorado.com/components/com_spidercatalog/images/sampleimages/panasonictx-pr50u30.jpg******0', '950.00', '1000.00', 'par_TV 
 
 System@@:@@DVB-T	DVB-C		par_Diagonal@@:@@50&quot; / 127 cm		par_Interface@@:@@RCA, RGB, VGA, HDMI 
 
@@ -929,7 +955,7 @@ x2, Scart, SD card		par_Refresh Rate@@:@@600 Hz Sub Field Drive		', 2, 1),
 
 C, 4xHDMI, VGA, RGB, RCA, USB, 2xSCART </p>', 
 
-'http://demo.web-dorado.com/components/com_spidercatalog/images/sampleimages/7_7557_1298400832.jpg;;;http://demo.web-dorado.com/components/com_spidercatalog/images/sampleimages/r1.jpg;;;http://demo.web-dorado.com/components/com_spidercatalog/images/sampleimages/sony-kdl32ex700aep-3.jpg', '1450.00', '1700.00', 'par_TV 
+'http://demo.web-dorado.com/components/com_spidercatalog/images/sampleimages/7_7557_1298400832.jpg******0;;;http://demo.web-dorado.com/components/com_spidercatalog/images/sampleimages/r1.jpg******0;;;http://demo.web-dorado.com/components/com_spidercatalog/images/sampleimages/sony-kdl32ex700aep-3.jpg******0', '1450.00', '1700.00', 'par_TV 
 
 System@@:@@Analog	DVB-T	DVB-C		par_Diagonal@@:@@46&quot; / 117 cm		par_Interface@@:@@4xHDMI, 
 
@@ -940,7 +966,7 @@ VGA, RGB, RCA, USB, 2xSCART		par_Refresh Rate@@:@@MotionFlow 100Hz		', 1, 1),
 
 HyperReal Engine, Samsung Apps, Social TV, WiFi Ready</p>', 
 
-'http://demo.web-dorado.com/components/com_spidercatalog/images/sampleimages/7_20107_1324712747.jpg', '1630.00', '1900.00', 'par_TV System@@:@@DTV 
+'http://demo.web-dorado.com/components/com_spidercatalog/images/sampleimages/7_20107_1324712747.jpg******0', '1630.00', '1900.00', 'par_TV System@@:@@DTV 
 
 DVB-T/C		par_Diagonal@@:@@46&quot; / 117 cm		par_Interface@@:@@4xHDMI,3xUSB, RGB, RCA, D-SUB,1xSCART, 
 
@@ -951,7 +977,7 @@ Television KDL-32EX421BAEP </strong></p><p>32&quot; / 80 cm, 50 Hz, Analog, DVB-
 
 Ethernet (RJ-45),24p True Cinema, X-Reality, DLNA, WiFi Ready, Internet Video, Internet Widgets, Web Browser, Skype, USB HDD 
 
-Recording</p>', 'http://demo.web-dorado.com/components/com_spidercatalog/images/sampleimages/7_19644_1323935170.jpg', '950.00', '0.00', 'par_TV 
+Recording</p>', 'http://demo.web-dorado.com/components/com_spidercatalog/images/sampleimages/7_19644_1323935170.jpg******0', '950.00', '0.00', 'par_TV 
 
 System@@:@@	par_Diagonal@@:@@32&quot; / 80 cm		par_Interface@@:@@AV, VGA, HDMI, USB, Ethernet 		
 
@@ -1031,3 +1057,30 @@ $wpdb->query($sql_5);
 register_activation_hook( __FILE__, 'Spider_Catalog_activate' );
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/////////////////////// attached functfunction get_attachment_id_from_src($image_src) {
+function get_attachment_id_from_src($image_src) {
+        global $wpdb;
+		$id=0;
+		 $image_src = preg_replace('/-\d+x\d+(?=\.(jpg|jpeg|png|gif)$)/i', '', $image_src);
+        $query = "SELECT ID FROM {$wpdb->posts} WHERE guid='$image_src'";
+        $id = $wpdb->get_var($query);
+		if(!$id)
+		$id=0;
+        return $image_src.'******'.$id;
+}

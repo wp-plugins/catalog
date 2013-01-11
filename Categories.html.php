@@ -66,6 +66,16 @@ var keyCode = event.keyCode ? event.keyCode : event.which ? event.which : event.
 	</script>
     <form method="post"  onkeypress="doNothing()" action="admin.php?page=Categories_Spider_Catalog" id="admin_form" name="admin_form">
 	<table cellspacing="10" width="100%">
+              <tr>   
+<td width="100%" style="font-size:14px; font-weight:bold"><a href="http://web-dorado.com/spider-catalog-wordpress-guide-step-2.html" target="_blank" style="color:blue; text-decoration:none;">User Manual</a><br />
+This section allows you to create categories of products. <a href="http://web-dorado.com/spider-catalog-wordpress-guide-step-2.html" target="_blank" style="color:blue; text-decoration:none;">More...</a></td>   
+	 <td colspan="7" align="right" style="font-size:16px;">
+  <a href="http://webdorado.org/files/fromSpiderCatalog.php" target="_blank" style="color:red; text-decoration:none;">
+<img src="<?php echo plugins_url("images/header.png",__FILE__) ?>" border="0" alt="http://webdorado.org/files/fromSpiderCatalog.php" width="215"><br>
+Get the full version&nbsp;&nbsp;&nbsp;&nbsp;
+</a>
+  </td>
+        </tr>
     <tr>
     <td style="width:80px">
     <?php echo "<h2>".'Categories'. "</h2>"; ?>
@@ -73,13 +83,6 @@ var keyCode = event.keyCode ? event.keyCode : event.which ? event.which : event.
     <td  style="width:90px; text-align:right;"><p class="submit" style="padding:0px; text-align:left"><input type="button" value="Add a Category" name="custom_parametrs" onclick="window.location.href='admin.php?page=Categories_Spider_Catalog&task=add_cat'" /></p></td>
 <td style="text-align:right;font-size:16px;padding:20px; padding-right:50px">
 
-	</td>
-	 <td colspan="7" align="right" style="font-size:16px;">
-  <a href="http://webdorado.org/files/fromSpiderCatalog.php" target="_blank" style="color:red; text-decoration:none;">
-<img src="<?php echo plugins_url("images/header.png",__FILE__) ?>" border="0" alt="http://webdorado.org/files/fromSpiderCatalog.php" width="215"><br>
-Get the full version&nbsp;&nbsp;&nbsp;&nbsp;
-</a>
-  </td>
     </tr>
     </table>
     <?php
@@ -212,13 +215,16 @@ function submitbutton(pressbutton)
 
 <table width="95%">
   <tbody>
-  <tr>
-   <td colspan="7" align="right" style="font-size:16px;">
+              <tr>   
+<td width="100%" style="font-size:14px; font-weight:bold"><a href="http://web-dorado.com/spider-catalog-wordpress-guide-step-2.html" target="_blank" style="color:blue; text-decoration:none;">User Manual</a><br />
+This section allows you to create categories of products. <a href="http://web-dorado.com/spider-catalog-wordpress-guide-step-2.html" target="_blank" style="color:blue; text-decoration:none;">More...</a></td>   
+	 <td colspan="7" align="right" style="font-size:16px;">
   <a href="http://webdorado.org/files/fromSpiderCatalog.php" target="_blank" style="color:red; text-decoration:none;">
 <img src="<?php echo plugins_url("images/header.png",__FILE__) ?>" border="0" alt="http://webdorado.org/files/fromSpiderCatalog.php" width="215"><br>
 Get the full version&nbsp;&nbsp;&nbsp;&nbsp;
 </a>
-  </td></tr>
+  </td>
+        </tr>
   <tr>
   <td width="100%"><h2>Category - <?php echo stripslashes($row->name) ?></h2></td>
   <td align="right"><input type="button" onclick="submitbutton('save')" value="Save" class="button-secondary action"> </td>  
@@ -407,7 +413,15 @@ function create_images_tags()
 <tr>
 <td id="img__uploads">
 <?php 
-$i=0;
+
+$images_with_id=$images;
+$counnt_image=count($images_with_id);
+for($i=0;$i<$counnt_image;$i++){
+	$ffff=explode('******',$images_with_id[$i]);
+	$images[$i]=$ffff[0];
+}
+$count_ord=count($images);
+
 if($images[0] || $count_ord!=1)
 for($i=0;$i<$count_ord;$i++){ ?>
 <div id="upload_div_<?php echo $i+1; ?>">
@@ -614,14 +628,16 @@ function submitbutton(pressbutton)
 
 <table width="95%">
   <tbody>
-  <tr>
-   <td colspan="7" align="right" style="font-size:16px;">
+              <tr>   
+<td width="100%" style="font-size:14px; font-weight:bold"><a href="http://web-dorado.com/spider-catalog-wordpress-guide-step-2.html" target="_blank" style="color:blue; text-decoration:none;">User Manual</a><br />
+This section allows you to create categories of products. <a href="http://web-dorado.com/spider-catalog-wordpress-guide-step-2.html" target="_blank" style="color:blue; text-decoration:none;">More...</a></td>   
+	 <td colspan="7" align="right" style="font-size:16px;">
   <a href="http://webdorado.org/files/fromSpiderCatalog.php" target="_blank" style="color:red; text-decoration:none;">
 <img src="<?php echo plugins_url("images/header.png",__FILE__) ?>" border="0" alt="http://webdorado.org/files/fromSpiderCatalog.php" width="215"><br>
 Get the full version&nbsp;&nbsp;&nbsp;&nbsp;
 </a>
   </td>
-  </tr>
+        </tr>
   <tr>
   <td width="100%"><h2>Add Category</h2></td>
   <td align="right"><input type="button" onclick="submitbutton('save')" value="Save" class="button-secondary action"> </td>  

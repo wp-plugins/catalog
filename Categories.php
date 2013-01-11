@@ -262,13 +262,19 @@ function save_cat()
 			 
 	}
 	 
-	 
+	 	 $images=explode(';;;',$_POST['uploadded_images_list']);
+	 $kk=count($images);
+ for($i=0;$i<$kk;$i++){
+		 $image_with_id=get_attachment_id_from_src($images[$i]);
+		 $images[$i]=$image_with_id;
+	 }
+	 $new_images=implode(';;;',$images);
 	 
 	 
 	 $save_or_no= $wpdb->insert($wpdb->prefix.'spidercatalog_product_categories', array(
 		'id'	=> NULL,
 		'name'   				 => $_POST["name"],
-        'category_image_url'     => $_POST["uploadded_images_list"],
+        'category_image_url'     => $new_images,
         'description'			 => stripslashes($_POST["content"]),
         'param'  				 =>$_POST["param"],
         'ordering' 				 => $_POST["ordering"],
@@ -442,11 +448,17 @@ function apply_cat($id)
 		
 			}
 		 }
-	
+	 	 $images=explode(';;;',$_POST['uploadded_images_list']);
+	 $kk=count($images);
+ for($i=0;$i<$kk;$i++){
+		 $image_with_id=get_attachment_id_from_src($images[$i]);
+		 $images[$i]=$image_with_id;
+	 }
+	 $new_images=implode(';;;',$images);
 	
 	$savedd=$wpdb->update($wpdb->prefix.'spidercatalog_product_categories', array(
 					'name'   				 => $_POST["name"],
-					'category_image_url'     => $_POST["uploadded_images_list"],
+					'category_image_url'     => $new_images,
 					'description'			 => stripslashes($_POST["content"]),
 					'param'  				 =>$_POST["param"],
 					'ordering' 				 => $_POST["ordering"],

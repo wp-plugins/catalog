@@ -51,11 +51,9 @@ var SCHR=new SpiderCatHttpReq();
 function prod_change_picture(url,obj,width,height)
 {
 		
-	phpurl=document.getElementById("prod_main_picture").style.backgroundImage.substr(0,document.getElementById("prod_main_picture").style.backgroundImage.indexOf("picture.php?url"));
-	document.getElementById("prod_main_picture_a").href=obj.parentNode.href;
 	
-	document.getElementById("prod_main_picture").style.backgroundImage=phpurl+'picture.php?url='+url+'&width='+width+'&height='+height+'&reverse=1)';
-	
+	document.getElementById("prod_main_picture_a").href=obj.parentNode.href;	
+	document.getElementById("prod_main_picture").style.backgroundImage='url('+url+')';	
 }
 
 

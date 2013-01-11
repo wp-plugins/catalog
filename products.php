@@ -20,14 +20,6 @@
  
  
 function  showProducts(){
-
-
-
-
-
-	  
-	  
-	  
 	  
 	  
   global $wpdb;
@@ -388,7 +380,13 @@ function  update_prad_cat($id){
 
 
 
-
+	 $images=explode(';;;',$_POST['uploadded_images_list']);
+	 $kk=count($images);
+	 for($i=0;$i<$kk;$i++){
+		 $image_with_id=get_attachment_id_from_src($images[$i]);
+		 $images[$i]=$image_with_id;
+	 }
+	 $new_images=implode(';;;',$images);
 
 
 
@@ -398,7 +396,7 @@ function  update_prad_cat($id){
 			'name'   		 =>$_POST['name'],
 			'category_id'    =>$_POST['cat_search'],
 			'description'    =>$_POST['content'],
-			'image_url'   	 =>$_POST['uploadded_images_list'],
+			'image_url'   	 =>$new_images,
 			'cost'   		 =>$_POST['cost'],
 			'market_cost'	 =>$_POST['market_cost'],
 			'param'	    	 =>$_POST['param'],
@@ -472,14 +470,20 @@ function save_prad_cat()
 	}
 	 
 	 
-	 
+	 $images=explode(';;;',$_POST['uploadded_images_list']);
+	 $kk=count($images);
+ for($i=0;$i<$kk;$i++){
+		 $image_with_id=get_attachment_id_from_src($images[$i]);
+		 $images[$i]=$image_with_id;
+	 }
+	 $new_images=implode(';;;',$images);
 	 
 	 $save_or_no= $wpdb->insert($wpdb->prefix.'spidercatalog_products', array(
 		'id'	=> NULL,
 		'name'   		 =>$_POST['name'],
 			'category_id'    =>$_POST['cat_search'],
 			'description'    =>$_POST['content'],
-			'image_url'   	 =>$_POST['uploadded_images_list'],
+			'image_url'   	 =>$new_images,
 			'cost'   		 =>$_POST['cost'],
 			'market_cost'	 =>$_POST['market_cost'],
 			'param'	    	 =>$_POST['param'],

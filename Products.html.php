@@ -66,7 +66,17 @@ var keyCode = event.keyCode ? event.keyCode : event.which ? event.which : event.
     
     
     <form method="post"  onkeypress="doNothing()" action="admin.php?page=Products_Spider_Catalog" id="admin_form" name="admin_form">
-	<table cellspacing="10" width="100%">
+<table cellspacing="10" width="100%">
+          <tr>   
+<td width="100%" style="font-size:14px; font-weight:bold"><a href="http://web-dorado.com/spider-catalog-wordpress-guide-step-3.html" target="_blank" style="color:blue; text-decoration:none;">User Manual</a><br />
+This section allows you to create Products.<a href="http://web-dorado.com/spider-catalog-wordpress-guide-step-3.html" target="_blank" style="color:blue; text-decoration:none;">More...</a></td>   
+	 <td colspan="7" align="right" style="font-size:16px;">
+  <a href="http://webdorado.org/files/fromSpiderCatalog.php" target="_blank" style="color:red; text-decoration:none;">
+<img src="<?php echo plugins_url("images/header.png",__FILE__) ?>" border="0" alt="http://webdorado.org/files/fromSpiderCatalog.php" width="215"><br>
+Get the full version&nbsp;&nbsp;&nbsp;&nbsp;
+</a>
+  </td>
+        </tr>
     <tr>
     <td style="width:80px">
     <?php echo "<h2>".'Products'. "</h2>"; ?>
@@ -75,12 +85,7 @@ var keyCode = event.keyCode ? event.keyCode : event.which ? event.which : event.
 <td style="text-align:right;font-size:16px;padding:20px; padding-right:50px">
 
 	</td>
-	 <td colspan="7" align="right" style="font-size:16px;">
-  <a href="http://webdorado.org/files/fromSpiderCatalog.php" target="_blank" style="color:red; text-decoration:none;">
-<img src="<?php echo plugins_url("images/header.png",__FILE__) ?>" border="0" alt="http://webdorado.org/files/fromSpiderCatalog.php" width="215"><br>
-Get the full version&nbsp;&nbsp;&nbsp;&nbsp;
-</a>
-  </td>
+
     </tr>
     </table>
     <?php
@@ -209,12 +214,16 @@ function change_select()
 </script>
 <table width="95%">
   <tbody>
-  <tr> <td colspan="7" align="right" style="font-size:16px;">
+            <tr>   
+<td width="100%" style="font-size:14px; font-weight:bold"><a href="http://web-dorado.com/spider-catalog-wordpress-guide-step-3.html" target="_blank" style="color:blue; text-decoration:none;">User Manual</a><br />
+This section allows you to create Products.<a href="http://web-dorado.com/spider-catalog-wordpress-guide-step-3.html" target="_blank" style="color:blue; text-decoration:none;">More...</a></td>   
+	 <td colspan="7" align="right" style="font-size:16px;">
   <a href="http://webdorado.org/files/fromSpiderCatalog.php" target="_blank" style="color:red; text-decoration:none;">
 <img src="<?php echo plugins_url("images/header.png",__FILE__) ?>" border="0" alt="http://webdorado.org/files/fromSpiderCatalog.php" width="215"><br>
 Get the full version&nbsp;&nbsp;&nbsp;&nbsp;
 </a>
-  </td></tr>
+  </td>
+        </tr>
   <tr>
   <td width="100%"><h2>Product - <?php echo $row->name ?></h2></td>
     <td align="right"><input type="button" onclick="submitbutton('edit_rating')" value=" Edit Ratings " class="button-primary action"> </td> 
@@ -293,7 +302,12 @@ value="<?php echo $row->market_cost; ?>" />
 
 }
 $count_ord=0;
-$images=explode(";;;",$row->image_url);
+$images_with_id=explode(";;;",$row->image_url);
+$counnt_image=count($images_with_id);
+for($i=0;$i<$counnt_image;$i++){
+	$ffff=explode('******',$images_with_id[$i]);
+	$images[$i]=$ffff[0];
+}
 $count_ord=count($images);
 ?>
 <tr>
@@ -708,14 +722,16 @@ function change_select()
 </script>
 <table width="95%">
   <tbody>
-  <tr>
-   <td colspan="7" align="right" style="font-size:16px;">
+          <tr>   
+<td width="100%" style="font-size:14px; font-weight:bold"><a href="http://web-dorado.com/spider-catalog-wordpress-guide-step-3.html" target="_blank" style="color:blue; text-decoration:none;">User Manual</a><br />
+This section allows you to create Products.<a href="http://web-dorado.com/spider-catalog-wordpress-guide-step-3.html" target="_blank" style="color:blue; text-decoration:none;">More...</a></td>   
+	 <td colspan="7" align="right" style="font-size:16px;">
   <a href="http://webdorado.org/files/fromSpiderCatalog.php" target="_blank" style="color:red; text-decoration:none;">
 <img src="<?php echo plugins_url("images/header.png",__FILE__) ?>" border="0" alt="http://webdorado.org/files/fromSpiderCatalog.php" width="215"><br>
 Get the full version&nbsp;&nbsp;&nbsp;&nbsp;
 </a>
   </td>
-  </tr>
+        </tr>
   <tr>
   <td width="100%"><h2>Add Product</h2></td>
   <td align="right"><input type="button" onclick="submitbutton('save')" value="Save" class="button-secondary action"> </td>  
