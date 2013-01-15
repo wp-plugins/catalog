@@ -373,7 +373,7 @@ if($img!=='******0')
 	$attach_url=$image_with_atach_id[0];
 	}
 	$img=$image_with_atach_id[0];
-$small_images_str.='<a href="'.$img.'" target="_blank"><img style="width:50px;heigth:50px" src="'.$attach_url.'" vspace="0" hspace="0" onMouseOver="prod_change_picture(\''.$img.'\',this,'.$params['large_picture_width'].','.$params['large_picture_height'].');" /></a>
+$small_images_str.='<a href="'.$img.'" target="_blank"><img style="max-width:50px;max-heigth:50px" src="'.$attach_url.'" vspace="0" hspace="0" onMouseOver="prod_change_picture(\''.$img.'\',this,'.$params['large_picture_width'].','.$params['large_picture_height'].');" /></a>
 ';
 $small_images_count++;
 }
@@ -1114,7 +1114,7 @@ else
 {
 	$attach_url=$image_and_atach[0];	
 }
-$small_images_str.='<a href="'.$img.'" target="_blank"><img style="width:50px;heigth:50px" src="'.$attach_url.'" vspace="0" hspace="0" onMouseOver="prod_change_picture(\''.$img.'\',this,'.$params[ 'category_picture_width' ].','.$params[ 'category_picture_height' ].');" /></a>
+$small_images_str.='<a href="'.$img.'" target="_blank"><img style="max-width:50px;max-heigth:50px" src="'.$attach_url.'" vspace="0" hspace="0" onMouseOver="prod_change_picture(\''.$img.'\',this,'.$params[ 'category_picture_width' ].','.$params[ 'category_picture_height' ].');" /></a>
 ';
 $small_images_count++;
 }
@@ -1254,7 +1254,7 @@ if (!($row->image_url != "" and $row->image_url != "*****0;;;"))
        echo '<td style=" vertical-align: top !important; padding:0px;border-width:'.$params[ 'border_width' ].'px;border-color:'.$params[ 'border_color' ].';border-style:'.$params[ 'border_style' ].';border-top:none; border-left:none;"><img style="border: #CCC solid 2px; margin:10px" src="'.plugins_url("Front_images/noimage.jpg",__FILE__).'" />
 </td>';
 else
-        echo '<td style=" vertical-align: top !important; border-width:'.$params[ 'border_width' ].'px;border-color:'.$params[ 'border_color' ].';border-style:'.$params[ 'border_style' ].';border-top:none; border-left:none;"><a href="' . $image . '" target="_blank"><img style="border: #CCC solid 2px; margin:10px; width:'. $params['list_picture_width'] .'px; height:'. $params['list_picture_height'] .'px" src="'.$attach_url.'" /></a></td>';
+        echo '<td style=" vertical-align: top !important; border-width:'.$params[ 'border_width' ].'px;border-color:'.$params[ 'border_color' ].';border-style:'.$params[ 'border_style' ].';border-top:none; border-left:none;"><a href="' . $image . '" target="_blank"><img style="border: #CCC solid 2px; margin:10px; max-width:'. $params['list_picture_width'] .'px; max-height:'. $params['list_picture_height'] .'px" src="'.$attach_url.'" /></a></td>';
 
 echo '<td style="'.(($params[ 'name_price_size_list']!='')?('font-size:'.$params[ 'name_price_size_list'].'px;'):'').' border-width:'.$params[ 'border_width' ].'px;border-color:'.$params[ 'border_color'].';border-style:'.$params[ 'border_style' ].';border-top:none; border-left:none;"><a href="'.$permalink_for_sp_cat. '&product_id=' . $row->id . '&view=showproduct&page_num=' . $page_num . '&back=1'.'" style="' . (($params['hyperlink_color'] != '') ? ('color:' . $params['hyperlink_color'] . ';') : '') . '">' . $row->name . '</a>';
 
@@ -1878,7 +1878,7 @@ else
 	
 if($image_and_atach[0]!=='')
 {
-$small_images_str.='<a href="'.$image_and_atach[0].'" target="_blank"><img style="width:50px; heigth=50px" src="'.$attach_url.'" vspace="0" hspace="0" onMouseOver="prod_change_picture(\''.$image_and_atach[0].'\',this,'.$params[ 'category_picture_width'].','.$params[ 'category_picture_height'].');" /></a>
+$small_images_str.='<a href="'.$image_and_atach[0].'" target="_blank"><img style="max-width:50px; max-heigth=50px" src="'.$attach_url.'" vspace="0" hspace="0" onMouseOver="prod_change_picture(\''.$image_and_atach[0].'\',this,'.$params[ 'category_picture_width'].','.$params[ 'category_picture_height'].');" /></a>
 ';
 $small_images_count++;
 }
@@ -2004,14 +2004,13 @@ foreach ($rows as $row)
         
         
         
-        echo '<td style="padding:10px;"><img style="width:' . $params['small_picture_width'] . 'px; height=' . $params['small_picture_height'] . 'px" src="'. $imgurl[0] . '" />
+        echo '<td style="padding:10px;"><img style="max-width:' . $params['small_picture_width'] . 'px; max-height=' . $params['small_picture_height'] . 'px" src="'. $imgurl[0] . '" />
 
 </td>';
       }
     else{
 		
 		$askofen=explode('******',$imgurl[0]);
-		
 		if($askofen[1])
 		{
 			$array_with_sizes=wp_get_attachment_image_src( $askofen[1], 'thumbnail' );
@@ -2022,7 +2021,7 @@ foreach ($rows as $row)
 			$attach_url=$askofen[0];
 		}
 		$imgurl[0]=$askofen[0];
-        echo '<td style="padding:10px;"><a href="' . $imgurl[0] . '" target="_blank"><img style="width:'. $params['small_picture_width'] . 'px; height:' . $params['small_picture_height'] . 'px" src="'.$attach_url.'" /></a></td>';
+        echo '<td style="padding:10px;"><a href="' . $imgurl[0] . '" target="_blank"><img style="max-width:'. $params['small_picture_width'] . 'px; max-height:' . $params['small_picture_height'] . 'px" src="'.$attach_url.'" /></a></td>';
     
 	}
     
