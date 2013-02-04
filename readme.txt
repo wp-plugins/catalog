@@ -1,6 +1,6 @@
 === WordPress Catalog ===  
 Contributors: webdorado  
-Donate link: http://web-dorado.com/products/wordpress-catalog.html  
+Donate link: http://webdorado.org/products/wordpress-catalog.html  
 Tags: wordpress catalog, wordpress products list, wordpress products catalog  
 Requires at least: 3.0  
 Tested up to: 3.5  
@@ -12,10 +12,10 @@ Spider Catalog for WordPress is a convenient tool for organizing the products re
   
 == Description ==  
   
-###Spider  [WordPress Catalog](http://web-dorado.com/products/wordpress-catalog.html)  
+###Spider  [WordPress Catalog](http://webdorado.org/products/wordpress-catalog.html)  
   
-Spider WordPress Product Catalog plugin is a convenient tool for organizing the products represented on your website into catalogs. Each product on the catalog is assigned with a relevant category, which makes it easier for the customers to search and identify the needed products within the WordPress catalog. It is possible to add an unlimited number of parameters for each of the categories in the catalog in order to allow a detailed representation of the product on the catalog. Moreover, each product on the catalog can be accompanied with an image. Customers are provided with the possibility of rating the products available on the catalog, as well as writing customer reviews that will appear under the [WordPress Catalog Product](http://web-dorado.com/products/wordpress-catalog.html).
-###If you want to customize the design of the catalog, you can buy the commercial version [ here.](http://web-dorado.com/products/wordpress-catalog.html) Color, font, size and design of each element of the catalog are customizable in the commercial version.        
+Spider WordPress Product Catalog plugin is a convenient tool for organizing the products represented on your website into catalogs. Each product on the catalog is assigned with a relevant category, which makes it easier for the customers to search and identify the needed products within the WordPress catalog. It is possible to add an unlimited number of parameters for each of the categories in the catalog in order to allow a detailed representation of the product on the catalog. Moreover, each product on the catalog can be accompanied with an image. Customers are provided with the possibility of rating the products available on the catalog, as well as writing customer reviews that will appear under the [WordPress Catalog Product](http://webdorado.org/products/wordpress-catalog.html).
+###If you want to customize the design of the catalog, you can buy the commercial version [ here.](http://webdorado.org/products/wordpress-catalog.html) Color, font, size and design of each element of the catalog are customizable in the commercial version.        
   
 = Features of Spider WordPress Product Catalog :=  
 = Possibility to make the following customizations: =  
@@ -79,7 +79,7 @@ Vietnamese (vi)
   
 == Installation ==  
   
-####Thank you for your interest in Spider [WordPress Catalog](http://web-dorado.com/products/wordpress-catalog.html).  
+####Thank you for your interest in Spider [WordPress Catalog](http://webdorado.org/products/wordpress-catalog.html).  
   
 Minimum requirements:  
   
@@ -96,7 +96,7 @@ After downloading the [Wordpress Product Catalog](http://wordpress.org/extend/pl
 6.  Once it is complete, activate the plugin.  
   
 Once the plugin is activated, you'll notice a menu on the left called "Spider Catalog".  
-If any problem occurs with Spider [Wordpress Catalog](http://wordpress.org/extend/plugins/catalog/), please contact us info@web-dorado.com.  
+If any problem occurs with Spider [Wordpress Catalog](http://wordpress.org/extend/plugins/catalog/), please contact us info@webdorado.org.  
 
 == Screenshots ==
 1.  Spider Catalog  - Category view  

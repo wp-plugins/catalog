@@ -2,9 +2,9 @@
 
 /*
 Plugin Name: WordPress Catalog
-Plugin URI: http://web-dorado.com/
-Version: 1.3.2
-Author: http://web-dorado.com/
+Plugin URI: http://webdorado.org/
+Version: 1.3.3
+Author: http://webdorado.org/
 License: GNU/GPLv3 http://www.gnu.org/licenses/gpl-3.0.html
 */
 
@@ -944,7 +944,7 @@ INSERT INTO
 
 600 Hz Sub Field Drive , DVB-T, DVB-C, RCA, RGB, VGA, HDMI x2, Scart, SD card</p>', 
 
-'http://demo.web-dorado.com/components/com_spidercatalog/images/sampleimages/7_19977_1324390185.jpg******0;;;http://demo.web-dorado.com/components/com_spidercatalog/images/sampleimages/11448_2.jpg******0;;;http://demo.web-dorado.com/components/com_spidercatalog/images/sampleimages/panasonictx-pr50u30.jpg******0', '950.00', '1000.00', 'par_TV 
+'http://demo.webdorado.org/components/com_spidercatalog/images/sampleimages/7_19977_1324390185.jpg******0;;;http://demo.webdorado.org/components/com_spidercatalog/images/sampleimages/11448_2.jpg******0;;;http://demo.webdorado.org/components/com_spidercatalog/images/sampleimages/panasonictx-pr50u30.jpg******0', '950.00', '1000.00', 'par_TV 
 
 System@@:@@DVB-T	DVB-C		par_Diagonal@@:@@50&quot; / 127 cm		par_Interface@@:@@RCA, RGB, VGA, HDMI 
 
@@ -955,7 +955,7 @@ x2, Scart, SD card		par_Refresh Rate@@:@@600 Hz Sub Field Drive		', 2, 1),
 
 C, 4xHDMI, VGA, RGB, RCA, USB, 2xSCART </p>', 
 
-'http://demo.web-dorado.com/components/com_spidercatalog/images/sampleimages/7_7557_1298400832.jpg******0;;;http://demo.web-dorado.com/components/com_spidercatalog/images/sampleimages/r1.jpg******0;;;http://demo.web-dorado.com/components/com_spidercatalog/images/sampleimages/sony-kdl32ex700aep-3.jpg******0', '1450.00', '1700.00', 'par_TV 
+'http://demo.webdorado.org/components/com_spidercatalog/images/sampleimages/7_7557_1298400832.jpg******0;;;http://demo.webdorado.org/components/com_spidercatalog/images/sampleimages/r1.jpg******0;;;http://demo.webdorado.org/components/com_spidercatalog/images/sampleimages/sony-kdl32ex700aep-3.jpg******0', '1450.00', '1700.00', 'par_TV 
 
 System@@:@@Analog	DVB-T	DVB-C		par_Diagonal@@:@@46&quot; / 117 cm		par_Interface@@:@@4xHDMI, 
 
@@ -966,7 +966,7 @@ VGA, RGB, RCA, USB, 2xSCART		par_Refresh Rate@@:@@MotionFlow 100Hz		', 1, 1),
 
 HyperReal Engine, Samsung Apps, Social TV, WiFi Ready</p>', 
 
-'http://demo.web-dorado.com/components/com_spidercatalog/images/sampleimages/7_20107_1324712747.jpg******0', '1630.00', '1900.00', 'par_TV System@@:@@DTV 
+'http://demo.webdorado.org/components/com_spidercatalog/images/sampleimages/7_20107_1324712747.jpg******0', '1630.00', '1900.00', 'par_TV System@@:@@DTV 
 
 DVB-T/C		par_Diagonal@@:@@46&quot; / 117 cm		par_Interface@@:@@4xHDMI,3xUSB, RGB, RCA, D-SUB,1xSCART, 
 
@@ -977,7 +977,7 @@ Television KDL-32EX421BAEP </strong></p><p>32&quot; / 80 cm, 50 Hz, Analog, DVB-
 
 Ethernet (RJ-45),24p True Cinema, X-Reality, DLNA, WiFi Ready, Internet Video, Internet Widgets, Web Browser, Skype, USB HDD 
 
-Recording</p>', 'http://demo.web-dorado.com/components/com_spidercatalog/images/sampleimages/7_19644_1323935170.jpg******0', '950.00', '0.00', 'par_TV 
+Recording</p>', 'http://demo.webdorado.org/components/com_spidercatalog/images/sampleimages/7_19644_1323935170.jpg******0', '950.00', '0.00', 'par_TV 
 
 System@@:@@	par_Diagonal@@:@@32&quot; / 80 cm		par_Interface@@:@@AV, VGA, HDMI, USB, Ethernet 		
 
@@ -996,7 +996,7 @@ INSERT INTO `$table_name` (`id`, `name`, `category_image_url`,
 `description`, `param`, `ordering`, `published`) VALUES
 (1, 'Televisions', 
 
-'http://demo.web-dorado.com/components/com_spidercatalog/images/sampleimages/category242.jpg', 'Television (TV) is a telecommunication medium for 
+'http://demo.webdorado.org/components/com_spidercatalog/images/sampleimages/category242.jpg', 'Television (TV) is a telecommunication medium for 
 
 transmitting and receiving moving images that can be monochrome (black-and-white) or colored, with or without accompanying 
 

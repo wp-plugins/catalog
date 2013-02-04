@@ -14,7 +14,7 @@ class JElementDonate extends JElement
  
         function fetchElement($name, $value, &$node, $control_name)
         {
-                        return '<a href="http://web-dorado.com/files/donate_redirect.php" target="_blank"><img src="https://www.paypal.com/en_US/i/btn/btn_donateCC_LG.gif" border="0" alt="Donate using PayPal - The safer, easier way to pay online!" style="border:none;"></a>';
+                        return '<a href="http://webdorado.org/files/donate_redirect.php" target="_blank"><img src="https://www.paypal.com/en_US/i/btn/btn_donateCC_LG.gif" border="0" alt="Donate using PayPal - The safer, easier way to pay online!" style="border:none;"></a>';
         }
 }
 ?>
