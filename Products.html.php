@@ -66,17 +66,17 @@ var keyCode = event.keyCode ? event.keyCode : event.which ? event.which : event.
     
     
     <form method="post"  onkeypress="doNothing()" action="admin.php?page=Products_Spider_Catalog" id="admin_form" name="admin_form">
-<table cellspacing="10" width="100%">
-          <tr>   
+	<table cellspacing="10" width="100%">
+              <tr>   
 <td width="100%" style="font-size:14px; font-weight:bold"><a href="http://web-dorado.com/spider-catalog-wordpress-guide-step-3.html" target="_blank" style="color:blue; text-decoration:none;">User Manual</a><br />
-This section allows you to create Products.<a href="http://web-dorado.com/spider-catalog-wordpress-guide-step-3.html" target="_blank" style="color:blue; text-decoration:none;">More...</a></td>   
-	 <td colspan="7" align="right" style="font-size:16px;">
+This section allows you to create Products.<a href="http://web-dorado.com/spider-catalog-wordpress-guide-step-3.html" target="_blank" style="color:blue; text-decoration:none;">More...</a></td> 
+<td colspan="7" align="right" style="font-size:16px;">
   <a href="http://web-dorado.com/files/fromSpiderCatalog.php" target="_blank" style="color:red; text-decoration:none;">
 <img src="<?php echo plugins_url("images/header.png",__FILE__) ?>" border="0" alt="http://web-dorado.com/files/fromSpiderCatalog.php" width="215"><br>
 Get the full version&nbsp;&nbsp;&nbsp;&nbsp;
 </a>
   </td>
-        </tr>
+          </tr>
     <tr>
     <td style="width:80px">
     <?php echo "<h2>".'Products'. "</h2>"; ?>
@@ -85,12 +85,11 @@ Get the full version&nbsp;&nbsp;&nbsp;&nbsp;
 <td style="text-align:right;font-size:16px;padding:20px; padding-right:50px">
 
 	</td>
-
     </tr>
     </table>
     <?php
 	if(isset($_POST['serch_or_not'])) {if($_POST['serch_or_not']=="search"){ $serch_value=$_POST['search_events_by_title']; }else{$serch_value="";}} 
-	$serch_fields='<div class="alignleft actions" style="width:180px;">
+	$serch_fields='<div class="alignleft actions" style="width:1825x;">
     	<label for="search_events_by_title" style="font-size:14px">Filter: </label>
         <input type="text" name="search_events_by_title" value="'.$serch_value.'" id="search_events_by_title" onchange="clear_serch_texts()">
     </div>
@@ -98,8 +97,8 @@ Get the full version&nbsp;&nbsp;&nbsp;&nbsp;
    		<input type="button" value="Search" onclick="document.getElementById(\'page_number\').value=\'1\'; document.getElementById(\'serch_or_not\').value=\'search\';
 		 document.getElementById(\'admin_form\').submit();" class="button-secondary action">
 		 <input type="button" value="Reset" onclick="window.location.href=\'admin.php?page=Products_Spider_Catalog\'" class="button-secondary action">
-    </div><br><br>';
-	$serch_fields.='<select style=" text-align:left;" name="cat_search" id="cat_search" class="inputbox" onchange="this.form.submit();">
+    </div>';
+	$serch_fields.='<select style=" text-align:left;float:right;" name="cat_search" id="cat_search" class="inputbox" onchange="this.form.submit();">
 	<option value="0"';
 	if(!isset($_POST['cat_search']))
     $serch_fields.='selected="selected"';
@@ -108,10 +107,10 @@ Get the full version&nbsp;&nbsp;&nbsp;&nbsp;
 	{
 		
 		$serch_fields.='<option value="'.$catt->id.'"';
-		if($_POST['cat_search']==$catt->id)
-		$serch_fields.='selected="selected"';
-		
+		if($_POST['cat_search']==$catt->id || $_GET["categoryid"]==$catt->id)
+		$serch_fields.='selected="selected"';		
 		$serch_fields.='>'.$catt->name.'</option>';
+		
 	}
 	
 	$serch_fields.='</select>';
@@ -186,9 +185,10 @@ Get the full version&nbsp;&nbsp;&nbsp;&nbsp;
  
  
  
+ 
 
  
- function html_editProduct( $row, $lists, $votes, $option , $params, $rows1,$cat_row)
+ function html_editProduct( $row, $lists, $votes, $option , $params, $rows1,$cat_row,$parent_cat)
  {
 
 ?>
@@ -197,8 +197,6 @@ function submitbutton(pressbutton)
 {	if(!document.getElementById('name').value)
 	{
 		alert('Name is required.');
-		document.getElementById('cat_search').selectedIndex="- Select a Category -";
-		
 		return;
 	}
 	else
@@ -214,10 +212,10 @@ function change_select()
 </script>
 <table width="95%">
   <tbody>
-            <tr>   
+             <tr>   
 <td width="100%" style="font-size:14px; font-weight:bold"><a href="http://web-dorado.com/spider-catalog-wordpress-guide-step-3.html" target="_blank" style="color:blue; text-decoration:none;">User Manual</a><br />
 This section allows you to create Products.<a href="http://web-dorado.com/spider-catalog-wordpress-guide-step-3.html" target="_blank" style="color:blue; text-decoration:none;">More...</a></td>   
-	 <td colspan="7" align="right" style="font-size:16px;">
+<td colspan="7" align="right" style="font-size:16px;">
   <a href="http://web-dorado.com/files/fromSpiderCatalog.php" target="_blank" style="color:red; text-decoration:none;">
 <img src="<?php echo plugins_url("images/header.png",__FILE__) ?>" border="0" alt="http://web-dorado.com/files/fromSpiderCatalog.php" width="215"><br>
 Get the full version&nbsp;&nbsp;&nbsp;&nbsp;
@@ -269,6 +267,8 @@ value="<?php echo stripslashes($row->name);?>" />
 ?>
 </td>
 </tr>
+
+
 <?php
 if($params['price']){
 ?>
@@ -593,7 +593,6 @@ for($j=0;$j<count($par_values);$j++)
 }
 ?>
 
-
 <tr>
 <td width="100" align="right" class="key">
 Description:<input type="hidden" value="<?php echo $row->param; ?>" name="param" id="all_par_hid" />
@@ -633,7 +632,29 @@ for($i=0;$i<$count_ord;$i++)
 
 </td>
 </tr>
+<tr>
+<td width="100" align="right" class="key">
+Show in Parent:
+</td>
+<td>
+<?php
+       $check0 = "";
+        $check1 = "";
+        if ($parent_cat == 1)
+            $check1 = ' checked="checked" ';
+        else
+            $check0 = ' checked="checked" ';
+?>
 
+ <input type="radio" name="par_cat" id="par_cat0" value="0" <?php echo $check0; ?> />
+ <label for="par_cat0">No</label>
+ <input type="radio" name="par_cat" id="par_cat1" value="1" <?php echo $check1; ?>  />
+ <label for="par_cat1">Yes</label>       
+
+
+
+</td>
+</tr>
 <tr>
 <td width="100" align="right" class="key">
 Published:
@@ -706,7 +727,6 @@ function submitbutton(pressbutton)
 {	if(!document.getElementById('name').value)
 	{
 		alert('Name is required.');
-		document.getElementById('cat_search').selectedIndex="- Select a Category -";
 		return;
 	}
 	else
@@ -722,17 +742,17 @@ function change_select()
 </script>
 <table width="95%">
   <tbody>
-          <tr>   
+  <tr>
+               <tr>   
 <td width="100%" style="font-size:14px; font-weight:bold"><a href="http://web-dorado.com/spider-catalog-wordpress-guide-step-3.html" target="_blank" style="color:blue; text-decoration:none;">User Manual</a><br />
 This section allows you to create Products.<a href="http://web-dorado.com/spider-catalog-wordpress-guide-step-3.html" target="_blank" style="color:blue; text-decoration:none;">More...</a></td>   
-	 <td colspan="7" align="right" style="font-size:16px;">
+<td colspan="7" align="right" style="font-size:16px;">
   <a href="http://web-dorado.com/files/fromSpiderCatalog.php" target="_blank" style="color:red; text-decoration:none;">
 <img src="<?php echo plugins_url("images/header.png",__FILE__) ?>" border="0" alt="http://web-dorado.com/files/fromSpiderCatalog.php" width="215"><br>
 Get the full version&nbsp;&nbsp;&nbsp;&nbsp;
 </a>
   </td>
         </tr>
-  <tr>
   <td width="100%"><h2>Add Product</h2></td>
   <td align="right"><input type="button" onclick="submitbutton('save')" value="Save" class="button-secondary action"> </td>  
   <td align="right"><input type="button" onclick="submitbutton('apply')" value="Apply" class="button-secondary action"> </td> 
@@ -769,6 +789,10 @@ Name:
 ?>
 </td>
 </tr>
+
+
+
+
 <?php
 if($params['price']){
 ?>
@@ -1016,7 +1040,22 @@ for($i=0;$i<$count_ord;$i++)
 
 </td>
 </tr>
+<tr>
+<td width="100" align="right" class="key">
+Show in parents:
+</td>
+<td>
 
+
+ <input type="radio" name="par_cat" id="par_cat0" value="0" checked="checked"  />
+ <label for="par_cat0">No</label>
+ <input type="radio" name="par_cat" id="par_cat1" value="1"  />
+ <label for="par_cat1">Yes</label>       
+
+
+
+</td>
+</tr>
 <tr>
 <td width="100" align="right" class="key">
 Published:

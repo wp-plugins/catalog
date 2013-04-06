@@ -18,6 +18,7 @@ function catal_secure_for_scripts($key)
 function front_end_single_product($id)
 {
 		global $wpdb;
+		global $ident; 
 		  $params=$wpdb->get_results("SELECT * FROM ".$wpdb->prefix."spidercatalog_params");
 	  $new_param=array();
 	  foreach( $params as $param)
@@ -27,8 +28,8 @@ function front_end_single_product($id)
 	   $params=$new_param;
 
 	$product_id=$id;
-	if($_GET['rev_page'])
-	$rev_page=$_GET['rev_page'];
+	if($_GET['rev_page_'.$ident])
+	$rev_page=$_GET['rev_page_'.$ident];
 	else
 	$rev_page=1;
 	
@@ -48,14 +49,14 @@ function front_end_single_product($id)
 
 		$row1 = $wpdb->get_row($query);
 		$category_name=$row1->name;
-		$full_name=catal_secure_for_scripts('full_name');
-		$message_text=catal_secure_for_scripts('message_text');
+		$full_name=catal_secure_for_scripts('full_name_'.$ident.'');
+		$message_text=catal_secure_for_scripts('message_text_'.$ident.'');
 
 
 
 		@session_start();
 
-		$code=$_POST['code'];
+		$code=$_POST['code_'.$ident];
 
 		
 
@@ -66,8 +67,8 @@ function front_end_single_product($id)
 						 $save_or_no= $wpdb->insert($wpdb->prefix.'spidercatalog_product_reviews', array(
 							'id'	=> NULL,
 								'name'   		 =>$full_name,
-								'content'	    =>$message_text,
-								'product_id'    =>$product_id,
+								'content'	     =>$message_text,
+								'product_id'     =>$product_id,
 								'remote_ip'   	 =>$_SERVER['REMOTE_ADDR'],
 									),
 									array(
@@ -114,7 +115,7 @@ function front_end_single_product($id)
 		$query= $wpdb->prepare("SELECT vote_value FROM ".$wpdb->prefix."spidercatalog_product_votes  WHERE product_id = %d and remote_ip='".$_SERVER['REMOTE_ADDR']."' ",$product_id);
 		$voted=count($wpdb->get_col($query));
 
-		return html_front_end_single_product($rows,$reviews_rows, $option, $params,$category_name,$rev_page,$reviews_count,$rating,$voted);
+		return html_front_end_single_product($rows,$reviews_rows, $option, $params,$category_name,$rev_page,$reviews_count,$rating,$voted,$product_id,$ident);
 
 	}
 	
@@ -204,17 +205,86 @@ function front_end_single_product($id)
 //////////////////////////////////////////////////////////////////////										//////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////										//////////////////////////////////////////////////////////////////////
 
+function open_cat_in_tree($catt,$tree_problem='',$hihiih=1){
+
+global $wpdb;
+static $trr_cat=array();
+if($hihiih)
+$trr_cat=array();
+foreach($catt as $dog){
+	$dog->name=$tree_problem.$dog->name;
+	array_push($trr_cat,$dog);
+	$new_cat_query=	"SELECT  a.* ,  COUNT(b.id) AS count, g.par_name AS par_name FROM ".$wpdb->prefix."spidercatalog_product_categories  AS a LEFT JOIN ".$wpdb->prefix."spidercatalog_product_categories AS b ON a.id = b.parent LEFT JOIN (SELECT  ".$wpdb->prefix."spidercatalog_product_categories.ordering as ordering,".$wpdb->prefix."spidercatalog_product_categories.id AS id, COUNT( ".$wpdb->prefix."spidercatalog_products.category_id ) AS prod_count
+FROM ".$wpdb->prefix."spidercatalog_products, ".$wpdb->prefix."spidercatalog_product_categories
+WHERE ".$wpdb->prefix."spidercatalog_products.category_id = ".$wpdb->prefix."spidercatalog_product_categories.id
+GROUP BY ".$wpdb->prefix."spidercatalog_products.category_id) AS c ON c.id = a.id LEFT JOIN
+(SELECT ".$wpdb->prefix."spidercatalog_product_categories.name AS par_name,".$wpdb->prefix."spidercatalog_product_categories.id FROM ".$wpdb->prefix."spidercatalog_product_categories) AS g
+ ON a.parent=g.id WHERE a.name LIKE '%".$search_tag."%' AND a.parent=".$dog->id." group by a.id"; 
+ $new_cat=$wpdb->get_results($new_cat_query);
+ open_cat_in_tree($new_cat,$tree_problem. "— ",0);
+}
+return $trr_cat;
+
+}
 
 
-
-
-
-
-
-
-function showPublishedProducts_1($cat_id=1,$show_cat_det=1,$cels_or_list='')
+function get_cat_childs_ids($cat_id=0){
+global $wpdb;
+$cat_ids='';
+if(!$cat_id)
+return $cat_ids;
+else
 {
+$loc_ids=$wpdb->get_col("SELECT id FROM ".$wpdb->prefix."spidercatalog_product_categories WHERE parent=".$cat_id);
+
+$count_cat=count($loc_ids);
+if($count_cat){
+for($i=0;$i<$count_cat;$i++){
+if($cat_ids)
+	$cat_ids=$cat_ids.','.$loc_ids[$i].','.get_cat_childs_ids($loc_ids[$i]);
+	else
+	$cat_ids=$loc_ids[$i].','.get_cat_childs_ids($loc_ids[$i]);
+}
+return str_replace(',,',',',$cat_ids);
+}
+else
+return '';
+
+}
+}
+
+
+function remov_last_storaket($str)
+{
+
+$last = $str[strlen($str)-1];
+if($last==',')
+{
+$str=substr_replace($str ,"",-1);
+}
+if(!$str)
+$str='0';
+return  $str;
+}
+
+
+function showPublishedProducts_1($cat_id=1,$show_cat_det=1,$cels_or_list='',$show_sub=1,$show_sub_prod=1,$show_prod=1)
+{
+            global $ident;
 			global $wpdb;
+			$params7['show_sub']=$show_sub;
+			$params7['show_sub_prod']=$show_sub_prod;
+			$params7['show_prod']=$show_prod;
+			if(!isset($params7['show_sub'])){
+		     $params7['show_sub']=1;
+		    }			
+		    if(!isset($params7['show_sub_prod'])){
+		     $params7['show_sub_prod']=2;
+		    }			
+		    if(!isset($params7['show_prod'])){
+		      $params7['show_prod']=1;
+	    	}
+			
 		  $params=$wpdb->get_results("SELECT * FROM ".$wpdb->prefix."spidercatalog_params");
 	  $new_param=array();
 	  foreach( $params as $param)
@@ -222,39 +292,70 @@ function showPublishedProducts_1($cat_id=1,$show_cat_det=1,$cels_or_list='')
 		  $new_param[$param->name]=$param->value;
 	  }
 	   $params=$new_param;
-
-		$params1['display_type']=$cels_or_list;
+       
+		
+		
+        if($cels_or_list=='list')
+        $cels_or_list=1;
+		else
+        $cels_or_list=0;
+      
 		$params1['show_category_details']=$show_cat_det;
 		$params1['categories']=$cat_id;
-		if($params1['display_type']=="list")
+		if($cels_or_list==1)
 		$prod_in_page=$params['count_of_products_in_the_page'];
 		else
 		$prod_in_page=$params['count_of_product_in_the_row']*$params['count_of_rows_in_the_page'];
-		if(isset($_GET['page_num']))
-		$page_num=$_GET['page_num'];
+		if(isset($_GET['page_num_'.$cels_or_list.'_'.$ident.'']))
+		$page_num=$_GET['page_num_'.$cels_or_list.'_'.$ident.''];
 		else
 		$page_num=1;
-		if(isset($_POST['cat_id']))
-		$cat_id=$_POST['cat_id'];
-		else
-		$cat_id=0;
+		
+		if(isset($_POST['cat_id_'.$cels_or_list.'_'.$ident.''])){
+		if($_POST['cat_id_'.$cels_or_list.'_'.$ident.'']!=0){
+		$cat_id=$_POST['cat_id_'.$cels_or_list.'_'.$ident.''];
+		}
+		else{
+		$cat_id=0;}
+		}
+		
+	
+		if($_POST['subcat_id_'.$cels_or_list.'_'.$ident.'']!="")
+             {
+              $subcat_id = $_POST['subcat_id_'.$cels_or_list.'_'.$ident.''];
+             }else
+             {
+			 $subcat_id = $cat_id; 
+             }
+		
+			$categ_query = "SELECT * FROM ".$wpdb->prefix."spidercatalog_product_categories WHERE parent=". $subcat_id." ";
+			
+			$child_ids = $wpdb->get_results($categ_query);
 
-		if(isset($_POST['prod_name']))
-			$prod_name=$_POST['prod_name'];
+		if(isset($_POST['prod_name_'.$cels_or_list.'_'.$ident.'']))
+			$prod_name=$_POST['prod_name_'.$cels_or_list.'_'.$ident.''];
 		else
 			$prod_name=0;
 		
-		if($params1['categories']>0)
+		if($cat_id>0)
 		{
 		
 		$query_count = $wpdb->prepare( "SELECT count(".$wpdb->prefix."spidercatalog_products.id) as prod_count FROM ".$wpdb->prefix."spidercatalog_products left join ".$wpdb->prefix."spidercatalog_product_categories on ".$wpdb->prefix."spidercatalog_products.category_id=".$wpdb->prefix."spidercatalog_product_categories.id WHERE 
-		".$wpdb->prefix."spidercatalog_products.published = '1'  and ".$wpdb->prefix."spidercatalog_products.category_id= %d",$params1['categories']);
-		
-		$query = $wpdb->prepare( "SELECT ".$wpdb->prefix."spidercatalog_products.*, ".$wpdb->prefix."spidercatalog_product_categories.name as cat_name,".$wpdb->prefix."spidercatalog_product_categories.category_image_url as cat_image_url,".$wpdb->prefix."spidercatalog_product_categories.description as cat_description FROM ".$wpdb->prefix."spidercatalog_products left join ".$wpdb->prefix."spidercatalog_product_categories on ".$wpdb->prefix."spidercatalog_products.category_id=".$wpdb->prefix."spidercatalog_product_categories.id WHERE
-		
-		".$wpdb->prefix."spidercatalog_products.published = '1'  and ".$wpdb->prefix."spidercatalog_products.category_id= %d",$params1['categories']);
-		
-		$cat_query= $wpdb->prepare( "SELECT ".$wpdb->prefix."spidercatalog_product_categories.name as cat_name,".$wpdb->prefix."spidercatalog_product_categories.category_image_url as cat_image_url,".$wpdb->prefix."spidercatalog_product_categories.description as cat_description FROM ".$wpdb->prefix."spidercatalog_product_categories WHERE published = '1' and id= %d ",$params1['categories']);
+		".$wpdb->prefix."spidercatalog_products.published = '1'  and ".$wpdb->prefix."spidercatalog_products.category_id= %d",$subcat_id);
+		if($params7['show_sub_prod']==2){
+		$query = $wpdb->prepare( "SELECT ".$wpdb->prefix."spidercatalog_products.*, ".$wpdb->prefix."spidercatalog_product_categories.name as cat_name,".$wpdb->prefix."spidercatalog_product_categories.category_image_url as cat_image_url,".$wpdb->prefix."spidercatalog_product_categories.description as cat_description FROM ".$wpdb->prefix."spidercatalog_products left join ".$wpdb->prefix."spidercatalog_product_categories on ".$wpdb->prefix."spidercatalog_products.category_id=".$wpdb->prefix."spidercatalog_product_categories.id WHERE		
+		".$wpdb->prefix."spidercatalog_products.published = '1'  and (".$wpdb->prefix."spidercatalog_products.category_id=%d  OR ( ".$wpdb->prefix."spidercatalog_products.category_id IN (".remov_last_storaket(get_cat_childs_ids($subcat_id)).") AND ".$wpdb->prefix."spidercatalog_products.published_in_parent = '1')) ",$subcat_id);
+		}
+		else if($params7['show_sub_prod']==1)
+		{
+		$query = $wpdb->prepare( "SELECT ".$wpdb->prefix."spidercatalog_products.*, ".$wpdb->prefix."spidercatalog_product_categories.name as cat_name,".$wpdb->prefix."spidercatalog_product_categories.category_image_url as cat_image_url,".$wpdb->prefix."spidercatalog_product_categories.description as cat_description FROM ".$wpdb->prefix."spidercatalog_products left join ".$wpdb->prefix."spidercatalog_product_categories on ".$wpdb->prefix."spidercatalog_products.category_id=".$wpdb->prefix."spidercatalog_product_categories.id WHERE		
+		".$wpdb->prefix."spidercatalog_products.published = '1'  and (".$wpdb->prefix."spidercatalog_products.category_id=%d  OR ( ".$wpdb->prefix."spidercatalog_products.category_id IN (".remov_last_storaket(get_cat_childs_ids($subcat_id))."))) ",$subcat_id);
+		}
+		else{
+		$query = $wpdb->prepare( "SELECT ".$wpdb->prefix."spidercatalog_products.*, ".$wpdb->prefix."spidercatalog_product_categories.name as cat_name,".$wpdb->prefix."spidercatalog_product_categories.category_image_url as cat_image_url,".$wpdb->prefix."spidercatalog_product_categories.description as cat_description FROM ".$wpdb->prefix."spidercatalog_products left join ".$wpdb->prefix."spidercatalog_product_categories on ".$wpdb->prefix."spidercatalog_products.category_id=".$wpdb->prefix."spidercatalog_product_categories.id WHERE		
+		".$wpdb->prefix."spidercatalog_products.published = '1'  and ".$wpdb->prefix."spidercatalog_products.category_id=%d",$subcat_id);
+		}
+		$cat_query= $wpdb->prepare( "SELECT ".$wpdb->prefix."spidercatalog_product_categories.name as cat_name,".$wpdb->prefix."spidercatalog_product_categories.category_image_url as cat_image_url,".$wpdb->prefix."spidercatalog_product_categories.description as cat_description FROM ".$wpdb->prefix."spidercatalog_product_categories WHERE published = '1' and id= %d",$subcat_id);
 		
 		}
 		
@@ -270,14 +371,23 @@ function showPublishedProducts_1($cat_id=1,$show_cat_det=1,$cels_or_list='')
 			
 		if($cat_id!=0)
 		{
-			if(is_numeric($cat_id)){
-		$query_count .= " and ".$wpdb->prefix."spidercatalog_products.category_id='".$cat_id."' ";
-		$query .= " and ".$wpdb->prefix."spidercatalog_products.category_id='".$cat_id."' ";
-		$cat_query.=" and id='".$cat_id."' ";
+			if(is_numeric($cat_id) and $params7['show_sub_prod']==2){
+			$query_count .= " and (".$wpdb->prefix."spidercatalog_products.category_id='".$cat_id."'  OR ( ".$wpdb->prefix."spidercatalog_products.category_id IN (".remov_last_storaket(get_cat_childs_ids($cat_id)).") AND ".$wpdb->prefix."spidercatalog_products.published_in_parent = '1'))";
+			$query .= " and (".$wpdb->prefix."spidercatalog_products.category_id='".$cat_id."'  OR ( ".$wpdb->prefix."spidercatalog_products.category_id IN (".remov_last_storaket(get_cat_childs_ids($cat_id)).") AND ".$wpdb->prefix."spidercatalog_products.published_in_parent = '1'))";
+		
+			}
+			else if($params7['show_sub_prod']==1)
+			{
+			$query_count .= " and (".$wpdb->prefix."spidercatalog_products.category_id='".$cat_id."'  OR ( ".$wpdb->prefix."spidercatalog_products.category_id IN (".remov_last_storaket(get_cat_childs_ids($cat_id)).")))";
+			$query .= " and (".$wpdb->prefix."spidercatalog_products.category_id='".$cat_id."'  OR ( ".$wpdb->prefix."spidercatalog_products.category_id IN (".remov_last_storaket(get_cat_childs_ids($cat_id)).")))";
+			}
+			else{
+			$query_count .= " and ".$wpdb->prefix."spidercatalog_products.category_id='".$cat_id."'";
+			$query .= " and ".$wpdb->prefix."spidercatalog_products.category_id='".$cat_id."'";
 			}
 		}
 		}
-		
+	
 		if($prod_name!="")
 		{
 		$query_count .= " and (".$wpdb->prefix."spidercatalog_products.name like %s or ".$wpdb->prefix."spidercatalog_products.description like %s )  ";
@@ -290,7 +400,7 @@ function showPublishedProducts_1($cat_id=1,$show_cat_det=1,$cels_or_list='')
 		
 		$prod_count=$row;
 		
-				if($prod_name!="")
+		if($prod_name!="")
 		{ 
 		
 		$query=$wpdb->prepare( $query,"%".$prod_name."%","%".$prod_name."%");
@@ -298,12 +408,12 @@ function showPublishedProducts_1($cat_id=1,$show_cat_det=1,$cels_or_list='')
 		}
 		
 		$rows = $wpdb->get_results( $query);
-		
+	
 
 
 		$cat_rows = $wpdb->get_results($cat_query);
-
-		
+            
+		if($params7['show_prod']==1){
 		foreach($rows as $row)
 		{
 			$id=$row->id;
@@ -321,12 +431,29 @@ function showPublishedProducts_1($cat_id=1,$show_cat_det=1,$cels_or_list='')
 			$row2 = $wpdb->get_row($query);	
 			$categories[$row2->id]=$row2->name;			
 			}
-		
-			$query= "SELECT * FROM ".$wpdb->prefix."spidercatalog_product_categories WHERE `published`=1 ";		$category_list = $wpdb->get_results($query);
-		if($params1['display_type']=="list")
-		return front_end_catalog_list($rows, $option,$params,$page_num,$prod_count,$prod_in_page,$ratings,$voted,$categories,$category_list,$params1,$cat_rows,$cat_id);
+	}
+
+			$query= "SELECT * FROM ".$wpdb->prefix."spidercatalog_product_categories WHERE parent=0 AND `published`=1 ORDER BY `ordering` ASC ";	
+			$category_list = $wpdb->get_results($query);
+			$cat_query = "SELECT * FROM ".$wpdb->prefix."spidercatalog_product_categories WHERE `published`=1 AND id=".$subcat_id."";
+			$categor = $wpdb->get_results($cat_query);
+			foreach($categor as $chid)
+			{
+            $par=$chid->parent;
+            }
+			
+			
+			
+			
+			
+			if($params7['show_sub']==1){
+			$category_list=open_cat_in_tree($category_list);
+			}
+			
+		if($cels_or_list==1)	
+		return front_end_catalog_list($rows, $option,$params,$page_num,$prod_count,$prod_in_page,$ratings,$voted,$categories,$category_list,$params1,$cat_rows,$cat_id,$child_ids,$params7,$categor,$par,$cels_or_list,$ident);
 		else
-		return front_end_catalog_cells($rows, $option,$params,$page_num,$prod_count,$prod_in_page,$ratings,$voted,$categories,$category_list,$params1,$cat_rows,$cat_id);
+		return front_end_catalog_cells($rows, $option,$params,$page_num,$prod_count,$prod_in_page,$ratings,$voted,$categories,$category_list,$params1,$cat_rows,$cat_id,$child_ids,$params7,$categor,$par,$cels_or_list,$ident);
 
 }
 

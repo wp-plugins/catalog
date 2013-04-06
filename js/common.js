@@ -51,9 +51,9 @@ var SCHR=new SpiderCatHttpReq();
 function prod_change_picture(url,obj,width,height)
 {
 		
-	
 	document.getElementById("prod_main_picture_a").href=obj.parentNode.href;	
-	document.getElementById("prod_main_picture").style.backgroundImage='url('+url+')';	
+	document.getElementById("prod_main_picture").style.backgroundImage='url('+url+')';
+	
 }
 
 
@@ -77,23 +77,23 @@ function vote(vote_value,prid,div_id,rated_text,home___)
 
 function submit_reveiw(text1,text2,text3)
 {  
-if(document.getElementById("full_name").value=='')      
+if(document.getElementById("full_name_"+prod_id).value=='')      
 {              
 alert(text1);  	 	      
-document.getElementById("full_name").focus();  	 	    
+document.getElementById("full_name_"+prod_id).focus();  	 	    
 }        
 else  
-if(document.getElementById("message_text").value=='')      
+if(document.getElementById("message_text_"+prod_id).value=='')      
 {              
 alert(text2);   	 	      
-document.getElementById("message_text").focus();
+document.getElementById("message_text_"+prod_id).focus();
 }       
 else  
 {
 	if(resQ) 
 		{
 			resQ=0;
-  	  		SCHR.sendRequest(document.getElementById('wd_captcha_img').src.split("?")[0]+'?checkcap=1&cap_code='+document.getElementById("review_capcode").value, 'caphid','');
+  	  		SCHR.sendRequest(document.getElementById("wd_captcha_img_"+prod_id).src.split("&")[0]+'&checkcap=1&cap_code='+document.getElementById("review_capcode_"+prod_id).value, "caphid_"+prod_id,'');
 			resNumberOfTry=0;
 			submitReveiwInner(text3);
 		}
@@ -106,27 +106,32 @@ function submitReveiwInner(text)
 {
 	if(resQ) 
 		{
-			if(document.getElementById("caphid").innerHTML=="1")
-				document.forms['review'].submit();   
+			if(document.getElementById("caphid_"+prod_id).innerHTML=="1")
+				document.forms["review_"+prod_id].submit();   
 			else
 				{
 					alert(text);
-					refreshCaptcha();
+					refreshCaptcha(prod_id);
 				}
 		}   
 else if(resNumberOfTry<100) setTimeout("submitReveiwInner('"+text+"');",200); resNumberOfTry++;
 
 }
 
-function refreshCaptcha()
+function refreshCaptcha(prod_id)
 {
-document.getElementById('wd_captcha_img').src=document.getElementById('wd_captcha_img').src.split("?")[0]+'?r='+Math.floor(Math.random()*100);
-document.getElementById("review_capcode").value='';
+	
+document.getElementById("wd_captcha_img_"+prod_id).src=document.getElementById("wd_captcha_img_"+prod_id).src.split("&")[0]+'&r='+Math.floor(Math.random()*100);
+document.getElementById("review_capcode_"+prod_id).value='';
 }
 
-function cat_form_reset(form)
+function cat_form_reset(form,type,idd)
 {
-form.prod_name.value='';
-if(typeof(form.cat_id)!=='undefined') form.cat_id.value='0';
+var pr_name='prod_name_'+type+'_'+idd;
+var cat_idd='cat_id_'+type+'_'+idd;
+
+document.getElementById(pr_name).value="";
+if(typeof(form.cat_idd)!=='undefined') form.cat_idd.value='0';
+
 form.submit();
 }

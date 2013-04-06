@@ -26,7 +26,7 @@
 
 
 
-function html_showcategories($option, $rows, $controller, $lists, $pageNav,$sort){
+function html_showcategories($option, $rows, $controller, $lists, $pageNav,$sort,$cat_row){
 	global $wpdb;
 	?>
     <script language="javascript">
@@ -65,11 +65,11 @@ var keyCode = event.keyCode ? event.keyCode : event.which ? event.which : event.
 }
 	</script>
     <form method="post"  onkeypress="doNothing()" action="admin.php?page=Categories_Spider_Catalog" id="admin_form" name="admin_form">
-	<table cellspacing="10" width="100%">
-              <tr>   
+<table cellspacing="10" width="100%">
+                  <tr>   
 <td width="100%" style="font-size:14px; font-weight:bold"><a href="http://web-dorado.com/spider-catalog-wordpress-guide-step-2.html" target="_blank" style="color:blue; text-decoration:none;">User Manual</a><br />
 This section allows you to create categories of products. <a href="http://web-dorado.com/spider-catalog-wordpress-guide-step-2.html" target="_blank" style="color:blue; text-decoration:none;">More...</a></td>   
-	 <td colspan="7" align="right" style="font-size:16px;">
+<td colspan="7" align="right" style="font-size:16px;">
   <a href="http://web-dorado.com/files/fromSpiderCatalog.php" target="_blank" style="color:red; text-decoration:none;">
 <img src="<?php echo plugins_url("images/header.png",__FILE__) ?>" border="0" alt="http://web-dorado.com/files/fromSpiderCatalog.php" width="215"><br>
 Get the full version&nbsp;&nbsp;&nbsp;&nbsp;
@@ -83,11 +83,12 @@ Get the full version&nbsp;&nbsp;&nbsp;&nbsp;
     <td  style="width:90px; text-align:right;"><p class="submit" style="padding:0px; text-align:left"><input type="button" value="Add a Category" name="custom_parametrs" onclick="window.location.href='admin.php?page=Categories_Spider_Catalog&task=add_cat'" /></p></td>
 <td style="text-align:right;font-size:16px;padding:20px; padding-right:50px">
 
+	</td>
     </tr>
     </table>
     <?php
 	if(isset($_POST['serch_or_not'])) {if($_POST['serch_or_not']=="search"){ $serch_value=$_POST['search_events_by_title']; }else{$serch_value="";}} 
-	$serch_fields='<div class="alignleft actions" style="width:180px;">
+	$serch_fields='<div class="alignleft actions" style="width:185px;">
     	<label for="search_events_by_title" style="font-size:14px">Filter: </label>
         <input type="text" name="search_events_by_title" value="'.$serch_value.'" id="search_events_by_title" onchange="clear_serch_texts()">
     </div>
@@ -96,46 +97,130 @@ Get the full version&nbsp;&nbsp;&nbsp;&nbsp;
 		 document.getElementById(\'admin_form\').submit();" class="button-secondary action">
 		 <input type="button" value="Reset" onclick="window.location.href=\'admin.php?page=Categories_Spider_Catalog\'" class="button-secondary action">
     </div>';
-	 print_html_nav($pageNav['total'],$pageNav['limit'],$serch_fields);	
 	
+	$serch_fields.='<select style=" text-align:left;float:right;" name="cat_search" id="cat_search" class="inputbox" onchange="this.form.submit();">
+	<option value="0"';
+	if(!isset($_POST['cat_search']))
+    $serch_fields.='selected="selected"';
+	$serch_fields.='>- Select Parent -</option>';
+
+	foreach($cat_row as $cat_id)
+	{
+		
+		$serch_fields.='<option value="'.$cat_id->id.'"';
+		if($_POST['cat_search']==$cat_id->id || $_GET["catid"]==$cat_id->id)
+		$serch_fields.='selected="selected"';		
+		$serch_fields.='>'.$cat_id->name.'</option>';
+		
+	}
+	
+	$serch_fields.='</select>';
+	 print_html_nav($pageNav['total'],$pageNav['limit'],$serch_fields);
 	?>
   <table class="wp-list-table widefat fixed pages" style="width:95%">
  <thead>
  <TR>
    <th scope="col" id="id" class="<?php if($sort["sortid_by"]=="id") echo $sort["custom_style"]; else echo $sort["default_style"]; ?>" style="width:30px" ><a href="javascript:ordering('id',<?php if($sort["sortid_by"]=="id") echo $sort["1_or_2"]; else echo "1"; ?>)"><span>ID</span><span class="sorting-indicator"></span></a></th>
- <th scope="col" id="name" class="<?php if($sort["sortid_by"]=="name") echo $sort["custom_style"]; else echo $sort["default_style"]; ?>" style="" ><a href="javascript:ordering('name',<?php if($sort["sortid_by"]=="name") echo $sort["1_or_2"]; else echo "1"; ?>)"><span>Name</span><span class="sorting-indicator"></span></a></th>
+ <th scope="col" id="name" class="<?php if($sort["sortid_by"]=="name") echo $sort["custom_style"]; else echo $sort["default_style"]; ?>" style="width:85px" ><a href="javascript:ordering('name',<?php if($sort["sortid_by"]=="name") echo $sort["1_or_2"]; else echo "1"; ?>)"><span>Name</span><span class="sorting-indicator"></span></a></th>
 <th scope="col" id="description" class="<?php if($sort["sortid_by"]=="description") echo $sort["custom_style"]; else echo $sort["default_style"]; ?>" style="" ><a href="javascript:ordering('description',<?php if($sort["sortid_by"]=="description") echo $sort["1_or_2"]; else echo "1"; ?>)"><span>Description</span><span class="sorting-indicator"></span></a></th>
- <th scope="col" id="ordering" class="<?php if($sort["sortid_by"]=="ordering") echo $sort["custom_style"]; else echo $sort["default_style"]; ?>" style="width:95px" ><a style="display:inline" href="javascript:ordering('ordering',<?php if($sort["sortid_by"]=="ordering") echo $sort["1_or_2"]; else echo "1"; ?>)"><span>Order</span><span class="sorting-indicator"></span></a><div><a style="display:inline" href="javascript:saveorder(1, 'saveorder')" title="Save Order"><img onclick="saveorder(1, 'saveorder')" src="<?php echo plugins_url("images/filesave.png",__FILE__) ?>" alt="Save Order"></a></div></th>
-  <th scope="col" id="published"  class="<?php if($sort["sortid_by"]=="published") echo $sort["custom_style"]; else echo $sort["default_style"]; ?>" style="width:100px" ><a href="javascript:ordering('published',<?php if($sort["sortid_by"]=="published") echo $sort["1_or_2"]; else echo "1"; ?>)"><span>Published</span><span class="sorting-indicator"></span></a></th>
- <th style="width:80px">Edit</th>
- <th style="width:80px">Delete</th>
+<th scope="col" id="count" class="<?php if($sort["sortid_by"]=="count") echo $sort["custom_style"]; else echo $sort["default_style"]; ?>" style="width: 102px;
+" ><a href="javascript:ordering('count',<?php if($sort["sortid_by"]=="count") echo $sort["1_or_2"]; else echo "1"; ?>)"><span>Subcategories</span><span class="sorting-indicator"></span></a></th>
+
+<th scope="col" id="par_name" class="<?php if($sort["sortid_by"]=="par_name") echo $sort["custom_style"]; else echo $sort["default_style"]; ?>" style="width: 76px;" ><a href="javascript:ordering('par_name',<?php if($sort["sortid_by"]=="par_name") echo $sort["1_or_2"]; else echo "1"; ?>)"><span>Parent</span><span class="sorting-indicator"></span></a></th>
+
+<th scope="col" id="prod_count" class="<?php if($sort["sortid_by"]=="prod_count") echo $sort["custom_style"]; else echo $sort["default_style"]; ?>" style="width: 75px;" ><a href="javascript:ordering('prod_count',<?php if($sort["sortid_by"]=="prod_count") echo $sort["1_or_2"]; else echo "1"; ?>)"><span>Products</span><span class="sorting-indicator"></span></a></th>
+
+ <th scope="col" id="ordering" class="<?php if($sort["sortid_by"]=="ordering") echo $sort["custom_style"]; else echo $sort["default_style"]; ?>" style="width:91px" ><a style="display:inline" href="javascript:ordering('ordering',<?php if($sort["sortid_by"]=="ordering") echo $sort["1_or_2"]; else echo "1"; ?>)"><span>Order</span><span class="sorting-indicator"></span></a><div><a style="display:inline" href="javascript:saveorder(1, 'saveorder')" title="Save Order"><img onclick="saveorder(1, 'saveorder')" src="<?php echo plugins_url("images/filesave.png",__FILE__) ?>" alt="Save Order"></a></div></th>
+  <th scope="col" id="published"  class="<?php if($sort["sortid_by"]=="published") echo $sort["custom_style"]; else echo $sort["default_style"]; ?>" style="width:70px" ><a href="javascript:ordering('published',<?php if($sort["sortid_by"]=="published") echo $sort["1_or_2"]; else echo "1"; ?>)"><span>Published</span><span class="sorting-indicator"></span></a></th>
+ <th style="width:33px">Edit</th>
+ <th style="width:40px">Delete</th>
  </TR>
  </thead>
  <tbody>
  <?php 
-  for($i=0; $i<count($rows);$i++){ 
+  for($i=0; $i<count($rows);$i++){
+	  $ka0=0;
+	  $ka1=0;
 	  if(isset($rows[$i-1]->id))
 		  {
-		  $move_up='<span><a href="#reorder" onclick="return listItemTask(\''.$rows[$i]->id.'\',\''.$rows[$i-1]->id.'\')" title="Move Up">   <img src="'.plugins_url('images/uparrow.png',__FILE__).'" width="16" height="16" border="0" alt="Move Up"></a></span>';
+			  if($rows[$i]->parent==$rows[$i-1]->parent){
+			  $x1=$rows[$i]->id;
+			  $x2=$rows[$i-1]->id;
+			  $ka0=1;
+			  }
+			  else
+			  {
+				  $jj=2;
+				  while(isset($rows[$i-$jj]))
+				  {
+					  if($rows[$i]->parent==$rows[$i-$jj]->parent)
+					  {
+						  $ka0=1;
+						  $x1=$rows[$i]->id;
+						  $x2=$rows[$i-$jj]->id;
+						   break;
+					  }
+ 					$jj++;
+				  }
+			  }
+			  if($ka0){
+		  $move_up='<span><a href="#reorder" onclick="return listItemTask(\''.$x1.'\',\''.$x2.'\')" title="Move Up">   <img src="'.plugins_url('images/uparrow.png',__FILE__).'" width="16" height="16" border="0" alt="Move Up"></a></span>';
+			  }
+			  else
+			  $move_up="";
 		  }
 	  else
 	  	{
 			$move_up="";
 	  	}
-		if(isset($rows[$i+1]->id))
-  		$move_down='<span><a href="#reorder" onclick="return listItemTask(\''.$rows[$i]->id.'\',\''.$rows[$i+1]->id.'\')" title="Move Down">  <img src="'.plugins_url('images/downarrow.png',__FILE__).'" width="16" height="16" border="0" alt="Move Down"></a></span>';
+		if(isset($rows[$i+1]->id)){
+			
+			if($rows[$i]->parent==$rows[$i+1]->parent){
+			  $x1=$rows[$i]->id;
+			  $x2=$rows[$i+1]->id;
+			  $ka1=1;
+			  }
+			  else
+			  {
+				  $jj=2;
+				  while(isset($rows[$i+$jj]))
+				  {
+					  if($rows[$i]->parent==$rows[$i+$jj]->parent)
+					  {
+						  $ka1=1;
+						  $x1=$rows[$i]->id;
+						  $x2=$rows[$i+$jj]->id;
+						  break;
+					  }
+ 					$jj++;
+				  }
+			  }
+			
+			if($ka1)
+  		$move_down='<span><a href="#reorder" onclick="return listItemTask(\''.$x1.'\',\''. $x2.'\')" title="Move Down">  <img src="'.plugins_url('images/downarrow.png',__FILE__).'" width="16" height="16" border="0" alt="Move Down"></a></span>';
+		else
+		$move_down="";	
+		}
   		else
-  		$move_down="";
-  		
+		{
+  		$move_down="";	
+		}
+		$uncat=$rows[$i]->par_name;
+		$pr_count=$rows[$i]->prod_count;
+
   ?>
  <tr>
          <td><?php echo $rows[$i]->id; ?></td>
          <td><a  href="admin.php?page=Categories_Spider_Catalog&task=edit_cat&id=<?php echo $rows[$i]->id?>"><?php echo $rows[$i]->name; ?></a></td>
          <td><?php echo $rows[$i]->description; ?></td>
+		 <td><a href="admin.php?page=Categories_Spider_Catalog&catid=<?php echo $rows[$i]->id; ?>" alt="Subcategories">(<?php echo $rows[$i]->count; ?>)</a></td>
+		 <td><?php if(!($uncat)){echo 'Uncategory';} else{ echo $rows[$i]->par_name;}?></td>		 
+		 <td><a href="admin.php?page=Products_Spider_Catalog&categoryid=<?php echo $rows[$i]->id; ?>" alt="">(<?php if(!($pr_count)){echo '0';} else{ echo $rows[$i]->prod_count;} ?>)</a></td>
          <td ><?php echo  $move_up.$move_down; ?><input type="text" name="order_<?php echo $rows[$i]->id; ?>" style="width:40px" value="<?php echo $rows[$i]->ordering; ?>" /></td>
          <td><a  href="admin.php?page=Categories_Spider_Catalog&task=unpublish_cat&id=<?php echo $rows[$i]->id?>"<?php if(!$rows[$i]->published){ ?> style="color:#C00;" <?php }?> ><?php if($rows[$i]->published)echo "Yes"; else echo "No"; ?></a></td>
          <td ><a  href="admin.php?page=Categories_Spider_Catalog&task=edit_cat&id=<?php echo $rows[$i]->id?>">Edit</a></td>
          <td><a  href="admin.php?page=Categories_Spider_Catalog&task=remove_cat&id=<?php echo $rows[$i]->id?>">Delete</a></td>
+		
   </tr> 
  <?php } ?>
  </tbody>
@@ -187,7 +272,7 @@ Get the full version&nbsp;&nbsp;&nbsp;&nbsp;
 
 
 
-function Html_editCategory($ord_elem, $count_ord,$images,$row)
+function Html_editCategory($ord_elem, $count_ord,$images,$row,$cat_row)
 
 {
 	
@@ -208,6 +293,11 @@ function submitbutton(pressbutton)
 	document.getElementById("adminForm").submit();
 	
 }
+function change_select()
+{
+		submitbutton('apply'); 
+	
+}
 </script>
 
 
@@ -215,10 +305,10 @@ function submitbutton(pressbutton)
 
 <table width="95%">
   <tbody>
-              <tr>   
+                    <tr>   
 <td width="100%" style="font-size:14px; font-weight:bold"><a href="http://web-dorado.com/spider-catalog-wordpress-guide-step-2.html" target="_blank" style="color:blue; text-decoration:none;">User Manual</a><br />
 This section allows you to create categories of products. <a href="http://web-dorado.com/spider-catalog-wordpress-guide-step-2.html" target="_blank" style="color:blue; text-decoration:none;">More...</a></td>   
-	 <td colspan="7" align="right" style="font-size:16px;">
+<td colspan="7" align="right" style="font-size:16px;">
   <a href="http://web-dorado.com/files/fromSpiderCatalog.php" target="_blank" style="color:red; text-decoration:none;">
 <img src="<?php echo plugins_url("images/header.png",__FILE__) ?>" border="0" alt="http://web-dorado.com/files/fromSpiderCatalog.php" width="215"><br>
 Get the full version&nbsp;&nbsp;&nbsp;&nbsp;
@@ -247,6 +337,31 @@ Name:
 </tr>
 
 
+
+<tr>
+<td align="right" class="key">Parent Category:</td>
+<td>
+<?php
+	$cat_select.='<select style=" text-align:left;" name="parent" id="parent" class="inputbox"  onchange="change_select();" >
+	<option value="0"';
+	if(!isset($row->parent))
+    $cat_select.='selected="selected"';
+	$cat_select.='>Main Category</option>';
+	
+	foreach($cat_row as $catt)
+	{
+		if($row->id!=$catt->id){
+		$cat_select.='<option value="'.$catt->id.'"';
+		if($row->parent==$catt->id)
+		$cat_select.='selected="selected"';
+		
+		$cat_select.='>'.$catt->name.'</option>';
+		}
+	}
+	echo $cat_select;
+?>
+</td>
+</tr>
 
 
 
@@ -413,7 +528,6 @@ function create_images_tags()
 <tr>
 <td id="img__uploads">
 <?php 
-
 $images_with_id=$images;
 $counnt_image=count($images_with_id);
 for($i=0;$i<$counnt_image;$i++){
@@ -457,7 +571,6 @@ for($i=0;$i<$count_ord;$i++){ ?>
 
 
 
-
 <tr>
 <td width="100" align="right" class="key">
 Description:
@@ -478,7 +591,8 @@ Description:
 Parameters:
 </td>
 <td>
-
+<?php $par=explode("	",$row->param);
+?>
 
 <script type="text/javascript">
 
@@ -488,7 +602,7 @@ $par=explode("	",$row->param);
 
 for($k=0;$k<=count($par);$k++)
 {
-if(isset($par[$k]) and $par[$k]!='')
+if($par[$k]!='')
 echo "'".stripslashes(str_replace('
 ','',htmlspecialchars($par[$k])))."',";
 }
@@ -499,6 +613,7 @@ echo "'".stripslashes(str_replace('
 
 <div id="sel1">
 <?php
+
 $k=0;
 while($k<1000)
 {
@@ -594,7 +709,6 @@ for($i=0;$i<$count_ord;$i++)
 	
 	
 }
-
     
    
 
@@ -602,7 +716,7 @@ for($i=0;$i<$count_ord;$i++)
 
 
 
-function html_add_category($ord_elem)
+function html_add_category($ord_elem, $cat_row)
 {
 	
 	
@@ -621,6 +735,11 @@ function submitbutton(pressbutton)
 	document.getElementById("adminForm").submit();
 	
 }
+function change_select()
+{
+		submitbutton('apply'); 
+	
+}
 </script>
 
 
@@ -628,10 +747,10 @@ function submitbutton(pressbutton)
 
 <table width="95%">
   <tbody>
-              <tr>   
+                    <tr>   
 <td width="100%" style="font-size:14px; font-weight:bold"><a href="http://web-dorado.com/spider-catalog-wordpress-guide-step-2.html" target="_blank" style="color:blue; text-decoration:none;">User Manual</a><br />
 This section allows you to create categories of products. <a href="http://web-dorado.com/spider-catalog-wordpress-guide-step-2.html" target="_blank" style="color:blue; text-decoration:none;">More...</a></td>   
-	 <td colspan="7" align="right" style="font-size:16px;">
+<td colspan="7" align="right" style="font-size:16px;">
   <a href="http://web-dorado.com/files/fromSpiderCatalog.php" target="_blank" style="color:red; text-decoration:none;">
 <img src="<?php echo plugins_url("images/header.png",__FILE__) ?>" border="0" alt="http://web-dorado.com/files/fromSpiderCatalog.php" width="215"><br>
 Get the full version&nbsp;&nbsp;&nbsp;&nbsp;
@@ -660,6 +779,30 @@ Name:
 </tr>
 
 
+
+<tr>
+<td align="right" class="key">Parent Category:</td>
+<td>
+<?php
+	$cat_select.='<select style=" text-align:left;" name="parent" id="parent" class="inputbox" onchange="change_select()">
+	<option value="0"';
+	if(!isset($row->parent))
+    $cat_select.='selected="selected"';
+	$cat_select.='>Main Category</option>';
+	foreach($cat_row as $catt)
+	{
+		
+		$cat_select.='<option value="'.$catt->id.'"';
+		if($row->parent==$catt->id)
+		$cat_select.='selected="selected"';
+		
+		$cat_select.='>'.$catt->name.'</option>';
+		
+	}
+	echo $cat_select;
+?>
+</td>
+</tr>
 
 
 
@@ -858,6 +1001,9 @@ Description:
 
 </td>
 </tr>
+
+
+
 <tr>
 <tr>
 <td width="100" align="right" class="key">
@@ -963,6 +1109,9 @@ value="<?php echo $row->id; ?>" />
 	
 	
 }
+
+
+
 
 
 

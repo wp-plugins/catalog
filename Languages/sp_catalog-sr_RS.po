@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: spider catalog\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-07-22 17:35+0400\n"
-"PO-Revision-Date: 2012-07-22 17:38+0400\n"
+"PO-Revision-Date: 2013-03-27 13:56+0400\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -11,8 +11,10 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Poedit-KeywordsList: _;gettext;gettext_noop;__\n"
 "X-Poedit-Basepath: .\n"
-"X-Poedit-Language: Serbian\n"
-"X-Poedit-SearchPath-0: C:\\wamp\\www\\wordpress\\wp-content\\plugins\\catalog\n"
+"Language: sr\n"
+"X-Generator: Poedit 1.5.3\n"
+"X-Poedit-SearchPath-0: C:\\wamp\\www\\wordpress\\wp-content\\plugins"
+"\\catalog\n"
 
 #: C:\wamp\www\wordpress\wp-content\plugins\catalog/front_end_functions
 #: .html.php:259
@@ -20,61 +22,37 @@ msgid "Back to Catalog"
 msgstr "Назад на каталог"
 
 #: C:\wamp\www\wordpress\wp-content\plugins\catalog/front_end_functions
-#: .html.php:281
-#: .html.php:298
-#: .html.php:1151
-#: .html.php:1173
-#: .html.php:1912
+#: .html.php:281 .html.php:298 .html.php:1151 .html.php:1173 .html.php:1912
 #: .html.php:1940
 msgid "Not rated Yet."
 msgstr "Артикал још није оцењен."
 
 #: C:\wamp\www\wordpress\wp-content\plugins\catalog/front_end_functions
-#: .html.php:288
-#: .html.php:289
-#: .html.php:290
-#: .html.php:291
-#: .html.php:292
-#: .html.php:1160
-#: .html.php:1161
-#: .html.php:1162
-#: .html.php:1163
-#: .html.php:1164
-#: .html.php:1925
-#: .html.php:1926
-#: .html.php:1927
-#: .html.php:1928
-#: .html.php:1929
+#: .html.php:288 .html.php:289 .html.php:290 .html.php:291 .html.php:292
+#: .html.php:1160 .html.php:1161 .html.php:1162 .html.php:1163 .html.php:1164
+#: .html.php:1925 .html.php:1926 .html.php:1927 .html.php:1928 .html.php:1929
 msgid "Rated."
 msgstr "Оцењено."
 
 #: C:\wamp\www\wordpress\wp-content\plugins\catalog/front_end_functions
-#: .html.php:300
-#: .html.php:1100
-#: .html.php:1943
+#: .html.php:300 .html.php:1100 .html.php:1943
 #: C:\wamp\www\wordpress\wp-content\plugins\catalog/star_rate.php:72
 msgid "Rating"
 msgstr "Оцена"
 
 #: C:\wamp\www\wordpress\wp-content\plugins\catalog/front_end_functions
-#: .html.php:300
-#: .html.php:1176
-#: .html.php:1943
+#: .html.php:300 .html.php:1176 .html.php:1943
 #: C:\wamp\www\wordpress\wp-content\plugins\catalog/star_rate.php:72
 msgid "You have already rated this product."
 msgstr "Већ сте оценили овај производ."
 
 #: C:\wamp\www\wordpress\wp-content\plugins\catalog/front_end_functions
-#: .html.php:365
-#: .html.php:1253
-#: .html.php:1884
+#: .html.php:365 .html.php:1253 .html.php:1884
 msgid "Market Price:"
 msgstr "Тржишна цена:"
 
 #: C:\wamp\www\wordpress\wp-content\plugins\catalog/front_end_functions
-#: .html.php:370
-#: .html.php:1139
-#: .html.php:1984
+#: .html.php:370 .html.php:1139 .html.php:1984
 msgid "Category:"
 msgstr "категорија:"
 
@@ -84,8 +62,7 @@ msgid "Add your review here"
 msgstr "Додајте свој коментар овде"
 
 #: C:\wamp\www\wordpress\wp-content\plugins\catalog/front_end_functions
-#: .html.php:451
-#: .html.php:1097
+#: .html.php:451 .html.php:1097
 msgid "Name"
 msgstr "име"
 
@@ -115,8 +92,7 @@ msgid "The Message field is required."
 msgstr "Порука поље је обавезно."
 
 #: C:\wamp\www\wordpress\wp-content\plugins\catalog/front_end_functions
-#: .html.php:474
-#: .html.php:497
+#: .html.php:474 .html.php:497
 msgid "Sorry, the code you entered was invalid."
 msgstr "Нажалост, код који сте унели је неисправна."
 
@@ -131,26 +107,22 @@ msgid "Author:"
 msgstr "Аутор:"
 
 #: C:\wamp\www\wordpress\wp-content\plugins\catalog/front_end_functions
-#: .html.php:1052
-#: .html.php:1772
+#: .html.php:1052 .html.php:1772
 msgid "Choose Category"
 msgstr "Одаберите категорију"
 
 #: C:\wamp\www\wordpress\wp-content\plugins\catalog/front_end_functions
-#: .html.php:1054
-#: .html.php:1774
+#: .html.php:1054 .html.php:1774
 msgid "All"
 msgstr "све"
 
 #: C:\wamp\www\wordpress\wp-content\plugins\catalog/front_end_functions
-#: .html.php:1075
-#: .html.php:1796
+#: .html.php:1075 .html.php:1796
 msgid "Search"
 msgstr "Претрага"
 
 #: C:\wamp\www\wordpress\wp-content\plugins\catalog/front_end_functions
-#: .html.php:1077
-#: .html.php:1798
+#: .html.php:1077 .html.php:1798
 msgid "Go"
 msgstr "ићи"
 
@@ -185,36 +157,35 @@ msgid "Rating:"
 msgstr "Оцена:"
 
 #: C:\wamp\www\wordpress\wp-content\plugins\catalog/front_end_functions
-#: .html.php:1240
-#: .html.php:2065
+#: .html.php:1240 .html.php:2065
 msgid "More"
 msgstr "више"
 
 #: C:\wamp\www\wordpress\wp-content\plugins\catalog/front_end_functions
-#: .html.php:1303
-#: .html.php:2138
+#: .html.php:1303 .html.php:2138
 msgid "First"
 msgstr "прво"
 
 #: C:\wamp\www\wordpress\wp-content\plugins\catalog/front_end_functions
-#: .html.php:1313
-#: .html.php:2148
+#: .html.php:1313 .html.php:2148
 msgid "Prev"
 msgstr "Претходна"
 
 #: C:\wamp\www\wordpress\wp-content\plugins\catalog/front_end_functions
-#: .html.php:1343
-#: .html.php:2178
+#: .html.php:1343 .html.php:2178
 msgid "Next"
 msgstr "следећи"
 
 #: C:\wamp\www\wordpress\wp-content\plugins\catalog/front_end_functions
-#: .html.php:1351
-#: .html.php:2186
+#: .html.php:1351 .html.php:2186
 msgid "Last"
 msgstr "последњи"
+
+#: C:\wamp\www\wordpress\wp-content\plugins\catalog/front_end_functions
+#: .html.php:1138 .html.php:1955
+msgid "Subcategories"
+msgstr "рубрике"
 
 #: C:\wamp\www\wordpress\wp-content\plugins\catalog/elements/sqlmultilistx.php:3
 msgid "select.genericlist"
 msgstr "select.genericlist"
-

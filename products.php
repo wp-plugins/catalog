@@ -20,6 +20,14 @@
  
  
 function  showProducts(){
+
+
+
+
+
+	  
+	  
+	  
 	  
 	  
   global $wpdb;
@@ -65,9 +73,36 @@ function  showProducts(){
 		{
 		$search_tag="";
 		}
-	if ( $search_tag!="") {
-		$where= " WHERE ".$wpdb->prefix."spidercatalog_products.name LIKE '%".$search_tag."%' ";
+	  if(isset($_GET["categoryid"]))
+		{
+	    $categ_id=$_GET["categoryid"];	
+		}
+		else{
+		if(isset($_POST['cat_search'])){
+		$categ_id=$_POST['cat_search'];
+		}
+		else{
+		$categ_id=0;
+		}
+		
+        }
+		if ( $search_tag!="") {
+	    $where= " WHERE ".$wpdb->prefix."spidercatalog_products.name LIKE '%".$search_tag."%' ";			  		
 	}
+	
+	if($where){
+	  if($categ_id){
+	  $where.=" AND category_id=" .$categ_id;
+	  }
+	
+	}
+	else{
+	if($categ_id){
+	  $where.=" WHERE category_id=" .$categ_id;
+	  }
+	
+	}
+	  
 	if(isset($_POST['saveorder']))
 	{
 		
@@ -152,21 +187,15 @@ function  showProducts(){
 	
 	// get the total number of records
 	$query = "SELECT COUNT(*) FROM ".$wpdb->prefix."spidercatalog_products". $where;
-	if($_POST["cat_search"])
-	{
-		if($where)
-		$where.="AND category_id='".$_POST["cat_search"]."' ";
-		else
-		$where.="WHERE category_id='".$_POST["cat_search"]."' ";
-		
-	}
+	
 	$total = $wpdb->get_var($query);
 	$pageNav['total'] =$total;
 	$pageNav['limit'] =	 $limit/20+1;
 	$query =	"SELECT ".$wpdb->prefix."spidercatalog_products.*,categories.name as category FROM ".$wpdb->prefix."spidercatalog_products left join ".$wpdb->prefix."spidercatalog_product_categories  as categories on  ".$wpdb->prefix."spidercatalog_products.category_id=categories.id ".$where." ". $order." "." LIMIT ".$limit.",20";
 	$rows = $wpdb->get_results($query);
-	$cat_row_query="SELECT id,name FROM ".$wpdb->prefix."spidercatalog_product_categories ORDER BY `ordering`";
+	$cat_row_query="SELECT id,name FROM ".$wpdb->prefix."spidercatalog_product_categories where parent=0 ORDER BY `ordering`";
 	$cat_row=$wpdb->get_results($cat_row_query);
+	$cat_row=open_cat_in_tree($cat_row);
 		html_showProducts($option, $rows,  $lists, $pageNav,$sort,$cat_row);
   
 
@@ -184,7 +213,27 @@ function  showProducts(){
 
 
 
+function open_cat_in_tree($catt,$tree_problem='',$hihiih=1){
 
+global $wpdb;
+static $trr_cat=array();
+if($hihiih)
+$trr_cat=array();
+foreach($catt as $dog){
+	$dog->name=$tree_problem.$dog->name;
+	array_push($trr_cat,$dog);
+	$new_cat_query=	"SELECT  a.* ,  COUNT(b.id) AS count, g.par_name AS par_name FROM ".$wpdb->prefix."spidercatalog_product_categories  AS a LEFT JOIN ".$wpdb->prefix."spidercatalog_product_categories AS b ON a.id = b.parent LEFT JOIN (SELECT  ".$wpdb->prefix."spidercatalog_product_categories.ordering as ordering,".$wpdb->prefix."spidercatalog_product_categories.id AS id, COUNT( ".$wpdb->prefix."spidercatalog_products.category_id ) AS prod_count
+FROM ".$wpdb->prefix."spidercatalog_products, ".$wpdb->prefix."spidercatalog_product_categories
+WHERE ".$wpdb->prefix."spidercatalog_products.category_id = ".$wpdb->prefix."spidercatalog_product_categories.id
+GROUP BY ".$wpdb->prefix."spidercatalog_products.category_id) AS c ON c.id = a.id LEFT JOIN
+(SELECT ".$wpdb->prefix."spidercatalog_product_categories.name AS par_name,".$wpdb->prefix."spidercatalog_product_categories.id FROM ".$wpdb->prefix."spidercatalog_product_categories) AS g
+ ON a.parent=g.id WHERE a.name LIKE '%".$search_tag."%' AND a.parent=".$dog->id." group by a.id"; 
+ $new_cat=$wpdb->get_results($new_cat_query);
+ open_cat_in_tree($new_cat,$tree_problem. "— ",0);
+}
+return $trr_cat;
+
+}
 
 
 
@@ -195,6 +244,7 @@ function  showProducts(){
 
 function change_prod( $id ){
   global $wpdb;
+  
   $published=$wpdb->get_var("SELECT published FROM ".$wpdb->prefix."spidercatalog_products WHERE `id`=".$id );
   if($published)
    $published=0;
@@ -239,11 +289,13 @@ function change_prod( $id ){
 
 
 
+
+
+
 function editProduct($id)
   {
 	  global $wpdb;
-	  
-	  $params=$wpdb->get_results("SELECT * FROM ".$wpdb->prefix."spidercatalog_params");
+	 	  $params=$wpdb->get_results("SELECT * FROM ".$wpdb->prefix."spidercatalog_params");
 	  $new_param=array();
 	  foreach( $params as $param)
 	  {
@@ -253,6 +305,7 @@ function editProduct($id)
 	  
     $row=$wpdb->get_row("SELECT * FROM ".$wpdb->prefix."spidercatalog_products WHERE id='".$id."'");
 	$cat_id_for_order=$row->category_id;
+    $parent_cat=$row->published_in_parent;
     $query = "SELECT id,name FROM ".$wpdb->prefix."spidercatalog_product_categories where published=1";
     $rows1 = $wpdb->get_results($query);
 	  $category_id['0'] = array(
@@ -283,14 +336,15 @@ function editProduct($id)
     $votes =  $wpdb->get_results( $query);
 
 	$query ="SELECT param FROM ".$wpdb->prefix."spidercatalog_product_categories where id='".$row->category_id."'";
+
 	$rows1 =$wpdb->get_results( $query);	
-	$cat_row=$wpdb->get_results("SELECT * FROM ".$wpdb->prefix."spidercatalog_product_categories");
-	
+	$cat_row=$wpdb->get_results("SELECT * FROM ".$wpdb->prefix."spidercatalog_product_categories where parent=0");
 	
 	
 	
 	
 	$lists=$wpdb->get_results("SELECT ordering,name FROM ".$wpdb->prefix."spidercatalog_products WHERE category_id='".$cat_id_for_order."' order by ordering");
+	$cat_row=open_cat_in_tree($cat_row);
 	
 	
 	
@@ -298,8 +352,7 @@ function editProduct($id)
 	
 	
 	
-	
-    html_editProduct($row, $lists, $votes, $option, $params, $rows1,$cat_row);
+    html_editProduct($row, $lists, $votes, $option, $params, $rows1,$cat_row,$parent_cat);
   }
 
 
@@ -313,7 +366,7 @@ function  update_prad_cat($id){
 
 
 
-		
+
 
 
 		 global $wpdb;
@@ -380,14 +433,14 @@ function  update_prad_cat($id){
 
 
 
+
 	 $images=explode(';;;',$_POST['uploadded_images_list']);
 	 $kk=count($images);
-	 for($i=0;$i<$kk;$i++){
+ for($i=0;$i<$kk;$i++){
 		 $image_with_id=get_attachment_id_from_src($images[$i]);
 		 $images[$i]=$image_with_id;
 	 }
 	 $new_images=implode(';;;',$images);
-
 
 
 
@@ -397,11 +450,12 @@ function  update_prad_cat($id){
 			'category_id'    =>$_POST['cat_search'],
 			'description'    =>$_POST['content'],
 			'image_url'   	 =>$new_images,
-			'cost'   		 =>$_POST['cost'],
+			'cost'   		 =>stripslashes($_POST['cost']),
 			'market_cost'	 =>$_POST['market_cost'],
 			'param'	    	 =>$_POST['param'],
 			'ordering'	     =>$_POST['ordering'],
 			'published'	     =>$_POST['published'],
+			'published_in_parent'	     =>$_POST['par_cat'],
               ), 
               array('id'=>$id),
 			  array(  
@@ -409,9 +463,10 @@ function  update_prad_cat($id){
 			  '%d',
 			  '%s',
 			  '%s',
-			  '%f',
-			  '%f',
 			  '%s',
+			  '%s',
+			  '%s',
+			  '%d',
 			  '%d',
 			  '%d'
 			  
@@ -434,7 +489,6 @@ function  update_prad_cat($id){
 
 
 
-
 function save_prad_cat()
 {
 	
@@ -448,9 +502,7 @@ function save_prad_cat()
 		return false;
 	 }
 	 
-	 
 	$count_of_rows=count($rows);
-	if($count_of_rows<10){
 	$ordering_values==array();
 	$ordering_ids==array();
 	for($i=0;$i<$count_of_rows;$i++)
@@ -469,8 +521,7 @@ function save_prad_cat()
 			 
 	}
 	 
-	 
-	 $images=explode(';;;',$_POST['uploadded_images_list']);
+	 	 $images=explode(';;;',$_POST['uploadded_images_list']);
 	 $kk=count($images);
  for($i=0;$i<$kk;$i++){
 		 $image_with_id=get_attachment_id_from_src($images[$i]);
@@ -478,17 +529,19 @@ function save_prad_cat()
 	 }
 	 $new_images=implode(';;;',$images);
 	 
+	 
 	 $save_or_no= $wpdb->insert($wpdb->prefix.'spidercatalog_products', array(
 		'id'	=> NULL,
 		'name'   		 =>$_POST['name'],
 			'category_id'    =>$_POST['cat_search'],
 			'description'    =>$_POST['content'],
 			'image_url'   	 =>$new_images,
-			'cost'   		 =>$_POST['cost'],
+			'cost'   		 =>stripslashes($_POST['cost']),
 			'market_cost'	 =>$_POST['market_cost'],
 			'param'	    	 =>$_POST['param'],
 			'ordering'	     =>$_POST['ordering'],
 			'published'	     =>$_POST['published'],
+			'published_in_parent'	     =>$_POST['par_cat'],
                 ),
 				array(
 				'%d',
@@ -496,10 +549,11 @@ function save_prad_cat()
 			    '%d',
 			 	'%s',
 			    '%s',
-			    '%f',
-			    '%f',
+			    '%s',
+			    '%s',
 			    '%s',
 			    '%d',
+				'%d',
 			    '%d'
 						
 				)
@@ -507,7 +561,7 @@ function save_prad_cat()
 					if(!$save_or_no)
 	{
 		?>
-	<div class="error"><p><strong><?php _e('Error. Please install plugin again'); ?></strong></p></div>
+	<div class="updated"><p><strong><?php _e('Error. Please install plugin again'); ?></strong></p></div>
 	<?php
 		return false;
 	}
@@ -520,14 +574,7 @@ function save_prad_cat()
 	<?php
 	
     return true;
-	}
-	else
-	{
-	?>
-	<div class="updated" style="font-size:14px; color:red"><p><strong><?php _e('The free version is limited up to 10 Products to add. If you need this functionality, you need to buy the commercial version'); ?></strong></p></div>
-	<?php
-	return false;
-	}
+	
 	
 
 }
@@ -566,8 +613,9 @@ function addProduct()
    // $lists['published'] = JHTML::_('select.booleanlist', 'published', 'class="inputbox"', $pub);
     $query              = "SELECT * FROM ".$wpdb->prefix."spidercatalog_product_votes  WHERE product_id = '" . $id . "' ";
     $votes =  $wpdb->get_results( $query);
-	$cat_row=$wpdb->get_results("SELECT * FROM ".$wpdb->prefix."spidercatalog_product_categories");
-	
+	$cat_row=$wpdb->get_results("SELECT * FROM ".$wpdb->prefix."spidercatalog_product_categories where parent=0");
+	$rows=$wpdb->get_row("SELECT * FROM ".$wpdb->prefix."spidercatalog_products WHERE id='".$id."'");
+   $cat_row=open_cat_in_tree($cat_row);
 	
 	
 	
@@ -638,7 +686,6 @@ function removeProduct($id){
 
 
 }
-
 
 
 
@@ -1056,6 +1103,7 @@ foreach($rows as $row)
 
 
 }
+
 
 
 

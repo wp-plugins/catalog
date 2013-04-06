@@ -32,7 +32,7 @@ text-align:right;
 
 #productMainDiv #prodMiddle
 {
-width:100%;
+width:100% !important;
 }
 
 #productMainDiv #prodMiddle td
@@ -45,10 +45,6 @@ padding:0px;padding-bottom:3px;vertical-align:top;
 padding:5px;
 }
 
-#productMainDiv #product_par_sel
-{
-
-}
 
 #AJhid,#AJhid1, #caphid
 {
@@ -411,5 +407,81 @@ text-align:right !important;
 
 #productMainDiv #category tr td
 {
-padding:5px;
+padding:5px !important;
+}
+#productMainDiv table{
+border-bottom:none !important;
+}
+
+select.spidercataloginput{
+margin: 0 0 24px 0 !important;
+top: -11px !important;
+position: relative;
+}
+#productMainDiv textarea,
+#productMainDiv input[type="text"]
+ {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-background-clip: padding;
+  -moz-background-clip: padding;
+  background-clip: padding-box;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  -webkit-appearance: none;
+  background-color: white;
+  border: 1px solid #cccccc;
+  color: black;
+  outline: 0;
+  margin: 0;
+  padding: 3px 4px;
+  text-align: left !important;
+  font-size: 13px;
+  font-family: Arial, "Liberation Sans", FreeSans, sans-serif;
+  height: 2.2em;
+  vertical-align: top;
+  *padding-top: 2px;
+  *padding-bottom: 1px;
+  *height: auto;
+}
+#productMainDiv textarea[disabled],
+#productMainDiv input[type="text"][disabled]
+{
+  background-color: #eeeeee;
+}
+#productMainDiv textarea:focus,
+#productMainDiv input[type="text"]:focus {
+  border-color: rgba(82, 168, 236, 0.8);
+  outline: 0;
+  outline: thin dotted \9;
+  /* IE6-9 */
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(82, 168, 236, 0.6);
+  -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(82, 168, 236, 0.6);
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(82, 168, 236, 0.6);
+}
+
+
+#productMainDiv input[disabled],
+#productMainDiv textarea[disabled] {
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+  -moz-user-select: -moz-none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  user-select: none;
+  color: #888888;
+  cursor: default;
+}
+#productMainDiv textarea {
+  min-height: 80px;
+  overflow: auto;
+  padding: 5px;
+  resize: vertical;
+  width: 100%;
 }
