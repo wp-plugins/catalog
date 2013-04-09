@@ -3,7 +3,7 @@
 /*
 Plugin Name: Spider Catalog
 Plugin URI: http://web-dorado.com/
-Version: 1.4
+Version: 1.4.1
 Author: http://web-dorado.com/
 License: GNU/GPLv3 http://www.gnu.org/licenses/gpl-3.0.html
 */
@@ -772,7 +772,7 @@ switch($mode) {
 	<p style="text-align: center;">
 		<?php echo 'Do you really want to uninstall Spider Catalog?'; ?><br /><br />
 		<input type="checkbox" name="Spider_Catalog_yes" value="yes" />&nbsp;<?php echo 'Yes'; ?><br /><br />
-		<input type="submit" name="do" value="<?php echo 'UNINSTALL Spider_Catalog'; ?>" class="button-primary" onclick="return confirm('<?php echo 'You Are About To Uninstall Spider Catalog From WordPress.\nThis Action Is Not Reversible.\n\n Choose [Cancel] To Stop, [OK] To Uninstall.'; ?>')" />
+		<input type="submit" name="do" value="<?php echo 'UNINSTALL Spider_Catalog'; ?>" class="button-primary" onClick="return confirm('<?php echo 'You Are About To Uninstall Spider Catalog From WordPress.\nThis Action Is Not Reversible.\n\n Choose [Cancel] To Stop, [OK] To Uninstall.'; ?>')" />
 	</p>
 </div>
 </form>
@@ -840,8 +840,8 @@ $categories=open_cat_in_tree($categories);
 <form name="spider_cat" action="#" method="post">
 	<div class="tabs" role="tablist" tabindex="-1">
 		<ul>
-			<li id="Single_product_tab" class="current" role="tab" tabindex="0"><span><a href="javascript:mcTabs.displayTab('Single_product_tab','Single_product_panel');" onmousedown="return false;" tabindex="-1">Single product</a></span></li>
-			<li id="Products_list_tab" role="tab" tabindex="-1"><span><a href="javascript:mcTabs.displayTab('Products_list_tab','Products_list_panel');" onmousedown="return false;" tabindex="-1">Products list</a></span></li>
+			<li id="Single_product_tab" class="current" role="tab" tabindex="0"><span><a href="javascript:mcTabs.displayTab('Single_product_tab','Single_product_panel');" onMouseDown="return false;" tabindex="-1">Single product</a></span></li>
+			<li id="Products_list_tab" role="tab" tabindex="-1"><span><a href="javascript:mcTabs.displayTab('Products_list_tab','Products_list_panel');" onMouseDown="return false;" tabindex="-1">Products list</a></span></li>
 			
 		</ul>
 	</div>
@@ -1148,7 +1148,7 @@ if(keyOfOpenImage<0) keyOfOpenImage = getImageKey(href);
 boxContainerWidth=0;
 if(newImgheight<=(viewportheight-100) && newImgwidth<=(viewportwidth-50))
 {
-document.getElementById("showPictureAnimated").innerHTML='<img src="'+href+'" border="0" style="cursor:url(\''+spiderBoxBase+'cursor_magnifier_minus.cur\'),pointer;border:" onclick="hidePictureAnimated();" />';
+document.getElementById("showPictureAnimated").innerHTML='<img src="'+href+'" border="0" style="cursor:url(\''+spiderBoxBase+'cursor_magnifier_minus.cur\'),pointer;border:" onClick="hidePictureAnimated();" />';
 
 boxContainerWidth=newImgwidth;
 }
@@ -1156,13 +1156,13 @@ else
 {
 if((newImgheight/viewportheight)>(newImgwidth/viewportwidth))
 {
-document.getElementById("showPictureAnimated").innerHTML='<img src="'+href+'" border="0" style="cursor:url(\''+spiderBoxBase+'cursor_magnifier_minus.cur\'),pointer;" onclick="hidePictureAnimated();" height="'+(viewportheight-100)+'" />';
+document.getElementById("showPictureAnimated").innerHTML='<img src="'+href+'" border="0" style="cursor:url(\''+spiderBoxBase+'cursor_magnifier_minus.cur\'),pointer;" onClick="hidePictureAnimated();" height="'+(viewportheight-100)+'" />';
 
 boxContainerWidth=((newImgwidth*(viewportheight-100))/newImgheight);
 }
 else
 {
-document.getElementById("showPictureAnimated").innerHTML='<img src="'+href+'" border="0" style="cursor:url(\''+spiderBoxBase+'cursor_magnifier_minus.cur\'),pointer;" onclick="hidePictureAnimated();" width="'+(viewportwidth-50)+'" />';
+document.getElementById("showPictureAnimated").innerHTML='<img src="'+href+'" border="0" style="cursor:url(\''+spiderBoxBase+'cursor_magnifier_minus.cur\'),pointer;" onClick="hidePictureAnimated();" width="'+(viewportwidth-50)+'" />';
 boxContainerWidth=(viewportwidth-40);
 }
 }
@@ -1267,7 +1267,7 @@ function SpiderCatAddToOnload()
 
 	
 		var spiderBoxElement = document.createElement('span');
-	spiderBoxElement.innerHTML+='<div style="position:fixed; top:0px; left:0px; width:100%; height:'+(viewportheight+300)+'px; background-color:#000000; z-index:98; display:none" id="showPictureAnimatedBg"></div>  <table border="0" cellpadding="0" cellspacing="0" id="showPictureAnimatedTable" style="position:fixed; top:0px; left:0px; width:100%; vertical-align:middle; text-align:center; z-index:10000; display:none"><tr><td valign="middle" id="tdviewportheight" style="height:'+(viewportheight-35)+'px; text-align:center;"><div id="boxContainer" style="margin:auto;width:400px; border:5px solid white;"><div id="showPictureAnimated" style=" height:400px">&nbsp;</div><div style="text-align:center;background-color:white;padding:5px;padding-bottom:0px;"><div style="width:48px;float:left;">&nbsp;</div><span onclick="prevImage();" style="cursor:pointer;"><img src="'+spiderBoxBase+'prev.png" /></span>&nbsp;&nbsp;<span onclick="nextImage();" style="cursor:pointer;"><img src="'+spiderBoxBase+'next.png" /></span><span onclick="hidePictureAnimated();" style="cursor:pointer;"><img src="'+spiderBoxBase+'close.png" align="right" /></span></div></div></td></tr></table>';
+	spiderBoxElement.innerHTML+='<div style="position:fixed; top:0px; left:0px; width:100%; height:'+(viewportheight+300)+'px; background-color:#000000; z-index:98; display:none" id="showPictureAnimatedBg"></div>  <table border="0" cellpadding="0" cellspacing="0" id="showPictureAnimatedTable" style="position:fixed; top:0px; left:0px; width:100%; vertical-align:middle; text-align:center; z-index:10000; display:none"><tr><td valign="middle" id="tdviewportheight" style="height:'+(viewportheight-35)+'px; text-align:center;"><div id="boxContainer" style="margin:auto;width:400px; border:5px solid white;"><div id="showPictureAnimated" style=" height:400px">&nbsp;</div><div style="text-align:center;background-color:white;padding:5px;padding-bottom:0px;"><div style="width:48px;float:left;">&nbsp;</div><span onClick="prevImage();" style="cursor:pointer;"><img src="'+spiderBoxBase+'prev.png" /></span>&nbsp;&nbsp;<span onClick="nextImage();" style="cursor:pointer;"><img src="'+spiderBoxBase+'next.png" /></span><span onClick="hidePictureAnimated();" style="cursor:pointer;"><img src="'+spiderBoxBase+'close.png" align="right" /></span></div></div></td></tr></table>';
 
 	document.body.appendChild(spiderBoxElement);
 
@@ -1752,13 +1752,15 @@ else{
 function spidercatalog(){
    global $wpdb;
 
-$parent = $wpdb->get_results("DESCRIBE ".$wpdb->prefix."spidercatalog_product_categories");
+$parent = $wpdb->get_results("DESCRIBE ".$wpdb->prefix."spidercatalog_product_categories",ARRAY_A);
+$published_in_parent= $wpdb->get_results("DESCRIBE ".$wpdb->prefix."spidercatalog_products",ARRAY_A);
 			$exists_parent = 0;
-     if($parent['Field'] == 'parent') 	$exists_parent = 1;
-	 
-$published_in_parent= $wpdb->get_results("DESCRIBE ".$wpdb->prefix."spidercatalog_products");
-      $exists_published_in_parent = 0;
- if($published_in_parent['Field'] == 'published_in_parent') 	$exists_published_in_parent = 1;
+			$exists_published_in_parent = 0;
+			foreach($parent as $parentt){
+              if($parentt['Field'] == 'parent') 	$exists_parent = 1;  }
+	 foreach($published_in_parent as $published_in_parentt){
+     if($published_in_parentt['Field'] == 'published_in_parent') 	$exists_published_in_parent = 1;}
+ 
  if(!$exists_parent) 		{ $wpdb->query("ALTER TABLE ".$wpdb->prefix."spidercatalog_product_categories ADD `parent` int(11) unsigned NOT NULL AFTER `name`"); }
   if(!$exists_published_in_parent) 		{ $wpdb->query("ALTER TABLE ".$wpdb->prefix."spidercatalog_products ADD `published_in_parent` tinyint(4) unsigned NOT NULL AFTER `published`"); }
 }
