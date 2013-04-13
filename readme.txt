@@ -139,7 +139,7 @@ If any problem occurs with Spider [Wordpress Catalog](http://wordpress.org/exten
 
 2.5  Description. Add a description for the category.		
 
-2.6  Parameters. Here you can define different parameters for the category. You can add as many parameters as you need. After filling in the current parameter title, press “Enter” to proceed to the next parameter.		
+2.6  Parameters. Here you can define different parameters for the category. You can add as many parameters as you need. After filling in the current parameter title, press "Enter" to proceed to the next parameter.		
 
 2.7  Order. Choose the order of the category.		
 
@@ -163,7 +163,7 @@ If any problem occurs with Spider [Wordpress Catalog](http://wordpress.org/exten
 
 3.6  Images. You can add any number of images of the product.		
 
-3.7  Description. You can add a description of the product. After filling the short description, you can click on the “Read more” button below the editor and fill the full description of the product.		
+3.7  Description. You can add a description of the product. After filling the short description, you can click on the "Read more" button below the editor and fill the full description of the product.		
 
 3.8  Order. Choose the order of the given product inside its category.		
 
@@ -194,7 +194,7 @@ If any problem occurs with Spider [Wordpress Catalog](http://wordpress.org/exten
 
 4.1.8  Customer Reviews. Choose whether the users can submit reviews or not.		
 
-4.1.9  Search by Category. Choose whether there is a possibility to filter products by category using the “Choose Category” drop-down list or not.		
+4.1.9  Search by Category. Choose whether there is a possibility to filter products by category using the "Choose Category" drop-down list or not.		
 
 4.1.10  Search by Name. Choose whether there is a possibility to search products on the catalog by name or not.		
 
@@ -209,7 +209,7 @@ Global Styles and colors. In this section you can customize several parameters f
 
 4.2.3  Background color. Select the background color of the item cell.	
 	
-4.2.4  Parameters Background Color. Select the background colors for product parameters (first comes the “Category” field and then the rest of the category-specific parameters alternately).
+4.2.4  Parameters Background Color. Select the background colors for product parameters (first comes the "Category" field and then the rest of the category-specific parameters alternately).
 
 4.2.5  Border Style. Select the border style of the item cell.
 
@@ -221,7 +221,7 @@ Global Styles and colors. In this section you can customize several parameters f
 
 4.2.9  Color of Parameter Values. Choose the color of values assigned to each parameter.
 
-4.2.10  Hyperlink color. Choose the color of hyperlinks appearing in the item cell (such as the “More” hyperlink).
+4.2.10  Hyperlink color. Choose the color of hyperlinks appearing in the item cell (such as the "More" hyperlink).
 
 4.2.11  Price Color. Choose the color of the product price.
 
@@ -316,7 +316,7 @@ In this section you can customize several parameters specifically for the one pr
 
 4.5.6  Title size. Define the text size of the product title.		
 
-4.5.7  Background Color of “Add your review here” section. Select the background color of the “Add your review here” section.		
+4.5.7  Background Color of "Add your review here" section. Select the background color of the "Add your review here" section.		
 
 4.5.8  Color of Review Texts. Choose what color the submitted review texts appear.		
 
@@ -346,12 +346,9 @@ To insert a catalog into a Page or a Post.
 5.3.3  Product display type. Choose whether to display the products in a list view, or in a cell view. 5.3.4 Show Subcategories. Choose whether to also display the subcategories of the chosen category or not.		
 
 5.3.5  Show Subcategory Products. Choose whether to display the subcategory products.		
-
-	*All. Shows all subcategory products.		
-
-	*No. Does not show subcategory products.		
-
-	*Chosen. Shows only the products for which the Show in Parent option has been enabled.		
+	All. Shows all subcategory products.		
+	No. Does not show subcategory products.		
+	Chosen. Shows only the products for which the Show in Parent option has been enabled.		
 
 5.3.6  Show Products. Choose whether to show the products of the chose category or not.		
 
@@ -367,15 +364,9 @@ Add the short code [Spider_Catalog_Product id="my id"] to the pages or posts and
 Products list		
 
 Add  the short code  [Spider_Catalog_Category id=" CategoryID" details="1" type="" showsub="1" showsubprod="2" showprod="1"] to the pages or posts and change the following points.		
-
-	*ID. Add the ID (Spider Catalog> Category>ID) of the category which you want to show to the appropriate place("my id") in the shortcode. If the value of the ID is "All_CAT", the all categories will be shown.		
-
-	*Details. If the value of the details is 1, the information about category won’t be shown. For showing the information change the value of the details into 0.		
-
-	*Type. If the value of the type is empty, the products list will be shown with cells. If the value of the type is "list" the products list will be shown with lists.		
-
-	*Showsub. Specify the value as “1” if you want the subcategories to be displayed. Specify the value as “0” if you do not want them to be displayed.		
-
-	*Showsubprod. All: Value=”1”; No: Value=”0”; Chosen: Value=”2”.		
-
-	*Showprod. Specify the value as “1” if you want the products to be displayed. Specify the value as “0” if you do not want them to be displayed.			
+	ID. Add the ID (Spider Catalog> Category>ID) of the category which you want to show to the appropriate place("my id") in the shortcode. If the value of the ID is "All_CAT", the all categories will be shown.		
+	Details. If the value of the details is 1, the information about category won’t be shown. For showing the information change the value of the details into 0.		
+	Type. If the value of the type is empty, the products list will be shown with cells. If the value of the type is "list" the products list will be shown with lists.		
+	Showsub. Specify the value as "1" if you want the subcategories to be displayed. Specify the value as "0" if you do not want them to be displayed.		
+	Showsubprod. All: Value="1"; No: Value="0"; Chosen: Value="2".		
+	Showprod. Specify the value as "1" if you want the products to be displayed. Specify the value as "0" if you do not want them to be displayed.			
