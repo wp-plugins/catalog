@@ -657,20 +657,29 @@ function apply_cat($id)
 				'%d',	
 				'%d', )
 			  );
-		   $query="SELECT parent FROM ".$wpdb->prefix."spidercatalog_product_categories WHERE id='".$id."'";
+		  if($_POST["parent"]!=0){
+		    $query="SELECT parent FROM ".$wpdb->prefix."spidercatalog_product_categories WHERE id='".$id."'";
 	        $fff=$wpdb->get_var($query);
 	        $query="SELECT param FROM ".$wpdb->prefix."spidercatalog_product_categories where id='".$fff."'";
 		    $rows1 =$wpdb->get_row($query);	
-		if(isset($_POST["parent"]) && $_POST["parent"]!=$id_bef){
-	
-    	foreach($rows1 as $par_cat){
-        $wpdb->update($wpdb->prefix.'spidercatalog_product_categories', array(
-		'param'    =>$par_cat,
-          ), 
-          array('id'=>$id),
-		  array(  '%s' )
+		    if(isset($_POST["parent"]) && $_POST["parent"]!=$id_bef){
+	 
+    	    foreach($rows1 as $par_cat){
+             $wpdb->update($wpdb->prefix.'spidercatalog_product_categories', array(
+		     'param'    =>$par_cat,
+             ), 
+             array('id'=>$id),
+		     array(  '%s' )
 			  );
-		}
+		    }
+		    }
+		}else{
+		 $wpdb->update($wpdb->prefix.'spidercatalog_product_categories', array(
+		     'param'    =>'',
+             ), 
+             array('id'=>$id),
+		     array(  '%s' )
+			  );
 		}
 	if($save_or_no)
 	{

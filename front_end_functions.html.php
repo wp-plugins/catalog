@@ -2420,18 +2420,19 @@ foreach ($rows as $row)
       }
     else{
 		
-		$askofen=explode('******',$imgurl[0]);
-		if($askofen[1])
-		{
-			$array_with_sizes=wp_get_attachment_image_src( $askofen[1], 'thumbnail' );
-			$attach_url=$array_with_sizes[0];
-		}
-		else
-		{
-			$attach_url=$askofen[0];
-		}
-		$imgurl[0]=$askofen[0];
-        echo '<td style="padding:10px;"><a href="' . $attach_url . '" target="_blank"><img style="max-width:'. $params['small_picture_width'] . 'px; max-height:' . $params['small_picture_height'] . 'px" src="'.$attach_url.'" /></a></td>';
+		$image_and_atach=explode('******',$imgurl[0]);
+$image=$image_and_atach[0];
+$atach=$image_and_atach[1];
+if($atach)
+{
+	$array_with_sizes=wp_get_attachment_image_src( $atach, 'thumbnail' );
+	$attach_url=$array_with_sizes[0];
+}
+else
+{
+	$attach_url=$image;	
+}
+        echo '<td style="padding:10px;"><a href="' . $image . '" target="_blank"><img style="max-width:'. $params['small_picture_width'] . 'px; max-height:' . $params['small_picture_height'] . 'px" src="'.$attach_url.'" /></a></td>';
     
 	}
     
