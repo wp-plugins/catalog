@@ -271,22 +271,23 @@ endif;
 $posss = strrpos(get_permalink(), "?");
 $frontpage_id = get_option('page_for_posts');
 $rest = explode("&",$_SERVER['QUERY_STRING']);
+$nnn=count($rest );
 if($posss){
 if( 'page' == get_option( 'show_on_front' ) && ( '' != get_option( 'page_for_posts' ) ) && is_home() ){
       $page_link1=get_permalink($frontpage_id);
-	  $ff='&'.$rest[3];
+	  $ff='&'.$rest[$nnn-2];
 	 
    }
 	   else if(is_home())
 	   {
 		   $page_link1=site_url().'/index.php';
-		   $ff='?'.$rest[3];
+		   $ff='?'.$rest[$nnn-2];
 		   
 	   }
 	   else
 	   {
 		   $page_link1=get_permalink();
-		   $ff='&'.$rest[3];
+		   $ff='&'.$rest[$nnn-2];
 		   
 	   }
 }else{
@@ -298,17 +299,16 @@ if( 'page' == get_option( 'show_on_front' ) && ( '' != get_option( 'page_for_pos
 	   else if(is_home())
 	   {
 		   $page_link1=site_url().'/index.php';
-		   $ff='?'.$rest[3];
+		   $ff='?'.$rest[$nnn-2];
 		   
 	   }
 	   else
 	   {
 		   $page_link1=get_permalink();
-		   $ff='?'.$rest[3];
+		   $ff='?'.$rest[$nnn-2];
 		   
 	   }
-}
-      
+}     
 if($_GET['ident']== $ident || !$_GET['product_id']){
 foreach($rows as $row)
 {
@@ -318,6 +318,7 @@ echo '<span id="back_to_spidercatalog_button"><a href="'.$page_link1.$ff.'" >'._
 
 $widt_spider_cat_prod_page='';
 if($params['spider_catalog_product_page_width']!='')
+
 {
 	$widt_spider_cat_prod_page="width:".$params['spider_catalog_product_page_width']."px !important; ";
 }
@@ -1347,8 +1348,12 @@ echo '</div>';
 
 //var_dump(get_permalink());
 $frontpage_id = get_option('page_for_posts');
-if (($params["choose_category"] and !($params1['categories'] > 0)) or $params["search_by_name"])
+if ((!$params["choose_category"] and ($params1['categories'] > 0)) or !$params["search_by_name"])
   {
+  echo '<script>
+  document.getElementById("cat_form_page_nav1").style.display = "none";
+  </script>';
+  }
 	    if( 'page' == get_option( 'show_on_front' ) && ( '' != get_option( 'page_for_posts' ) ) && is_home() ){
       $page_link=get_permalink($frontpage_id);
    }
@@ -1361,7 +1366,7 @@ if (($params["choose_category"] and !($params1['categories'] > 0)) or $params["s
 		   $page_link=get_permalink();
 	   }
 	 
-    echo '<form action="'. $page_link.'" method="post" name="cat_form_'.$cels_or_list.'_'.$ident.'" id="cat_form_page_nav1">
+    echo '<form action="'. $page_link.'" method="post" name="cat_form_'.$cels_or_list.'_'.$ident.'" id="cat_form_page_nav1" style="display:block;">
 <input type="hidden" name="page_num_'.$cels_or_list.'_'.$ident.'"	value="1">
 <input type="hidden" name="subcat_id_'.$cels_or_list.'_'.$ident.'" id="subcat_id_'.$cels_or_list.'_'.$ident.'" value="'. $subcat_id.'">
 <div class="CatalogSearchBox">';
@@ -1402,7 +1407,7 @@ echo '<br />
 	<input type="button" onclick="this.form.submit()" value="'. __('Go','sp_catalog') .'" class="spidercatalogbutton" style="background-color:'.$params[ 'button_background_color' ].'; color:'.$params[ 'button_color' ].'; width:inherit;"><input type="button" value="'. __('Reset','sp_catalog') .'" onClick="cat_form_reset(this.form,'.$cels_or_list.','.$ident.');" class="spidercatalogbutton" style="background-color:'.$params[ 'button_background_color' ].'; color:'.$params[ 'button_color' ].'; width:inherit;">';
 }
 echo '</div></form>';
-}
+
 
 if($params7['show_prod']==1){
 if(count($rows))
@@ -2301,6 +2306,10 @@ $frontpage_id = get_option('page_for_posts');
 
 if (($params["choose_category"] and !($params1['categories'] > 0)) or $params["search_by_name"])
   {
+  echo '<script>
+  document.getElementById("cat_form_page_nav").style.display = "none";
+  </script>';
+  }
    if( 'page' == get_option( 'show_on_front' ) && ( '' != get_option( 'page_for_posts' ) ) && is_home() ){
       $page_link=get_permalink($frontpage_id);
    }
@@ -2312,7 +2321,7 @@ if (($params["choose_category"] and !($params1['categories'] > 0)) or $params["s
 	   {
 		   $page_link=get_permalink();
 	   }
-    echo '<form action="'.$page_link.'" method="post" name="cat_form_'.$cels_or_list.'_'.$ident.'" id="cat_form_page_nav">
+    echo '<form action="'.$page_link.'" method="post" name="cat_form_'.$cels_or_list.'_'.$ident.'" id="cat_form_page_nav" style="display:block;">
 <input type="hidden" name="page_num_'.$cels_or_list.'_'.$ident.'"	value="1">
 <input type="hidden" name="subcat_id_'.$cels_or_list.'_'.$ident.'" id="subcat_id_'.$cels_or_list.'_'.$ident.'" value="'. $subcat_id.'">
 
@@ -2354,7 +2363,7 @@ echo '<br />
 	<input type="button" onclick="this.form.submit()"  value="'. __('Go','sp_catalog') .'" class="spidercatalogbutton" style="background-color:'.$params[ 'button_background_color'].'; color:'.$params[ 'button_color'].'; width:inherit;"><input type="button" value="'. __('Reset','sp_catalog') .'" onClick="cat_form_reset(this.form,'.$cels_or_list.','.$ident.');" class="spidercatalogbutton" style="background-color:'.$params[ 'button_background_color'].'; color:'.$params[ 'button_color'].'; width:inherit;">';
 }
 echo '</div></form>';
-}
+
 
 if(count($rows))
 echo '<table cellpadding="0" cellspacing="0" id="productMainTable" style="width:'. ($params['count_of_product_in_the_row']*$params['product_cell_width']+$params['count_of_product_in_the_row']*20).'px"><tr>';
@@ -2400,20 +2409,14 @@ foreach ($rows as $row)
 
 <table id="prodMiddle" border="0" cellspacing="0" cellpadding="0"><tr>';
     
-    
+
+
+
     
     if (!($row->image_url != "" and $row->image_url != "******0"))
       {
         $imgurl[0] = plugins_url("Front_images/noimage.jpg",__FILE__);
-        
-        
-        
-        
-        
-        
-        
-
-        
+     
         echo '<td style="padding:10px;"><img style="max-width:' . $params['small_picture_width'] . 'px; max-height=' . $params['small_picture_height'] . 'px" src="'. $imgurl[0] . '" />
 
 </td>';
