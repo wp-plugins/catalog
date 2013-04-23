@@ -673,13 +673,6 @@ function apply_cat($id)
 			  );
 		    }
 		    }
-		}else{
-		 $wpdb->update($wpdb->prefix.'spidercatalog_product_categories', array(
-		     'param'    =>'',
-             ), 
-             array('id'=>$id),
-		     array(  '%s' )
-			  );
 		}
 	if($save_or_no)
 	{
