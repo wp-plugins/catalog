@@ -1369,7 +1369,7 @@ if ((!$params["choose_category"] and ($params1['categories'] > 0)) or !$params["
     echo '<form action="'. $page_link.'" method="post" name="cat_form_'.$cels_or_list.'_'.$ident.'" id="cat_form_page_nav1" style="display:block;">
 <input type="hidden" name="page_num_'.$cels_or_list.'_'.$ident.'"	value="1">
 <input type="hidden" name="subcat_id_'.$cels_or_list.'_'.$ident.'" id="subcat_id_'.$cels_or_list.'_'.$ident.'" value="'. $subcat_id.'">
-<div class="CatalogSearchBox">';
+<div class="CatalogSearchBox" style="padding-top: 10px;">';
 
 if ($params["choose_category"] and !($params1['categories'] > 0))
 {
@@ -2325,7 +2325,7 @@ if (($params["choose_category"] and !($params1['categories'] > 0)) or $params["s
 <input type="hidden" name="page_num_'.$cels_or_list.'_'.$ident.'"	value="1">
 <input type="hidden" name="subcat_id_'.$cels_or_list.'_'.$ident.'" id="subcat_id_'.$cels_or_list.'_'.$ident.'" value="'. $subcat_id.'">
 
-<div class="CatalogSearchBox">';
+<div class="CatalogSearchBox" style="padding-top: 10px;">';
 if ($params["choose_category"] and !($params1['categories'] > 0))
 {
 	echo '<span style="top: -11px; position: relative;">'.__('Choose Category','sp_catalog') . '&nbsp</span>

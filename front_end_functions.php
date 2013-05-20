@@ -394,11 +394,9 @@ function showPublishedProducts_1($cat_id=1,$show_cat_det=1,$cels_or_list='',$sho
 		$query .= " and (".$wpdb->prefix."spidercatalog_products.name like %s or ".$wpdb->prefix."spidercatalog_products.description like %s )  ";
 		}
 		
-		$query .= " order by ".$wpdb->prefix."spidercatalog_products.ordering limit ".(($page_num-1)*$prod_in_page).",".$prod_in_page."  ";
 		
-		$row = $wpdb->get_var($query_count);
 		
-		$prod_count=$row;
+		
 		
 		if($prod_name!="")
 		{ 
@@ -406,7 +404,12 @@ function showPublishedProducts_1($cat_id=1,$show_cat_det=1,$cels_or_list='',$sho
 		$query=$wpdb->prepare( $query,"%".$prod_name."%","%".$prod_name."%");
 		$query_count =$wpdb->prepare($query_count,"%".$prod_name."%","%".$prod_name."%");
 		}
+
+			$rows = $wpdb->get_results( $query);
 		
+			$prod_count=count($rows);	
+				$query .= " order by ".$wpdb->prefix."spidercatalog_products.ordering limit ".(($page_num-1)*$prod_in_page).",".$prod_in_page."  ";
+	
 		$rows = $wpdb->get_results( $query);
 	
 
