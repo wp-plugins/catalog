@@ -125,7 +125,7 @@ document.getElementById("wd_captcha_img_"+prod_id).src=document.getElementById("
 document.getElementById("review_capcode_"+prod_id).value='';
 }
 
-function cat_form_reset(form,type,idd)
+function cat_form_resett(form,type,idd)
 {
 var pr_name='prod_name_'+type+'_'+idd;
 var cat_idd='cat_id_'+type+'_'+idd;

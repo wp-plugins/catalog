@@ -284,17 +284,14 @@ function showPublishedProducts_1($cat_id=1,$show_cat_det=1,$cels_or_list='',$sho
 		    if(!isset($params7['show_prod'])){
 		      $params7['show_prod']=1;
 	    	}
-			
-		  $params=$wpdb->get_results("SELECT * FROM ".$wpdb->prefix."spidercatalog_params");
+
+	  $params=$wpdb->get_results("SELECT * FROM ".$wpdb->prefix."spidercatalog_params");
 	  $new_param=array();
 	  foreach( $params as $param)
 	  {
 		  $new_param[$param->name]=$param->value;
 	  }
 	   $params=$new_param;
-       
-		
-		
         if($cels_or_list=='list')
         $cels_or_list=1;
 		else
@@ -317,9 +314,13 @@ function showPublishedProducts_1($cat_id=1,$show_cat_det=1,$cels_or_list='',$sho
 		}
 		else{
 		$cat_id=0;}
+		}else if(isset($_GET['cat_id_'.$cels_or_list.'_'.$ident.''])){
+		if($_GET['cat_id_'.$cels_or_list.'_'.$ident.'']!=0){
+		$cat_id=$_GET['cat_id_'.$cels_or_list.'_'.$ident.''];
 		}
-		
-	
+		else{
+		$cat_id=0;}
+	    }
 		if($_POST['subcat_id_'.$cels_or_list.'_'.$ident.'']!="")
              {
               $subcat_id = $_POST['subcat_id_'.$cels_or_list.'_'.$ident.''];
@@ -332,10 +333,15 @@ function showPublishedProducts_1($cat_id=1,$show_cat_det=1,$cels_or_list='',$sho
 			
 			$child_ids = $wpdb->get_results($categ_query);
 
-		if(isset($_POST['prod_name_'.$cels_or_list.'_'.$ident.'']))
+		if(isset($_POST['prod_name_'.$cels_or_list.'_'.$ident.''])){
+		 if($_POST['prod_name_'.$cels_or_list.'_'.$ident.'']!='')
 			$prod_name=$_POST['prod_name_'.$cels_or_list.'_'.$ident.''];
 		else
-			$prod_name=0;
+			$prod_name='';
+		}else if(isset($_GET['prod_name_'.$cels_or_list.'_'.$ident.'']))
+		    $prod_name=$_GET['prod_name_'.$cels_or_list.'_'.$ident.''];
+		else
+			$prod_name='';
 		
 		if($cat_id>0)
 		{
@@ -394,28 +400,18 @@ function showPublishedProducts_1($cat_id=1,$show_cat_det=1,$cels_or_list='',$sho
 		$query .= " and (".$wpdb->prefix."spidercatalog_products.name like %s or ".$wpdb->prefix."spidercatalog_products.description like %s )  ";
 		}
 		
-		
-		
-		
-		
 		if($prod_name!="")
-		{ 
-		
+		{ 		
 		$query=$wpdb->prepare( $query,"%".$prod_name."%","%".$prod_name."%");
 		$query_count =$wpdb->prepare($query_count,"%".$prod_name."%","%".$prod_name."%");
 		}
 
-			$rows = $wpdb->get_results( $query);
-		
-			$prod_count=count($rows);	
-				$query .= " order by ".$wpdb->prefix."spidercatalog_products.ordering limit ".(($page_num-1)*$prod_in_page).",".$prod_in_page."  ";
-	
 		$rows = $wpdb->get_results( $query);
-	
-
-
-		$cat_rows = $wpdb->get_results($cat_query);
-            
+		
+		$prod_count=count($rows);	
+		$query .= " order by ".$wpdb->prefix."spidercatalog_products.ordering limit ".(($page_num-1)*$prod_in_page).",".$prod_in_page."  ";
+		$rows = $wpdb->get_results( $query);
+		$cat_rows = $wpdb->get_results($cat_query);         
 		if($params7['show_prod']==1){
 		foreach($rows as $row)
 		{
@@ -436,7 +432,7 @@ function showPublishedProducts_1($cat_id=1,$show_cat_det=1,$cels_or_list='',$sho
 			}
 	}
 
-			$query= "SELECT * FROM ".$wpdb->prefix."spidercatalog_product_categories WHERE parent=0 AND `published`=1 ORDER BY `ordering` ASC ";	
+			$query= "SELECT * FROM ".$wpdb->prefix."spidercatalog_product_categories WHERE parent=0 AND `published`=1 ORDER BY `ordering` ASC  ";	
 			$category_list = $wpdb->get_results($query);
 			$cat_query = "SELECT * FROM ".$wpdb->prefix."spidercatalog_product_categories WHERE `published`=1 AND id=".$subcat_id."";
 			$categor = $wpdb->get_results($cat_query);
@@ -448,11 +444,9 @@ function showPublishedProducts_1($cat_id=1,$show_cat_det=1,$cels_or_list='',$sho
 			
 			
 			
-			
 			if($params7['show_sub']==1){
 			$category_list=open_cat_in_tree($category_list);
 			}
-			
 		if($cels_or_list==1)	
 		return front_end_catalog_list($rows, $option,$params,$page_num,$prod_count,$prod_in_page,$ratings,$voted,$categories,$category_list,$params1,$cat_rows,$cat_id,$child_ids,$params7,$categor,$par,$cels_or_list,$ident);
 		else

@@ -275,40 +275,41 @@ $nnn=count($rest );
 if($posss){
 if( 'page' == get_option( 'show_on_front' ) && ( '' != get_option( 'page_for_posts' ) ) && is_home() ){
       $page_link1=get_permalink($frontpage_id);
-	  $ff='&'.$rest[$nnn-2];
+	  $ff='&'.$rest[$nnn-3].'&'.$rest[$nnn-2];
 	 
    }
 	   else if(is_home())
 	   {
 		   $page_link1=site_url().'/index.php';
-		   $ff='?'.$rest[$nnn-2];
+		   $ff='?'.$rest[$nnn-3].'&'.$rest[$nnn-2];
 		   
 	   }
 	   else
 	   {
 		   $page_link1=get_permalink();
-		   $ff='&'.$rest[$nnn-2];
+		   $ff='&'.$rest[$nnn-3].'&'.$rest[$nnn-2];
 		   
 	   }
 }else{
 if( 'page' == get_option( 'show_on_front' ) && ( '' != get_option( 'page_for_posts' ) ) && is_home() ){
       $page_link1=get_permalink($frontpage_id);
-	  $ff='?'.$rest[3];
-	 
+	  $ff='?'.$rest[$nnn-4].'&'.$rest[3];
+
    }
 	   else if(is_home())
 	   {
 		   $page_link1=site_url().'/index.php';
-		   $ff='?'.$rest[$nnn-2];
+		   $ff='?'.$rest[$nnn-3].'&'.$rest[$nnn-2];
 		   
 	   }
 	   else
 	   {
 		   $page_link1=get_permalink();
-		   $ff='?'.$rest[$nnn-2];
+		   $ff='?'.$rest[$nnn-3].'&'.$rest[$nnn-2];
 		   
 	   }
 }     
+
 if($_GET['ident']== $ident || !$_GET['product_id']){
 foreach($rows as $row)
 {
@@ -318,7 +319,6 @@ echo '<span id="back_to_spidercatalog_button"><a href="'.$page_link1.$ff.'" >'._
 
 $widt_spider_cat_prod_page='';
 if($params['spider_catalog_product_page_width']!='')
-
 {
 	$widt_spider_cat_prod_page="width:".$params['spider_catalog_product_page_width']."px !important; ";
 }
@@ -1204,11 +1204,9 @@ function catt_idd_<?php echo $ident; ?>(id)
 	}
 </script>
 <?php
-
 foreach($categor as $chidd){
-if($par!=0 and ($cat_id!=$chidd->id or $_POST['cat_id_'.$cels_or_list.'_'.$ident.''])){
+if($par!=0 and ($cat_id!=$chidd->id or $_POST['cat_id_'.$cels_or_list.'_'.$ident.'']  or $_GET['cat_id_'.$cels_or_list.'_'.$ident.'']!=0)){
 echo '<a style="cursor:pointer;" onclick="catt_idd_'.$ident.'('.$chidd->parent.')" >'.__('Back to Catalog','sp_catalog').'</a>';
-
 }
 }
 if(($params1['categories'] > 0 or $cat_id!=0) and $params1['show_category_details']==1 )
@@ -1354,22 +1352,46 @@ if ((!$params["choose_category"] and ($params1['categories'] > 0)) or !$params["
   document.getElementById("cat_form_page_nav1").style.display = "none";
   </script>';
   }
-	    if( 'page' == get_option( 'show_on_front' ) && ( '' != get_option( 'page_for_posts' ) ) && is_home() ){
-      $page_link=get_permalink($frontpage_id);
+	   if( 'page' == get_option( 'show_on_front' ) && ( '' != get_option( 'page_for_posts' ) ) && is_home() ){
+    if($_POST['subcat_id_'.$cels_or_list.'_'.$ident.'']){
+		  if($_POST['subcat_id_'.$cels_or_list.'_'.$ident.'']!=0)
+		   $page_link=get_permalink($frontpage_id).'&cat_id_'.$cels_or_list.'_'.$ident.'='.$_POST['subcat_id_'.$cels_or_list.'_'.$ident.''];
+		  else
+		   $page_link=get_permalink($frontpage_id);
+		  }else if($_POST['prod_name_'.$cels_or_list.'_'.$ident.''] or $_POST['page_num_'.$cels_or_list.'_'.$ident.''])
+		   $page_link=get_permalink($frontpage_id).'&cat_id_'.$cels_or_list.'_'.$ident.'='.$cat_id;
+		  else
+		   $page_link=get_permalink($frontpage_id);
    }
 	   else if(is_home())
-	   {
+	   { 
+	      if($_POST['subcat_id_'.$cels_or_list.'_'.$ident.'']){
+		  if($_POST['subcat_id_'.$cels_or_list.'_'.$ident.'']!=0)
+		   $page_link=site_url().'/index.php?cat_id_'.$cels_or_list.'_'.$ident.'='.$_POST['subcat_id_'.$cels_or_list.'_'.$ident.''];
+		  else
+		   $page_link=site_url().'/index.php';
+		  }else if($_POST['prod_name_'.$cels_or_list.'_'.$ident.''] or $_POST['page_num_'.$cels_or_list.'_'.$ident.''])
+		   $page_link=site_url().'/index.php?cat_id_'.$cels_or_list.'_'.$ident.'='.$cat_id;
+		  else
 		   $page_link=site_url().'/index.php';
 	   }
 	   else
 	   {
+	     if($_POST['subcat_id_'.$cels_or_list.'_'.$ident.'']){
+		  if($_POST['subcat_id_'.$cels_or_list.'_'.$ident.'']!=0)
+		   $page_link=get_permalink().'&cat_id_'.$cels_or_list.'_'.$ident.'='.$_POST['subcat_id_'.$cels_or_list.'_'.$ident.''];
+		  else
+		   $page_link=get_permalink();
+		  }else if($_POST['prod_name_'.$cels_or_list.'_'.$ident.''] or $_POST['page_num_'.$cels_or_list.'_'.$ident.''])
+		   $page_link=get_permalink().'&cat_id_'.$cels_or_list.'_'.$ident.'='.$cat_id;
+		  else
 		   $page_link=get_permalink();
 	   }
 	 
     echo '<form action="'. $page_link.'" method="post" name="cat_form_'.$cels_or_list.'_'.$ident.'" id="cat_form_page_nav1" style="display:block;">
 <input type="hidden" name="page_num_'.$cels_or_list.'_'.$ident.'"	value="1">
 <input type="hidden" name="subcat_id_'.$cels_or_list.'_'.$ident.'" id="subcat_id_'.$cels_or_list.'_'.$ident.'" value="'. $subcat_id.'">
-<div class="CatalogSearchBox" style="padding-top: 10px;">';
+<div class="CatalogSearchBox" style="padding-top:10px;">';
 
 if ($params["choose_category"] and !($params1['categories'] > 0))
 {
@@ -1397,17 +1419,27 @@ if ($params["choose_category"] and !($params1['categories'] > 0))
 
 if ( $params["search_by_name"] and $params7['show_prod']==1)
 {
-	if(isset($_POST['prod_name_'.$cels_or_list.'_'.$ident.'']))
-		$prod_name=$_POST['prod_name_'.$cels_or_list.'_'.$ident.''];
-	else
-	$prod_name="";
+	if(isset($_POST['prod_name_'.$cels_or_list.'_'.$ident.''])){
+		 if($_POST['prod_name_'.$cels_or_list.'_'.$ident.'']!='')
+			$prod_name=$_POST['prod_name_'.$cels_or_list.'_'.$ident.''];
+		else
+			$prod_name='';
+		}else if(isset($_GET['prod_name_'.$cels_or_list.'_'.$ident.'']))
+		    $prod_name=$_GET['prod_name_'.$cels_or_list.'_'.$ident.''];
+        else
+			$prod_name='';
 echo '<br />
 ' . __('Search','sp_catalog') . '&nbsp;
 <input type="text" id="prod_name_'.$cels_or_list.'_'.$ident.'" name="prod_name_'.$cels_or_list.'_'.$ident.'" class="spidercataloginput" value="'.$prod_name.'"> 
-	<input type="button" onclick="this.form.submit()" value="'. __('Go','sp_catalog') .'" class="spidercatalogbutton" style="background-color:'.$params[ 'button_background_color' ].'; color:'.$params[ 'button_color' ].'; width:inherit;"><input type="button" value="'. __('Reset','sp_catalog') .'" onClick="cat_form_reset(this.form,'.$cels_or_list.','.$ident.');" class="spidercatalogbutton" style="background-color:'.$params[ 'button_background_color' ].'; color:'.$params[ 'button_color' ].'; width:inherit;">';
+	<input type="button" onclick="this.form.submit()" value="'. __('Go','sp_catalog') .'" class="spidercatalogbutton" style="background-color:'.$params[ 'button_background_color' ].'; color:'.$params[ 'button_color' ].'; width:inherit;"><input type="button" value="'. __('Reset','sp_catalog') .'" onClick="cat_form_resett(this.form,'.$cels_or_list.','.$ident.');" class="spidercatalogbutton" style="background-color:'.$params[ 'button_background_color' ].'; color:'.$params[ 'button_color' ].'; width:inherit;">';
 }
 echo '</div></form>';
-
+if($_POST['subcat_id_'.$cels_or_list.'_'.$ident.'']!="")
+{
+  $subcat_id = $_POST['subcat_id_'.$cels_or_list.'_'.$ident.''];
+}else{
+  $subcat_id = $cat_id; 
+}
 
 if($params7['show_prod']==1){
 if(count($rows))
@@ -1462,7 +1494,7 @@ else
 	$attach_url=$image;	
 }
 
-
+ $link = $permalink_for_sp_cat . '&ident='.$ident.'&product_id=' . $row->id . '&cat_id_'.$cels_or_list.'_'.$ident.'=' . $subcat_id.'&page_num_'.$cels_or_list.'_'.$ident.'=' . $page_num . '&back=1';
 if (!($row->image_url != "" and $row->image_url != "******0"))
 $imgurl[0]=plugins_url("Front_images/noimage.jpg",__FILE__);
 
@@ -1474,7 +1506,7 @@ if (!($row->image_url != "" and $row->image_url != "******0"))
 else
         echo '<td style=" vertical-align: top !important; border-width:'.$params[ 'border_width' ].'px;border-color:'.$params[ 'border_color' ].';border-style:'.$params[ 'border_style' ].';border-top:none; border-left:none;"><a href="' . $image . '" target="_blank"><img style="border: #CCC solid 2px; margin:10px; max-width:'. $params['list_picture_width'] .'px; max-height:'. $params['list_picture_height'] .'px" src="'.$attach_url.'" /></a></td>';
 
-echo '<td style="'.(($params[ 'name_price_size_list']!='')?('font-size:'.$params[ 'name_price_size_list'].'px;'):'').' border-width:'.$params[ 'border_width' ].'px;border-color:'.$params[ 'border_color'].';border-style:'.$params[ 'border_style' ].';border-top:none; border-left:none;"><a href="'.$permalink_for_sp_cat. '&ident='.$ident.'&product_id=' . $row->id . '&page_num_'.$cels_or_list.'_'.$ident.'=' . $page_num . '&back=1'.'" style="' . (($params['hyperlink_color'] != '') ? ('color:' . $params['hyperlink_color'] . ';') : '') . '">' . $row->name . '</a>';
+echo '<td style="'.(($params[ 'name_price_size_list']!='')?('font-size:'.$params[ 'name_price_size_list'].'px;'):'').' border-width:'.$params[ 'border_width' ].'px;border-color:'.$params[ 'border_color'].';border-style:'.$params[ 'border_style' ].';border-top:none; border-left:none;"><a href="'.$link.'" style="' . (($params['hyperlink_color'] != '') ? ('color:' . $params['hyperlink_color'] . ';') : '') . '">' . $row->name . '</a>';
 
 	if ($row->category_id > 0 and $params['list_show_category'])
         echo '<br><div style="margin:10px;"><b>' . __('Category:','sp_catalog') . '</b>&nbsp;&nbsp;&nbsp;<span style="' . (($params['params_color'] != '') ? ('color:' . $params['params_color'] . ';') : '') . '" id="cat_' . $row->id . '">' . $categories[$row->category_id] . '</span></div>';
@@ -1572,13 +1604,14 @@ if($parameters_exist and $params[ 'list_show_parameters'])
 echo '</table></td>';
 }
 
+   
 
 if($params[ 'list_show_description' ])
 {	
    $description = explode('<!--more-->', stripslashes($row->description));
    echo '<td style="border-width:'.$params[ 'border_width' ].'px;border-color:'.$params[ 'border_color' ].';border-style:'.$params[ 'border_style' ].';border-top:none; border-left:none;padding:10px">
    <div id="prodDescription" style="'. (($params['description_size_list'] != '') ? ('font-size:' . $params['description_size_list'] . 'px;') : '') .'">' . $description[0] . ' </div>
-   <div id="prodMore"  style="'. (($params['description_size_list'] != '') ? ('font-size:' . $params['description_size_list'] . 'px;') : '') .'"><a href="'.$permalink_for_sp_cat.'&ident='.$ident.'&product_id=' . $row->id . '&page_num_'.$cels_or_list.'_'.$ident.'=' . $page_num . '&back=1'.'" style="' . (($params['hyperlink_color'] != '') ? ('color:' . $params['hyperlink_color'] . ';') : '') . '">' . __('More','sp_catalog') . '</a></div>
+   <div id="prodMore"  style="'. (($params['description_size_list'] != '') ? ('font-size:' . $params['description_size_list'] . 'px;') : '') .'"><a href="'.$link.'" style="' . (($params['hyperlink_color'] != '') ? ('color:' . $params['hyperlink_color'] . ';') : '') . '">' . __('More','sp_catalog') . '</a></div>
    </td>';
 }
 	
@@ -1622,6 +1655,11 @@ function submit_catal(page_link)
 
 <div id="spidercatalognavigation" style="text-align:center;">
   <?php
+if ($cat_id != 0)
+    $url .= '&cat_id_'.$cels_or_list.'_'.$ident.'=' . $subcat_id;
+	
+if ($prod_name != "")
+    $url .= '&prod_name_'.$cels_or_list.'_'.$ident.'=' . $prod_name;
 
 if ($prod_count > $prod_in_page and $prod_in_page > 0)
   {
@@ -2156,7 +2194,6 @@ border-top-left-radius: 8px;
 endif;
 ?>
 <script>
-
 function catt_idd_<?php echo $ident; ?>(id)
 { 
 
@@ -2167,8 +2204,9 @@ function catt_idd_<?php echo $ident; ?>(id)
 </script>
 <?php
 
+
 foreach($categor as $chidd){
-if($par!=0 and ($cat_id!=$chidd->id or $_POST['cat_id_'.$cels_or_list.'_'.$ident.''])){
+if($par!=0 and ($cat_id!=$chidd->id or $_POST['cat_id_'.$cels_or_list.'_'.$ident.''] or $_GET['cat_id_'.$cels_or_list.'_'.$ident.'']!=0)){
 
 echo '<a style="cursor:pointer;" onclick="catt_idd_'.$ident.'('.$chidd->parent.')" >'.__('Back to Catalog','sp_catalog').'</a>';
 }
@@ -2250,8 +2288,7 @@ echo '<table id="category" border="0" cellspacing="10" cellpadding="10">';
 <script>
 function change_subcat_<?php echo $ident; ?>(id)
 {
-	document.getElementById("subcat_id_<?php echo $cels_or_list."_".$ident; ?>").value=id;
-	
+	document.getElementById("subcat_id_<?php echo $cels_or_list."_".$ident; ?>").value=id;	
 	document.cat_form_<?php echo $cels_or_list."_".$ident; ?>.submit();
 	}
 </script>
@@ -2260,7 +2297,6 @@ function change_subcat_<?php echo $ident; ?>(id)
 foreach ($child_ids as $chid)
 {
  $imgurl = explode(";;;", $chid->category_image_url);
-
 	
 	echo '<tr><td>';
 	echo '<table border="0" style="margin:0 !important;"> <tr> <td style="width:55px; vertical-align: middle;">';
@@ -2286,6 +2322,7 @@ foreach ($child_ids as $chid)
     echo  '<div>'.'<a style="'.(($params['text_size_small'] != '') ? ('font-size:' . $params['text_size_small'] . 'px !important;') : '').';cursor:pointer; '.(($params[ 'hyperlink_color']!='')?('color:'.$params[ 'hyperlink_color'].';'):'').'; font-size:inherit;" onclick="change_subcat_'.$ident.'('.$chid->id.')">'.$chid->name.'</a><br />';
     echo $chid->description.' </div>';
 echo '</td></tr></table>';
+
 }
 	
 	echo '</td></tr></table>';
@@ -2311,21 +2348,60 @@ if (($params["choose_category"] and !($params1['categories'] > 0)) or $params["s
   </script>';
   }
    if( 'page' == get_option( 'show_on_front' ) && ( '' != get_option( 'page_for_posts' ) ) && is_home() ){
-      $page_link=get_permalink($frontpage_id);
+    if($_POST['subcat_id_'.$cels_or_list.'_'.$ident.'']){
+		  if($_POST['subcat_id_'.$cels_or_list.'_'.$ident.'']!=0)
+		   $page_link=get_permalink($frontpage_id).'&cat_id_'.$cels_or_list.'_'.$ident.'='.$_POST['subcat_id_'.$cels_or_list.'_'.$ident.''];
+		  else
+		   $page_link=get_permalink($frontpage_id);
+		  }else if($_POST['prod_name_'.$cels_or_list.'_'.$ident.''] or $_POST['page_num_'.$cels_or_list.'_'.$ident.''])
+		   $page_link=get_permalink($frontpage_id).'&cat_id_'.$cels_or_list.'_'.$ident.'='.$cat_id;
+		  else
+		   $page_link=get_permalink($frontpage_id);
    }
 	   else if(is_home())
-	   {
+	   { 
+	      if($_POST['subcat_id_'.$cels_or_list.'_'.$ident.'']){
+		  if($_POST['subcat_id_'.$cels_or_list.'_'.$ident.'']!=0)
+		   $page_link=site_url().'/index.php?cat_id_'.$cels_or_list.'_'.$ident.'='.$_POST['subcat_id_'.$cels_or_list.'_'.$ident.''];
+		  else
+		   $page_link=site_url().'/index.php';
+		  }else if($_POST['prod_name_'.$cels_or_list.'_'.$ident.''] or $_POST['page_num_'.$cels_or_list.'_'.$ident.''])
+		   $page_link=site_url().'/index.php?cat_id_'.$cels_or_list.'_'.$ident.'='.$cat_id;
+		  else
 		   $page_link=site_url().'/index.php';
 	   }
 	   else
 	   {
+	     if(strrpos(get_permalink(), '?')){
+	     if($_POST['subcat_id_'.$cels_or_list.'_'.$ident.'']){
+		  if($_POST['subcat_id_'.$cels_or_list.'_'.$ident.'']!=0)
+		 
+		   $page_link=get_permalink().'&cat_id_'.$cels_or_list.'_'.$ident.'='.$_POST['subcat_id_'.$cels_or_list.'_'.$ident.''];
+		  else
 		   $page_link=get_permalink();
+		  }else if($_POST['prod_name_'.$cels_or_list.'_'.$ident.''] or $_POST['page_num_'.$cels_or_list.'_'.$ident.''])
+		   $page_link=get_permalink().'&cat_id_'.$cels_or_list.'_'.$ident.'='.$cat_id;
+		  else
+		   $page_link=get_permalink();
+		   }else{
+		   if($_POST['subcat_id_'.$cels_or_list.'_'.$ident.'']){
+		  if($_POST['subcat_id_'.$cels_or_list.'_'.$ident.'']!=0)
+		 
+		   $page_link=get_permalink().'?cat_id_'.$cels_or_list.'_'.$ident.'='.$_POST['subcat_id_'.$cels_or_list.'_'.$ident.''];
+		  else
+		   $page_link=get_permalink();
+		  }else if($_POST['prod_name_'.$cels_or_list.'_'.$ident.''] or $_POST['page_num_'.$cels_or_list.'_'.$ident.''])
+		   $page_link=get_permalink().'?cat_id_'.$cels_or_list.'_'.$ident.'='.$cat_id;
+		  else
+		   $page_link=get_permalink();
+		   }
 	   }
+
     echo '<form action="'.$page_link.'" method="post" name="cat_form_'.$cels_or_list.'_'.$ident.'" id="cat_form_page_nav" style="display:block;">
 <input type="hidden" name="page_num_'.$cels_or_list.'_'.$ident.'"	value="1">
 <input type="hidden" name="subcat_id_'.$cels_or_list.'_'.$ident.'" id="subcat_id_'.$cels_or_list.'_'.$ident.'" value="'. $subcat_id.'">
 
-<div class="CatalogSearchBox" style="padding-top: 10px;">';
+<div class="CatalogSearchBox" style="padding-top:10px;">';
 if ($params["choose_category"] and !($params1['categories'] > 0))
 {
 	echo '<span style="top: -11px; position: relative;">'.__('Choose Category','sp_catalog') . '&nbsp</span>
@@ -2352,19 +2428,28 @@ if ($params["choose_category"] and !($params1['categories'] > 0))
 
 if ( $params["search_by_name"] and $params7['show_prod']==1)
 {
-	if(isset($_POST['prod_name_'.$cels_or_list.'_'.$ident.'']))
-$prod_name=$_POST['prod_name_'.$cels_or_list.'_'.$ident.''];
-else
-$prod_name='';
-
+	if(isset($_POST['prod_name_'.$cels_or_list.'_'.$ident.''])){
+		 if($_POST['prod_name_'.$cels_or_list.'_'.$ident.'']!='')
+			$prod_name=$_POST['prod_name_'.$cels_or_list.'_'.$ident.''];
+		else
+			$prod_name='';
+		}else if(isset($_GET['prod_name_'.$cels_or_list.'_'.$ident.'']))
+		    $prod_name=$_GET['prod_name_'.$cels_or_list.'_'.$ident.''];
+        else
+			$prod_name='';
 echo '<br />
 <label for="prod_name_'.$cels_or_list.'_'.$ident.'">' . __('Search','sp_catalog') . '</label>&nbsp;
 <input type="text" id="prod_name_'.$cels_or_list.'_'.$ident.'" name="prod_name_'.$cels_or_list.'_'.$ident.'" class="spidercataloginput" value="'.$prod_name.'"> 
-	<input type="button" onclick="this.form.submit()"  value="'. __('Go','sp_catalog') .'" class="spidercatalogbutton" style="background-color:'.$params[ 'button_background_color'].'; color:'.$params[ 'button_color'].'; width:inherit;"><input type="button" value="'. __('Reset','sp_catalog') .'" onClick="cat_form_reset(this.form,'.$cels_or_list.','.$ident.');" class="spidercatalogbutton" style="background-color:'.$params[ 'button_background_color'].'; color:'.$params[ 'button_color'].'; width:inherit;">';
+	<input type="button" onclick="this.form.submit()"  value="'. __('Go','sp_catalog') .'" class="spidercatalogbutton" style="background-color:'.$params[ 'button_background_color'].'; color:'.$params[ 'button_color'].'; width:inherit;"><input type="button" value="'. __('Reset','sp_catalog') .'" onClick="cat_form_resett(this.form,'.$cels_or_list.','.$ident.');" class="spidercatalogbutton" style="background-color:'.$params[ 'button_background_color'].'; color:'.$params[ 'button_color'].'; width:inherit;">';
 }
 echo '</div></form>';
-
-
+if($_POST['subcat_id_'.$cels_or_list.'_'.$ident.'']!="")
+{
+  $subcat_id = $_POST['subcat_id_'.$cels_or_list.'_'.$ident.''];
+}else{
+  $subcat_id = $cat_id; 
+}
+			 
 if(count($rows))
 echo '<table cellpadding="0" cellspacing="0" id="productMainTable" style="width:'. ($params['count_of_product_in_the_row']*$params['product_cell_width']+$params['count_of_product_in_the_row']*20).'px"><tr>';
 if($params7['show_prod']==1){
@@ -2380,8 +2465,7 @@ foreach ($rows as $row)
     
     
     $prod_iterator++;
-    
-    $link = $permalink_for_sp_cat . '&ident='.$ident.'&product_id=' . $row->id . '&page_num_'.$cels_or_list.'_'.$ident.'=' . $page_num . '&back=1';
+    $link = $permalink_for_sp_cat . '&ident='.$ident.'&product_id=' . $row->id . '&cat_id_'.$cels_or_list.'_'.$ident.'=' . $subcat_id.'&page_num_'.$cels_or_list.'_'.$ident.'=' . $page_num . '&back=1';
     
     
     
@@ -2647,8 +2731,6 @@ if(count($rows))
 echo '</tr></table>';
 ?>
 <script>
-
-
 function submit_catal(page_link)
 {
 	if(document.getElementById('cat_form_page_nav')){
@@ -2660,7 +2742,6 @@ function submit_catal(page_link)
 		window.location.href=page_link;
 	}
 }
-
 </script>
 
 <div id="spidercatalognavigation" style="text-align:center;">
@@ -2671,11 +2752,12 @@ function submit_catal(page_link)
 
 
 
+
 if ($cat_id != 0)
-    $url .= "&cat_id=" . $cat_id;
+    $url .= '&cat_id_'.$cels_or_list.'_'.$ident.'=' . $subcat_id;
 	
 if ($prod_name != "")
-    $url .= "&prod_name=" . $prod_name;
+    $url .= '&prod_name_'.$cels_or_list.'_'.$ident.'=' . $prod_name;
 
 
 
