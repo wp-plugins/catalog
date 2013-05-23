@@ -329,7 +329,7 @@ function showPublishedProducts_1($cat_id=1,$show_cat_det=1,$cels_or_list='',$sho
 			 $subcat_id = $cat_id; 
              }
 		
-			$categ_query = "SELECT * FROM ".$wpdb->prefix."spidercatalog_product_categories WHERE parent=". $subcat_id." ";
+			$categ_query = "SELECT * FROM ".$wpdb->prefix."spidercatalog_product_categories WHERE parent=". $subcat_id." AND `published`=1 ORDER BY `ordering` ASC  ";
 			
 			$child_ids = $wpdb->get_results($categ_query);
 

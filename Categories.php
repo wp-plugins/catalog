@@ -272,8 +272,18 @@ GROUP BY ".$wpdb->prefix."spidercatalog_products.category_id) AS c ON c.id = a.i
 }
 
 $rows = $wpdb->get_results($query);
-
-
+ global $glob_ordering_in_cat;
+if(isset($sort["sortid_by"]))
+{
+	if($sort["sortid_by"]=='ordering'){
+	if($_POST['asc_or_desc']==1){
+		$glob_ordering_in_cat=" ORDER BY ordering ASC";
+	}
+	else{
+		$glob_ordering_in_cat=" ORDER BY ordering DESC";
+	}
+	}
+}
 $rows=open_cat_in_tree($rows);
 	$query ="SELECT  ".$wpdb->prefix."spidercatalog_product_categories.ordering,".$wpdb->prefix."spidercatalog_product_categories.id, COUNT( ".$wpdb->prefix."spidercatalog_products.category_id ) AS prod_count
 FROM ".$wpdb->prefix."spidercatalog_products, ".$wpdb->prefix."spidercatalog_product_categories
@@ -306,12 +316,12 @@ foreach($rows as $row)
 
 
 
-
 //////////////////////        edit or add categories
 
 function open_cat_in_tree($catt,$tree_problem='',$hihiih=1){
 
 global $wpdb;
+global $glob_ordering_in_cat;
 static $trr_cat=array();
 if($hihiih)
 $trr_cat=array();
@@ -323,16 +333,13 @@ FROM ".$wpdb->prefix."spidercatalog_products, ".$wpdb->prefix."spidercatalog_pro
 WHERE ".$wpdb->prefix."spidercatalog_products.category_id = ".$wpdb->prefix."spidercatalog_product_categories.id
 GROUP BY ".$wpdb->prefix."spidercatalog_products.category_id) AS c ON c.id = a.id LEFT JOIN
 (SELECT ".$wpdb->prefix."spidercatalog_product_categories.name AS par_name,".$wpdb->prefix."spidercatalog_product_categories.id FROM ".$wpdb->prefix."spidercatalog_product_categories) AS g
- ON a.parent=g.id WHERE a.name LIKE '%".$search_tag."%' AND a.parent=".$dog->id." group by a.id"; 
+ ON a.parent=g.id WHERE a.name LIKE '%".$search_tag."%' AND a.parent=".$dog->id." group by a.id  ".$glob_ordering_in_cat; 
  $new_cat=$wpdb->get_results($new_cat_query);
  open_cat_in_tree($new_cat,$tree_problem. "— ",0);
 }
 return $trr_cat;
 
 }
-
-
-
 
 
 function editCategory($id)
@@ -377,11 +384,6 @@ function add_category()
 	
 	
 }
-
-
-
-
-
 
 function save_cat()
 {
@@ -514,6 +516,7 @@ function change_cat( $id ){
 	
     return true;
 }
+
 
 
 function removeCategory($id)
@@ -657,7 +660,7 @@ function apply_cat($id)
 				'%d',	
 				'%d', )
 			  );
-		  if($_POST["parent"]!=0){
+		if($_POST["parent"]!=0){
 		    $query="SELECT parent FROM ".$wpdb->prefix."spidercatalog_product_categories WHERE id='".$id."'";
 	        $fff=$wpdb->get_var($query);
 	        $query="SELECT param FROM ".$wpdb->prefix."spidercatalog_product_categories where id='".$fff."'";
@@ -688,6 +691,7 @@ function apply_cat($id)
     return true;
 	
 }
+
 
 
 
