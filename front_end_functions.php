@@ -3,6 +3,10 @@
 
 function catal_secure_for_scripts($key)
    {
+	   if(!isset($_POST[$key]))
+	   {
+		   return '';
+	   }
        $_POST[$key] = htmlspecialchars(stripslashes($_POST[$key]));
        $_POST[$key] = str_ireplace("script", "blocked", $_POST[$key]);
        $_POST[$key] = mysql_escape_string($_POST[$key]);
@@ -19,6 +23,8 @@ function front_end_single_product($id)
 {
 		global $wpdb;
 		global $ident; 
+		if(!is_numeric($id))
+		return 'insert numeric `id`';
 		  $params=$wpdb->get_results("SELECT * FROM ".$wpdb->prefix."spidercatalog_params");
 	  $new_param=array();
 	  foreach( $params as $param)
@@ -28,8 +34,8 @@ function front_end_single_product($id)
 	   $params=$new_param;
 
 	$product_id=$id;
-	if($_GET['rev_page_'.$ident])
-	$rev_page=$_GET['rev_page_'.$ident];
+	if(isset($_GET['rev_page_'.$ident]) && $_GET['rev_page_'.$ident])
+	$rev_page=$wpdb->escape($_GET['rev_page_'.$ident]);
 	else
 	$rev_page=1;
 	
@@ -55,8 +61,10 @@ function front_end_single_product($id)
 
 
 		@session_start();
-
-		$code=$_POST['code_'.$ident];
+		if(isset($_POST['code_'.$ident]))
+			$code=$wpdb->escape($_POST['code_'.$ident]);
+		else
+			$code='';
 
 		
 
@@ -115,7 +123,7 @@ function front_end_single_product($id)
 		$query= $wpdb->prepare("SELECT vote_value FROM ".$wpdb->prefix."spidercatalog_product_votes  WHERE product_id = %d and remote_ip='".$_SERVER['REMOTE_ADDR']."' ",$product_id);
 		$voted=count($wpdb->get_col($query));
 
-		return html_front_end_single_product($rows,$reviews_rows, $option, $params,$category_name,$rev_page,$reviews_count,$rating,$voted,$product_id,$ident);
+		return html_front_end_single_product($rows,$reviews_rows,  $params,$category_name,$rev_page,$reviews_count,$rating,$voted,$product_id,$ident);
 
 	}
 	
@@ -208,6 +216,7 @@ function front_end_single_product($id)
 function open_cat_in_tree($catt,$tree_problem='',$hihiih=1){
 
 global $wpdb;
+$search_tag='';
 static $trr_cat=array();
 if($hihiih)
 $trr_cat=array();
@@ -219,7 +228,7 @@ FROM ".$wpdb->prefix."spidercatalog_products, ".$wpdb->prefix."spidercatalog_pro
 WHERE ".$wpdb->prefix."spidercatalog_products.category_id = ".$wpdb->prefix."spidercatalog_product_categories.id
 GROUP BY ".$wpdb->prefix."spidercatalog_products.category_id) AS c ON c.id = a.id LEFT JOIN
 (SELECT ".$wpdb->prefix."spidercatalog_product_categories.name AS par_name,".$wpdb->prefix."spidercatalog_product_categories.id FROM ".$wpdb->prefix."spidercatalog_product_categories) AS g
- ON a.parent=g.id WHERE a.name LIKE '%".$search_tag."%' AND a.parent=".$dog->id." group by a.id"; 
+ ON a.parent=g.id WHERE a.name LIKE '%".$wpdb->escape($search_tag)."%' AND a.parent=".$dog->id." group by a.id"; 
  $new_cat=$wpdb->get_results($new_cat_query);
  open_cat_in_tree($new_cat,$tree_problem. "— ",0);
 }
@@ -256,8 +265,10 @@ return '';
 
 function remov_last_storaket($str)
 {
-
+if(isset($str[strlen($str)-1]))
 $last = $str[strlen($str)-1];
+else
+$last='';
 if($last==',')
 {
 $str=substr_replace($str ,"",-1);
@@ -272,6 +283,8 @@ function showPublishedProducts_1($cat_id=1,$show_cat_det=1,$cels_or_list='',$sho
 {
             global $ident;
 			global $wpdb;
+			 if($cat_id=='ALL_CAT')
+				 $cat_id=0;
 			$params7['show_sub']=$show_sub;
 			$params7['show_sub_prod']=$show_sub_prod;
 			$params7['show_prod']=$show_prod;
@@ -321,11 +334,12 @@ function showPublishedProducts_1($cat_id=1,$show_cat_det=1,$cels_or_list='',$sho
 		else{
 		$cat_id=0;}
 	    }
-		if($_POST['subcat_id_'.$cels_or_list.'_'.$ident.'']!="")
+		if(isset ($_POST['subcat_id_'.$cels_or_list.'_'.$ident.'']) && $_POST['subcat_id_'.$cels_or_list.'_'.$ident.'']!="")
              {
               $subcat_id = $_POST['subcat_id_'.$cels_or_list.'_'.$ident.''];
              }else
              {
+				
 			 $subcat_id = $cat_id; 
              }
 		
@@ -426,12 +440,16 @@ function showPublishedProducts_1($cat_id=1,$show_cat_det=1,$cels_or_list='',$sho
 			$num_rows = $wpdb->get_var($query);
 			$voted[$id]=$num_rows;
 		
+		
 			$query= $wpdb->prepare("SELECT * FROM ".$wpdb->prefix."spidercatalog_product_categories WHERE id = %d ",$row->category_id);	
 			$row2 = $wpdb->get_row($query);	
-			$categories[$row2->id]=$row2->name;			
+			if($row2)
+			$categories[$row2->id]=$row2->name;	
+			else
+			$categories[0]='';
 			}
 	}
-
+$par=0;
 			$query= "SELECT * FROM ".$wpdb->prefix."spidercatalog_product_categories WHERE parent=0 AND `published`=1 ORDER BY `ordering` ASC  ";	
 			$category_list = $wpdb->get_results($query);
 			$cat_query = "SELECT * FROM ".$wpdb->prefix."spidercatalog_product_categories WHERE `published`=1 AND id=".$subcat_id."";
@@ -444,13 +462,14 @@ function showPublishedProducts_1($cat_id=1,$show_cat_det=1,$cels_or_list='',$sho
 			
 			
 			
+			
 			if($params7['show_sub']==1){
 			$category_list=open_cat_in_tree($category_list);
 			}
 		if($cels_or_list==1)	
-		return front_end_catalog_list($rows, $option,$params,$page_num,$prod_count,$prod_in_page,$ratings,$voted,$categories,$category_list,$params1,$cat_rows,$cat_id,$child_ids,$params7,$categor,$par,$cels_or_list,$ident);
+		return front_end_catalog_list($rows, $params,$page_num,$prod_count,$prod_in_page,$ratings,$voted,$categories,$category_list,$params1,$cat_rows,$cat_id,$child_ids,$params7,$categor,$par,$cels_or_list,$ident);
 		else
-		return front_end_catalog_cells($rows, $option,$params,$page_num,$prod_count,$prod_in_page,$ratings,$voted,$categories,$category_list,$params1,$cat_rows,$cat_id,$child_ids,$params7,$categor,$par,$cels_or_list,$ident);
+		return front_end_catalog_cells($rows,$params,$page_num,$prod_count,$prod_in_page,$ratings,$voted,$categories,$category_list,$params1,$cat_rows,$cat_id,$child_ids,$params7,$categor,$par,$cels_or_list,$ident);
 
 }
 

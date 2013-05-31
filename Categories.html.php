@@ -1,6 +1,10 @@
 	<?php	
 	
+	if(function_exists('current_user_can'))
 	if(!current_user_can('manage_options')) {
+	die('Access Denied');
+}	
+if(!function_exists('current_user_can')){
 	die('Access Denied');
 }	
  //////////////////////////////////////////////////////                                             /////////////////////////////////////////////////////// 
@@ -26,7 +30,7 @@
 
 
 
-function html_showcategories($option, $rows, $controller, $lists, $pageNav,$sort,$cat_row){
+function html_showcategories( $rows,  $pageNav,$sort,$cat_row){
 	global $wpdb;
 	?>
     <script language="javascript">
@@ -87,6 +91,7 @@ Get the full version&nbsp;&nbsp;&nbsp;&nbsp;
     </tr>
     </table>
     <?php
+	$serch_value='';
 	if(isset($_POST['serch_or_not'])) {if($_POST['serch_or_not']=="search"){ $serch_value=$_POST['search_events_by_title']; }else{$serch_value="";}} 
 	$serch_fields='<div class="alignleft actions" style="width:185px;">
     	<label for="search_events_by_title" style="font-size:14px">Filter: </label>
@@ -108,6 +113,7 @@ Get the full version&nbsp;&nbsp;&nbsp;&nbsp;
 	{
 		
 		$serch_fields.='<option value="'.$cat_id->id.'"';
+		if(isset($_POST['cat_search']) && isset($_GET["catid"]) && $_GET["catid"])
 		if($_POST['cat_search']==$cat_id->id || $_GET["catid"]==$cat_id->id)
 		$serch_fields.='selected="selected"';		
 		$serch_fields.='>'.$cat_id->name.'</option>';
@@ -206,7 +212,11 @@ Get the full version&nbsp;&nbsp;&nbsp;&nbsp;
   		$move_down="";	
 		}
 		$uncat=$rows[$i]->par_name;
+		if(isset($rows[$i]->prod_count))
 		$pr_count=$rows[$i]->prod_count;
+		else
+		$pr_count=0;
+
 
   ?>
  <tr>
@@ -342,7 +352,7 @@ Name:
 <td align="right" class="key">Parent Category:</td>
 <td>
 <?php
-	$cat_select.='<select style=" text-align:left;" name="parent" id="parent" class="inputbox"  onchange="change_select();" >
+	$cat_select='<select style=" text-align:left;" name="parent" id="parent" class="inputbox"  onchange="change_select();" >
 	<option value="0"';
 	if(!isset($row->parent))
     $cat_select.='selected="selected"';
@@ -542,10 +552,14 @@ for($i=0;$i<$count_ord;$i++){ ?>
 <input type="text"  id="image_no_<?php echo $i+1; ?>" value="<?php echo stripslashes($images[$i]) ?>" onchange="add_upload('<?php echo $i+1; ?>');" class="text_input" style="width:200px;"><a id="upload_href_<?php echo $i+1; ?>" class="button lu_upload_button" onclick="narek('<?php echo $i+1; ?>')" >Select</a><input type="button" value="X" title="Delete" onclick="remov_upload('<?php echo $i+1; ?>')" /><br>
 </div>
 
-<?php }?>
+<?php }
+
+if(!isset($images[1]))
+$images[1]='';
+?>
 
 <div id="upload_div_<?php echo $i+1; ?>">
-<input type="text"  id="image_no_<?php echo $i+1; ?>" value="<?php echo stripslashes($images[$i]) ?>" onchange="add_upload('<?php echo $i+1; ?>');" class="text_input" style="width:200px;"><a id="upload_href_<?php echo $i+1; ?>" class="button lu_upload_button" onclick="narek('<?php echo $i+1; ?>')">Select</a><input type="button" value="X" title="Delete" onclick="remov_upload('<?php echo $i+1; ?>')" /><br>
+<input type="text"  id="image_no_<?php echo $i+1; ?>" value="<?php if(isset($images[$i])) echo stripslashes($images[$i]) ?>" onchange="add_upload('<?php echo $i+1; ?>');" class="text_input" style="width:200px;"><a id="upload_href_<?php echo $i+1; ?>" class="button lu_upload_button" onclick="narek('<?php echo $i+1; ?>')">Select</a><input type="button" value="X" title="Delete" onclick="remov_upload('<?php echo $i+1; ?>')" /><br>
 </div>
 </td>
 <tr>
@@ -564,7 +578,6 @@ for($i=0;$i<$count_ord;$i++){ ?>
 
 </tr>
 <tr><td colspan="2" style="width:500px;">
-<?php echo $image_url_list; ?>
 </td></tr>
 
 
@@ -578,8 +591,14 @@ Description:
 <td>
 
 <div id="main_editor"><div  style=" width:600px; text-align:left" id="poststuff">
+<?php if(version_compare(get_bloginfo('version'),3.3)<0) {?>
 <div id="<?php echo user_can_richedit() ? 'postdivrich' : 'postdiv'; ?>" class="postarea"><?php the_editor(stripslashes($row->description),"content","title" ); ?>
 </div>
+<?php }else{?>
+<?php 
+wp_editor(stripslashes($row->description),"content");
+}
+?>
 </div>
 </div>
 
@@ -591,16 +610,16 @@ Description:
 Parameters:
 </td>
 <td>
-<?php $par=explode("	",$row->param);
-?>
+
 
 <script type="text/javascript">
 
 parameters0['sel1']=new Array(<?php
-
+if(isset($row->param) && $row->param!='')
 $par=explode("	",$row->param);
-
-for($k=0;$k<=count($par);$k++)
+else
+$par[0]='';
+for($k=0;$k<count($par);$k++)
 {
 if($par[$k]!='')
 echo "'".stripslashes(str_replace('
@@ -608,7 +627,6 @@ echo "'".stripslashes(str_replace('
 }
 
 ?>'');
-
 </script>
 
 <div id="sel1">
@@ -774,7 +792,7 @@ Get the full version&nbsp;&nbsp;&nbsp;&nbsp;
 Name:
 </td>
 <td>
-<input class="text_area" type="text" name="name" id="name" size="50" maxlength="250" value="<?php echo $row->name;?>" />
+<input class="text_area" type="text" name="name" id="name" size="50" maxlength="250" value="" />
 </td>
 </tr>
 
@@ -784,7 +802,7 @@ Name:
 <td align="right" class="key">Parent Category:</td>
 <td>
 <?php
-	$cat_select.='<select style=" text-align:left;" name="parent" id="parent" class="inputbox" onchange="change_select()">
+	$cat_select='<select style=" text-align:left;" name="parent" id="parent" class="inputbox" onchange="change_select()">
 	<option value="0"';
 	if(!isset($row->parent))
     $cat_select.='selected="selected"';
@@ -793,8 +811,7 @@ Name:
 	{
 		
 		$cat_select.='<option value="'.$catt->id.'"';
-		if($row->parent==$catt->id)
-		$cat_select.='selected="selected"';
+	
 		
 		$cat_select.='>'.$catt->name.'</option>';
 		
@@ -961,7 +978,7 @@ function create_images_tags()
 <tr>
 <td id="img__uploads">
 <div id="upload_div_1">
-<input type="text"  id="image_no_1" onchange="add_upload('1');" class="text_input" style="width:200px;"><a id="upload_href_1" class="button lu_upload_button" onclick="narek('<?php echo $i+1; ?>')">Select</a><input type="button" value="X" title="Delete" onclick="remov_upload('1')" /><br>
+<input type="text"  id="image_no_1" onchange="add_upload('1');" class="text_input" style="width:200px;"><a id="upload_href_1" class="button lu_upload_button" onclick="narek('1')">Select</a><input type="button" value="X" title="Delete" onclick="remov_upload('1')" /><br>
 </div>
 </td>
 <tr>
@@ -977,7 +994,7 @@ function create_images_tags()
 
 </tr>
 <tr><td colspan="2" style="width:500px;">
-<?php echo $image_url_list; ?>
+
 </td></tr>
 
 
@@ -991,12 +1008,18 @@ Description:
 </td>
 <td>
 
-<div id="main_editor"><div  style=" width:600px; text-align:left" id="poststuff">
+<div id="main_editor">
+
+<?php if(version_compare(get_bloginfo('version'),'3.3')<0){?>
+<div  style=" width:600px; text-align:left" id="poststuff">
 <div id="<?php echo user_can_richedit() ? 'postdivrich' : 'postdiv'; ?>" class="postarea"><?php the_editor
 
 ("","content","title" ); ?>
 </div>
 </div>
+<?php }else{
+	wp_editor("","content");
+	}?>
 </div>
 
 </td>
@@ -1015,10 +1038,11 @@ Parameters:</td>
 <script type="text/javascript">
 
 parameters0['sel1']=new Array(<?php
-
+if(isset($row->param) && $row->param!='')
 $par=explode("	",$row->param);
-
-for($k=0;$k<=count($par);$k++)
+else
+$par[0]='';
+for($k=0;$k<count($par);$k++)
 {
 if(isset($par[$k]) and $par[$k]!='')
 echo "'".addslashes(htmlspecialchars($par[$k]))."',";
@@ -1071,7 +1095,7 @@ for($i=0;$i<$count_ord;$i++)
 <?php 
 }
 ?>
-<option value="<?php echo  $ord_elem[$i-1]->ordering+1; ?>"><?php echo  $ord_elem[$i-1]->ordering+1; ?> Last</option>
+<option value="<?php if(isset($ord_elem[$i-1])) echo  $ord_elem[$i-1]->ordering+1; ?>"><?php if(isset($ord_elem[$i-1])) echo  $ord_elem[$i-1]->ordering+1; ?> Last</option>
 </select>
 
 
@@ -1091,9 +1115,7 @@ for($i=0;$i<$count_ord;$i++)
 </td>
 </tr>
 </table>
-<input type="hidden" name="id"
-value="<?php echo $row->id; ?>" />
-<input type="hidden" name="task" value="" />
+
 </form>
 <?php
 

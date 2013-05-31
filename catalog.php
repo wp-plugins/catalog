@@ -3,7 +3,7 @@
 /*
 Plugin Name: Spider Catalog
 Plugin URI: http://web-dorado.com/
-Version: 1.4.7
+Version: 1.4.8
 Author: http://web-dorado.com/
 License: GNU/GPLv3 http://www.gnu.org/licenses/gpl-3.0.html
 */
@@ -24,6 +24,23 @@ function Spider_Catalog_Products_list_shotrcode($atts) {
 		  'showsubprod'=> '1',
 		  'showprod'=> '1',
      ), $atts));
+	if(!(is_numeric($atts['id']) || $atts['id']=='ALL_CAT'))
+	return 'insert numerical or `ALL_CAT` shortcode in `id`';
+	
+	if(!($atts['details']==1 || $atts['details']==0))
+	return 'insert valid `detalis`';
+	
+	if(!($atts['type']=='list' || $atts['type']==''))
+	return 'insert valid `type`';
+	
+	if(!($atts['showsub']==1 || $atts['showsub']==0))
+	return 'insert valid `showsub`';
+	
+	if(!($atts['showsubprod']==0 || $atts['showsubprod']==1 || $atts['showsubprod']==2))
+	return  'insert valid `showsubprod`';
+	
+	if(!($atts['showprod']==0 || $atts['showprod']==1))
+	return  'insert valid `showprod`';
 	
      return spider_cat_Products_list($atts['id'],$atts['details'],$atts['type'],$atts['showsub'],$atts['showsubprod'],$atts['showprod']);
 	 
@@ -39,7 +56,8 @@ function Spider_Catalog_Products_list_shotrcode($atts) {
 function catalog_after_search_results($query){
 	global $wpdb;
 	if(isset($_REQUEST['s']) && $_REQUEST['s']){
-	$serch_word=htmlspecialchars(stripslashes($_REQUEST['s']));
+	$serch_word=htmlspecialchars(($_REQUEST['s']));
+	
 	$query=str_replace($wpdb->prefix."posts.post_content",gen_string_catalog_search($serch_word,$wpdb->prefix.'posts.post_content')." ".$wpdb->prefix."posts.post_content",$query);
 	}	
     return $query;
@@ -54,14 +72,14 @@ function gen_string_catalog_search($serch_word,$wordpress_query_post)
 
 	global $wpdb;
 	if($serch_word){
-	$rows_category=$wpdb->get_results("SELECT * FROM ".$wpdb->prefix."spidercatalog_product_categories WHERE (description LIKE '%".$serch_word."%') OR (name LIKE '%".$serch_word."%')");
+	$rows_category=$wpdb->get_results($wpdb->prepare("SELECT * FROM ".$wpdb->prefix."spidercatalog_product_categories WHERE (description LIKE %s) OR (name LIKE %s)",'%'.$serch_word.'%',"%".$serch_word."%"));
 	
 	$count_cat_rows=count($rows_category);
 	if($count_cat_rows){ 
-		$string_search .=$wordpress_query_post.' LIKE \'%[Spider_Catalog_Category id="ALL_CAT" details="1" type=""]%\' OR ';
+		$string_search .=$wordpress_query_post.' LIKE \'%[Spider_Catalog_Category id="ALL_CAT" details="1" %\' OR ';
 	}
 	for($i=0;$i<$count_cat_rows;$i++){
-		$string_search .=$wordpress_query_post.' LIKE \'%[Spider_Catalog_Category id="'.$rows_category[$i]->id.'" details="1" type=""]%\' OR '.$wordpress_query_post.' LIKE \'%[Spider_Catalog_Category id="'.$rows_category[$i]->id.'" details="1" type="list"]%\' OR ';
+		$string_search .=$wordpress_query_post.' LIKE \'%[Spider_Catalog_Category id="'.$rows_category[$i]->id.'" details="1" %\' OR '.$wordpress_query_post.' LIKE \'%[Spider_Catalog_Category id="'.$rows_category[$i]->id.'" details="1"%\' OR ';
 	}
 	
 	
@@ -70,7 +88,7 @@ function gen_string_catalog_search($serch_word,$wordpress_query_post)
 	$rows_category=$wpdb->get_results("SELECT * FROM ".$wpdb->prefix."spidercatalog_product_categories WHERE (name LIKE '%".$serch_word."%')");
 	$count_cat_rows=count($rows_category);
 	for($i=0;$i<$count_cat_rows;$i++){
-		$string_search .=$wordpress_query_post.' LIKE \'%[Spider_Catalog_Category id="'.$rows_category[$i]->id.'" details="0" type=""]%\' OR '.$wordpress_query_post.' LIKE \'%[Spider_Catalog_Category id="'.$rows_category[$i]->id.'" details="0" type="list"]%\' OR ';
+		$string_search .=$wordpress_query_post.' LIKE \'%[Spider_Catalog_Category id="'.$rows_category[$i]->id.'" details="0"%\' OR '.$wordpress_query_post.' LIKE \'%[Spider_Catalog_Category id="'.$rows_category[$i]->id.'" details="0"%\' OR ';
 	}
 	
 	$rows_single=$wpdb->get_results("SELECT * FROM ".$wpdb->prefix."spidercatalog_products WHERE name LIKE '%".$serch_word."%'");
@@ -106,9 +124,13 @@ function Spider_Catalog_Single_product_shotrcode($atts) {
      extract(shortcode_atts(array(
 	      'id' => '',
      ), $atts));
+	 if(!(is_numeric($atts['id'])))
+	return 'insert numerical  shortcode in `id`';
+	
      return spider_cat_Single_product($id);
 }
 add_shortcode('Spider_Catalog_Product', 'Spider_Catalog_Single_product_shotrcode');
+
 
 
 
@@ -228,7 +250,7 @@ function spiderbox_scripts_method() {
 	wp_enqueue_style('spider_cat_main',plugins_url("spidercatalog_main.css",__FILE__));
 }     
  
-add_action('wp_enqueue_scripts', 'spiderbox_scripts_method');
+add_action('wp_head', 'spiderbox_scripts_method',1);
 
 
 
@@ -248,7 +270,9 @@ function spider_cat_ShowTinyMCE() {
 	wp_print_scripts('editor');
 	if (function_exists('add_thickbox')) add_thickbox();
 	wp_print_scripts('media-upload');
+	if(version_compare(get_bloginfo('version'),3.3)<0){
 	if (function_exists('wp_tiny_mce')) wp_tiny_mce();
+	}
 	wp_admin_css();
 	wp_enqueue_script('utils');
 	do_action("admin_print_styles-post-php");
@@ -402,9 +426,10 @@ function Categories_Spider_Catalog()
 	
 	
 	
-	
+if(isset($_GET["task"]))	
 $task=$_GET["task"];//get task for choosing function
-
+else
+$task='';
 if(isset($_GET["id"]))
 	$id=$_GET["id"];
 	else
@@ -670,14 +695,16 @@ function Options_Catalog_global(){
 
 
 
+
 function Uninstall_Spider_Catalog(){
 	
 global $wpdb;
 $base_name = plugin_basename('Spider_Catalog');
 $base_page = 'admin.php?page='.$base_name;
+if(isset($_GET['mode']))
 $mode = trim($_GET['mode']);
-
-
+else
+$mode ='';
 if(!empty($_POST['do'])) {
 
 	if($_POST['do']=="UNINSTALL Spider_Catalog") {
@@ -796,6 +823,7 @@ switch($mode) {
  function open_cat_in_tree($catt,$tree_problem='',$hihiih=1){
 
 global $wpdb;
+$search_tag='';
 static $trr_cat=array();
 if($hihiih)
 $trr_cat=array();
@@ -807,7 +835,7 @@ FROM ".$wpdb->prefix."spidercatalog_products, ".$wpdb->prefix."spidercatalog_pro
 WHERE ".$wpdb->prefix."spidercatalog_products.category_id = ".$wpdb->prefix."spidercatalog_product_categories.id
 GROUP BY ".$wpdb->prefix."spidercatalog_products.category_id) AS c ON c.id = a.id LEFT JOIN
 (SELECT ".$wpdb->prefix."spidercatalog_product_categories.name AS par_name,".$wpdb->prefix."spidercatalog_product_categories.id FROM ".$wpdb->prefix."spidercatalog_product_categories) AS g
- ON a.parent=g.id WHERE a.name LIKE '%".$search_tag."%' AND a.parent=".$dog->id." group by a.id"; 
+ ON a.parent=g.id WHERE a.name LIKE '%".$wpdb->escape($search_tag)."%' AND a.parent=".$dog->id." group by a.id"; 
  $new_cat=$wpdb->get_results($new_cat_query);
  open_cat_in_tree($new_cat,$tree_problem. "— ",0);
 }
@@ -1027,7 +1055,8 @@ add_action('wp_ajax_spiderboxjsphp', 'spider_box_js_php');
  add_action('wp_ajax_nopriv_spiderboxjsphp', 'spider_box_js_php');
 
 function spider_box_js_php(){
-	?>
+  header('Content-Type: text/javascript; charset=UTF-8');
+?>
 var keyOfOpenImage;
 var listOfImages=Array();
 var slideShowOn;
@@ -1256,11 +1285,11 @@ function SpiderCatAddToOnload()
 
     getViewportSize();
 
-	slideShowDelay=<?php echo $_GET['delay']; ?>;
-	slideShowQ=<?php echo $_GET['slideShowQ']; ?>;	
-	allImagesQ=<?php echo $_GET['allImagesQ']; ?>;
-	spiderShop=<?php echo isset($_GET['spiderShop'])?$_GET['spiderShop']:0; ?>;
-	darkBG=<?php echo $_GET['darkBG']; ?>;
+	slideShowDelay=<?php echo esc_js($_GET['delay']); ?>;
+	slideShowQ=<?php echo esc_js($_GET['slideShowQ']); ?>;	
+	allImagesQ=<?php echo esc_js($_GET['allImagesQ']); ?>;
+	spiderShop=<?php echo isset($_GET['spiderShop'])?esc_js($_GET['spiderShop']):0; ?>;
+	darkBG=<?php echo esc_js($_GET['darkBG']); ?>;
 	keyOfOpenImage=-1;
 	spiderBoxBase="<?php echo urldecode($_GET['juriroot']); ?>/spiderBox/";
 	LoadingImg.src=spiderBoxBase+"loadingAnimation.gif";
@@ -1625,7 +1654,7 @@ x2, Scart, SD card		par_Refresh Rate@@:@@600 Hz Sub Field Drive		', 2, 1, 0),
 
 1, '<p><b>Sony Television KDL-46EX710AEP</b></p><p>46&quot; / 117 cm, MotionFlow 100Hz, Bravia Engine 3, Analog, DVB-T, DVB-
 
-C, 4xHDMI, VGA, RGB, RCA, USB, 2xSCART </p>', 
+C, 4xHDMI, VGA, RGB, RCA, USB, 2xSCART </p>', 
 
 '".plugins_url("Front_images/sampleimages/7_7557_1298400832.jpg",__FILE__)."******0;;;".plugins_url("Front_images/sampleimages/r1.jpg",__FILE__)."******0;;;".plugins_url("Front_images/sampleimages/sony_kdl32ex700aep_3.jpg",__FILE__)."', '1450.00', '1700.00', 'par_TV 
 

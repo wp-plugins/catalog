@@ -1,7 +1,7 @@
 <?php 
 
 
-function html_front_end_single_product($rows,$reviews_rows, $option, $params,$category_name,$rev_page,$reviews_count,$rating,$voted,$product_id,$ident){
+function html_front_end_single_product($rows,$reviews_rows,  $params,$category_name,$rev_page,$reviews_count,$rating,$voted,$product_id,$ident){
    ob_start();
     global $ident;
 ?>
@@ -281,7 +281,9 @@ if( 'page' == get_option( 'show_on_front' ) && ( '' != get_option( 'page_for_pos
 	   else if(is_home())
 	   {
 		   $page_link1=site_url().'/index.php';
+		   if(isset($rest[$nnn-3]) && isset ($rest[$nnn-2]))
 		   $ff='?'.$rest[$nnn-3].'&'.$rest[$nnn-2];
+		   else  $ff='?';
 		   
 	   }
 	   else
@@ -310,7 +312,7 @@ if( 'page' == get_option( 'show_on_front' ) && ( '' != get_option( 'page_for_pos
 	   }
 }     
 
-if($_GET['ident']== $ident || !$_GET['product_id']){
+if((isset($_GET['ident']) && isset($_GET['product_id'])) && ($_GET['ident']== $ident || !$_GET['product_id'])){
 foreach($rows as $row)
 {
 
@@ -408,9 +410,9 @@ if($img!=='******0')
 {
 	
 	$image_with_atach_id=explode('******',$img);
-	if($image_with_atach_id[1])
+	if(isset($image_with_atach_id[1]) && $image_with_atach_id[1])
 	{
-		$array_with_sizes=wp_get_attachment_image_src( $image_with_atach_id[1], 'thumbnail' );
+	$array_with_sizes=wp_get_attachment_image_src( $image_with_atach_id[1], 'thumbnail' );
 	$attach_url=$array_with_sizes[0];
 	}
 	else{
@@ -569,8 +571,7 @@ echo '
 	<input type="hidden" name="product_id" value="'.$row->id.'" />
 	
 	
-	<input type="hidden" name="review_'.$ident.'" value="1" />
-	<input type="hidden" name="option" value="'.$option.'" />';
+	<input type="hidden" name="review_'.$ident.'" value="1" />';
 
 	?><br />
 <br />
@@ -592,9 +593,15 @@ echo '
 	
   
   
-  
+  if(isset($_POST['code_'.$ident]))
    $code=$_POST['code_'.$ident];
+   else
+   $code='';
+   if(isset($_POST['review_'.$ident]))
    $review=$_POST['review_'.$ident];
+   else
+   $review='';
+   
 
    if($review)
   	if($code!='' and $code==$_SESSION['captcha_code']   )
@@ -828,7 +835,7 @@ $content=ob_get_contents();
 
 
 
-function front_end_catalog_list($rows, $option,$params,$page_num,$prod_count,$prod_in_page,$ratings,$voted,$categories,$category_list,$params1,$cat_rows,$cat_id,$child_ids,$params7,$categor,$par,$cels_or_list,$ident)
+function front_end_catalog_list($rows,$params,$page_num,$prod_count,$prod_in_page,$ratings,$voted,$categories,$category_list,$params1,$cat_rows,$cat_id,$child_ids,$params7,$categor,$par,$cels_or_list,$ident)
 {
 
   
@@ -1365,12 +1372,12 @@ if ((!$params["choose_category"] and ($params1['categories'] > 0)) or !$params["
    }
 	   else if(is_home())
 	   { 
-	      if($_POST['subcat_id_'.$cels_or_list.'_'.$ident.'']){
+	      if(isset($_POST['subcat_id_'.$cels_or_list.'_'.$ident.'']) && $_POST['subcat_id_'.$cels_or_list.'_'.$ident.'']){
 		  if($_POST['subcat_id_'.$cels_or_list.'_'.$ident.'']!=0)
 		   $page_link=site_url().'/index.php?cat_id_'.$cels_or_list.'_'.$ident.'='.$_POST['subcat_id_'.$cels_or_list.'_'.$ident.''];
 		  else
 		   $page_link=site_url().'/index.php';
-		  }else if($_POST['prod_name_'.$cels_or_list.'_'.$ident.''] or $_POST['page_num_'.$cels_or_list.'_'.$ident.''])
+		  }else if((isset($_POST['prod_name_'.$cels_or_list.'_'.$ident.'']) && isset($_POST['page_num_'.$cels_or_list.'_'.$ident.''])) && ($_POST['prod_name_'.$cels_or_list.'_'.$ident.''] or $_POST['page_num_'.$cels_or_list.'_'.$ident.'']))
 		   $page_link=site_url().'/index.php?cat_id_'.$cels_or_list.'_'.$ident.'='.$cat_id;
 		  else
 		   $page_link=site_url().'/index.php';
@@ -1387,7 +1394,9 @@ if ((!$params["choose_category"] and ($params1['categories'] > 0)) or !$params["
 		  else
 		   $page_link=get_permalink();
 	   }
-	 
+	 if(!isset($subcat_id)){
+		$subcat_id='';
+		}
     echo '<form action="'. $page_link.'" method="post" name="cat_form_'.$cels_or_list.'_'.$ident.'" id="cat_form_page_nav1" style="display:block;">
 <input type="hidden" name="page_num_'.$cels_or_list.'_'.$ident.'"	value="1">
 <input type="hidden" name="subcat_id_'.$cels_or_list.'_'.$ident.'" id="subcat_id_'.$cels_or_list.'_'.$ident.'" value="'. $subcat_id.'">
@@ -1434,10 +1443,12 @@ echo '<br />
 	<input type="button" onclick="this.form.submit()" value="'. __('Go','sp_catalog') .'" class="spidercatalogbutton" style="background-color:'.$params[ 'button_background_color' ].'; color:'.$params[ 'button_color' ].'; width:inherit;"><input type="button" value="'. __('Reset','sp_catalog') .'" onClick="cat_form_resett(this.form,'.$cels_or_list.','.$ident.');" class="spidercatalogbutton" style="background-color:'.$params[ 'button_background_color' ].'; color:'.$params[ 'button_color' ].'; width:inherit;">';
 }
 echo '</div></form>';
-if($_POST['subcat_id_'.$cels_or_list.'_'.$ident.'']!="")
+if(isset($_POST['subcat_id_'.$cels_or_list.'_'.$ident.'']) && $_POST['subcat_id_'.$cels_or_list.'_'.$ident.'']!="")
 {
   $subcat_id = $_POST['subcat_id_'.$cels_or_list.'_'.$ident.''];
 }else{
+	if($cat_id=='ALL_CAT')
+	$cat_id=0;
   $subcat_id = $cat_id; 
 }
 
@@ -1483,7 +1494,10 @@ foreach ($rows as $row)
 $imgurl=explode(";;;",$row->image_url);
 $image_and_atach=explode('******',$imgurl[0]);
 $image=$image_and_atach[0];
+if(isset($image_and_atach[1]))
 $atach=$image_and_atach[1];
+else
+$atach=NULL;
 if($atach)
 {
 	$array_with_sizes=wp_get_attachment_image_src( $atach, 'thumbnail' );
@@ -1823,7 +1837,7 @@ window.onload = SpiderCatAddToOnload;
 
 
 
-function front_end_catalog_cells($rows, $option,$params,$page_num,$prod_count,$prod_in_page,$ratings,$voted,$categories,$category_list,$params1,$cat_rows,$cat_id,$child_ids,$params7,$categor,$par,$cels_or_list,$ident){
+function front_end_catalog_cells($rows, $params,$page_num,$prod_count,$prod_in_page,$ratings,$voted,$categories,$category_list,$params1,$cat_rows,$cat_id,$child_ids,$params7,$categor,$par,$cels_or_list,$ident){
 
         ob_start();
  global $ident;
@@ -2360,12 +2374,12 @@ if (($params["choose_category"] and !($params1['categories'] > 0)) or $params["s
    }
 	   else if(is_home())
 	   { 
-	      if($_POST['subcat_id_'.$cels_or_list.'_'.$ident.'']){
+	      if(isset($_POST['subcat_id_'.$cels_or_list.'_'.$ident.'']) && $_POST['subcat_id_'.$cels_or_list.'_'.$ident.'']){
 		  if($_POST['subcat_id_'.$cels_or_list.'_'.$ident.'']!=0)
 		   $page_link=site_url().'/index.php?cat_id_'.$cels_or_list.'_'.$ident.'='.$_POST['subcat_id_'.$cels_or_list.'_'.$ident.''];
 		  else
 		   $page_link=site_url().'/index.php';
-		  }else if($_POST['prod_name_'.$cels_or_list.'_'.$ident.''] or $_POST['page_num_'.$cels_or_list.'_'.$ident.''])
+		  }else if((isset($_POST['prod_name_'.$cels_or_list.'_'.$ident.'']) or isset($_POST['page_num_'.$cels_or_list.'_'.$ident.''])) && ($_POST['prod_name_'.$cels_or_list.'_'.$ident.''] or $_POST['page_num_'.$cels_or_list.'_'.$ident.'']))
 		   $page_link=site_url().'/index.php?cat_id_'.$cels_or_list.'_'.$ident.'='.$cat_id;
 		  else
 		   $page_link=site_url().'/index.php';
@@ -2373,30 +2387,31 @@ if (($params["choose_category"] and !($params1['categories'] > 0)) or $params["s
 	   else
 	   {
 	     if(strrpos(get_permalink(), '?')){
-	     if($_POST['subcat_id_'.$cels_or_list.'_'.$ident.'']){
+	     if(isset($_POST['subcat_id_'.$cels_or_list.'_'.$ident.'']) && $_POST['subcat_id_'.$cels_or_list.'_'.$ident.'']){
 		  if($_POST['subcat_id_'.$cels_or_list.'_'.$ident.'']!=0)
 		 
 		   $page_link=get_permalink().'&cat_id_'.$cels_or_list.'_'.$ident.'='.$_POST['subcat_id_'.$cels_or_list.'_'.$ident.''];
 		  else
 		   $page_link=get_permalink();
-		  }else if($_POST['prod_name_'.$cels_or_list.'_'.$ident.''] or $_POST['page_num_'.$cels_or_list.'_'.$ident.''])
+		  }else if((isset($_POST['prod_name_'.$cels_or_list.'_'.$ident.'']) or isset($_POST['page_num_'.$cels_or_list.'_'.$ident.''])) && ($_POST['prod_name_'.$cels_or_list.'_'.$ident.''] or $_POST['page_num_'.$cels_or_list.'_'.$ident.'']))
 		   $page_link=get_permalink().'&cat_id_'.$cels_or_list.'_'.$ident.'='.$cat_id;
 		  else
 		   $page_link=get_permalink();
 		   }else{
-		   if($_POST['subcat_id_'.$cels_or_list.'_'.$ident.'']){
+		   if(isset($_POST['subcat_id_'.$cels_or_list.'_'.$ident.'']) && $_POST['subcat_id_'.$cels_or_list.'_'.$ident.'']){
 		  if($_POST['subcat_id_'.$cels_or_list.'_'.$ident.'']!=0)
 		 
 		   $page_link=get_permalink().'?cat_id_'.$cels_or_list.'_'.$ident.'='.$_POST['subcat_id_'.$cels_or_list.'_'.$ident.''];
 		  else
 		   $page_link=get_permalink();
-		  }else if($_POST['prod_name_'.$cels_or_list.'_'.$ident.''] or $_POST['page_num_'.$cels_or_list.'_'.$ident.''])
+		  }else if((isset($_POST['prod_name_'.$cels_or_list.'_'.$ident.'']) && isset($_POST['page_num_'.$cels_or_list.'_'.$ident.''])) && ($_POST['prod_name_'.$cels_or_list.'_'.$ident.''] or $_POST['page_num_'.$cels_or_list.'_'.$ident.'']))
 		   $page_link=get_permalink().'?cat_id_'.$cels_or_list.'_'.$ident.'='.$cat_id;
 		  else
 		   $page_link=get_permalink();
 		   }
 	   }
-
+if(!isset($subcat_id))
+$subcat_id='';
     echo '<form action="'.$page_link.'" method="post" name="cat_form_'.$cels_or_list.'_'.$ident.'" id="cat_form_page_nav" style="display:block;">
 <input type="hidden" name="page_num_'.$cels_or_list.'_'.$ident.'"	value="1">
 <input type="hidden" name="subcat_id_'.$cels_or_list.'_'.$ident.'" id="subcat_id_'.$cels_or_list.'_'.$ident.'" value="'. $subcat_id.'">
@@ -2443,7 +2458,7 @@ echo '<br />
 	<input type="button" onclick="this.form.submit()"  value="'. __('Go','sp_catalog') .'" class="spidercatalogbutton" style="background-color:'.$params[ 'button_background_color'].'; color:'.$params[ 'button_color'].'; width:inherit;"><input type="button" value="'. __('Reset','sp_catalog') .'" onClick="cat_form_resett(this.form,'.$cels_or_list.','.$ident.');" class="spidercatalogbutton" style="background-color:'.$params[ 'button_background_color'].'; color:'.$params[ 'button_color'].'; width:inherit;">';
 }
 echo '</div></form>';
-if($_POST['subcat_id_'.$cels_or_list.'_'.$ident.'']!="")
+if(isset($_POST['subcat_id_'.$cels_or_list.'_'.$ident.'']) && $_POST['subcat_id_'.$cels_or_list.'_'.$ident.'']!="")
 {
   $subcat_id = $_POST['subcat_id_'.$cels_or_list.'_'.$ident.''];
 }else{
@@ -2509,7 +2524,10 @@ foreach ($rows as $row)
 		
 		$image_and_atach=explode('******',$imgurl[0]);
 $image=$image_and_atach[0];
+if(isset($image_and_atach[1]))
 $atach=$image_and_atach[1];
+else
+$atach='';
 if($atach)
 {
 	$array_with_sizes=wp_get_attachment_image_src( $atach, 'thumbnail' );

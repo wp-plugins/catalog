@@ -1,9 +1,11 @@
 	<?php	
-	
+	if(function_exists('current_user_can'))
 	if(!current_user_can('manage_options')) {
 	die('Access Denied');
 }	
-
+if(!function_exists('current_user_can')){
+	die('Access Denied');
+}
 
 
 
@@ -35,7 +37,20 @@ function showCategory()
 	  
 	  
   global $wpdb;
+  
+  
+  if(isset($_POST['search_events_by_title']))
+$_POST['search_events_by_title']=esc_js($_POST['search_events_by_title']);
+if(isset($_POST['asc_or_desc']))
+$_POST['asc_or_desc']=esc_js($_POST['asc_or_desc']);
+if(isset($_POST['order_by']))
+$_POST['order_by']=esc_js($_POST['order_by']);
+  $where='';
+  	$sort["custom_style"] ="manage-column column-autor sortable desc";
 	$sort["default_style"]="manage-column column-autor sortable desc";
+	$sort["sortid_by"]='id';
+	$sort["1_or_2"]=1;
+	$order='';
 	
 	if(isset($_POST['page_number']))
 	{
@@ -221,8 +236,8 @@ if(isset($_POST['saveorder']))
 	}
 	
 	
-	
-	if(isset($_POST["oreder_move"]))
+
+	if(isset($_POST["oreder_move"]) && $_POST["oreder_move"]!='')
 	{
 		$ids=explode(",",$_POST["oreder_move"]);
 		$this_order=$wpdb->get_var("SELECT ordering FROM ".$wpdb->prefix."spidercatalog_product_categories WHERE id=".$ids[0]);
@@ -306,7 +321,7 @@ foreach($rows as $row)
 	}
 	
 	$cat_row=open_cat_in_tree($cat_row);
-		html_showcategories($option, $rows, $controller, $lists, $pageNav,$sort,$cat_row);
+		html_showcategories( $rows, $pageNav,$sort,$cat_row);
   }
 
 
@@ -323,6 +338,8 @@ function open_cat_in_tree($catt,$tree_problem='',$hihiih=1){
 global $wpdb;
 global $glob_ordering_in_cat;
 static $trr_cat=array();
+if(!isset($search_tag))
+$search_tag='';
 if($hihiih)
 $trr_cat=array();
 foreach($catt as $dog){
@@ -348,8 +365,10 @@ function editCategory($id)
 	  global $wpdb;
 
 
-	   $query="SELECT * FROM ".$wpdb->prefix."spidercatalog_product_categories WHERE id='".$id."'";
+	   $query=$wpdb->prepare("SELECT * FROM ".$wpdb->prefix."spidercatalog_product_categories WHERE id=%d",$id);
 	   $row=$wpdb->get_row($query);
+	   if(!isset($row->category_image_url))
+	   return 'id not found';
        $images=explode(";;;",$row->category_image_url);
 	   $par=explode('	',$row->param);
 	   $count_ord=count($images);
@@ -372,7 +391,7 @@ function add_category()
 	global $wpdb;
 	
 	
-	$query="SELECT name,ordering FROM ".$wpdb->prefix."spidercatalog_product_categories ORDER BY `ordering` WHERE parent=-1";
+	$query="SELECT name,ordering FROM ".$wpdb->prefix."spidercatalog_product_categories WHERE parent=0 ORDER BY `ordering`";
 	$ord_elem=$wpdb->get_results($query); ///////ordering elements list
 	$cat_row=$wpdb->get_results("SELECT * FROM ".$wpdb->prefix."spidercatalog_product_categories where parent=0");
 	$cat_row=open_cat_in_tree($cat_row);
@@ -398,8 +417,8 @@ function save_cat()
 	 }
 	 
 	$count_of_rows=count($rows);
-	$ordering_values==array();
-	$ordering_ids==array();
+	$ordering_values=array();
+	$ordering_ids=array();
 	for($i=0;$i<$count_of_rows;$i++)
 	{		
 	
@@ -428,11 +447,11 @@ function save_cat()
 	 
 	 $save_or_no= $wpdb->insert($wpdb->prefix.'spidercatalog_product_categories', array(
 		'id'	=> NULL,
-		'name'   				 => $_POST["name"],
+		'name'   				 => htmlspecialchars($_POST["name"]),
 		'parent'                 => $_POST["parent"],
-        'category_image_url'     => $new_images,
-        'description'			 => stripslashes($_POST["content"]),
-        'param'  				 =>$_POST["param"],		
+        'category_image_url'     => esc_js($new_images),
+        'description'			 => esc_js(stripslashes($_POST["content"])),
+        'param'  				 =>esc_js($_POST["param"]),		
         'ordering' 				 => $_POST["ordering"],
 		'published'				 =>$_POST["published"],
                 ),
@@ -450,9 +469,9 @@ function save_cat()
                 );
 			$id=$wpdb->get_var("SELECT MAX( id ) FROM ".$wpdb->prefix."spidercatalog_product_categories");
 			
-			$query="SELECT parent FROM ".$wpdb->prefix."spidercatalog_product_categories WHERE id='".$id."'";
+			$query=$wpdb->prepare("SELECT parent FROM ".$wpdb->prefix."spidercatalog_product_categories WHERE id=%d",$id);
 	        $fff=$wpdb->get_var($query);
-	        $query="SELECT param FROM ".$wpdb->prefix."spidercatalog_product_categories where id='".$fff."'";
+	        $query=$wpdb->prepare("SELECT param FROM ".$wpdb->prefix."spidercatalog_product_categories where id=%d",$fff);
 		    $rows1 =$wpdb->get_row($query);	
     	
 		if(isset($_POST["parent"]) && $_POST["parent"]!=0){
@@ -465,7 +484,7 @@ function save_cat()
 			  );
 		}
 		}
-				$cat_row=$wpdb->get_results("SELECT * FROM ".$wpdb->prefix."spidercatalog_product_categories WHERE id!=" .$_GET['id']. " ");
+				$cat_row=$wpdb->get_results($wpdb->prepare("SELECT * FROM ".$wpdb->prefix."spidercatalog_product_categories WHERE id!=%d ",$id));
 				
 					if(!$save_or_no)
 	{
@@ -492,7 +511,8 @@ function save_cat()
 
 function change_cat( $id ){
   global $wpdb;
-  $published=$wpdb->get_var("SELECT published FROM ".$wpdb->prefix."spidercatalog_product_categories WHERE `id`=".$id );
+  
+  $published=$wpdb->get_var($wpdb->prepare("SELECT published FROM ".$wpdb->prefix."spidercatalog_product_categories WHERE `id`=%d",$id) );
   if($published)
    $published=0;
   else
@@ -503,13 +523,7 @@ function change_cat( $id ){
               array('id'=>$id),
 			  array(  '%d' )
 			  );
-	if($save_or_no)
-	{
-		?>
-	<div class="error"><p><strong><?php _e('Error. Please install plugin again'); ?></strong></p></div>
-	<?php
-		return false;
-	}
+	
 	?>
 	<div class="updated"><p><strong><?php _e('Item Saved'); ?></strong></p></div>
 	<?php
@@ -524,11 +538,11 @@ function removeCategory($id)
 	
 	
 	global $wpdb;
-	 $sql_remov_tag="DELETE FROM ".$wpdb->prefix."spidercatalog_product_categories WHERE id='".$id."'";
+	 $sql_remov_tag=$wpdb->prepare("DELETE FROM ".$wpdb->prefix."spidercatalog_product_categories WHERE id=%d",$id);
  if(!$wpdb->query($sql_remov_tag))
  {
 	  ?>
-	  <div id="message" class="error"><p>Spider Video Player Tag Not Deleted</p></div>
+	  <div id="message" class="error"><p>Category Not Deleted</p></div>
       <?php
 	 
  }
@@ -537,17 +551,20 @@ function removeCategory($id)
  <div class="updated"><p><strong><?php _e('Item Deleted.' ); ?></strong></p></div>
  <?php
  }
-    $row=$wpdb->get_results('UPDATE '.$wpdb->prefix.'spidercatalog_product_categories SET parent="0"   WHERE parent='.$id.'');
+    $row=$wpdb->get_results($wpdb->prepare( 'UPDATE '.$wpdb->prefix.'spidercatalog_product_categories SET parent="0"   WHERE parent=%d',$id));
 	$rows=$wpdb->get_results('SELECT * FROM '.$wpdb->prefix.'spidercatalog_product_categories  ORDER BY `ordering` ASC ');
 	
 	$count_of_rows=count($rows);
-	$ordering_values==array();
-	$ordering_ids==array();
+	$ordering_values=array();
+	$ordering_ids=array();
 	for($i=0;$i<$count_of_rows;$i++)
 	{		
 	
 		$ordering_ids[$i]=$rows[$i]->id;
+		if(isset($_POST["ordering"]))
 		$ordering_values[$i]=$i+1+$_POST["ordering"];
+		else
+		$ordering_values[$i]=$i+1;
 	}
 
 		for($i=0;$i<$count_of_rows;$i++)
@@ -575,16 +592,25 @@ function apply_cat($id)
 	
 	
 		 global $wpdb;
-		 $cat_row=$wpdb->get_results("SELECT * FROM ".$wpdb->prefix."spidercatalog_product_categories WHERE id!=" .$_GET['id']. " ");
-		 $corent_ord=$wpdb->get_var('SELECT `ordering` FROM '.$wpdb->prefix.'spidercatalog_product_categories WHERE id=\''.$id.'\' AND parent='.$_POST['parent'].'');
+		 if(!is_numeric($id)){
+			 echo 'insert numerc id';
+		 	return '';
+		 }
+		 if(!(isset($_POST['parent']) && isset($_POST["ordering"]) && isset($_POST["name"]) && isset($_POST["content"]) && isset($_POST["param"]) && isset( $_POST["ordering"])))
+		 {
+			 echo 'not important values';
+			 return '';
+		 }
+		 $cat_row=$wpdb->get_results($wpdb->prepare("SELECT * FROM ".$wpdb->prefix."spidercatalog_product_categories WHERE id!=%d ",$_GET['id']));
+		 $corent_ord=$wpdb->get_var($wpdb->prepare('SELECT `ordering` FROM '.$wpdb->prefix.'spidercatalog_product_categories WHERE id=%d AND parent=%d',$id,$_POST['parent']));
 		 $max_ord=$wpdb->get_var('SELECT MAX(ordering) FROM '.$wpdb->prefix.'spidercatalog_product_categories');
 		 if($corent_ord>$_POST["ordering"])
 		 {
-				$rows=$wpdb->get_results('SELECT * FROM '.$wpdb->prefix.'spidercatalog_product_categories WHERE ordering>='.$_POST["ordering"].' AND id<>\''.$id.'\' AND parent='.$_POST['parent'].' ORDER BY `ordering` ASC ');
+				$rows=$wpdb->get_results($wpdb->prepare('SELECT * FROM '.$wpdb->prefix.'spidercatalog_product_categories WHERE ordering>=%d AND id<>%d AND parent=%d ORDER BY `ordering` ASC ',$_POST["ordering"],$id,$_POST['parent']));
 			 
 			$count_of_rows=count($rows);
-			$ordering_values==array();
-			$ordering_ids==array();
+			$ordering_values=array();
+			$ordering_ids=array();
 			for($i=0;$i<$count_of_rows;$i++)
 			{		
 			
@@ -602,11 +628,11 @@ function apply_cat($id)
 		 }
 		 if($corent_ord<$_POST["ordering"])
 		 {
-			 $rows=$wpdb->get_results('SELECT * FROM '.$wpdb->prefix.'spidercatalog_product_categories WHERE ordering<='.$_POST["ordering"].' AND id<>\''.$id.'\' AND parent='.$_POST['parent'].'  ORDER BY `ordering` ASC ');
+			 $rows=$wpdb->get_results($wpdb->prepare('SELECT * FROM '.$wpdb->prefix.'spidercatalog_product_categories WHERE ordering<=%d AND id<>%d AND parent=%d  ORDER BY `ordering` ASC ',$_POST["ordering"],$id,$_POST['parent']));
 			 
 			$count_of_rows=count($rows);
-			$ordering_values==array();
-			$ordering_ids==array();
+			$ordering_values=array();
+			$ordering_ids=array();
 			for($i=0;$i<$count_of_rows;$i++)
 			{		
 			
@@ -629,7 +655,7 @@ function apply_cat($id)
 		 
 		 
      
-            $query="SELECT parent FROM ".$wpdb->prefix."spidercatalog_product_categories WHERE id='".$id."'";
+            $query=$wpdb->prepare("SELECT parent FROM ".$wpdb->prefix."spidercatalog_product_categories WHERE id=%d",$id);
 	        $id_bef=$wpdb->get_var($query);
       
 		 
@@ -642,11 +668,11 @@ function apply_cat($id)
 	 $new_images=implode(';;;',$images);
 	
 	$savedd=$wpdb->update($wpdb->prefix.'spidercatalog_product_categories', array(
-					'name'   				 => $_POST["name"],
+					'name'   				 => esc_js($_POST["name"]),
 					'parent'   				 => $_POST["parent"],
-					'category_image_url'     => $new_images,
-					'description'			 => stripslashes($_POST["content"]),
-					'param'  				 =>$_POST["param"],
+					'category_image_url'     => esc_js($new_images),
+					'description'			 => esc_js(stripslashes($_POST["content"])),
+					'param'  				 =>esc_js($_POST["param"]),
 					'ordering' 				 => $_POST["ordering"],
 					'published'				 =>$_POST["published"],
               ), 
@@ -661,9 +687,9 @@ function apply_cat($id)
 				'%d', )
 			  );
 		if($_POST["parent"]!=0){
-		    $query="SELECT parent FROM ".$wpdb->prefix."spidercatalog_product_categories WHERE id='".$id."'";
+		    $query=$wpdb->prepare("SELECT parent FROM ".$wpdb->prefix."spidercatalog_product_categories WHERE id=%d",$id);
 	        $fff=$wpdb->get_var($query);
-	        $query="SELECT param FROM ".$wpdb->prefix."spidercatalog_product_categories where id='".$fff."'";
+	        $query=$wpdb->prepare("SELECT param FROM ".$wpdb->prefix."spidercatalog_product_categories where id=%d",$fff);
 		    $rows1 =$wpdb->get_row($query);	
 		    if(isset($_POST["parent"]) && $_POST["parent"]!=$id_bef){
 	 
@@ -677,13 +703,7 @@ function apply_cat($id)
 		    }
 		    }
 		}
-	if($save_or_no)
-	{
-		?>
-	<div class="error"><p><strong><?php _e('Error. Please install plugin again'); ?></strong></p></div>
-	<?php
-		return false;
-	}
+
 	?>
 	<div class="updated"><p><strong><?php _e('Item Saved'); ?></strong></p></div>
 	<?php
