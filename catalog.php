@@ -245,7 +245,7 @@ add_action('admin_head', 'add_button_style_Spider_Catalog');
 
 
 function spiderbox_scripts_method() {
-    wp_enqueue_script( 'spiderbox',admin_url('admin-ajax.php?action=spiderboxjsphp').'&delay=3000&allImagesQ=0&slideShowQ=0&darkBG=1&juriroot='.urlencode(plugins_url("",__FILE__)).'&spiderShop=1' );
+    wp_enqueue_script( 'spidersuperbox',admin_url('admin-ajax.php?action=spiderboxjsphp').'&delay=3000&allImagesQ=0&slideShowQ=0&darkBG=1&juriroot='.urlencode(plugins_url("",__FILE__)).'&spiderShop=1' );
 	wp_enqueue_script( 'my_common',plugins_url("js/common.js",__FILE__));
 	wp_enqueue_style('spider_cat_main',plugins_url("spidercatalog_main.css",__FILE__));
 }     
@@ -827,15 +827,15 @@ $search_tag='';
 static $trr_cat=array();
 if($hihiih)
 $trr_cat=array();
-foreach($catt as $dog){
-	$dog->name=$tree_problem.$dog->name;
-	array_push($trr_cat,$dog);
+foreach($catt as $local_cat){
+	$local_cat->name=$tree_problem.$local_cat->name;
+	array_push($trr_cat,$local_cat);
 	$new_cat_query=	"SELECT  a.* ,  COUNT(b.id) AS count, g.par_name AS par_name FROM ".$wpdb->prefix."spidercatalog_product_categories  AS a LEFT JOIN ".$wpdb->prefix."spidercatalog_product_categories AS b ON a.id = b.parent LEFT JOIN (SELECT  ".$wpdb->prefix."spidercatalog_product_categories.ordering as ordering,".$wpdb->prefix."spidercatalog_product_categories.id AS id, COUNT( ".$wpdb->prefix."spidercatalog_products.category_id ) AS prod_count
 FROM ".$wpdb->prefix."spidercatalog_products, ".$wpdb->prefix."spidercatalog_product_categories
 WHERE ".$wpdb->prefix."spidercatalog_products.category_id = ".$wpdb->prefix."spidercatalog_product_categories.id
 GROUP BY ".$wpdb->prefix."spidercatalog_products.category_id) AS c ON c.id = a.id LEFT JOIN
 (SELECT ".$wpdb->prefix."spidercatalog_product_categories.name AS par_name,".$wpdb->prefix."spidercatalog_product_categories.id FROM ".$wpdb->prefix."spidercatalog_product_categories) AS g
- ON a.parent=g.id WHERE a.name LIKE '%".$wpdb->escape($search_tag)."%' AND a.parent=".$dog->id." group by a.id"; 
+ ON a.parent=g.id WHERE a.name LIKE '%".$wpdb->escape($search_tag)."%' AND a.parent=".$local_cat->id." group by a.id"; 
  $new_cat=$wpdb->get_results($new_cat_query);
  open_cat_in_tree($new_cat,$tree_problem. "— ",0);
 }

@@ -240,15 +240,15 @@ $search_tag='';
 static $trr_cat=array();
 if($hihiih)
 $trr_cat=array();
-foreach($catt as $dog){
-	$dog->name=$tree_problem.$dog->name;
-	array_push($trr_cat,$dog);
+foreach($catt as $local_cat){
+	$local_cat->name=$tree_problem.$local_cat->name;
+	array_push($trr_cat,$local_cat);
 	$new_cat_query=	"SELECT  a.* ,  COUNT(b.id) AS count, g.par_name AS par_name FROM ".$wpdb->prefix."spidercatalog_product_categories  AS a LEFT JOIN ".$wpdb->prefix."spidercatalog_product_categories AS b ON a.id = b.parent LEFT JOIN (SELECT  ".$wpdb->prefix."spidercatalog_product_categories.ordering as ordering,".$wpdb->prefix."spidercatalog_product_categories.id AS id, COUNT( ".$wpdb->prefix."spidercatalog_products.category_id ) AS prod_count
 FROM ".$wpdb->prefix."spidercatalog_products, ".$wpdb->prefix."spidercatalog_product_categories
 WHERE ".$wpdb->prefix."spidercatalog_products.category_id = ".$wpdb->prefix."spidercatalog_product_categories.id
 GROUP BY ".$wpdb->prefix."spidercatalog_products.category_id) AS c ON c.id = a.id LEFT JOIN
 (SELECT ".$wpdb->prefix."spidercatalog_product_categories.name AS par_name,".$wpdb->prefix."spidercatalog_product_categories.id FROM ".$wpdb->prefix."spidercatalog_product_categories) AS g
- ON a.parent=g.id WHERE a.name LIKE '%".$wpdb->escape($search_tag)."%' AND a.parent=".$wpdb->escape($dog->id)." group by a.id"; 
+ ON a.parent=g.id WHERE a.name LIKE '%".$wpdb->escape($search_tag)."%' AND a.parent=".$wpdb->escape($local_cat->id)." group by a.id"; 
  $new_cat=$wpdb->get_results($new_cat_query);
  open_cat_in_tree($new_cat,$tree_problem. "— ",0);
 }
