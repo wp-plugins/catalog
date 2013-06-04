@@ -4,7 +4,7 @@ Donate link: http://web-dorado.com/products/wordpress-catalog.html
 Tags: wordpress catalog, wordpress products list, wordpress products catalog  
 Requires at least: 3.0  
 Tested up to: 3.5  
-Stable tag: 1.4.8
+Stable tag: trunk  
 License: GPLv2 or later  
 License URI: http://www.gnu.org/licenses/gpl-2.0.html  
   

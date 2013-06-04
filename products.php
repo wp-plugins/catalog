@@ -508,9 +508,9 @@ function save_prad_cat()
 	
 	
 	 global $wpdb;
-	 if(!(isset($_POST["ordering"]) && isset($_POST["uploadded_images_list"]) && isset($_POST["cat_search"]) && isset($_POST["content"]) && isset($_POST["cost"]) && isset($_POST["param"])))
+	 if(!(isset($_POST["ordering"]) && isset($_POST["uploadded_images_list"]) && isset($_POST["cat_search"]) && isset($_POST["content"]) && isset($_POST["param"])))
 	 {
-		 echo 'canot get \$_POST[]';
+		 echo 'cannot get \$_POST[]';
 		 exit;
 	 }
 	 if(isset($_POST["ordering"])){	 
