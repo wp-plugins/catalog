@@ -312,7 +312,7 @@ if( 'page' == get_option( 'show_on_front' ) && ( '' != get_option( 'page_for_pos
 	   }
 }     
 
-if((isset($_GET['ident']) && isset($_GET['product_id'])) && ($_GET['ident']== $ident || !$_GET['product_id'])){
+if((isset($_GET['ident']) && $_GET['ident']== $ident) || !(isset($_GET['product_id']) && $_GET['product_id'])){
 foreach($rows as $row)
 {
 
