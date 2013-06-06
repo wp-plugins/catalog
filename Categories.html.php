@@ -113,7 +113,7 @@ Get the full version&nbsp;&nbsp;&nbsp;&nbsp;
 	{
 		
 		$serch_fields.='<option value="'.$cat_id->id.'"';
-		if(isset($_POST['cat_search']) && isset($_GET["catid"]) && $_GET["catid"])
+		if(isset($_POST['cat_search']) || isset($_GET["catid"]) && $_GET["catid"])
 		if($_POST['cat_search']==$cat_id->id || $_GET["catid"]==$cat_id->id)
 		$serch_fields.='selected="selected"';		
 		$serch_fields.='>'.$cat_id->name.'</option>';
