@@ -1212,7 +1212,7 @@ function catt_idd_<?php echo $ident; ?>(id)
 </script>
 <?php
 foreach($categor as $chidd){
-if($par!=0 and ($cat_id!=$chidd->id or $_POST['cat_id_'.$cels_or_list.'_'.$ident.'']  or $_GET['cat_id_'.$cels_or_list.'_'.$ident.'']!=0)){
+if($par!=0 and $params1['show_category_details']==1 and ($cat_id!=$chidd->id or $_POST['cat_id_'.$cels_or_list.'_'.$ident.'']  or $_GET['cat_id_'.$cels_or_list.'_'.$ident.'']!=0)){
 echo '<a style="cursor:pointer;" onclick="catt_idd_'.$ident.'('.$chidd->parent.')" >'.__('Back to Catalog','sp_catalog').'</a>';
 }
 }
@@ -2220,7 +2220,7 @@ function catt_idd_<?php echo $ident; ?>(id)
 
 
 foreach($categor as $chidd){
-if($par!=0 and ($cat_id!=$chidd->id or $_POST['cat_id_'.$cels_or_list.'_'.$ident.''] or $_GET['cat_id_'.$cels_or_list.'_'.$ident.'']!=0)){
+if($par!=0 and $params1['show_category_details']==1 and ($cat_id!=$chidd->id or $_POST['cat_id_'.$cels_or_list.'_'.$ident.''] or $_GET['cat_id_'.$cels_or_list.'_'.$ident.'']!=0)){
 
 echo '<a style="cursor:pointer;" onclick="catt_idd_'.$ident.'('.$chidd->parent.')" >'.__('Back to Catalog','sp_catalog').'</a>';
 }
