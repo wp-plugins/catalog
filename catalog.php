@@ -3,7 +3,7 @@
 /*
 Plugin Name: Spider Catalog
 Plugin URI: http://web-dorado.com/
-Version: 1.5.0
+Version: 1.5.1
 Author: http://web-dorado.com/
 License: GNU/GPLv3 http://www.gnu.org/licenses/gpl-3.0.html
 */
@@ -15,6 +15,17 @@ function catalog_lang_load() {
 	
 }
 $ident=1;
+
+
+add_action('admin_head','spider_ajax_func');
+function spider_ajax_func() {
+?>
+<script>
+var spider_ajax='<?php echo admin_url("admin-ajax.php"); ?>';
+</script>
+<?php
+}
+
 function Spider_Catalog_Products_list_shotrcode($atts) {
      extract(shortcode_atts(array(
 	      'id' => 'no Spider catalog',

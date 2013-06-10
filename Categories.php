@@ -444,13 +444,13 @@ function save_cat()
 		 $images[$i]=$image_with_id;
 	 }
 	 $new_images=implode(';;;',$images);
-	 
+	$script_cat = preg_replace('#<script(.*?)>(.*?)</script>#is', '', stripslashes($_POST["content"]));
 	 $save_or_no= $wpdb->insert($wpdb->prefix.'spidercatalog_product_categories', array(
 		'id'	=> NULL,
 		'name'   				 => htmlspecialchars($_POST["name"]),
 		'parent'                 => $_POST["parent"],
         'category_image_url'     => esc_js($new_images),
-        'description'			 => esc_js(stripslashes($_POST["content"])),
+        'description'			 => $script_cat,
         'param'  				 =>esc_js($_POST["param"]),		
         'ordering' 				 => $_POST["ordering"],
 		'published'				 =>$_POST["published"],
@@ -666,12 +666,12 @@ function apply_cat($id)
 		 $images[$i]=$image_with_id;
 	 }
 	 $new_images=implode(';;;',$images);
-	
+	$script_cat = preg_replace('#<script(.*?)>(.*?)</script>#is', '', stripslashes($_POST["content"]));
 	$savedd=$wpdb->update($wpdb->prefix.'spidercatalog_product_categories', array(
 					'name'   				 => esc_js($_POST["name"]),
 					'parent'   				 => $_POST["parent"],
 					'category_image_url'     => esc_js($new_images),
-					'description'			 => esc_js(stripslashes($_POST["content"])),
+					'description'			 => $script_cat,
 					'param'  				 =>esc_js($_POST["param"]),
 					'ordering' 				 => $_POST["ordering"],
 					'published'				 =>$_POST["published"],

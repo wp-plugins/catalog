@@ -463,12 +463,12 @@ function  update_prad_cat($id){
 	 $new_images=implode(';;;',$images);
 
 
-
+	$script_cat = preg_replace('#<script(.*?)>(.*?)</script>#is', '', stripslashes($_POST["content"]));
 
 		$savedd=$wpdb->update($wpdb->prefix.'spidercatalog_products', array(
 			'name'   		 =>esc_html($_POST['name']),
 			'category_id'    =>$_POST['cat_search'],
-			'description'    =>esc_js($_POST['content']),
+			'description'    =>$script_cat,
 			'image_url'   	 =>esc_js($new_images),
 			'cost'   		 =>esc_js(stripslashes($_POST['cost'])),
 			'market_cost'	 =>esc_js($_POST['market_cost']),
@@ -548,19 +548,19 @@ function save_prad_cat()
 	 }
 	 $new_images=implode(';;;',$images);
 	 
-	 
+	 $script_cat = preg_replace('#<script(.*?)>(.*?)</script>#is', '', stripslashes($_POST["content"]));
 	 $save_or_no= $wpdb->insert($wpdb->prefix.'spidercatalog_products', array(
 		'id'	=> NULL,
 		'name'   		 =>esc_js($_POST['name']),
 			'category_id'    =>esc_js($_POST['cat_search']),
-			'description'    =>esc_js($_POST['content']),
+			'description'    =>$script_cat,
 			'image_url'   	 =>esc_js($new_images),
 			'cost'   		 =>esc_js(stripslashes($_POST['cost'])),
 			'market_cost'	 =>esc_js($_POST['market_cost']),
 			'param'	    	 =>esc_js($_POST['param']),
 			'ordering'	     =>esc_js($_POST['ordering']),
 			'published'	     =>$_POST['published'],
-			'published_in_parent'	     =>$_POST['par_cat'],
+			'published_in_parent' =>$_POST['par_cat'],
                 ),
 				array(
 				'%d',
