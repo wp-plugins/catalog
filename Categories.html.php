@@ -622,8 +622,8 @@ $par[0]='';
 for($k=0;$k<count($par);$k++)
 {
 if($par[$k]!='')
-echo "'".stripslashes(str_replace('
-','',htmlspecialchars($par[$k])))."',";
+echo "'".stripslashes(addslashes(str_replace('
+','',htmlspecialchars($par[$k]))))."',";
 }
 
 ?>'');
