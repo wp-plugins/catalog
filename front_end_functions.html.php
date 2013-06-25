@@ -387,14 +387,14 @@ if(!($row->image_url!="" and $row->image_url!="******0"))
 {
 	$imgurl[0]=plugins_url("Front_images/noimage.jpg",__FILE__);
 
-	echo '<tr><td colspan="2" id="prod_main_picture_container" valign="top"><div style="border: #CCCCCC solid 2px;padding:5px;background-color:white;width:'.($params['large_picture_width']).'px;height:'.($params['large_picture_height']).'px;"><div id="prod_main_picture" style="width:'.($params['large_picture_width']).'px;height:'.($params['large_picture_height']).'px; background:url('.$imgurl[0].') center no-repeat;background-size:contain;">&nbsp;</div></div></td></tr>';
+	echo '<tr><td colspan="2" id="prod_main_picture_container" valign="top"><div style="border: #CCCCCC solid 2px;padding:5px;background-color:white;width:'.($params['large_picture_width']).'px;height:'.($params['large_picture_height']).'px;"><div id="prod_main_picture_'.$ident.'" style="width:'.($params['large_picture_width']).'px;height:'.($params['large_picture_height']).'px; background:url('.$imgurl[0].') center no-repeat;background-size:contain;">&nbsp;</div></div></td></tr>';
 }
 else{
 	$imgurl[0]=explode('******',$imgurl[0]);
 	echo '<tr><td colspan="2" id="prod_main_picture_container" valign="top">
 <div style="border: #CCCCCC solid 2px;padding:5px;background-color:white;width:'.($params['large_picture_width']).'px;">
-<a href="'.$imgurl[0][0].'" target="_blank" id="prod_main_picture_a" style="text-decoration:none;">
-<div id="prod_main_picture" style="width:'.($params['large_picture_width']).'px;height:'.($params['large_picture_height']).'px; background:url('.$imgurl[0][0].') center no-repeat;background-size:contain;">&nbsp;</div></a></div>
+<a href="'.$imgurl[0][0].'" target="_blank" id="prod_main_picture_a_'.$ident.'" style="text-decoration:none;">
+<div id="prod_main_picture_'.$ident.'" style="width:'.($params['large_picture_width']).'px;height:'.($params['large_picture_height']).'px; background:url('.$imgurl[0][0].') center no-repeat;background-size:contain;">&nbsp;</div></a></div>
 </td></tr>';
 }
 echo'
@@ -419,7 +419,7 @@ if($img!=='******0')
 	$attach_url=$image_with_atach_id[0];
 	}
 	$img=$image_with_atach_id[0];
-$small_images_str.='<a href="'.$img.'" target="_blank"><img style="max-width:50px;max-height:50px" src="'.$attach_url.'" vspace="0" hspace="0" onMouseOver="prod_change_picture(\''.$img.'\',this,'.$params['large_picture_width'].','.$params['large_picture_height'].');" /></a>
+$small_images_str.='<a href="'.$img.'" target="_blank"><img style="max-width:50px;max-height:50px" src="'.$attach_url.'" vspace="0" hspace="0" onMouseOver="prod_change_picture(\''.$img.'\','.$ident.',this,'.$params['large_picture_width'].','.$params['large_picture_height'].');" /></a>
 ';
 $small_images_count++;
 }
@@ -1241,8 +1241,8 @@ if($cat_rows[0]->cat_image_url!="" and $cat_rows[0]->cat_image_url!="******0")
 			<table cellpadding="0" cellspacing="5" border="0" style="margin:0px;">
 			<tr><td colspan="2" id="prod_main_picture_container" valign="top">
 			<div style="border: #CCCCCC solid 2px;padding:5px;background-color:white;">
-			<a href="'.$url_for_image[0].'" target="_blank" id="prod_main_picture_a" style="text-decoration:none;">
-			<div id="prod_main_picture" style="width:'.($params[ 'category_picture_width' ]).'px;height:'.($params[ 'category_picture_height' ]).'px; background:url('.$url_for_image[0].') center no-repeat; background-size: contain;">&nbsp;</div></a></div>
+			<a href="'.$url_for_image[0].'" target="_blank" id="prod_main_picture_a_'.$ident.'" style="text-decoration:none;">
+			<div id="prod_main_picture_'.$ident.'" style="width:'.($params[ 'category_picture_width' ]).'px;height:'.($params[ 'category_picture_height' ]).'px; background:url('.$url_for_image[0].') center no-repeat; background-size: contain;">&nbsp;</div></a></div>
 			</td></tr>';
 
 	echo'<tr><td style="text-align:justify;">';
@@ -1268,7 +1268,7 @@ else
 {
 	$attach_url=$image_and_atach[0];	
 }
-$small_images_str.='<a href="'.$img.'" target="_blank"><img style="max-width:50px;max-height:50px" src="'.$attach_url.'" vspace="0" hspace="0" onMouseOver="prod_change_picture(\''.$img.'\',this,'.$params[ 'category_picture_width' ].','.$params[ 'category_picture_height' ].');" /></a>
+$small_images_str.='<a href="'.$img.'" target="_blank"><img style="max-width:50px;max-height:50px" src="'.$attach_url.'" vspace="0" hspace="0" onMouseOver="prod_change_picture(\''.$img.'\','.$ident.',this,'.$params['large_picture_width'].','.$params['large_picture_height'].');" /></a>
 ';
 $small_images_count++;
 }
@@ -2244,8 +2244,8 @@ if($cat_rows[0]->cat_image_url!="" and $cat_rows[0]->cat_image_url!="******0")
 			<table cellpadding="0" cellspacing="5" border="0" style="margin:0px;">
 			<tr><td colspan="2" style="width:'.($params[ 'category_picture_width']).'px;height:'.($params[ 'category_picture_height']).'px;" id="prod_main_picture_container" valign="top">
 			<div style="border: #CCCCCC solid 2px;padding:5px;background-color:white;">
-			<a href="'.$askofenn[0].'" target="_blank" id="prod_main_picture_a" style="text-decoration:none;">
-			<div id="prod_main_picture" style="width:'.($params[ 'category_picture_width']).'px;height:'.($params[ 'category_picture_height']).'px;background:url('.$askofenn[0].') center no-repeat; background-size: contain">&nbsp;</div></a></div>
+			<a href="'.$askofenn[0].'" target="_blank" id="prod_main_picture_a_'.$ident.'" style="text-decoration:none;">
+			<div id="prod_main_picture_'.$ident.'" style="width:'.($params[ 'category_picture_width']).'px;height:'.($params[ 'category_picture_height']).'px;background:url('.$askofenn[0].') center no-repeat; background-size: contain">&nbsp;</div></a></div>
 			</td></tr>';
 
 	echo'<tr><td style="text-align:justify;">';
@@ -2271,7 +2271,7 @@ else
 	
 if($image_and_atach[0]!=='')
 {
-$small_images_str.='<a href="'.$image_and_atach[0].'" target="_blank"><img style="max-width:50px; max-height=50px" src="'.$attach_url.'" vspace="0" hspace="0" onMouseOver="prod_change_picture(\''.$image_and_atach[0].'\',this,'.$params[ 'category_picture_width'].','.$params[ 'category_picture_height'].');" /></a>
+$small_images_str.='<a href="'.$image_and_atach[0].'" target="_blank"><img style="max-width:50px; max-height=50px" src="'.$attach_url.'" vspace="0" hspace="0" onMouseOver="prod_change_picture(\''.$img.'\','.$ident.',this,'.$params['large_picture_width'].','.$params['large_picture_height'].');" /></a>
 ';
 $small_images_count++;
 }

@@ -48,11 +48,11 @@ function SpiderCatHttpReq()
 
 var SCHR=new SpiderCatHttpReq();
 
-function prod_change_picture(url,obj,width,height)
+function prod_change_picture(url,prod_id,obj,width,height)
 {
 		
-	document.getElementById("prod_main_picture_a").href=obj.parentNode.href;	
-	document.getElementById("prod_main_picture").style.backgroundImage='url('+url+')';
+	document.getElementById("prod_main_picture_a_"+prod_id).href=obj.parentNode.href;	
+	document.getElementById("prod_main_picture_"+prod_id).style.backgroundImage='url('+url+')';
 	
 }
 
