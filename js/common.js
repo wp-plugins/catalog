@@ -52,7 +52,7 @@ function prod_change_picture(url,prod_id,obj,width,height)
 {
 		
 	document.getElementById("prod_main_picture_a_"+prod_id).href=obj.parentNode.href;	
-	document.getElementById("prod_main_picture_"+prod_id).style.backgroundImage='url('+url+')';
+	document.getElementById("prod_main_picture_"+prod_id).src=url;
 	
 }
 
@@ -129,8 +129,8 @@ function cat_form_resett(form,type,idd)
 {
 var pr_name='prod_name_'+type+'_'+idd;
 var cat_idd='cat_id_'+type+'_'+idd;
-
 document.getElementById(pr_name).value="";
+
 if(typeof(form.cat_idd)!=='undefined') form.cat_idd.value='0';
 
 form.submit();

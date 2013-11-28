@@ -46,6 +46,7 @@ else
 	{
 		for(i=0;i<parameters0[sel].length;i++) 
 			{
+			  
 				parameters0[sel][i]=document.getElementById("inp_"+sel+"_"+i).value;
 			}
 	}

@@ -13,6 +13,7 @@ if(!function_exists('current_user_can')){
 
 
 
+
  //////////////////////////////////////////////////////                                             /////////////////////////////////////////////////////// 
  //////////////////////////////////////////////////////         functions for categories            ///////////////////////////////////////////////////////
  //////////////////////////////////////////////////////                                             ///////////////////////////////////////////////////////
@@ -38,9 +39,8 @@ function showCategory()
 	  
   global $wpdb;
   
-  
   if(isset($_POST['search_events_by_title']))
-$_POST['search_events_by_title']=esc_js($_POST['search_events_by_title']);
+$_POST['search_events_by_title']=esc_html(stripslashes($_POST['search_events_by_title']));
 if(isset($_POST['asc_or_desc']))
 $_POST['asc_or_desc']=esc_js($_POST['asc_or_desc']);
 if(isset($_POST['order_by']))
@@ -85,7 +85,7 @@ $_POST['order_by']=esc_js($_POST['order_by']);
 			$limit=0;
 		}
 	if(isset($_POST['search_events_by_title'])){
-		$search_tag=$_POST['search_events_by_title'];
+		$search_tag=esc_html(stripslashes($_POST['search_events_by_title']));
 		}
 		
 		else
@@ -444,10 +444,10 @@ function save_cat()
 		 $images[$i]=$image_with_id;
 	 }
 	 $new_images=implode(';;;',$images);
-	$script_cat = preg_replace('#<script(.*?)>(.*?)</script>#is', '', stripslashes($_POST["content"]));
+	 $script_cat = preg_replace('#<script(.*?)>(.*?)</script>#is', '', stripslashes($_POST["content"]));
 	 $save_or_no= $wpdb->insert($wpdb->prefix.'spidercatalog_product_categories', array(
 		'id'	=> NULL,
-		'name'   				 => htmlspecialchars($_POST["name"]),
+		'name'   				 => esc_js($_POST["name"]),
 		'parent'                 => $_POST["parent"],
         'category_image_url'     => esc_js($new_images),
         'description'			 => $script_cat,

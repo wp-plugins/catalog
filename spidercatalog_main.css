@@ -1,6 +1,8 @@
-@charset "utf-8";/* CSS Document */#productMainTable td
+@charset "utf-8";/* CSS Document */
+
+#productMainTable td
 {
-vertical-align:top;
+/*vertical-align:top;*/
 }
 
 #productMainDiv
@@ -147,11 +149,6 @@ padding-bottom:0px;
 #contactsTable input
 {
 width:250px;
-}
-
-#productMainDiv img 
-{
-border:#CCCCCC solid 2px;
 }
 
 .spidercatalogparamslist,.spidercatalogparamslist li

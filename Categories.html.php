@@ -1,12 +1,11 @@
 	<?php	
-	
 	if(function_exists('current_user_can'))
 	if(!current_user_can('manage_options')) {
 	die('Access Denied');
 }	
 if(!function_exists('current_user_can')){
 	die('Access Denied');
-}	
+}
  //////////////////////////////////////////////////////                                             /////////////////////////////////////////////////////// 
  //////////////////////////////////////////////////////      Html functions for categories          ///////////////////////////////////////////////////////
  //////////////////////////////////////////////////////                                             ///////////////////////////////////////////////////////
@@ -72,13 +71,13 @@ var keyCode = event.keyCode ? event.keyCode : event.which ? event.which : event.
 <table cellspacing="10" width="100%">
                   <tr>   
 <td width="100%" style="font-size:14px; font-weight:bold"><a href="http://web-dorado.com/spider-catalog-wordpress-guide-step-2.html" target="_blank" style="color:blue; text-decoration:none;">User Manual</a><br />
-This section allows you to create categories of products. <a href="http://web-dorado.com/spider-catalog-wordpress-guide-step-2.html" target="_blank" style="color:blue; text-decoration:none;">More...</a></td>   
+This section allows you to create categories of products. <a href="http://web-dorado.com/spider-catalog-wordpress-guide-step-2.html" target="_blank" style="color:blue; text-decoration:none;">More...</a></td> 
 <td colspan="7" align="right" style="font-size:16px;">
   <a href="http://web-dorado.com/files/fromSpiderCatalog.php" target="_blank" style="color:red; text-decoration:none;">
 <img src="<?php echo plugins_url("images/header.png",__FILE__) ?>" border="0" alt="http://web-dorado.com/files/fromSpiderCatalog.php" width="215"><br>
 Get the full version&nbsp;&nbsp;&nbsp;&nbsp;
 </a>
-  </td>
+  </td>  
         </tr>
     <tr>
     <td style="width:80px">
@@ -92,7 +91,7 @@ Get the full version&nbsp;&nbsp;&nbsp;&nbsp;
     </table>
     <?php
 	$serch_value='';
-	if(isset($_POST['serch_or_not'])) {if($_POST['serch_or_not']=="search"){ $serch_value=$_POST['search_events_by_title']; }else{$serch_value="";}} 
+	if(isset($_POST['serch_or_not'])) {if($_POST['serch_or_not']=="search"){ $serch_value=esc_html(stripslashes($_POST['search_events_by_title'])); }else{$serch_value="";}} 
 	$serch_fields='<div class="alignleft actions" style="width:185px;">
     	<label for="search_events_by_title" style="font-size:14px">Filter: </label>
         <input type="text" name="search_events_by_title" value="'.$serch_value.'" id="search_events_by_title" onchange="clear_serch_texts()">
@@ -113,9 +112,11 @@ Get the full version&nbsp;&nbsp;&nbsp;&nbsp;
 	{
 		
 		$serch_fields.='<option value="'.$cat_id->id.'"';
-		if(isset($_POST['cat_search']) || isset($_GET["catid"]) && $_GET["catid"])
-		if($_POST['cat_search']==$cat_id->id || $_GET["catid"]==$cat_id->id)
-		$serch_fields.='selected="selected"';		
+		if(isset($_POST['cat_search']) || (isset($_GET["catid"]) && $_GET["catid"])) {
+      if((isset($_POST['cat_search']) && $_POST['cat_search'] == $cat_id->id) || (isset($_GET["catid"]) && $_GET["catid"]==$cat_id->id)) {
+        $serch_fields.='selected="selected"';		
+      }
+    }
 		$serch_fields.='>'.$cat_id->name.'</option>';
 		
 	}
@@ -767,13 +768,13 @@ function change_select()
   <tbody>
                     <tr>   
 <td width="100%" style="font-size:14px; font-weight:bold"><a href="http://web-dorado.com/spider-catalog-wordpress-guide-step-2.html" target="_blank" style="color:blue; text-decoration:none;">User Manual</a><br />
-This section allows you to create categories of products. <a href="http://web-dorado.com/spider-catalog-wordpress-guide-step-2.html" target="_blank" style="color:blue; text-decoration:none;">More...</a></td>   
+This section allows you to create categories of products. <a href="http://web-dorado.com/spider-catalog-wordpress-guide-step-2.html" target="_blank" style="color:blue; text-decoration:none;">More...</a></td>  
 <td colspan="7" align="right" style="font-size:16px;">
   <a href="http://web-dorado.com/files/fromSpiderCatalog.php" target="_blank" style="color:red; text-decoration:none;">
 <img src="<?php echo plugins_url("images/header.png",__FILE__) ?>" border="0" alt="http://web-dorado.com/files/fromSpiderCatalog.php" width="215"><br>
 Get the full version&nbsp;&nbsp;&nbsp;&nbsp;
 </a>
-  </td>
+  </td> 
         </tr>
   <tr>
   <td width="100%"><h2>Add Category</h2></td>
