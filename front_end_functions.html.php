@@ -509,7 +509,7 @@ html_categories($rows, $params, $page_num, $prod_count, $prod_in_page, $ratings,
 
 <table style="height:100%;border-width:' . $params['cells1_border_width'] . 'px;border-color:' . $params['cells1_border_color'] . ';border-style:' . $params['cells1_border_style'] . ';"><tr><td>
 
-<div id="prodTitle" style="margin: 0 !important;padding:5px;' . (($params['cells1_title_color'] != '') ? ('color:' . $params['cells1_title_color'] . ';') : '') . (($params['cells1_title_background_color'] != '') ? ('background-color:' . $params['cells1_title_background_color'] . ';') : '') . '"><table style="margin: 0 !important;"><tr style="height: 72px;line-height:1.5;"><td><font style="word-break: break-word;font-size:'.$params['cell_big_title_size'].'px;">' . $array[0] . '</font><p style="word-break: break-word;line-height: 1;font-size:' . $params['title_size_small'] . 'px;">'.$array2.'</p></td><td style="background-color:' . $params['cell_price_background_color'] . ';">';
+<div id="prodTitle" style="margin: 0 !important;padding:5px;' . (($params['cells1_title_color'] != '') ? ('color:' . $params['cells1_title_color'] . ';') : '') . (($params['cells1_title_background_color'] != '') ? ('background-color:' . $params['cells1_title_background_color'] . ';') : '') . '"><table style="margin: 0 !important; width:100%;"><tr style="height: 72px;line-height:1.5;"><td><font style="word-break: break-word;font-size:'.$params['cell_big_title_size'].'px;">' . $array[0] . '</font><p style="word-break: break-word;line-height: 1;font-size:' . $params['title_size_small'] . 'px;">'.$array2.'</p></td><td style="background-color:' . $params['cell_price_background_color'] . ';">';
 
             if ($params['price'] and $row->cost != 0 and $row->cost != '')
                 echo '<div id="prodCost" style="min-width: 108px;text-align: center;font-size:' . $params['price_size_small'] . 'px;color:' . $params['cells1_price_color'] . ';">' . (($params['currency_symbol_position'] == 0) ? ($params['currency_symbol']) : '') . ' ' . $row->cost . ' ' . (($params['currency_symbol_position'] == 1) ? $params['currency_symbol'] : '') . '</div>';
@@ -517,7 +517,7 @@ html_categories($rows, $params, $page_num, $prod_count, $prod_in_page, $ratings,
             if ($params['market_price'] and $row->market_cost != 0 and $row->market_cost != '')
                 echo '<div id="prodCost" style="text-align: center;font-size:' . ($params['market_price_size_small']) . 'px;"><span style="color:' . $params['cells1_market_price_color'] . ';">' . __('Market Price:', 'sp_catalog') . ' </span><br><span style=" text-decoration:line-through;color:' . $params['cells1_market_price_color'] . ';"> ' . (($params['currency_symbol_position'] == 0) ? ($params['currency_symbol']) : '') . ' ' . $row->market_cost . ' ' . (($params['currency_symbol_position'] == 1) ? $params['currency_symbol'] : '') . '</span></div>';
            
-            echo '</tr></tr></table></div></td></tr><tr><td><table id="prodMiddle" border="0" cellspacing="0" cellpadding="0" style="margin: 0 !important;"><tr><td style="padding-left:2px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>';
+            echo '</tr></tr></table></div></td></tr><tr><td><table id="prodMiddle" border="0" cellspacing="0" cellpadding="0" style="margin: 0 !important;"><tr><td>';
 
 
             if ($params['enable_rating']) {
@@ -535,7 +535,7 @@ html_categories($rows, $params, $page_num, $prod_count, $prod_in_page, $ratings,
                         $title = $ratings[$id];
 
 
-                    echo "<div id='voting" . $row->id . "_" . $cels_or_list . "_" . $ident . "' style='height:30px;'>
+                    echo "<div id='voting" . $row->id . "_" . $cels_or_list . "_" . $ident . "' style='height:30px;float: right;'>
 
 			<ul class='star-rating'>	
 
@@ -559,7 +559,7 @@ html_categories($rows, $params, $page_num, $prod_count, $prod_in_page, $ratings,
                         $title = __('Rating', 'sp_catalog') . ' ' . $ratings[$id] . '&nbsp;&nbsp;&nbsp;&nbsp;&#013;' . __('You have already rated this product.', 'sp_catalog');
 
 
-                    echo "<div id='voting" . $row->id . "_" . $cels_or_list . "_" . $ident . "' style='height:30px;'>
+                    echo "<div id='voting" . $row->id . "_" . $cels_or_list . "_" . $ident . "' style='height:30px;float: right;'>
 
 			<ul class='star-rating1'>	
 
