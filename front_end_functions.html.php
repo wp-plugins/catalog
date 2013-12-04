@@ -2773,8 +2773,8 @@ function html_search($rows, $params, $page_num, $prod_count, $prod_in_page, $rat
       echo '<select style="opacity:0;cursor:pointer;height: 30px;width: 197px !important;border: none;display: block;background-color: #ececec;position: absolute;z-index:10;top:0 !important;margin:0 !important;webkit-border-radius: 0px !important;-moz-border-radius: 0px !important;border-radius: 0px !important;" id="cat_id_' . $cels_or_list . '_' . $ident . '" name="cat_id_' . $cels_or_list . '_' . $ident . '" class="spidercataloginput" size="1" onChange="this.form.submit();">
         <option value="0">' . __('All', 'sp_catalog') . '</option> ';
         foreach ($category_list as $category) {
-            if ($_POST['subcat_id_' . $cels_or_list . '_' . $ident . '']) {
-                if ($_POST['subcat_id_' . $cels_or_list . '_' . $ident . ''] == $category->id) {
+            if (isset($_POST['cat_id_' . $cels_or_list . '_' . $ident . '']) && $_POST['cat_id_' . $cels_or_list . '_' . $ident . '']) {
+                if ($_POST['cat_id_' . $cels_or_list . '_' . $ident . ''] == $category->id) {
                     echo '<option value="' . $category->id . '"  selected="selected">' . stripslashes($category->name) . '</option>';
                 } else
                     echo '<option value="' . $category->id . '" >' . stripslashes($category->name) . '</option>';
@@ -2836,12 +2836,12 @@ function html_categories($rows, $params, $page_num, $prod_count, $prod_in_page, 
     </style>
     <?php
     foreach ($categor as $chidd) {
-        if ($par != 0 and $params1['show_category_details'] == 1 and ($cat_id != $chidd->id or $_POST['cat_id_' . $cels_or_list . '_' . $ident . '']  or $_GET['cat_id_' . $cels_or_list . '_' . $ident . ''] != 0)) {
+        if ($par != 0 and $params1['show_category_details'] == 1 and ($cat_id != $chidd->id or (isset($_POST['cat_id_' . $cels_or_list . '_' . $ident . '']) && $_POST['cat_id_' . $cels_or_list . '_' . $ident . ''])  or (isset($_GET['cat_id_' . $cels_or_list . '_' . $ident . '']) && $_GET['cat_id_' . $cels_or_list . '_' . $ident . '']))) {
           echo '<a style="cursor:pointer;" onclick="catt_idd_' . $ident . '(' . $chidd->parent . ')" >' . __('Back to Catalog', 'sp_catalog') . '</a>';
         }
     }
     echo '<div id="productMainDiv" class="spider_catalog_style" style="width: 100%;display: inline-block;border-width:' . $params[$from . 'border_width'] . 'px;border-color:' . $params[$from . 'border_color'] . ';border-style:' . $params[$from . 'border_style'] . ';' . (($params[$from . 'text_color'] != '') ? ('color:' . $params[$from . 'text_color'] . ';') : '') . (($params[$from . 'background_color'] != '') ? ('background-color:' . $params[$from . 'background_color'] . ';') : '') . '">'; 
-    if (($params1['categories'] > 0 or $cat_id != 0) and $params1['show_category_details'] == 1) {
+    if ($cat_id != 0 and $params1['show_category_details'] == 1) {
         echo '<div id="prodTitle" style="text-align: right;width:370px;' . (($params[$from . 'button_color'] != '') ? ('color:' . $params[$from . 'button_color'] . ';') : '') . (($params[$from . 'button_background_color'] != '') ? ('background-color:' . $params[$from . 'button_background_color'] . ';') : '') . 'padding:20px;font-size:' . $params[$from . 'category_title_size'] . 'px;">' . $cat_rows[0]->cat_name . '</div>';
         $imgurl = explode(";;;", $cat_rows[0]->cat_image_url);
         echo '<table id="category" border="0" cellspacing="10" cellpadding="10"><tr>';
@@ -2905,7 +2905,7 @@ function html_categories($rows, $params, $page_num, $prod_count, $prod_in_page, 
                 echo '<a style="cursor:pointer;" onclick="change_subcat_' . $ident . '(' . $chid->id . ')"><img style="max-width:' . $params[$from . 'list_picture_width'] . 'px; max-height:' . $params[$from . 'list_picture_height'] . 'px" src="' . plugins_url("Front_images/noimage.jpg", __FILE__) . '"  vspace="0" hspace="0"  /></a>';
             else {
                 $askofen = explode('******', $imgurl[0]);
-                if ($askofen[1]) {
+                if (isset($askofen[1]) && $askofen[1]) {
                     $array_with_sizes = wp_get_attachment_image_src($askofen[1], 'thumbnail');
                     $attach_url = $array_with_sizes[0];
                 } else {

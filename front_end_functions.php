@@ -257,10 +257,7 @@ function showPublishedProducts_1($cat_id = 1, $show_cat_det = 1, $cels_or_list =
         } else {
             $cat_id = 0;
         }
-    }
-    else {
-      $cat_id = 0;
-    }      
+    }  
     if (isset ($_POST['subcat_id_' . $cels_or_list . '_' . $ident . '']) && $_POST['subcat_id_' . $cels_or_list . '_' . $ident . ''] != "") {
         $subcat_id = (int)$_POST['subcat_id_' . $cels_or_list . '_' . $ident . ''];
     } else {
