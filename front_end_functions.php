@@ -270,11 +270,11 @@ function showPublishedProducts_1($cat_id = 1, $show_cat_det = 1, $cels_or_list =
     $child_ids = $wpdb->get_results($categ_query);
 
     if (isset($_POST['prod_name_' . $cels_or_list . '_' . $ident . ''])) {
-        if ($_POST['prod_name_' . $cels_or_list . '_' . $ident . ''] != '' && $_POST['prod_name_' . $cels_or_list . '_' . $ident . ''] != 'Search...')
+        if ($_POST['prod_name_' . $cels_or_list . '_' . $ident . ''] != '' && $_POST['prod_name_' . $cels_or_list . '_' . $ident . ''] != __('Search...', 'sp_catalog'))
             $prod_name = esc_html(stripslashes($_POST['prod_name_' . $cels_or_list . '_' . $ident . '']));
         else
             $prod_name = '';
-    } else if (isset($_GET['prod_name_' . $cels_or_list . '_' . $ident . '']) && $_GET['prod_name_' . $cels_or_list . '_' . $ident . ''] != '' && $_GET['prod_name_' . $cels_or_list . '_' . $ident . ''] != 'Search...')
+    } else if (isset($_GET['prod_name_' . $cels_or_list . '_' . $ident . '']) && $_GET['prod_name_' . $cels_or_list . '_' . $ident . ''] != '' && $_GET['prod_name_' . $cels_or_list . '_' . $ident . ''] != __('Search...', 'sp_catalog'))
         $prod_name = esc_html(stripslashes($_GET['prod_name_' . $cels_or_list . '_' . $ident . '']));
     else 
         $prod_name = '';
