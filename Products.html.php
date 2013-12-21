@@ -92,7 +92,7 @@ function html_showProducts($rows, $pageNav, $sort, $cat_row)
                         Import CSV:
                         <span style="position:relative;height:25px;width:auto;cursor:pointer;">
                             <input type="button" style="cursor:pointer;" value="Choose file"/>
-                            <input style="width:1%;height:1%;position:absolute;top:0px;left:0px;opacity:0;cursor:pointer;display:block;" type="file" id="csv_file" value="brrr" name="filename" size="20" />
+                            <input style="width:82%;height:90%;position:absolute;top:-5px;left:0px;opacity:0;cursor:pointer;display:block;" type="file" id="csv_file" value="brrr" name="filename" size="20" />
                         </span>
                         <input type="hidden" name="uploaded" id="uploaded" value="chok" />
                         <input type="button" value="Upload" onclick="if (document.getElementById('csv_file').value=='') {
@@ -140,7 +140,7 @@ function html_showProducts($rows, $pageNav, $sort, $cat_row)
             $serch_fields .= '<option value="' . $catt->id . '"';
             if ((isset($_POST['cat_search']) && $_POST['cat_search'] == $catt->id) || (isset($_GET['categoryid']) && $_GET["categoryid"] == $catt->id))
               $serch_fields .= 'selected="selected"';
-            $serch_fields .= '>' . $catt->name . '</option>';
+            $serch_fields .= '>' . esc_html(stripslashes($catt->name)) . '</option>';
 
         }
 
@@ -208,7 +208,7 @@ function html_showProducts($rows, $pageNav, $sort, $cat_row)
                 <tr>
                     <td><?php echo $rows[$i]->id; ?></td>
                     <td>
-                        <a href="admin.php?page=Products_Spider_Catalog&task=edit_prad&id=<?php echo $rows[$i]->id ?>"><?php echo $rows[$i]->name; ?></a>
+                        <a href="admin.php?page=Products_Spider_Catalog&task=edit_prad&id=<?php echo $rows[$i]->id ?>"><?php echo esc_html(stripslashes($rows[$i]->name)); ?></a>
                     </td>
                     <td><?php echo $rows[$i]->cost; ?></td>
                     <td><?php echo $rows[$i]->category; ?></td>
@@ -293,7 +293,7 @@ function html_editProduct($row, $lists, $votes, $params, $rows1, $cat_row, $pare
               </td>
         </tr>
         <tr>
-            <td width="100%"><h2>Product - <?php echo $row->name ?></h2></td>
+            <td width="100%"><h2>Product - <?php echo esc_html(stripslashes($row->name)) ?></h2></td>
             <td align="right"><input type="button" onclick="submitbutton('edit_rating')" value=" Edit Ratings "
                                      class="button-primary action"></td>
             <td align="right"><input type="button" onclick="submitbutton('edit_reviews')" value=" Edit Reviews "
@@ -320,7 +320,7 @@ function html_editProduct($row, $lists, $votes, $params, $rows1, $cat_row, $pare
         <td>
             <input class="text_area" type="text" name="name"
                    id="name" size="50" maxlength="250"
-                   value="<?php echo stripslashes($row->name); ?>"/>
+                   value="<?php echo esc_html(stripslashes($row->name)); ?>"/>
         </td>
     </tr>
     <tr>
@@ -335,7 +335,7 @@ function html_editProduct($row, $lists, $votes, $params, $rows1, $cat_row, $pare
                     $cat_select .= ' selected="selected"';
                 }
 
-                $cat_select .= '>' . $catt->name . '</option>';
+                $cat_select .= '>' . esc_html(stripslashes($catt->name)) . '</option>';
             }
             $cat_select .= '<input type="hidden" id="categ_search" name="categ_search" value=' . $row->category_id . ' />';
             echo $cat_select;
@@ -681,7 +681,7 @@ echo $count_ord+1;
                     ?>
                     <option
                         value="<?php echo $ord_elem[$i]->ordering ?>"<?php if ($ord_elem[$i]->ordering == $row->ordering) echo 'selected="selected"'; ?> > <?php echo $ord_elem[$i]->ordering . " ";
-                        echo $ord_elem[$i]->name; ?></option>
+                        echo esc_html(stripslashes($ord_elem[$i]->name)); ?></option>
 
                 <?php
                 }
@@ -822,7 +822,7 @@ function html_addProduct($lists, $params, $rows1, $cat_row)
 
                 $cat_select .= '<option value="' . $catt->id . '"';
 
-                $cat_select .= '>' . $catt->name . '</option>';
+                $cat_select .= '>' . esc_html(stripslashes($catt->name)) . '</option>';
             }
             $cat_select .= '<input type="hidden" id="categ_search" name="categ_search" value="" />';
             echo $cat_select;
@@ -1058,7 +1058,7 @@ function html_addProduct($lists, $params, $rows1, $cat_row)
                 for ($i = 0; $i < $count_ord; $i++) {
                     ?>
                     <option value="<?php echo $ord_elem[$i]->ordering ?>"> <?php echo $ord_elem[$i]->ordering . " ";
-                        echo $ord_elem[$i]->name; ?></option>
+                        echo esc_html(stripslashes($ord_elem[$i]->name)); ?></option>
 
                 <?php
                 }
@@ -1210,8 +1210,8 @@ function html_spider_cat_prod_rev($rows, $pageNav, $sort, $id)
                     <th scope="row" class="check-column"><input type="checkbox" name="post[]"
                                                                 value="<?php echo $rows[$i]->id; ?>"></th>
                     <td><?php echo $rows[$i]->remote_ip; ?></td>
-                    <td><?php echo $rows[$i]->name; ?></td>
-                    <td><?php echo $rows[$i]->content; ?></td>
+                    <td><?php echo esc_html(stripslashes($rows[$i]->name)); ?></td>
+                    <td><?php echo esc_html(stripslashes($rows[$i]->content)); ?></td>
                     <td>
                         <a href="admin.php?page=Products_Spider_Catalog&task=delete_review&id=<?php echo $id; ?>&del_id=<?php echo $rows[$i]->id ?>">Delete</a>
                     </td>

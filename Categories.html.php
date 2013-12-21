@@ -117,7 +117,7 @@ Get the full version&nbsp;&nbsp;&nbsp;&nbsp;
         $serch_fields.='selected="selected"';		
       }
     }
-		$serch_fields.='>'.$cat_id->name.'</option>';
+		$serch_fields.='>'.esc_html(stripslashes($cat_id->name)).'</option>';
 		
 	}
 	
@@ -222,7 +222,7 @@ Get the full version&nbsp;&nbsp;&nbsp;&nbsp;
   ?>
  <tr>
          <td><?php echo $rows[$i]->id; ?></td>
-         <td><a  href="admin.php?page=Categories_Spider_Catalog&task=edit_cat&id=<?php echo $rows[$i]->id?>"><?php echo $rows[$i]->name; ?></a></td>
+         <td><a  href="admin.php?page=Categories_Spider_Catalog&task=edit_cat&id=<?php echo $rows[$i]->id?>"><?php echo esc_html(stripslashes($rows[$i]->name)); ?></a></td>
          <td><?php echo $rows[$i]->description; ?></td>
 		 <td><a href="admin.php?page=Categories_Spider_Catalog&catid=<?php echo $rows[$i]->id; ?>" alt="Subcategories">(<?php echo $rows[$i]->count; ?>)</a></td>
 		 <td><?php if(!($uncat)){echo 'Uncategory';} else{ echo $rows[$i]->par_name;}?></td>		 
@@ -327,7 +327,7 @@ Get the full version&nbsp;&nbsp;&nbsp;&nbsp;
   </td>
         </tr>
   <tr>
-  <td width="100%"><h2>Category - <?php echo stripslashes($row->name) ?></h2></td>
+  <td width="100%"><h2>Category - <?php echo esc_html(stripslashes($row->name)) ?></h2></td>
   <td align="right"><input type="button" onclick="submitbutton('save')" value="Save" class="button-secondary action"> </td>  
   <td align="right"><input type="button" onclick="submitbutton('apply')" value="Apply" class="button-secondary action"> </td> 
   <td align="right"><input type="button" onclick="window.location.href='admin.php?page=Categories_Spider_Catalog'" value="Cancel" class="button-secondary action"> </td> 
@@ -343,7 +343,7 @@ Get the full version&nbsp;&nbsp;&nbsp;&nbsp;
 Name:
 </td>
 <td>
-<input class="text_area" type="text" name="name" id="name" size="50" maxlength="250" value="<?php echo $row->name;?>" />
+<input class="text_area" type="text" name="name" id="name" size="50" maxlength="250" value="<?php echo esc_html(stripslashes($row->name));?>" />
 </td>
 </tr>
 
@@ -366,7 +366,7 @@ Name:
 		if($row->parent==$catt->id)
 		$cat_select.='selected="selected"';
 		
-		$cat_select.='>'.$catt->name.'</option>';
+		$cat_select.='>'.esc_html(stripslashes($catt->name)).'</option>';
 		}
 	}
 	echo $cat_select;
@@ -669,7 +669,7 @@ $count_ord=count($ord_elem);
 for($i=0;$i<$count_ord;$i++)
 {
 ?>
-<option value="<?php echo $ord_elem[$i]->ordering  ?>"<?php if($ord_elem[$i]->ordering==$row->ordering) echo 'selected="selected"'; ?> > <?php echo  $ord_elem[$i]->ordering." "; echo $ord_elem[$i]->name; ?></option>
+<option value="<?php echo $ord_elem[$i]->ordering  ?>"<?php if($ord_elem[$i]->ordering==$row->ordering) echo 'selected="selected"'; ?> > <?php echo  $ord_elem[$i]->ordering." "; echo esc_html(stripslashes($ord_elem[$i]->name)); ?></option>
 
 <?php 
 }
@@ -814,7 +814,7 @@ Name:
 		$cat_select.='<option value="'.$catt->id.'"';
 	
 		
-		$cat_select.='>'.$catt->name.'</option>';
+		$cat_select.='>'.esc_html(stripslashes($catt->name)).'</option>';
 		
 	}
 	echo $cat_select;
@@ -1091,7 +1091,7 @@ $count_ord=count($ord_elem);
 for($i=0;$i<$count_ord;$i++)
 {
 ?>
-<option value="<?php echo $ord_elem[$i]->ordering  ?>"> <?php echo  $ord_elem[$i]->ordering." "; echo $ord_elem[$i]->name; ?></option>
+<option value="<?php echo $ord_elem[$i]->ordering  ?>"> <?php echo  $ord_elem[$i]->ordering." "; echo esc_html(stripslashes($ord_elem[$i]->name)); ?></option>
 
 <?php 
 }

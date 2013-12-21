@@ -4,7 +4,7 @@
 Plugin Name: Spider Catalog
 Plugin URI: http://web-dorado.com/products/wordpress-catalog.html
 Description: Spider Catalog is a convenient tool for organizing the products represented on your website into catalogs. Each product on the catalog is assigned with a relevant category, which makes it easier for the customers to search and identify the needed products within the catalog.
-Version: 1.5.6
+Version: 1.5.7
 Author: http://web-dorado.com/
 License: GNU/GPLv3 http://www.gnu.org/licenses/gpl-3.0.html
 */
@@ -245,8 +245,10 @@ function Spider_Catalog_options_panel()
     add_submenu_page('Categories_Spider_Catalog', 'Global Options', 'Global Options', 'manage_options', 'Options_Catalog_global', 'Options_Catalog_global');
     $page_option = add_submenu_page('Categories_Spider_Catalog', 'Styles and Colors', 'Styles and Colors', 'manage_options', 'Options_Catalog_styles', 'Options_Catalog_styles');
     add_submenu_page( 'Categories_Spider_Catalog', 'Licensing', 'Licensing', 'manage_options', 'Spider_catalog_Licensing', 'Spider_catalog_Licensing');
+    $Featured_Plugins = add_submenu_page('Categories_Spider_Catalog', 'Featured Plugins', 'Featured Plugins', 'manage_options', 'catalog_Featured_Plugins', 'catalog_Featured_Plugins');
     add_submenu_page('Categories_Spider_Catalog', 'Uninstall Spider_Catalog ', 'Uninstall  Spider Catalog', 'manage_options', 'Uninstall_Spider_Catalog', 'Uninstall_Spider_Catalog');
 
+    add_action('admin_print_styles-' . $Featured_Plugins, 'catalog_Featured_Plugins_styles');
     add_action('admin_print_styles-' . $page_cat, 'Spider_Category_admin_script');
     add_action('admin_print_styles-' . $page_prad, 'Spider_prodact_admin_script');
     add_action('admin_print_styles-' . $page_option, 'Spider_option_admin_script');
@@ -759,7 +761,7 @@ GROUP BY " . $wpdb->prefix . "spidercatalog_products.category_id) AS c ON c.id =
         <div class="panel_wrapper">
             <div id="Single_product_panel" class="panel current">
                 <br>
-                <table border="0" cellpadding="4" cellspacing="0">
+                <table border="0" cellpadding="4" cellspacing="0" style="font-size: 11px !important;">
                     <tbody>
                     <tr>
                         <td nowrap="nowrap"><label for="gallerytag">Select product</label></td>
@@ -779,7 +781,7 @@ GROUP BY " . $wpdb->prefix . "spidercatalog_products.category_id) AS c ON c.id =
             </div>
             <div id="Products_list_panel" class="panel">
                 <br>
-                <table border="0" cellspacing="0">
+                <table border="0" cellspacing="0" style="font-size: 11px !important;">
                     <tbody>
                     <tr>
                         <td nowrap="nowrap"><label for="Spider_cat_Category">Select Category</label></td>
@@ -1850,11 +1852,21 @@ query6;
     if (!$wpdb->get_var("select count(*) from " . $wpdb->prefix . "spidercatalog_params")) {
         $wpdb->query($sql_1);
     }
-    $wpdb->query($sql_2);
-    $wpdb->query($sql_3);
-    $wpdb->query($sql_4);
-    $wpdb->query($sql_5);
-    $wpdb->query($sql_6);
+    if (!$wpdb->get_var("select count(*) from " . $wpdb->prefix . "spidercatalog_products")) {
+      $wpdb->query($sql_2);
+    }
+    if (!$wpdb->get_var("select count(*) from " . $wpdb->prefix . "spidercatalog_product_categories")) {
+      $wpdb->query($sql_3);
+    }
+    if (!$wpdb->get_var("select count(*) from " . $wpdb->prefix . "spidercatalog_product_reviews")) {
+      $wpdb->query($sql_4);
+    }
+    if (!$wpdb->get_var("select count(*) from " . $wpdb->prefix . "spidercatalog_product_votes")) {
+      $wpdb->query($sql_5);
+    }
+    if (!$wpdb->get_var("select count(*) from " . $wpdb->prefix . "spidercatalog_id")) {
+      $wpdb->query($sql_6);
+    }
 
 }
 
@@ -2214,4 +2226,138 @@ function spider_catalog_export_csv()
 {
     require_once("exportcsv.php");
 	export_catalog_csv();
+}
+
+function catalog_Featured_Plugins_styles() {
+  wp_enqueue_style("Featured_Plugins", plugins_url("featured_plugins.css", __FILE__));
+}
+function catalog_Featured_Plugins() {
+  ?>
+	<div id="main_featured_plugins_page">
+		<table align="center" width="90%" style="margin-top: 0px;border-bottom: rgb(111, 111, 111) solid 2px;">
+			<tr>
+				<td colspan="2" style="height: 70px;"><h3 style="margin: 0px;font-family:Segoe UI;padding-bottom: 15px;color: rgb(111, 111, 111); font-size:18pt;">Featured Plugins</h3></td>
+				<td  align="right" style="font-size:16px;">
+           <a href="http://web-dorado.com/files/fromSpiderCatalog.php" target="_blank" style="color:red; text-decoration:none;">
+              <img src="<?php echo plugins_url('images/header.png', __FILE__); ?>" border="0" alt="http://web-dorado.com/files/fromSpiderCatalog.php" width="215"><br>
+                 Get the full version&nbsp;&nbsp;&nbsp;&nbsp;
+           </a>
+        </td>
+			</tr>
+		</table>
+		<form method="post">
+			<ul id="featured-plugins-list">
+        <li class="form-maker">
+                 <div class="product">
+                         <div class="title">
+                                 <strong class="heading">Form Maker</strong>
+                                 <p>Wordpress form builder plugin</p>
+                         </div>
+                 </div>
+                 <div class="description">
+                                 <p>Form Maker is a modern and advanced tool for creating WordPress forms easily and fast.</p>
+                                 <a target="_blank" href="http://web-dorado.com/products/wordpress-form.html" class="download">Download</a>
+                 </div>
+         </li>
+				<li class="spider-calendar">
+					<div class="product">
+						<div class="title">
+							<strong class="heading">Spider Calendar</strong>
+							<p>WordPress event calendar plugin</p>
+						</div>
+					</div>
+					<div class="description">
+							<p>Spider Event Calendar is a highly configurable product which allows you to have multiple organized events.</p>
+							<a target="_blank" href="http://web-dorado.com/products/wordpress-calendar.html" class="download">Download</a>
+					</div>
+				</li>
+        <li class="player">
+					<div class="product">
+						<div class="title">
+							<strong class="heading">Video Player</strong>
+							<p>WordPress Video player plugin</p>
+						</div>
+					</div>
+					<div class="description">
+							<p>Spider Video Player for WordPress is a Flash & HTML5 video player plugin that allows you to easily add videos to your website with the possibility</p>
+							<a target="_blank" href="http://web-dorado.com/products/wordpress-player.html" class="download">Download</a>
+					</div>
+				</li>
+				<li class="contacts">
+					<div class="product">
+						<div class="title">
+							<strong class="heading">Spider Contacts</strong>
+							<p>Wordpress staff list plugin</p>
+						</div>
+					</div>
+					<div class="description">
+							<p>Spider Contacts helps you to display information about the group of people more intelligible, effective and convenient.</p>
+							<a target="_blank" href="http://web-dorado.com/products/wordpress-contacts-plugin.html" class="download">Download</a>
+					</div>
+				</li>
+        <li class="facebook">
+					<div class="product">
+						<div class="title">
+							<strong class="heading">Spider Facebook</strong>
+							<p>WordPress Facebook plugin</p>
+						</div>
+					</div>
+					<div class="description">
+							<p>Spider Facebook is a WordPress integration tool for Facebook.It includes all the available Facebook social plugins and widgets to be added to your web</p>
+							<a target="_blank" href="http://web-dorado.com/products/wordpress-facebook.html" class="download">Download</a>
+					</div>
+				</li>
+                <li class="faq">
+					<div class="product">
+						<div class="title">
+							<strong class="heading">Spider FAQ</strong>
+							<p>WordPress FAQ Plugin</p>
+						</div>
+					</div>
+					<div class="description">
+							<p>The Spider FAQ WordPress plugin is for creating an FAQ (Frequently Asked Questions) section for your website.</p>
+							<a target="_blank" href="http://web-dorado.com/products/wordpress-faq-plugin.html" class="download">Download</a>
+					</div>
+				</li>
+                <li class="zoom">
+					<div class="product">
+						<div class="title">
+							<strong class="heading">Zoom</strong>
+							<p>WordPress text zoom plugin</p>
+						</div>
+					</div>
+					<div class="description">
+							<p>Zoom enables site users to resize the predefined areas of the web site.</p>
+							<a target="_blank" href="http://web-dorado.com/products/wordpress-zoom.html" class="download">Download</a>
+					</div>
+				</li>
+				<li class="flash-calendar">
+					<div class="product">
+						<div class="title">
+							<strong class="heading">Flash Calendar</strong>
+							<p>WordPress flash calendar plugin</p>
+						</div>
+					</div>
+					<div class="description">
+							<p>Spider Flash Calendar is a highly configurable Flash calendar plugin which allows you to have multiple organized events.</p>
+							<a target="_blank" href="http://web-dorado.com/products/wordpress-events-calendar.html" class="download">Download</a>
+					</div>
+				</li>
+        <li class="contact-maker">
+                 <div class="product">
+                         <div class="title">
+                                 <strong class="heading">Contact Form Maker</strong>
+                                 <p>WordPress contact form builder plugin</p>
+                         </div>
+                 </div>
+                 <div class="description">
+                                 <p>WordPress Contact Form Maker is an advanced and easy-to-use tool for creating forms.</p>
+                                 <a target="_blank" href="http://web-dorado.com/products/wordpress-contact-form-maker-plugin.html" class="download">Download</a>
+                 </div>
+         </li>
+
+			</ul>
+		</form>
+	</div >
+  <?php
 }
