@@ -2764,7 +2764,7 @@ function html_search($rows, $params, $page_num, $prod_count, $prod_in_page, $rat
       }
   }
   echo '<form action="' . $page_link . '" method="post" name="cat_form_' . $cels_or_list . '_' . $ident . '" id="cat_form_page_nav1"><input type="hidden" name="page_num_' . $cels_or_list . '_' . $ident . '"	value="1"><input type="hidden" name="subcat_id_' . $cels_or_list . '_' . $ident . '" id="subcat_id_' . $cels_or_list . '_' . $ident . '" value=""><div class="CatalogSearchBox" style="padding-top:10px;"><div class="spider_catalog_style" style="padding-bottom: 35px;">';
-  if ($params["choose_category"] || $params1['categories'] > 0)
+  if ($params["choose_category"])/* || $params1['categories'] > 0*/
   {
   ?>     
     <div style="margin-right: 90px;"><?php echo __('Choose Category', 'sp_catalog') ?></div>
