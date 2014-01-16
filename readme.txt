@@ -1,7 +1,7 @@
 === WordPress Catalog ===  
 Contributors: webdorado  
 Donate link: http://web-dorado.com/products/wordpress-catalog.html  
-Tags: product catalog ,catalog, product, products , product reviews, product review , product catalogue , wordpress catalog, wordpress products catalog, wordpress products list,wp catalog, catalogo, catalogue, product tabs, product feed, product portfolio, product management,  WP Catalogue, catalog of goods, blog catalog, directory, product directory, products directory
+Tags: product catalog ,catalog, product, products , product reviews, product review, product catalogue , wp catalog, catalogo, catalogue, product tabs, product feed, product portfolio, product management,  WP Catalogue, catalog of goods, blog catalog, directory
 Requires at least: 3.0  
 Tested up to: 3.7.1  
 Stable tag: 1.5.8
