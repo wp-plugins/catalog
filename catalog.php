@@ -4,7 +4,7 @@
 Plugin Name: Spider Catalog
 Plugin URI: http://web-dorado.com/products/wordpress-catalog.html
 Description: Spider Catalog is a convenient tool for organizing the products represented on your website into catalogs. Each product on the catalog is assigned with a relevant category, which makes it easier for the customers to search and identify the needed products within the catalog.
-Version: 1.5.8
+Version: 1.5.9
 Author: http://web-dorado.com/
 License: GNU/GPLv3 http://www.gnu.org/licenses/gpl-3.0.html
 */
@@ -209,7 +209,7 @@ add_action('admin_head', 'add_button_style_Spider_Catalog');
 function spiderbox_scripts_method()
 {
 
-    wp_enqueue_script('spidersuperbox', admin_url('admin-ajax.php?action=spiderboxjsphp') . '&delay=3000&allImagesQ=0&slideShowQ=0&darkBG=1&juriroot=' . urlencode(plugins_url("", __FILE__)) . '&spiderShop=1');
+    wp_enqueue_script('spidersuperbox', admin_url('admin-ajax.php?action=spiderboxjsphp'));
     wp_enqueue_script('my_common', plugins_url("js/common.js", __FILE__));
     wp_enqueue_style('spider_cat_main', plugins_url("spidercatalog_main.css", __FILE__));
 }
@@ -1174,14 +1174,13 @@ function SpiderCatAddToOnload()
 	
 
     getViewportSize();
-
-	slideShowDelay=<?php echo esc_js($_GET['delay']); ?>;
-	slideShowQ=<?php echo esc_js($_GET['slideShowQ']); ?>;	
-	allImagesQ=<?php echo esc_js($_GET['allImagesQ']); ?>;
-	spiderShop=<?php echo isset($_GET['spiderShop']) ? esc_js($_GET['spiderShop']) : 0; ?>;
-	darkBG=<?php echo esc_js($_GET['darkBG']); ?>;
+	slideShowDelay=3000;
+	slideShowQ=0;	
+	allImagesQ=0;
+	spiderShop=1;
+	darkBG=1;
 	keyOfOpenImage=-1;
-	spiderBoxBase="<?php echo urldecode($_GET['juriroot']); ?>/spiderBox/";
+	spiderBoxBase="<?php echo plugins_url("", __FILE__); ?>/spiderBox/";
 	LoadingImg.src=spiderBoxBase+"loadingAnimation.gif";
 
 	
@@ -1203,7 +1202,7 @@ function SpiderCatAddToOnload()
 							listOfImages[listOfImages.length]=document.getElementsByTagName( 'a' )[i].href;
 
 						document.getElementsByTagName( 'a' )[i].href="javascript:showPictureAnimated('"+document.getElementsByTagName( 'a' )[i].href+"')";
-                        document.getElementsByTagName( 'a' )[i].style.cursor="url('<?php echo urldecode($_GET['juriroot']); ?>/spiderBox/cursor_magnifier_plus.cur'),pointer";
+                        document.getElementsByTagName( 'a' )[i].style.cursor="url('<?php echo plugins_url("", __FILE__); ?>/spiderBox/cursor_magnifier_plus.cur'),pointer";
 						document.getElementsByTagName( 'a' )[i].target="";
 						
 					}
