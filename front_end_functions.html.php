@@ -2815,9 +2815,9 @@ function html_search($rows, $params, $page_num, $prod_count, $prod_in_page, $rat
           <input type="submit" value="" style="background-color:<?php echo $params[$from . 'search_icon_color']; ?>;background-image:url('<?php echo plugins_url("Front_images/search-icon.png", __FILE__) ?>') !important;width: 30px !important;height: 30px !important;background-size: 100% 100%; position:relative;background-repeat: no-repeat; border: 0px;cursor: pointer;border-radius: 0 !important; padding: 3px !important;margin:  -3px -3px 0px -3px;;">
           <input type="submit" value="" onClick="<?php echo 'cat_form_resett(this.form,' . $cels_or_list . ',' . $ident . ');'?>" style="background-color:<?php echo $params[$from . 'reset_icon_color']; ?>;border-radius: 0 !important;position:relative;width:30px;height:30px;background-repeat: no-repeat;background-image:url('<?php echo plugins_url("Front_images/search-reset.png", __FILE__) ?>') !important; background-size: 100% 100%; border: 0px;cursor: pointer; padding: 3px !important;">
     <?php
-    echo '</div></div>';
+    echo '</div>';
   }
-  echo "</div></form>";
+  echo "</div></div></form>";
   return isset($prod_name) ? $prod_name : "";
 }
 
