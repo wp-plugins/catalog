@@ -18,15 +18,22 @@ Spider WordPress Product Catalog plugin is a convenient tool for organizing the 
 ###Possibility to organize items into categories and subcategories. 	
 ###If you want to customize the design of the catalog, you can buy the commercial version [ here.](http://web-dorado.com/products/wordpress-catalog.html) Color, font, size and design of each element of the catalog are customizable in the commercial version.        
   
-= Features of Spider WordPress Product Catalog :=  
-= Possibility to make the following customizations: =  
+= Features of Spdier [WordPress Catalog](http://web-dorado.com/products/wordpress-catalog.html)  =  
   
-* Enable/disable product ratings and customer reviews for the products on the catalog.  
-* Search products by name and category name on the catalog.  
-* Choose how the products are organized on the catalog: Cells1, List, Cells2, Wide Cells, Thumbnails, Cells3 or Single Product.
-* Export/Import Products.
-* Default 'Price' and 'Market Price' (appears as crossed out) parameters for each product on the catalog.  
-  
+* Organize items into categories and subcategories.    
+* Export/Import Products.   
+* Customize the product cell layout on the main page of the catalog and the product page separately. (commercial version)   
+* Enable/disable product ratings and customer reviews for the products on the catalog.(commercial version)   
+* Choose the background colors of practically all the fields of the catalog item cell.(commercial version)   
+* Customize the color of any text on the catalog.(commercial version)   
+* Select the text size for each of the fields on the catalog.(commercial version)   
+* Customize the width and height of the catalog product cell, as well as the style, color, width, and height of the product cell border.(commercial version)   
+* Choose the number of catalog products in the row and the number of rows in the catalog page, as well as the number of customer reviews per catalog page.(commercial version)   
+* Customize the width and height of the product on the catalog, as well as to choose the design of the stars used to indicate customer ratings on the catalog.(commercial version)   
+* Search products by name and category name on the catalog.   
+* Choose how the products are organized on the catalog: Cells1, List, Cells2, Wide Cells, Thumbnails, Cells3 or Single Product.   
+* Default ‘Price’ and ‘Market Price’ (appears as crossed out) parameters for each product on the catalog.(commercial version)   
+ 
 ### Supported languages  
   
  *If you need language which is not included in this list, please contact us and we will do the translation within 3 days. If you find some mistakes in the translation, please contact us and we will correct it within 3 days.*  
