@@ -18,7 +18,7 @@ Spider WordPress Product Catalog plugin is a convenient tool for organizing the 
 ###Possibility to organize items into categories and subcategories. 	
 ###If you want to customize the design of the catalog, you can buy the commercial version [ here.](http://web-dorado.com/products/wordpress-catalog.html) Color, font, size and design of each element of the catalog are customizable in the commercial version.        
   
-= Features of Spdier [WordPress Catalog](http://web-dorado.com/products/wordpress-catalog.html)  =  
+= Features of Spider [WordPress Catalog](http://web-dorado.com/products/wordpress-catalog.html)=  
   
 * Organize items into categories and subcategories.    
 * Export/Import Products.   
@@ -32,7 +32,7 @@ Spider WordPress Product Catalog plugin is a convenient tool for organizing the 
 * Customize the width and height of the product on the catalog, as well as to choose the design of the stars used to indicate customer ratings on the catalog.(commercial version)   
 * Search products by name and category name on the catalog.   
 * Choose how the products are organized on the catalog: Cells1, List, Cells2, Wide Cells, Thumbnails, Cells3 or Single Product.   
-* Default ‘Price’ and ‘Market Price’ (appears as crossed out) parameters for each product on the catalog.(commercial version)   
+* Default Price and Market Price (appears as crossed out) parameters for each product on the catalog.(commercial version)   
  
 ### Supported languages  
   
