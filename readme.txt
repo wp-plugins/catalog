@@ -138,7 +138,7 @@ If any problem occurs with Spider [Wordpress Catalog](http://wordpress.org/exten
 	
 1.3 Updating the Spider Catalog.  
 
-If you want to update the catalog plugin while preserving your existing catalogs, you need to deactivate and delete the Spider Catalog from the list of installed plugins (Do not uninstall it using the Uninstall Spider Catalog option of the plugin, otherwise you will lose your initial data) and install the new plugin. 
+If you want to update the Spider Catalog while preserving your existing catalogs, you need to deactivate and delete the Spider Catalog from the list of installed plugins (Do not uninstall it using the Uninstall Spider Catalog option of the plugin, otherwise you will lose your initial data) and install the new plugin. 
 
 ==Spider Catalog Step by step guide Step  2 ==        
     
