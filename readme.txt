@@ -37,6 +37,8 @@ Spider WordPress Product Catalog plugin is a convenient tool for organizing the 
 * Choose how the products are organized on the catalog: Cells1, List, Cells2, Wide Cells, Thumbnails, Cells3 or Single Product.   
 * Default Price and Market Price (appears as crossed out) parameters for each product on the catalog.(commercial version)   
  
+ ###IMPORTANT: If you think you found a bug in Spider Catalog or have any problem/question concerning the plugin, please check out [Support Forum](http://web-dorado.com/forum/spider-catalog-wordpress.html) in our website. If you do not find a solution here, do not hesitate to contact us at [info@web-dorado.com](mailto:info@web-dorado.com).
+ 
 ### Supported languages  
   
  *If you need language which is not included in this list, please contact us and we will do the translation within 3 days. If you find some mistakes in the translation, please contact us and we will correct it within 3 days.*  
