@@ -28,6 +28,9 @@ The view option for the catalog can be determined in advance, plus you will be a
   
 * Organize items into categories and subcategories.    
 * Export/Import Products.   
+* Search products by name and category name on the catalog.   
+* Possibility of adding multiple images for each product.  
+* Choose how the products are organized on the catalog: Cells1, List, Cells2, Wide Cells, Thumbnails, Cells3 or Single Product.   
 * Customize the product cell layout on the main page of the catalog and the product page separately. (commercial version)   
 * Enable/disable product ratings and customer reviews for the products on the catalog.(commercial version)   
 * Choose the background colors of practically all the fields of the catalog item cell.(commercial version)   
@@ -36,8 +39,7 @@ The view option for the catalog can be determined in advance, plus you will be a
 * Customize the width and height of the catalog product cell, as well as the style, color, width, and height of the product cell border.(commercial version)   
 * Choose the number of catalog products in the row and the number of rows in the catalog page, as well as the number of customer reviews per catalog page.(commercial version)   
 * Customize the width and height of the product on the catalog, as well as to choose the design of the stars used to indicate customer ratings on the catalog.(commercial version)   
-* Search products by name and category name on the catalog.   
-* Choose how the products are organized on the catalog: Cells1, List, Cells2, Wide Cells, Thumbnails, Cells3 or Single Product.   
+
 * Default Price and Market Price (appears as crossed out) parameters for each product on the catalog.(commercial version)   
  
  ###IMPORTANT: If you think you found a bug in Spider Catalog or have any problem/question concerning the plugin, please check out [Support Forum](http://web-dorado.com/forum/spider-catalog-wordpress.html) in our website. If you do not find a solution here, do not hesitate to contact us at [info@web-dorado.com](mailto:info@web-dorado.com).
