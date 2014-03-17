@@ -31,6 +31,7 @@ The view option for the catalog can be determined in advance, plus you will be a
 * Search products by name and category name on the catalog.   
 * Possibility of adding multiple images for each product.  
 * Choose how the products are organized on the catalog: Cells1, List, Cells2, Wide Cells, Thumbnails, Cells3 or Single Product.   
+* Filtering opportunity in the front end when selecting a specific category or subcategory.    
 * Customize the product cell layout on the main page of the catalog and the product page separately. (commercial version)   
 * Enable/disable product ratings and customer reviews for the products on the catalog.(commercial version)   
 * Choose the background colors of practically all the fields of the catalog item cell.(commercial version)   
