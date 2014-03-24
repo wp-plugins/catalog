@@ -32,16 +32,21 @@ The view option for the catalog can be determined in advance, plus you will be a
 * Possibility of adding multiple images for each product.  
 * Choose how the products are organized on the catalog: Cells1, List, Cells2, Wide Cells, Thumbnails, Cells3 or Single Product.   
 * Filtering opportunity in the front end when selecting a specific category or subcategory.    
-* Customize the product cell layout on the main page of the catalog and the product page separately. (commercial version)   
-* Enable/disable product ratings and customer reviews for the products on the catalog.(commercial version)   
-* Choose the background colors of practically all the fields of the catalog item cell.(commercial version)   
-* Customize the color of any text on the catalog.(commercial version)   
-* Select the text size for each of the fields on the catalog.(commercial version)   
-* Customize the width and height of the catalog product cell, as well as the style, color, width, and height of the product cell border.(commercial version)   
-* Choose the number of catalog products in the row and the number of rows in the catalog page, as well as the number of customer reviews per catalog page.(commercial version)   
-* Customize the width and height of the product on the catalog, as well as to choose the design of the stars used to indicate customer ratings on the catalog.(commercial version)   
+  
 
-* Default Price and Market Price (appears as crossed out) parameters for each product on the catalog.(commercial version)   
+ 
+Upgrade to [WordPress Catalog Pro](http://web-dorado.com/products/wordpress-catalog.html) to add features:  
+ 
+* Customize the product cell layout on the main page of the catalog and the product page separately.     
+* Enable/disable product ratings and customer reviews for the products on the catalog.     
+* Choose the background colors of practically all the fields of the catalog item cell.   
+* Customize the color of any text on the catalog.   
+* Select the text size for each of the fields on the catalog.   
+* Customize the width and height of the catalog product cell, as well as the style, color, width, and height of the product cell border.     
+* Choose the number of catalog products in the row and the number of rows in the catalog page, as well as the number of customer reviews per catalog page.   
+* Customize the width and height of the product on the catalog, as well as to choose the design of the stars used to indicate customer ratings on the catalog.   
+* Default Price and Market Price (appears as crossed out) parameters for each product on the catalog.    
+
  
  ###IMPORTANT: If you think you found a bug in Spider Catalog or have any problem/question concerning the plugin, please check out [Support Forum](http://web-dorado.com/forum/spider-catalog-wordpress.html) in our website. If you do not find a solution here, do not hesitate to contact us at [info@web-dorado.com](mailto:info@web-dorado.com).
  
