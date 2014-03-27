@@ -44,7 +44,10 @@
 #main_featured_plugins_page #featured-plugins-list  li.player  .product {background:url(images/player.jpg) left center no-repeat;}
 #main_featured_plugins_page #featured-plugins-list  li.spider-calendar  .product {background:url(images/spider.calendar.jpg) left center no-repeat;}
 #main_featured_plugins_page #featured-plugins-list  li.zoom .product {background:url(images/zoom.jpg) left center no-repeat;}
+#main_featured_plugins_page #featured-plugins-list  li.twitter .product {background:url(images/twittertools.png) left center no-repeat;}
+#main_featured_plugins_page #featured-plugins-list  li.photo-gallery  .product {background:url(images/photo-gallery.png) left center no-repeat #CACACA; background-position-x:5px; border-top-left-radius: 5px; border-bottom-left-radius: 5px;}
 
+#main_featured_plugins_page #featured-plugins-list  li.photo-gallery  .title {border-left-style: solid; border-width: 1px; border-color: #ededed;}
 
 #main_featured_plugins_page #featured-plugins-list li  .title  .heading {
 	display:block;

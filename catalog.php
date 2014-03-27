@@ -4,7 +4,7 @@
 Plugin Name: Spider Catalog
 Plugin URI: http://web-dorado.com/products/wordpress-catalog.html
 Description: Spider Catalog is a convenient tool for organizing the products represented on your website into catalogs. Each product on the catalog is assigned with a relevant category, which makes it easier for the customers to search and identify the needed products within the catalog.
-Version: 1.6
+Version: 1.6.1
 Author: http://web-dorado.com/
 License: GNU/GPLv3 http://www.gnu.org/licenses/gpl-3.0.html
 */
@@ -2246,6 +2246,19 @@ function catalog_Featured_Plugins() {
 		</table>
 		<form method="post">
 			<ul id="featured-plugins-list">
+      <li class="photo-gallery">
+            <div class="product">
+              <div class="title">
+                <strong class="heading">Photo Gallery</strong>
+                <p>WordPress Photo Gallery Plugin</p>
+              </div>
+            </div>
+            <div class="description">
+                <p>Photo Gallery is a fully responsive WordPress Gallery plugin with advanced functionality. 
+				It allows having different image galleries for your posts and pages, as well as different widgets. </p>
+                <a target="_blank" href="http://web-dorado.com/products/wordpress-photo-gallery-plugin.html" class="download">Download</a>
+            </div>
+          </li>
         <li class="form-maker">
                  <div class="product">
                          <div class="title">
@@ -2354,7 +2367,18 @@ function catalog_Featured_Plugins() {
                                  <a target="_blank" href="http://web-dorado.com/products/wordpress-contact-form-maker-plugin.html" class="download">Download</a>
                  </div>
          </li>
-
+          <li class="twitter">
+                 <div class="product">
+                         <div class="title">
+                                 <strong class="heading">Widget Twitter</strong>
+                                 <p>WordPress Twitter plugin</p>
+                         </div>
+                 </div>
+                 <div class="description">
+                                 <p>The Widget Twitter is a boosted WordPress plugin, which provides full Twitter Integration for your WordPress site.</p>
+                                 <a target="_blank" href="http://web-dorado.com/products/wordpress-twitter-integration-plugin.html" class="download">Download</a>
+                 </div>
+         </li>
 			</ul>
 		</form>
 	</div >

@@ -14,44 +14,45 @@ function echo_catalog_csv( $fields )
     $separator = '';
     foreach ( $fields as $field )
     {
-        if ( substr_count($field, '@@:@@'))
-        {
-            $string = '';
-            $par_data=explode("par_",$field);
+        // if ( substr_count($field, '@@:@@'))
+        // {
+            // $string = '';
+            // $par_data=explode("par_",$field);
 
-            for($j=0;$j<count($par_data);$j++)
-                if($par_data[$j]!='')
-                {
-                    $par1_data=explode("@@:@@",$par_data[$j]);
-                    $par_values=explode("	",$par1_data[1]);
-                    $countOfPar=0;
-                    for($k=0;$k<count($par_values);$k++)
-                        if($par_values[$k]!="")
-                            $countOfPar++;
-                    if($countOfPar!=0)
-                    {
-                        $string .= $par1_data[0].':';
-                        for ($k = 0; $k < count($par_values); $k++)
-                            if ($par_values[$k] != "")
-                                $string.= $par_values[$k].', ' ;
-                        $string .= "\n";
-                    }
-                }
-            $field = $string;
-        }
+            // for($j=0;$j<count($par_data);$j++)
+                // if($par_data[$j]!='')
+                // {
+                    // $par1_data=explode("@@:@@",$par_data[$j]);
+                    // $par_values=explode("	",$par1_data[1]);
+                    // $countOfPar=0;
+                    // for($k=0;$k<count($par_values);$k++)
+                        // if($par_values[$k]!="")
+                            // $countOfPar++;
+                    // if($countOfPar!=0)
+                    // {
+                        // $string .= $par1_data[0].':';
+                        // for ($k = 0; $k < count($par_values); $k++)
+                            // if ($par_values[$k] != "")
+                                // $string.= $par_values[$k].', ' ;
+                        // $string .= "\n";
+                    // }
+                // }
+            // $field = $string;
+        // }
         $field1 = $field;
 
-        if ( preg_match_all(  $pattern ,$field, $res))
-        { 	$field1 ='';
-            for ($i=0;$i<count($res[0]);$i++)
-            {
-                $field1.=$res[1][$i].':'.$res[2][$i].' ';
-            }
-        }
+        // if ( preg_match_all(  $pattern ,$field, $res))
+        // { 	$field1 ='';
+            // for ($i=0;$i<count($res[0]);$i++)
+            // {
+                // $field1.=$res[1][$i].':'.$res[2][$i].' ';
+            // }
+        // }
         if ( preg_match( '/\\r|\\n|,|"/', $field1 ) )
         {
             $field1 = '"' . str_replace( '"', '""', $field1 ) . '"';
         }
+        $field1 = str_replace( "'", "\'", $field1);
         echo $separator . $field1;
         $separator = ',';
     }
