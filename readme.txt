@@ -31,8 +31,8 @@ The view option for the catalog can be determined in advance, plus you will be a
 * Search products by name and category name on the catalog.   
 * Possibility of adding multiple images for each product.  
 * Choose how the products are organized on the catalog: Cells1, List, Cells2, Wide Cells, Thumbnails, Cells3 or Single Product.   
-* Filtering opportunity in the front end when selecting a specific category or subcategory.    
-  
+* Filtering opportunity in the front end when selecting a specific category or subcategory.      
+* Possibility of displaying products either grouped within categories or as a single product per page.    
 
  
 Upgrade to [WordPress Catalog Pro](http://web-dorado.com/products/wordpress-catalog.html) to add features:  
