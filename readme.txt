@@ -19,7 +19,7 @@ The front end browsing will be available both for categories and subcategories f
 The possibility of importing/exporting products in CSV will allow the user to make quick changes and to update the catalog easily.    
 The view option for the catalog can be determined in advance, plus you will be able to use different views for different pages of your website.     
 ###Possibility to organize items into categories and subcategories.    	 
-###If you want to customize the design of the catalog, you can buy the commercial version [ here.](http://web-dorado.com/products/wordpress-catalog.html) Color, font, size and design of each element of the catalog are customizable in the commercial version.        
+###If you want to customize the design of the catalog, you can buy the commercial version [ here.](http://web-dorado.com/products/wordpress-catalog.html) Color, font size and design of each element of the catalog are customizable in the commercial version.        
   
   
   
