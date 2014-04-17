@@ -80,13 +80,34 @@ Get the full version&nbsp;&nbsp;&nbsp;&nbsp;
   </td>  
         </tr>
     <tr>
-    <td style="width:80px">
-    <?php echo "<h2>".'Categories'. "</h2>"; ?>
-    </td>
-    <td  style="width:90px; text-align:right;"><p class="submit" style="padding:0px; text-align:left"><input type="button" value="Add a Category" name="custom_parametrs" onclick="window.location.href='admin.php?page=Categories_Spider_Catalog&task=add_cat'" /></p></td>
-<td style="text-align:right;font-size:16px;padding:20px; padding-right:50px">
-
-	</td>
+      <td style="width:80px">
+        <?php echo "<h2>".'Categories'. "</h2>"; ?>
+      </td>
+      <td  style="width:90px; text-align:right;">
+        <p class="submit" style="padding:0px; text-align:left">
+          <input type="button" value="Add a Category" name="custom_parametrs" onclick="window.location.href='admin.php?page=Categories_Spider_Catalog&task=add_cat'" />
+        </p>
+      </td>
+      <td  style="width:90px; text-align:right;">
+        <p class="submit" style="padding:0px; text-align:left">
+          <input type="button" value="Publish" name="custom_parametrs" onclick="document.getElementById('admin_form').action='admin.php?page=Categories_Spider_Catalog&task=publish'; document.getElementById('admin_form').submit();" />
+        </p>
+      </td>
+      <td  style="width:90px; text-align:right;">
+        <p class="submit" style="padding:0px; text-align:left">
+          <input type="button" value="Unpublish" name="custom_parametrs" onclick="document.getElementById('admin_form').action='admin.php?page=Categories_Spider_Catalog&task=unpublish'; document.getElementById('admin_form').submit();" />
+        </p>
+      </td>
+      <td  style="width:90px; text-align:right;">
+        <p class="submit" style="padding:0px; text-align:left">
+          <input type="button" value="Delete" name="custom_parametrs" onclick="if (confirm('Do you want to delete selected items?')) {
+                                                       document.getElementById('admin_form').action='admin.php?page=Categories_Spider_Catalog&task=delete'; document.getElementById('admin_form').submit();
+                                                     } else {
+                                                       return false;
+                                                     }" />
+        </p>
+      </td>
+      <td style="text-align:right;font-size:16px;padding:20px; padding-right:50px"></td>
     </tr>
     </table>
     <?php
@@ -128,6 +149,7 @@ Get the full version&nbsp;&nbsp;&nbsp;&nbsp;
  <thead>
  <TR>
    <th scope="col" id="id" class="<?php if($sort["sortid_by"]=="id") echo $sort["custom_style"]; else echo $sort["default_style"]; ?>" style="width:30px" ><a href="javascript:ordering('id',<?php if($sort["sortid_by"]=="id") echo $sort["1_or_2"]; else echo "1"; ?>)"><span>ID</span><span class="sorting-indicator"></span></a></th>
+   <th class="manage-column column-cb check-column table_small_col"><input id="check_all" type="checkbox" style="margin:0;" /></th>
  <th scope="col" id="name" class="<?php if($sort["sortid_by"]=="name") echo $sort["custom_style"]; else echo $sort["default_style"]; ?>" style="width:85px" ><a href="javascript:ordering('name',<?php if($sort["sortid_by"]=="name") echo $sort["1_or_2"]; else echo "1"; ?>)"><span>Name</span><span class="sorting-indicator"></span></a></th>
 <th scope="col" id="description" class="<?php if($sort["sortid_by"]=="description") echo $sort["custom_style"]; else echo $sort["default_style"]; ?>" style="" ><a href="javascript:ordering('description',<?php if($sort["sortid_by"]=="description") echo $sort["1_or_2"]; else echo "1"; ?>)"><span>Description</span><span class="sorting-indicator"></span></a></th>
 <th scope="col" id="count" class="<?php if($sort["sortid_by"]=="count") echo $sort["custom_style"]; else echo $sort["default_style"]; ?>" style="width: 102px;
@@ -222,6 +244,7 @@ Get the full version&nbsp;&nbsp;&nbsp;&nbsp;
   ?>
  <tr>
          <td><?php echo $rows[$i]->id; ?></td>
+         <td class="table_small_col check-column"><input id="check_<?php echo $rows[$i]->id; ?>" name="check_<?php echo $rows[$i]->id; ?>" type="checkbox" /></td>
          <td><a  href="admin.php?page=Categories_Spider_Catalog&task=edit_cat&id=<?php echo $rows[$i]->id?>"><?php echo esc_html(stripslashes($rows[$i]->name)); ?></a></td>
          <td><?php echo $rows[$i]->description; ?></td>
 		 <td><a href="admin.php?page=Categories_Spider_Catalog&catid=<?php echo $rows[$i]->id; ?>" alt="Subcategories">(<?php echo $rows[$i]->count; ?>)</a></td>

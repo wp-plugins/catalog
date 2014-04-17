@@ -254,6 +254,31 @@ function change_prod($id)
     return true;
 }
 
+function publish_all($published) {
+  global $wpdb;  
+  $ids = $wpdb->get_col('SELECT id FROM ' . $wpdb->prefix . 'spidercatalog_products');
+  foreach ($ids as $id) {
+    if (isset($_POST['check_' . $id])) {
+      $wpdb->update($wpdb->prefix . 'spidercatalog_products', array('published' => $published), array('id' => $id));
+    }
+  }	
+	?>
+	<div class="updated"><p><strong><?php _e('Item Saved'); ?></strong></p></div>
+	<?php	
+  return true;
+}
+
+function delete_all() {
+  global $wpdb;
+  $ids = $wpdb->get_col('SELECT id FROM ' . $wpdb->prefix . 'spidercatalog_products');
+  foreach ($ids as $id) {
+    if (isset($_POST['check_' . $id])) {
+      removeProduct($id);
+    }
+  }
+  return true;
+}
+
 
 function editProduct($id)
 {

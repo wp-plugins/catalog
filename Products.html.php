@@ -80,6 +80,25 @@ function html_showProducts($rows, $pageNav, $sort, $cat_row)
                             type="button" value="Add a Product" name="custom_parametrs"
                             onclick="window.location.href='admin.php?page=Products_Spider_Catalog&task=add_prad'"/></p>
                 </td>
+                <td  style="width:90px; text-align:right;">
+                  <p class="submit" style="padding:0px; text-align:left">
+                    <input type="button" value="Publish" name="custom_parametrs" onclick="document.getElementById('admin_form').action='admin.php?page=Products_Spider_Catalog&task=publish'; document.getElementById('admin_form').submit();" />
+                  </p>
+                </td>
+                <td  style="width:90px; text-align:right;">
+                  <p class="submit" style="padding:0px; text-align:left">
+                    <input type="button" value="Unpublish" name="custom_parametrs" onclick="document.getElementById('admin_form').action='admin.php?page=Products_Spider_Catalog&task=unpublish'; document.getElementById('admin_form').submit();" />
+                  </p>
+                </td>
+                <td  style="width:90px; text-align:right;">
+                  <p class="submit" style="padding:0px; text-align:left">
+                    <input type="button" value="Delete" name="custom_parametrs" onclick="if (confirm('Do you want to delete selected items?')) {
+                                                                 document.getElementById('admin_form').action='admin.php?page=Products_Spider_Catalog&task=delete'; document.getElementById('admin_form').submit();
+                                                               } else {
+                                                                 return false;
+                                                               }" />
+                  </p>
+                </td>
                 <td style="text-align:right;font-size:16px;padding:20px; padding-right:50px">
 
                 </td>
@@ -156,6 +175,7 @@ function html_showProducts($rows, $pageNav, $sort, $cat_row)
                     style="width:30px"><a
                         href="javascript:ordering('id',<?php if ($sort["sortid_by"] == "id") echo $sort["1_or_2"]; else echo "1"; ?>)"><span>ID</span><span
                             class="sorting-indicator"></span></a></th>
+                <th class="manage-column column-cb check-column table_small_col"><input id="check_all" type="checkbox" style="margin:0;" /></th>
                 <th scope="col" id="name"
                     class="<?php if ($sort["sortid_by"] == "name") echo $sort["custom_style"]; else echo $sort["default_style"]; ?>"
                     style=""><a
@@ -207,6 +227,7 @@ function html_showProducts($rows, $pageNav, $sort, $cat_row)
                 ?>
                 <tr>
                     <td><?php echo $rows[$i]->id; ?></td>
+                    <td class="table_small_col check-column"><input id="check_<?php echo $rows[$i]->id; ?>" name="check_<?php echo $rows[$i]->id; ?>" type="checkbox" /></td>
                     <td>
                         <a href="admin.php?page=Products_Spider_Catalog&task=edit_prad&id=<?php echo $rows[$i]->id ?>"><?php echo esc_html(stripslashes($rows[$i]->name)); ?></a>
                     </td>

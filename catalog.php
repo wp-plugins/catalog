@@ -4,7 +4,7 @@
 Plugin Name: Spider Catalog
 Plugin URI: http://web-dorado.com/products/wordpress-catalog.html
 Description: Spider Catalog is a convenient tool for organizing the products represented on your website into catalogs. Each product on the catalog is assigned with a relevant category, which makes it easier for the customers to search and identify the needed products within the catalog.
-Version: 1.6.1
+Version: 1.6.2
 Author: http://web-dorado.com/
 License: GNU/GPLv3 http://www.gnu.org/licenses/gpl-3.0.html
 */
@@ -196,11 +196,7 @@ function Spider_Catalog_register($plugin_array)
 
 function add_button_style_Spider_Catalog()
 {
-    echo '<style type="text/css">
-.wp_themeSkin span.mce_Spider_Catalog_mce {background:url(\'' . plugins_url('images/Spider_CatalogLogo.png', __FILE__) . '\') no-repeat !important;}
-.wp_themeSkin .mceButtonEnabled:hover span.mce_Spider_Catalog_mce,.wp_themeSkin .mceButtonActive span.mce_Spider_Catalog_mce
-{background:url(\'' . plugins_url('images/Spider_CatalogLogoHover.png', __FILE__) . '\') no-repeat !important;}
-</style>';
+    echo '<script>var wd_cat_plugin_url = "' . plugins_url('', __FILE__) . '";</script>';
 }
 
 add_action('admin_head', 'add_button_style_Spider_Catalog');
@@ -358,8 +354,16 @@ function Categories_Spider_Catalog()
             change_cat($id);
             showCategory();
             break;
+        case 'publish':
+            publish_all(TRUE);
+            showCategory();
+            break;
         case 'unpublish_cat':
             change_cat($id);
+            showCategory();
+            break;
+        case 'unpublish':
+            publish_all(FALSE);
             showCategory();
             break;
 
@@ -401,6 +405,10 @@ function Categories_Spider_Catalog()
 
         case 'remove_cat':
             removeCategory($id);
+            showCategory();
+            break;
+        case 'delete':
+            delete_all();
             showCategory();
             break;
 
@@ -458,6 +466,18 @@ function Products_Spider_Catalog()
 
         case 'saveorder':
 
+            break;
+        case 'publish':
+            publish_all(TRUE);
+            showProducts();
+            break;
+        case 'unpublish':
+            publish_all(FALSE);
+            showProducts();
+            break;
+        case 'delete':
+            delete_all();
+            showProducts();
             break;
         case 'unpublish_prad':
             change_prod($id);
@@ -727,9 +747,7 @@ GROUP BY " . $wpdb->prefix . "spidercatalog_products.category_id) AS c ON c.id =
         <script language="javascript" type="text/javascript"
                 src="<?php echo get_option("siteurl"); ?>/wp-includes/js/jquery/jquery.js"></script>
         <script language="javascript" type="text/javascript"
-                src="<?php echo get_option("siteurl"); ?>/wp-includes/js/tinymce/tiny_mce_popup.js"></script>
-        <link rel="stylesheet"
-              href="<?php echo get_option("siteurl"); ?>/wp-includes/js/tinymce/themes/advanced/skins/wp_theme/dialog.css?ver=342-20110630100">
+                src="<?php echo get_option("siteurl"); ?>/wp-includes/js/tinymce/tiny_mce_popup.js"></script>        
         <script language="javascript" type="text/javascript"
                 src="<?php echo get_option("siteurl"); ?>/wp-includes/js/tinymce/utils/mctabs.js"></script>
         <script language="javascript" type="text/javascript"
@@ -780,7 +798,6 @@ GROUP BY " . $wpdb->prefix . "spidercatalog_products.category_id) AS c ON c.id =
                 </table>
             </div>
             <div id="Products_list_panel" class="panel">
-                <br>
                 <table border="0" cellspacing="0" style="font-size: 11px !important;">
                     <tbody>
                     <tr>
@@ -907,8 +924,7 @@ GROUP BY " . $wpdb->prefix . "spidercatalog_products.category_id) AS c ON c.id =
 
                 var tagtext;
                 tagtext = '[Spider_Catalog_Category id="' + document.getElementById('Spider_cat_Category').value + '" details="' + show + '" type="' + lists + '" showsub="' + showsub + '" showsubprod="' + showsubprod + '" showprod="' + showprod + '"]';
-                window.tinyMCE.execInstanceCommand('content', 'mceInsertContent', false, tagtext);
-                tinyMCEPopup.editor.execCommand('mceRepaint');
+                window.tinyMCE.execCommand('mceInsertContent', false, tagtext);
                 tinyMCEPopup.close();
 
 
@@ -922,8 +938,7 @@ GROUP BY " . $wpdb->prefix . "spidercatalog_products.category_id) AS c ON c.id =
                 else {
                     var tagtext;
                     tagtext = '[Spider_Catalog_Product id="' + document.getElementById('spider_catalog_product').value + '"]';
-                    window.tinyMCE.execInstanceCommand('content', 'mceInsertContent', false, tagtext);
-                    tinyMCEPopup.editor.execCommand('mceRepaint');
+                    window.tinyMCE.execCommand('mceInsertContent', false, tagtext);
                     tinyMCEPopup.close();
                 }
 

@@ -531,7 +531,30 @@ function change_cat( $id ){
     return true;
 }
 
+function publish_all($published) {
+  global $wpdb;  
+  $ids = $wpdb->get_col('SELECT id FROM ' . $wpdb->prefix . 'spidercatalog_product_categories');
+  foreach ($ids as $id) {
+    if (isset($_POST['check_' . $id])) {
+      $wpdb->update($wpdb->prefix . 'spidercatalog_product_categories', array('published' => $published), array('id' => $id));
+    }
+  }	
+	?>
+	<div class="updated"><p><strong><?php _e('Item Saved'); ?></strong></p></div>
+	<?php	
+  return true;
+}
 
+function delete_all() {
+  global $wpdb;
+  $ids = $wpdb->get_col('SELECT id FROM ' . $wpdb->prefix . 'spidercatalog_product_categories');
+  foreach ($ids as $id) {
+    if (isset($_POST['check_' . $id])) {
+      removeCategory($id);
+    }
+  }
+  return true;
+}
 
 function removeCategory($id)
 {

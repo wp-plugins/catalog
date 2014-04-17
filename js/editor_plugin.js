@@ -15,7 +15,8 @@
 			});
             ed.addButton('Spider_Catalog_mce', {
             title : 'Insert Spider Catalog',
-			cmd : 'mceSpider_Catalog_mce',
+            cmd : 'mceSpider_Catalog_mce',
+            image: wd_cat_plugin_url + '/images/Spider_CatalogLogoHover.png'
             });
         }
     });
