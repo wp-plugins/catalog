@@ -47,7 +47,7 @@ Upgrade to [WordPress Catalog Pro](http://web-dorado.com/products/wordpress-cata
 * Choose the number of catalog products in the row and the number of rows in the catalog page, as well as the number of customer reviews per catalog page.   
 * Customize the width and height of the product on the catalog, as well as to choose the design of the stars used to indicate customer ratings on the catalog.   
 * Default Price and Market Price (appears as crossed out) parameters for each product on the catalog.    
-
+* Separate Style and Colors sections for each view option   
  
  ###IMPORTANT: If you think you found a bug in Spider Catalog or have any problem/question concerning the plugin, please check out [Support Forum](http://web-dorado.com/forum/spider-catalog-wordpress.html) in our website. If you do not find a solution here, do not hesitate to contact us at [info@web-dorado.com](mailto:info@web-dorado.com).
  
