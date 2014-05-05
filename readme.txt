@@ -17,8 +17,8 @@ Spider Catalog for WordPress is a convenient tool for organizing the products re
 Spider WordPress Product Catalog plugin is a convenient tool for organizing the products represented on your website into catalogs. Each product on the catalog is assigned with a relevant category, which makes it easier for the customers to search and identify the needed products within the WordPress catalog. It is possible to add an unlimited number of parameters for each of the categories in the catalog in order to allow a detailed representation of the product on the catalog. Moreover, each product on the catalog can be accompanied with an image. Customers are provided with the possibility of rating the products available on the catalog, as well as writing customer reviews that will appear under the [WordPress Catalog Product](http://web-dorado.com/products/wordpress-catalog.html).
 The front end browsing will be available both for categories and subcategories for more convenient search.
 The possibility of importing/exporting products in CSV will allow the user to make quick changes and to update the catalog easily.    
-The view option for the catalog can be determined in advance, plus you will be able to use different views for different pages of your website. 
-Captcha protection for the product reviews to avoid spam in your  catalog.    
+The view option for the catalog can be determined in advance. You are able to use different views for different pages of your website.   
+Captcha protection is added for the product reviews to avoid spam in your catalog.   
 ###Possibility to organize items into categories and subcategories.    	 
 ###If you want to customize the design of the catalog, you can buy the commercial version [ here.](http://web-dorado.com/products/wordpress-catalog.html) Color, font size and design of each element of the catalog are customizable in the commercial version.        
   
@@ -31,7 +31,7 @@ Captcha protection for the product reviews to avoid spam in your  catalog.
 * Export/Import Products.   
 * Search products by name and category name on the catalog.   
 * Possibility of adding multiple images for each product.  
-* Choose how the products are organized on the catalog: Cells1, List, Cells2, Wide Cells, Thumbnails, Cells3 or Single Product.   
+* Choose one of the view options to organize the catalog: Cells1, List, Cells2, Wide Cells, Thumbnails, Cells3 or Single Product.  
 * Filtering opportunity in the front end when selecting a specific category or subcategory.         
 * Possibility of displaying products either grouped within categories or as a single product per page.       
 
@@ -46,8 +46,8 @@ Upgrade to [WordPress Catalog Pro](http://web-dorado.com/products/wordpress-cata
 * Customize the width and height of the catalog product cell, as well as the style, color, width, and height of the product cell border.     
 * Choose the number of catalog products in the row and the number of rows in the catalog page, as well as the number of customer reviews per catalog page.   
 * Customize the width and height of the product on the catalog, as well as to choose the design of the stars used to indicate customer ratings on the catalog.   
-* Default Price and Market Price (appears as crossed out) parameters for each product on the catalog.    
-* Separate Style and Colors sections for each view option  
+* Add Default Price and Market Price to each product of the catalog. Market Price appears crossed out.       
+* Customize the styles and colors of the catalog views in separate sections.    
  
  ###IMPORTANT: If you think you found a bug in Spider Catalog or have any problem/question concerning the plugin, please check out [Support Forum](http://web-dorado.com/forum/spider-catalog-wordpress.html) in our website. If you do not find a solution here, do not hesitate to contact us at [info@web-dorado.com](mailto:info@web-dorado.com).
  
