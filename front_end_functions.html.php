@@ -2050,7 +2050,7 @@ function front_end_catalog_wcells($rows, $params, $page_num, $prod_count, $prod_
 
             $categories_id=explode(',',$row->category_id);
             if ($row->category_id > 0 and $params['cell_show_category']) {
-                echo '<div style="padding-left:7px;background-color:'.$params['single_cell_background_color_1'].';font-size:'.$params['single_cell_font_1_size'].'px !important;"><span style="color:'.$params['single_cell_text_color_2'].' !important;" id="cat_' . $row->id . '">Category:';
+                echo '<div style="padding-left:7px;background-color:'.$params['single_cell_background_color_1'].';font-size:'.$params['single_cell_font_1_size'].'px !important;"><span style="color:'.$params['single_cell_text_color_2'].' !important;" id="cat_' . $row->id . '">' . __('Category:', 'sp_catalog') . ':';
 
                 foreach($categories as $key=>$categ)
                 {
@@ -2116,7 +2116,7 @@ function front_end_catalog_wcells($rows, $params, $page_num, $prod_count, $prod_
 
             $description = explode('<!--more-->', stripslashes($row->description));
             echo '<div id="spanman" style="color:'.$params['single_cell_text_color_2'].' !important;padding-left:7px;background-color:'.$params['single_cell_background_color_1'].';font-size:'.$params['single_cell_font_1_size'].'px !important;" id="prodDescription">' . $description[0] . ' </div>';
-            echo '<div  style="background-color:'.$params['wcells_more_background_color'].';width:70px;float:right;margin-bottom: 3px;;padding-left: 16px;position:relative;"><a style="color:'.$params['wcells_more_font_color'].';font-size:12pt;" href="'.$link.'">More</a></div>';
+            echo '<div  style="background-color:'.$params['wcells_more_background_color'].';width:70px;float:right;margin-bottom: 3px;;padding-left: 16px;position:relative;"><a style="color:'.$params['wcells_more_font_color'].';font-size:12pt;" href="'.$link.'">' . __('More', 'sp_catalog') . '</a></div>';
 
             echo '</td>';
 
