@@ -34,7 +34,6 @@ Captcha protection is added for the product reviews to avoid spam in your catalo
 * Choose one of the view options to organize the catalog: Cells1, List, Cells2, Wide Cells, Thumbnails, Cells3 or Single Product.  
 * Filtering opportunity in the front end when selecting a specific category or subcategory.         
 * Possibility of displaying products either grouped within categories or as a single product per page.       
-
  
 Upgrade to [WordPress Catalog Pro](http://web-dorado.com/products/wordpress-catalog.html) to add features:  
  
@@ -48,7 +47,8 @@ Upgrade to [WordPress Catalog Pro](http://web-dorado.com/products/wordpress-cata
 * Customize the width and height of the product on the catalog, as well as to choose the design of the stars used to indicate customer ratings on the catalog.   
 * Add Default Price and Market Price to each product of the catalog. Market Price appears crossed out.       
 * Customize the styles and colors of the catalog views in separate sections.    
- 
+* Possibility to choose the currency symbol and its positioning for the product price.   
+
  ###IMPORTANT: If you think you found a bug in Spider Catalog or have any problem/question concerning the plugin, please check out [Support Forum](http://web-dorado.com/forum/spider-catalog-wordpress.html) in our website. If you do not find a solution here, do not hesitate to contact us at [info@web-dorado.com](mailto:info@web-dorado.com).
  
 ### Supported languages  
