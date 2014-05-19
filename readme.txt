@@ -27,7 +27,7 @@ Captcha protection is added for the product reviews to avoid spam in your catalo
   
 ###Features of Spider [WordPress Catalog](http://web-dorado.com/products/wordpress-catalog.html)  
   
-* Organize items into categories and subcategories.    
+* Organize products into categories and subcategories.    
 * Export/Import Products.   
 * Search products by name and category name on the catalog.   
 * Possibility of adding multiple images for each product.  
