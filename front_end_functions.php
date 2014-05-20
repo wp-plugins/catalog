@@ -339,7 +339,10 @@ function showPublishedProducts_1($cat_id = 1, $show_cat_det = 1, $cels_or_list =
 
     if ($prod_name != "") {
         //$query_count .= " and (" . $wpdb->prefix . "spidercatalog_products.name like %s or " . $wpdb->prefix . "spidercatalog_products.description like %s )  ";
-        $query .= " and (" . $wpdb->prefix . "spidercatalog_products.name like '%" . $prod_name . "%' or " . $wpdb->prefix . "spidercatalog_products.description like '%" . $prod_name . "%' )  ";
+        $prod_name = explode(' ', $prod_name);
+        foreach ($prod_name as $pr_name) {
+          $query .= " and (" . $wpdb->prefix . "spidercatalog_products.name like '%" . $pr_name . "%' or " . $wpdb->prefix . "spidercatalog_products.description like '%" . $pr_name . "%'  or " . $wpdb->prefix . "spidercatalog_products.param like '%" . $pr_name . "%')  ";
+        }
     }
 
     /*if ($prod_name != "") {

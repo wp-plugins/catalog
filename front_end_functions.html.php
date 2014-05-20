@@ -2311,7 +2311,7 @@ function html_front_end_single_product($rows, $reviews_rows, $params, $category_
     $array = explode(" ", esc_html(stripslashes($row->name)));
     $array2 = str_replace("$array[0]", "", esc_html(stripslashes($row->name)));
     ?>
-    <table id="prodMiddle" class="spider_catalog_style" style="border:inherit !impotrtant" cellspacing="0" cellpadding="0">
+    <table id="prodMiddle" class="spider_catalog_style" style="border:inherit !important" cellspacing="0" cellpadding="0">
       <tbody>
         <tr>
           <td colspan="2">
