@@ -33,7 +33,7 @@ Captcha protection is added for the product reviews to avoid spam in your catalo
   
 * Organize products into categories and subcategories.    
 * Export/Import Products.   
-* Search products by name and category name on the catalog.   
+* Search products by name, parameters, descrition and category name on the catalog.   
 * Possibility of adding multiple images for each product.  
 * Choose one of the view options to organize the catalog: Cells1, List, Cells2, Wide Cells, Thumbnails, Cells3 or Single Product.  
 * Filtering opportunity in the front end when selecting a specific category or subcategory.         
