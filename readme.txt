@@ -48,7 +48,8 @@ Upgrade to [WordPress Catalog Pro](http://web-dorado.com/products/wordpress-cata
 * Customize the color of any text on the catalog.   
 * Select the text size for each of the fields on the catalog.   
 * Customize the width and height of the catalog product cell, as well as the style, color, width, and height of the product cell border.     
-* Choose the number of catalog products in the row and the number of rows in the catalog page, as well as the number of customer reviews per catalog page.   
+* Choose the number of catalog products in the row and the number of rows in the catalog page.
+* Possibility of changing the color scheme and font color for the review section, as well as possibility to select the number of customer reviews per catalog page.      
 * Customize the width and height of the product on the catalog, as well as to choose the design of the stars used to indicate customer ratings on the catalog.   
 * Add Default Price and Market Price to each product of the catalog. Market Price appears crossed out.       
 * Customize the styles and colors of the catalog views in separate sections.    
