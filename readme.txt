@@ -39,6 +39,7 @@ Captcha protection is added for the product reviews to avoid spam in your catalo
 * Filtering opportunity in the front end when selecting a specific category or subcategory.         
 * Possibility of displaying products either grouped within categories or as a single product per page.       
 * Possibility to add custom HTML in the description of the product.   
+* Possibility of providing detailed description for each category.   
 
 Upgrade to [WordPress Catalog Pro](http://web-dorado.com/products/wordpress-catalog.html) to add features:  
  
