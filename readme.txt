@@ -41,6 +41,7 @@ Captcha protection is added for the product reviews to avoid spam in your catalo
 * Possibility to add custom HTML in the description of the product.   
 * Possibility of providing detailed description for each category.   
 * Possibility of select the order of the product display.   
+* Possibility to disable categories and parameters for the Cells 1 and List Page options.  
 
 Upgrade to [WordPress Catalog Pro](http://web-dorado.com/products/wordpress-catalog.html) to add features:  
  
