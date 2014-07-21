@@ -43,6 +43,7 @@ Captcha protection is added for the product reviews to avoid spam in your catalo
 * Possibility of select the order of the product display.   
 * Possibility to disable categories and parameters for the Cells 1 and List Page options.  
 * Product image display in a lightbox for full view possibility.  
+* Add Default Price and Market Price to each product of the catalog. Market Price appears crossed out.   
 
 Upgrade to [WordPress Catalog Pro](http://web-dorado.com/products/wordpress-catalog.html) to add features:  
  
@@ -54,8 +55,7 @@ Upgrade to [WordPress Catalog Pro](http://web-dorado.com/products/wordpress-cata
 * Customize the width and height of the catalog product cell, as well as the style, color, width, and height of the product cell border.     
 * Choose the number of catalog products in the row and the number of rows in the catalog page.
 * Possibility of changing the color scheme and font color for the review section, as well as possibility to select the number of customer reviews per catalog page.      
-* Customize the width and height of the product on the catalog, as well as to choose the design of the stars used to indicate customer ratings on the catalog.   
-* Add Default Price and Market Price to each product of the catalog. Market Price appears crossed out.       
+* Customize the width and height of the product on the catalog, as well as to choose the design of the stars used to indicate customer ratings on the catalog.        
 * Customize the styles and colors of the catalog views in separate sections.    
 * Possibility to choose the currency symbol and its positioning for the product price.   
 
