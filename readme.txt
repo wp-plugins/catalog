@@ -204,7 +204,7 @@ Note:  WordPress Catalog already supports Import CSV and Export CSV possibilitie
 
 3.6 Images. You can add any number of images of the product. 
 
-3.7 Description. You can add a description of the product. After filling the short description, you can click on the “Read more” button below the editor and fill the full description of the product. 
+3.7 Description. You can add a description of the product. After filling the short description, you can click on the "Read more" button below the editor and fill the full description of the product. 
 
 3.8 Order. Choose the order of the given product inside its category. 
 
