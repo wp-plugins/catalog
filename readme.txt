@@ -190,25 +190,32 @@ If you want to update the Spider Catalog while preserving your existing catalogs
 
 =  Creating/Editing WordPress Catalog Items (Products). =  	
 
-3.1  On the left menu select Spider Catalog>Products>Add Product	
+Note:  WordPress Catalog already supports Import CSV and Export CSV possibilities. You can download existing catalog to Microsoft Excel form, manually edit the files and import the updated catalog.
 
-3.2  Name. Choose a name for the product that will appear in the catalog.	
+3.1 On the left menu select Spider Catalog > Products > Add Product
 
-3.3  Category. Choose the product’s category.		
+3.2 Name. Choose a name for the product that will appear in the catalog. 
 
-3.4  Price. Define the actual price of the product.	
+3.3 Category. Choose the category/categories for the product. 
 
-3.5  Market Price. Indicate the price of the product on the market. It will appear as crossed out. This parameter can also serve to show the initial price of the product or its price before the discount, etc.	
+3.4 Price. Define the actual price of the product. 
 
-3.6  Images. You can add any number of images of the product.		
+3.5 Market Price. Indicate the price of the product on the market. It will appear as crossed out. This parameter can also serve to show the initial price of the product or its price before the discount, etc. 
 
-3.7  Description. You can add a description of the product. After filling the short description, you can click on the "Read more" button below the editor and fill the full description of the product.		
+3.6 Images. You can add any number of images of the product. 
 
-3.8  Order. Choose the order of the given product inside its category.		
+3.7 Description. You can add a description of the product. After filling the short description, you can click on the “Read more” button below the editor and fill the full description of the product. 
 
-3.9  Show in Parent. If the product belongs to a subcategory, you can set it to appear as part of the parent category.		
+3.8 Order. Choose the order of the given product inside its category. 
 
-3.10  Published. Choose whether to publish the product or not.		
+3.9 Show in Parent. If the product belongs to a subcategory, you can set it to appear as part of the parent category.
+ 
+3.10 Published. Choose whether to publish the product or not.
+
+3.11 Edit Ratings. The product ratings can be edited or removed with this feature. You can find this relevant button on the top left corner.
+
+3.12 Edit Reviews. The product reviews can be removed in this section. You can find this relevant button on the top left corner.
+	
 
 
 ==Spider Catalog Step by step guide Step  4 ==  	
