@@ -222,27 +222,27 @@ Note:  WordPress Catalog already supports Import CSV and Export CSV possibilitie
 
 = Catalog Options = 	
 
-4.1  Global options of the WordPress Catalog.		
+4.1 Global options of the WordPress Catalog.
 
-4.1.1  On the left menu select Spider Catalog>Global Options		
+4.1.1 On the left menu select Spider Catalog>Global Options.
 
-4.1.2  Category Details Width. Define the width of the category details.	
+4.1.2 Category Details Width. Define the width of the category details.
 
-4.1.3  Price. Choose whether the catalog has a price parameter or not.		
+4.1.3 Price. Choose whether the catalog has a price parameter or not.
 
-4.1.4  Market Price. Choose whether the catalog has a market price parameter or not.		
+4.1.4 Market Price. Choose whether the catalog has a market price parameter or not.
+		
+4.1.5 Currency symbol. Define the currency of the product price (e.g. ‘$’).		
 
-4.1.5  Currency symbol. Define the currency of the product price (e.g. ‘$’)		
+4.1.6 Currency Symbol Position. Choose whether the currency symbol appears before or after the price number.    
 
-4.1.6  Currency Symbol Position. Choose whether the currency symbol appears before or after the price number.		
+4.1.7 Product Ratings. Choose whether the users can rate the product or not.    
 
-4.1.7  Product Ratings. Choose whether the users can rate the product or not.		
+4.1.8 Customer Reviews. Choose whether the users can submit reviews or not.   
 
-4.1.8  Customer Reviews. Choose whether the users can submit reviews or not.		
+4.1.9 Search by Category. Choose whether there is a possibility to filter products by category using the "Choose Category" drop-down list or not.   
 
-4.1.9  Search by Category. Choose whether there is a possibility to filter products by category using the "Choose Category" drop-down list or not.		
-
-4.1.10  Search by Name. Choose whether there is a possibility to search products on the catalog by name or not.		
+4.1.10 Search by Name. Choose whether there is a possibility to search products on the catalog by name or not.   
 
 
 4.2  Styles and colors of the WordPress Catalog.	
