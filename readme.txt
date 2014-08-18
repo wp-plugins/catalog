@@ -142,6 +142,25 @@ If any problem occurs with Spider [Wordpress Catalog](http://wordpress.org/exten
 5.  Spider [Wordpress Product Catalog](http://wordpress.org/extend/plugins/catalog/)  - Product Page Options
 
 
+
+== Changelog ==
+
+= 1.6.4 =
+improve search
+
+= 1.6.3 =
+fix translation
+
+= 1.6.2 =
+bug fixed on wp 3.9 editor
+
+= 1.6 =
+change lightbox
+
+= 1.5.9 =
+show category search bug fixed
+
+
 ==Spider Catalog Step by step guide Step 1 ==    
 = Installing the WordPress Catalog. =    
     
