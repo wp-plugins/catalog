@@ -43,7 +43,8 @@ Captcha protection is added for the product reviews to avoid spam in your catalo
 * Possibility of select the order of the product display.   
 * Possibility to disable categories and parameters for the Cells 1 and List Page options.  
 * Product image display in a lightbox for full view possibility.  
-* Add Default Price and Market Price to each product of the catalog. Market Price appears crossed out.   
+* Add Default Price and Market Price to each product of the catalog. Market Price appears crossed out.  
+* “More” button for the redirection to the Product Page.  
 
 Upgrade to [WordPress Catalog Pro](http://web-dorado.com/products/wordpress-catalog.html) to add features:  
  
