@@ -3,7 +3,7 @@ Contributors: webdorado
 Donate link: http://web-dorado.com/products/wordpress-catalog.html  
 Tags: directory, product catalog ,catalog, product, products , product reviews, product review, product catalogue , wp catalog, catalogo, catalogue, product tabs, product feed, product portfolio, product management, blog catalog, catalog of goods, WP Catalogue
 Requires at least: 3.0  
-Tested up to: 3.9  
+Tested up to: 4.0  
 Stable tag: 1.6.4
 License: GPLv2 or later  
 License URI: http://www.gnu.org/licenses/gpl-2.0.html  
@@ -12,7 +12,7 @@ Spider Catalog for WordPress is a convenient tool for organizing the products re
   
 == Description ==  
   
-###Spider  [WordPress Catalog](http://web-dorado.com/products/wordpress-catalog.html)  
+Spider  [WordPress Catalog](http://web-dorado.com/products/wordpress-catalog.html)   
 [Demo](http://wpdemo.web-dorado.com/catalog/)  
 [Demo Admin](http://wpdemo.web-dorado.com/wp-admin/admin.php?page=Categories_Spider_Catalog)  
 [User Manual](http://web-dorado.com/spider-catalog-wordpress-guide-step-1.html)  
