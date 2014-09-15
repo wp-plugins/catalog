@@ -46,6 +46,7 @@ Captcha protection is added for the product reviews to avoid spam in your catalo
 * Add Default Price and Market Price to each product of the catalog. Market Price appears crossed out.   
 * "More" button for the redirection to the Product Page.  
 * Product page displaying the image thumbnail as the main product image when hovering over it.  
+* Possibility to add parameter specifications to a category and inherit them to the products under that category   
 
 Upgrade to [WordPress Catalog Pro](http://web-dorado.com/products/wordpress-catalog.html) to add features:  
  
