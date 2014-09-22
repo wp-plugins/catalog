@@ -254,7 +254,7 @@ Note:  WordPress Catalog already supports Import CSV and Export CSV possibilitie
 
 4.1.4 Market Price. Choose whether the catalog has a market price parameter or not.
 		
-4.1.5 Currency symbol. Define the currency of the product price (e.g. ‘$’).		
+4.1.5 Currency symbol. Define the currency of the product price (e.g. $).		
 
 4.1.6 Currency Symbol Position. Choose whether the currency symbol appears before or after the price number.    
 
@@ -388,7 +388,7 @@ In this section you can customize several parameters specifically for the one pr
 
 4.5.8  Color of Review Texts. Choose what color the submitted review texts appear.		
 
-4.5.9  Background Color of Review Author section. Choose the background color of the section where the reviewer’s name appears.		
+4.5.9  Background Color of Review Author section. Choose the background color of the section where the reviewer's name appears.		
 
 4.5.10  Background Color of Review text. Choose the background color of the submitted reviews.		
 
@@ -433,7 +433,7 @@ Products list
 
 Add  the short code  [Spider_Catalog_Category id=" CategoryID" details="1" type="" showsub="1" showsubprod="2" showprod="1"] to the pages or posts and change the following points.		
 	ID. Add the ID (Spider Catalog> Category>ID) of the category which you want to show to the appropriate place("my id") in the shortcode. If the value of the ID is "All_CAT", the all categories will be shown.		
-	Details. If the value of the details is 1, the information about category won’t be shown. For showing the information change the value of the details into 0.		
+	Details. If the value of the details is 1, the information about category won't be shown. For showing the information change the value of the details into 0.		
 	Type. If the value of the type is empty, the products list will be shown with cells. If the value of the type is "list" the products list will be shown with lists.		
 	Showsub. Specify the value as "1" if you want the subcategories to be displayed. Specify the value as "0" if you do not want them to be displayed.		
 	Showsubprod. All: Value="1"; No: Value="0"; Chosen: Value="2".		
