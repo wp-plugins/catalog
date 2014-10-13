@@ -429,7 +429,7 @@ Single product
 
 Add the short code [Spider_Catalog_Product id="my id"] to the pages or posts and change the following point.		
 
-	ID. Add the ID (Spider Catalog>Products>ID) of the single product to the appropriate place("my id") in the shortcode.		
+ID. Add the ID (Spider Catalog>Products>ID) of the single product to the appropriate place("my id") in the shortcode.		
 
 Products list		
 
