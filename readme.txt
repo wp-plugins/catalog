@@ -50,7 +50,7 @@ Captcha protection is added for the product reviews to avoid spam in your catalo
 * Possibility to publish only specific category products for each page.   
 * Possibility to connect catalog with other pages including HTML links within the product description.    
 * Review editing possibility for the products in Products section.   
-* Catalog category filtering from the back end for easier management and editing possibilities   
+* Catalog category filtering from the back end for easier management and editing possibilities  
 
 Upgrade to [WordPress Catalog Pro](http://web-dorado.com/products/wordpress-catalog.html) to add features:  
  
