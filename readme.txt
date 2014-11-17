@@ -50,6 +50,7 @@ Captcha protection is added for the product reviews to avoid spam in your catalo
 * Possibility to publish only specific category products for each page.   
 * Possibility to connect catalog with other pages including HTML links within the product description.    
 * Review editing possibility for the products in Products section.   
+* Catalog category filtering from the back end for easier management and editing possibilities   
 
 Upgrade to [WordPress Catalog Pro](http://web-dorado.com/products/wordpress-catalog.html) to add features:  
  
@@ -66,6 +67,7 @@ Upgrade to [WordPress Catalog Pro](http://web-dorado.com/products/wordpress-cata
 * Possibility to choose the currency symbol and its positioning for the product price.   
 * Pagination support for placing specific amount of products of products per page.  
 * Possibility to change the border styles for most of the views   
+
 
  ###IMPORTANT: If you think you found a bug in Spider Catalog or have any problem/question concerning the plugin, please check out [Support Forum](http://web-dorado.com/forum/spider-catalog-wordpress.html) in our website. If you do not find a solution here, do not hesitate to contact us at [info@web-dorado.com](mailto:info@web-dorado.com).
  
