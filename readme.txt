@@ -40,7 +40,7 @@ Captcha protection is added for the product reviews to avoid spam in your catalo
 * Possibility of displaying products either grouped within categories or as a single product per page.       
 * Possibility to add custom HTML in the description of the product.   
 * Possibility of providing detailed description for each category.   
-* Possibility of select the order of the product display.   
+* Option of reordering the products both in the front end and back end.   
 * Possibility to disable categories and parameters for the Cells 1 and List Page options.  
 * Product image display in a lightbox for full view possibility.  
 * Add Default Price and Market Price to each product of the catalog. Market Price appears crossed out.   
