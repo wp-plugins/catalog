@@ -164,13 +164,13 @@ improve search
 fix translation
 
 = 1.6.2 =
-bug fixed on wp 3.9 editor
+bug fixed in wp 3.9 editor
 
 = 1.6 =
 change lightbox
 
 = 1.5.9 =
-show category search bug fixed
+bug fixed in show category search 
 
 
 ==Spider Catalog Step by step guide Step 1 ==    
