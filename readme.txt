@@ -67,8 +67,7 @@ Upgrade to [WordPress Catalog Pro](http://web-dorado.com/products/wordpress-cata
 * Customize the width and height of the product on the catalog, as well as to choose the design of the stars used to indicate customer ratings on the catalog.        
 * Customize the styles and colors of the catalog views in separate sections.    
 * Possibility to choose the currency symbol and its positioning for the product price.   
-* Pagination support for placing specific amount of products of products per page.  
-* Possibility to change the border styles    
+* Pagination support for placing specific amount of products of products per page.     
 
 
  ###IMPORTANT: If you think you found a bug in Spider Catalog or have any problem/question concerning the plugin, please check out [Support Forum](http://web-dorado.com/forum/spider-catalog-wordpress.html) in our website. If you do not find a solution here, do not hesitate to contact us at [info@web-dorado.com](mailto:info@web-dorado.com).
@@ -441,7 +440,7 @@ ID. Add the ID (Spider Catalog>Products>ID) of the single product to the appropr
 Products list		
 
 Add  the short code  [Spider_Catalog_Category id=" CategoryID" details="1" type="" showsub="1" showsubprod="2" showprod="1"] to the pages or posts and change the following points.		
-	ID. Add the ID (Spider Catalog> Category>ID) of the category which you want to show to the appropriate place("my id") in the shortcode. If the value of the ID is "All_CAT", the all categories will be shown.		
+	ID. Add the ID of the category which you want to show to the appropriate place("ID") in the shortcode. If the value of the ID is "All_CAT", the all categories will be shown.		
 	Details. If the value of the details is 1, the information about category won't be shown. For showing the information change the value of the details into 0.		
 	Type. If the value of the type is empty, the products list will be shown with cells. If the value of the type is "list" the products list will be shown with lists.		
 	Showsub. Specify the value as "1" if you want the subcategories to be displayed. Specify the value as "0" if you do not want them to be displayed.		
