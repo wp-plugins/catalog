@@ -137,7 +137,7 @@ FROM " . $wpdb->prefix . "spidercatalog_products, " . $wpdb->prefix . "spidercat
 WHERE " . $wpdb->prefix . "spidercatalog_products.category_id = " . $wpdb->prefix . "spidercatalog_product_categories.id
 GROUP BY " . $wpdb->prefix . "spidercatalog_products.category_id) AS c ON c.id = a.id LEFT JOIN
 (SELECT " . $wpdb->prefix . "spidercatalog_product_categories.name AS par_name," . $wpdb->prefix . "spidercatalog_product_categories.id FROM " . $wpdb->prefix . "spidercatalog_product_categories) AS g
- ON a.parent=g.id WHERE a.name LIKE '%" . esc_html($search_tag) . "%' AND a.parent=" . $local_cat->id . " group by a.id";
+ ON a.parent=g.id WHERE a.name LIKE '%" . esc_html($search_tag) . "%' AND a.parent=" . $local_cat->id . " group by a.id order by a.ordering asc";
         $new_cat = $wpdb->get_results($new_cat_query);
         open_cat_in_tree($new_cat, $tree_problem . "— ", 0);
     }
