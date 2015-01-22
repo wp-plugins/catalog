@@ -156,6 +156,9 @@ If any problem occurs with Spider [Wordpress Catalog](http://wordpress.org/exten
 
 == Changelog ==
 
+= 1.6.5 =
+bug fixed in subcategories ordering
+
 = 1.6.4 =
 improve search
 
