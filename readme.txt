@@ -66,8 +66,7 @@ Upgrade to [WordPress Catalog Pro](http://web-dorado.com/products/wordpress-cata
 * Possibility of changing the color scheme and font color for the review section, as well as possibility to select the number of customer reviews per catalog page.      
 * Customize the width and height of the product on the catalog, as well as to choose the design of the stars used to indicate customer ratings on the catalog.        
 * Customize the styles and colors of the catalog views in separate sections.    
-* Possibility to choose the currency symbol and its positioning for the product price.   
-* Pagination support for placing specific amount of products of products per page.     
+* Pagination support for placing specific amount of products per page.     
 
 
  ###IMPORTANT: If you think you found a bug in Spider Catalog or have any problem/question concerning the plugin, please check out [Support Forum](http://web-dorado.com/forum/spider-catalog-wordpress.html) in our website. If you do not find a solution here, do not hesitate to contact us at [info@web-dorado.com](mailto:info@web-dorado.com).
