@@ -173,6 +173,9 @@ change lightbox
 = 1.5.9 =
 bug fixed in show category search 
 
+= 1.0.0 =
+Initial version
+
 
 ==Spider Catalog Step by step guide Step 1 ==    
 = Installing the WordPress Catalog. =    
