@@ -53,6 +53,7 @@ Captcha protection is added for the product reviews to avoid spam in your catalo
 * Catalog category filtering from the back end for easier management and editing possibilities  
 * Quick image display (lightbox) for each product in a category view  
 * Product listing feature based on a single or multiple categories  
+* Pagination support for placing specific amount of products per page.   
 
 Upgrade to [WordPress Catalog Pro](http://web-dorado.com/products/wordpress-catalog.html) to add features:  
  
@@ -64,9 +65,9 @@ Upgrade to [WordPress Catalog Pro](http://web-dorado.com/products/wordpress-cata
 * Customize the width and height of the catalog product cell, as well as the style, color, width, and height of the product cell border.     
 * Choose the number of catalog products in the row and the number of rows in the catalog page.
 * Possibility of changing the color scheme and font color for the review section, as well as possibility to select the number of customer reviews per catalog page.      
-* Customize the width and height of the product on the catalog, as well as to choose the design of the stars used to indicate customer ratings on the catalog.        
+* Customize the design of the stars used to indicate customer ratings on the catalog.        
 * Customize the styles and colors of the catalog views in separate sections.    
-* Pagination support for placing specific amount of products per page.     
+  
 
 
  ###IMPORTANT: If you think you found a bug in Spider Catalog or have any problem/question concerning the plugin, please check out [Support Forum](http://web-dorado.com/forum/spider-catalog-wordpress.html) in our website. If you do not find a solution here, do not hesitate to contact us at [info@web-dorado.com](mailto:info@web-dorado.com).
