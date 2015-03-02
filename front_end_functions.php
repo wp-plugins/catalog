@@ -8,7 +8,7 @@ function catal_secure_for_scripts($key)
     }
     $_POST[$key] = htmlspecialchars(stripslashes($_POST[$key]));
     $_POST[$key] = str_ireplace("script", "blocked", $_POST[$key]);
-    $_POST[$key] = mysql_escape_string($_POST[$key]);
+    $_POST[$key] = esc_sql($_POST[$key]);
     return $_POST[$key];
 }
 

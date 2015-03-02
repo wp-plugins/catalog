@@ -99,7 +99,7 @@ Get the full version&nbsp;&nbsp;&nbsp;&nbsp;
             <div id="div_7" class="theme_type" onclick="change_type(7)"> Thumbnails Page Options</div>
             <div id="div_8" class="theme_type" onclick="change_type(8)"> Cells 3 Page Options</div>
             <div id="div_4" class="theme_type" onclick="change_type(4)"> Product Page Options</div>
-            <input type="hidden" id="type" name="type" value="<?php echo isset($_POST['type']) ? $_POST['type'] : '1'; ?>"/>
+            <input type="hidden" id="type" name="type" value="<?php echo isset($_POST['type']) ? esc_js($_POST['type']) : '1'; ?>"/>
           </div>
           <script>
             function change_type(type) {
@@ -116,7 +116,7 @@ Get the full version&nbsp;&nbsp;&nbsp;&nbsp;
                     }
                 }
             }
-            window.onload = function() { change_type(<?php echo isset($_POST['type']) ? $_POST['type'] : '2'; ?>); };            
+            window.onload = function() { change_type(<?php echo isset($_POST['type']) ? esc_js($_POST['type']) : '2'; ?>); };            
           </script>
         </td>
       </tr>

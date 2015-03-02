@@ -250,9 +250,9 @@ function html_showProducts($rows, $pageNav, $sort, $cat_row)
         </table>
         <input type="hidden" name="oreder_move" id="oreder_move" value=""/>
         <input type="hidden" name="asc_or_desc" id="asc_or_desc"
-               value="<?php if (isset($_POST['asc_or_desc'])) echo $_POST['asc_or_desc']; ?>"/>
+               value="<?php if (isset($_POST['asc_or_desc'])) echo esc_html(stripslashes($_POST['asc_or_desc'])); ?>"/>
         <input type="hidden" name="order_by" id="order_by"
-               value="<?php if (isset($_POST['order_by'])) echo $_POST['order_by']; ?>"/>
+               value="<?php if (isset($_POST['order_by'])) echo esc_html(stripslashes($_POST['order_by'])); ?>"/>
         <input type="hidden" name="saveorder" id="saveorder" value=""/>
 
         <?php
@@ -1076,18 +1076,14 @@ function html_addProduct($lists, $params, $rows1, $cat_row)
                 <?php
                 $ord_elem = $lists;
                 $count_ord = count($ord_elem);
-                for ($i = 0; $i < $count_ord; $i++) {
+				for ($i = 0; $i < $count_ord; $i++) {
                     ?>
                     <option value="<?php echo $ord_elem[$i]->ordering ?>"> <?php echo $ord_elem[$i]->ordering . " ";
                         echo esc_html(stripslashes($ord_elem[$i]->name)); ?></option>
-
                 <?php
                 }
                 ?>
-                <option
-                    value="<?php echo $ord_elem[$i - 1]->ordering + 1; ?>"><?php echo $ord_elem[$i - 1]->ordering + 1; ?>
-                    Last
-                </option>
+                <option value="<?php if(isset($ord_elem[$i-1])) echo  $ord_elem[$i-1]->ordering+1; else echo 0; ?>"><?php if(isset($ord_elem[$i-1])) echo  $ord_elem[$i-1]->ordering+1; ?> Last</option>
             </select>
 
         </td>
@@ -1242,9 +1238,9 @@ function html_spider_cat_prod_rev($rows, $pageNav, $sort, $id)
         </table>
 
         <input type="hidden" name="asc_or_desc" id="asc_or_desc"
-               value="<?php if (isset($_POST['asc_or_desc'])) echo $_POST['asc_or_desc']; ?>"/>
+               value="<?php if (isset($_POST['asc_or_desc'])) echo esc_html(stripslashes($_POST['asc_or_desc'])); ?>"/>
         <input type="hidden" name="order_by" id="order_by"
-               value="<?php if (isset($_POST['order_by'])) echo $_POST['order_by']; ?>"/>
+               value="<?php if (isset($_POST['order_by'])) echo esc_html(stripslashes($_POST['order_by'])); ?>"/>
 
         <?php
         ?>
@@ -1375,9 +1371,9 @@ function html_spider_cat_prod_rating($rows, $pageNav, $sort, $id)
         </table>
 
         <input type="hidden" name="asc_or_desc" id="asc_or_desc"
-               value="<?php if (isset($_POST['asc_or_desc'])) echo $_POST['asc_or_desc']; ?>"/>
+               value="<?php if (isset($_POST['asc_or_desc'])) echo esc_html(stripslashes($_POST['asc_or_desc'])); ?>"/>
         <input type="hidden" name="order_by" id="order_by"
-               value="<?php if (isset($_POST['order_by'])) echo $_POST['order_by']; ?>"/>
+               value="<?php if (isset($_POST['order_by'])) echo esc_html(stripslashes($_POST['order_by'])); ?>"/>
 
         <?php
         ?>

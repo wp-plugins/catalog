@@ -4,7 +4,7 @@
 Plugin Name: Spider Catalog
 Plugin URI: http://web-dorado.com/products/wordpress-catalog.html
 Description: Spider Catalog is a convenient tool for organizing the products represented on your website into catalogs. Each product on the catalog is assigned with a relevant category, which makes it easier for the customers to search and identify the needed products within the catalog.
-Version: 1.6.5
+Version: 1.6.6
 Author: http://web-dorado.com/
 License: GNU/GPLv3 http://www.gnu.org/licenses/gpl-3.0.html
 */
@@ -29,8 +29,7 @@ function spider_ajax_func()
 <?php
 }
 
-function Spider_Catalog_Products_list_shotrcode($atts)
-{
+function Spider_Catalog_Products_list_shotrcode($atts) {
     extract(shortcode_atts(array(
         'id' => 'no Spider catalog',
         'details' => '1',

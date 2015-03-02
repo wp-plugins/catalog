@@ -260,8 +260,8 @@ Get the full version&nbsp;&nbsp;&nbsp;&nbsp;
  </tbody>
  </table>
  <input type="hidden" name="oreder_move" id="oreder_move" value="" />
- <input type="hidden" name="asc_or_desc" id="asc_or_desc" value="<?php if(isset($_POST['asc_or_desc'])) echo $_POST['asc_or_desc'];?>"  />
- <input type="hidden" name="order_by" id="order_by" value="<?php if(isset($_POST['order_by'])) echo $_POST['order_by'];?>"  />
+ <input type="hidden" name="asc_or_desc" id="asc_or_desc" value="<?php if(isset($_POST['asc_or_desc'])) echo esc_html(stripslashes($_POST['asc_or_desc']));?>"  />
+ <input type="hidden" name="order_by" id="order_by" value="<?php if(isset($_POST['order_by'])) echo esc_html(stripslashes($_POST['order_by']));?>"  />
  <input type="hidden" name="saveorder" id="saveorder" value="" />
 
  <?php
@@ -1119,7 +1119,7 @@ for($i=0;$i<$count_ord;$i++)
 <?php 
 }
 ?>
-<option value="<?php if(isset($ord_elem[$i-1])) echo  $ord_elem[$i-1]->ordering+1; ?>"><?php if(isset($ord_elem[$i-1])) echo  $ord_elem[$i-1]->ordering+1; ?> Last</option>
+<option value="<?php if(isset($ord_elem[$i-1])) echo  $ord_elem[$i-1]->ordering+1; else echo 0; ?>"><?php if(isset($ord_elem[$i-1])) echo  $ord_elem[$i-1]->ordering+1; ?> Last</option>
 </select>
 
 
