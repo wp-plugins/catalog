@@ -4,7 +4,7 @@ Donate link: http://web-dorado.com/products/wordpress-catalog.html
 Tags: directory, product catalog ,catalog, product, products , product reviews, product review, product catalogue , wp catalog, catalogo, catalogue, product tabs, product feed, product portfolio, product management, blog catalog, catalog of goods, WP Catalogue
 Requires at least: 3.0  
 Tested up to: 4.1  
-Stable tag: 1.6.6
+Stable tag: 1.6.7
 License: GPLv2 or later  
 License URI: http://www.gnu.org/licenses/gpl-2.0.html  
   
@@ -23,9 +23,8 @@ The front end browsing will be available both for categories and subcategories f
 The possibility of importing/exporting products in CSV will allow the user to make quick changes and to update the catalog easily.    
 The view option for the catalog can be determined in advance. You are able to use different views for different pages of your website.   
 Captcha protection is added for the product reviews to avoid spam in your catalog.   
-###Possibility to organize items into categories and subcategories.    	 
-###If you want to customize the design of the catalog, you can buy the commercial version [ here.](http://web-dorado.com/products/wordpress-catalog.html) Color, font size and design of each element of the catalog are customizable in the commercial version.        
-  
+ 
+###If you want to customize the design of the catalog, you can buy the commercial version [here.](http://web-dorado.com/products/wordpress-catalog.html) Color, font size and design of each element of the catalog are customizable in the commercial version.         
   
   
   
@@ -157,6 +156,9 @@ If any problem occurs with Spider [Wordpress Catalog](http://wordpress.org/exten
 
 
 == Changelog ==
+
+= 1.6.7 =
+bug fixed in export/ipmort
 
 = 1.6.5 =
 bug fixed in subcategories ordering
