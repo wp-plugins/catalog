@@ -192,10 +192,20 @@ function  showProducts()
         fwrite($file, iconv('CP1251', 'UTF-8', file_get_contents($_FILES["filename"]["name"])));
         rewind($file);
         $r = 0;
-        while (($row = fgetcsv($file, 1000, ",")) != FALSE) {          
-          $r++;            
-          if($row[0]!='Name' and $row[1]!='Category id' ) {
-            $ins="INSERT INTO `" . $wpdb->prefix . "spidercatalog_products` (`name`,`category_id`,`description`, `image_url`, `cost`, `market_cost`, `param`, `ordering`, `published`, `published_in_parent`) VALUES ('$row[0]', '$row[1]', '$row[2]', '$row[3]', '$row[4]', '$row[5]', '$row[6]', '$row[7]', '$row[8]', '$row[9]')";            
+        while (($row = fgetcsv($file, 0, ",")) != FALSE) {
+          $r++;
+          if($row[0] != 'Name' and $row[1] != 'Category id' ) {
+            $row[0] = addslashes($row[0]);
+            $row[1] = addslashes($row[1]);
+            $row[2] = addslashes($row[2]);
+            $row[3] = addslashes($row[3]);
+            $row[4] = addslashes($row[4]);
+            $row[5] = addslashes($row[5]);
+            $row[6] = addslashes($row[6]);
+            $row[7] = addslashes($row[7]);
+            $row[8] = addslashes($row[8]);
+            $row[9] = addslashes($row[9]);
+            $ins="INSERT INTO `" . $wpdb->prefix . "spidercatalog_products` (`name`,`category_id`,`description`, `image_url`, `cost`, `market_cost`, `param`, `ordering`, `published`, `published_in_parent`) VALUES ('$row[0]', '$row[1]', '$row[2]', '$row[3]', '$row[4]', '$row[5]', '$row[6]', '$row[7]', '$row[8]', '$row[9]')";
             $wpdb->query($ins);
           }
         }
