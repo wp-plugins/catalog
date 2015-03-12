@@ -684,7 +684,7 @@ echo $count_ord+1;
                     </div>
                 <?php
                 } else {
-                    wp_editor(stripslashes($row->description), "content");
+                    wp_editor(htmlspecialchars_decode(stripslashes($row->description)), "content");
                 } ?>
             </div>
         </td>

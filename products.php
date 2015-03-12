@@ -415,7 +415,7 @@ function  update_prad_cat($id)
     $savedd = $wpdb->update($wpdb->prefix . 'spidercatalog_products', array(
             'name' => esc_html($_POST['name']),
             'category_id' => $_POST['categ_search'],
-            'description' => $script_cat,
+            'description' => addslashes(htmlspecialchars(nl2br($script_cat))),
             'image_url' => esc_js($new_images),
             'cost' => esc_js(stripslashes($_POST['cost'])),
             'market_cost' => esc_js($_POST['market_cost']),
@@ -495,7 +495,7 @@ function save_prad_cat()
             'id' => NULL,
             'name' => esc_js($_POST['name']),
             'category_id' => esc_js($_POST['categ_search']),
-            'description' => $script_cat,
+            'description' => addslashes(htmlspecialchars(nl2br($script_cat))),
             'image_url' => esc_js($new_images),
             'cost' => esc_js(stripslashes($_POST['cost'])),
             'market_cost' => esc_js($_POST['market_cost']),

@@ -282,7 +282,7 @@ $prod_name = html_search($rows, $params, $page_num, $prod_count, $prod_in_page, 
             {
                 $description = explode('<!--more-->', stripslashes($row->description));
                 echo '<td style="vertical-align: middle;border-right: solid 1px '.$params['list_list_border_color'].' !important;border-width:'.$params['list_border_width'].'px;border-color:'.$params['list_border_color'].';border-style:'.$params['list_border_style'].';border-top:none; border-left:none;padding:10px">
-   <div id="prodDescription">' . $description[0] . ' </div>
+   <div id="prodDescription">' . htmlspecialchars_decode($description[0]) . ' </div>
    <div id="prodMore"><a href="' . $link . '" style="' . (($params['list_hyperlink_color'] != '') ? ('color:' . $params['list_hyperlink_color'] . ';') : '') . '">' . __('More', 'sp_catalog') . '</a></div>
    </td>';
             }
@@ -689,7 +689,7 @@ html_categories($rows, $params, $page_num, $prod_count, $prod_in_page, $ratings,
               $bgcolor = (isset($params['params_background_color2']) && $params['params_background_color2'] != '') ? ('background-color:' . $params['params_background_color2'] . ';') : '';
             }
             
-            echo '<tr style="' . $bgcolor . 'text-align:left;border-bottom:solid 1px #d8d7d7;"><td style="color:'.$params['cell_params_text_color'].';padding-left:20px;font-size:'.$params['cell_parameters_left_size'].'px;" colspan="2">' . $description[0] . '</td></tr><tr style="height:100%;"><td colspan="2" style="vertical-align: bottom;height:100%;"><a href="' . $link . '" style="color:'.$params['cell_more_font_color'].';font-size:'.$params['cell_more_font_size'].'px;"><div style="float: right;bottom:5px;position: relative;"><span style="background-color:'.$params['cell_more_background_color'].';padding: 4px;padding-left: 11px;padding-right: 11px;">' . __('More', 'sp_catalog') . '</span></div></a></td></tr>';
+            echo '<tr style="' . $bgcolor . 'text-align:left;border-bottom:solid 1px #d8d7d7;"><td style="color:'.$params['cell_params_text_color'].';padding-left:20px;font-size:'.$params['cell_parameters_left_size'].'px;" colspan="2">' . htmlspecialchars_decode($description[0]) . '</td></tr><tr style="height:100%;"><td colspan="2" style="vertical-align: bottom;height:100%;"><a href="' . $link . '" style="color:'.$params['cell_more_font_color'].';font-size:'.$params['cell_more_font_size'].'px;"><div style="float: right;bottom:5px;position: relative;"><span style="background-color:'.$params['cell_more_background_color'].';padding: 4px;padding-left: 11px;padding-right: 11px;">' . __('More', 'sp_catalog') . '</span></div></a></td></tr>';
 
             echo '</table></td></tr>';            
             echo '</table></td></tr>
@@ -1120,7 +1120,7 @@ function front_end_catalog_cells2($rows, $params, $page_num, $prod_count, $prod_
 
             $description = explode('<!--more-->', stripslashes($row->description));
 
-            echo '<tr style="height:100%;"><td colspan="2"><div style="height: 100%;color:'.$params['cell_new_text_color'].';font-size:'.$params['cell_new_text_size'].'px;padding-left:12px;padding-right:12px;background-color:' . $params['cell_new_text_back_color_2'] . ';"  id="spanman">' . $description[0] . '</div></td></tr><tr><td colspan="2"><a href="' . $link . '" style="position:relative;bottom: 0;display:block;color:' . $params['cell_new_more_font_color'] . ';text-align:center;text-decoration:none;min-height:20px; background-color:' . $params['cell_new_more_background_color'] . ';font-size:' . $params['new_cell_more_font_size'] . 'px !important;">' . __('More', 'sp_catalog') . '</a></td></tr>';
+            echo '<tr style="height:100%;"><td colspan="2"><div style="height: 100%;color:'.$params['cell_new_text_color'].';font-size:'.$params['cell_new_text_size'].'px;padding-left:12px;padding-right:12px;background-color:' . $params['cell_new_text_back_color_2'] . ';"  id="spanman">' . htmlspecialchars_decode($description[0]) . '</div></td></tr><tr><td colspan="2"><a href="' . $link . '" style="position:relative;bottom: 0;display:block;color:' . $params['cell_new_more_font_color'] . ';text-align:center;text-decoration:none;min-height:20px; background-color:' . $params['cell_new_more_background_color'] . ';font-size:' . $params['new_cell_more_font_size'] . 'px !important;">' . __('More', 'sp_catalog') . '</a></td></tr>';
             echo '</table></td></tr></table></td></tr></table></div></div></td>';                     
         }
 		if (count($rows))
@@ -1429,7 +1429,7 @@ function front_end_catalog_cells3($rows, $params, $page_num, $prod_count, $prod_
             }
 
             $description = explode('<!--more-->', stripslashes($row->description));
-            echo '<span id="spanman" style="color:'.$params['all_cell_text_color'].';font-size:'.$params['all_cell_text_size'].'px !important;">'.$description[0].'</span></tr></table>';
+            echo '<span id="spanman" style="color:'.$params['all_cell_text_color'].';font-size:'.$params['all_cell_text_size'].'px !important;">'.htmlspecialchars_decode($description[0]).'</span></tr></table>';
 
             if ($params['price'] and $row->cost != 0 and $row->cost != '')
                 echo '<div style="position: absolute;top: ' . ($params['all_cell_all_height'] - 35) . 'px;right: 5px;width:120px;background-image:url(' . plugins_url("Front_images/kapcal.png", __FILE__) . ');background-repeat: no-repeat;background-size:176px 32px;color:'.$params['all_cell_price_text_color'].';font-size:'.$params['all_cell_price_size'].'px !important;"><center>' . (($params['currency_symbol_position'] == 0) ? ($params['currency_symbol']) : '') . ' ' . $row->cost . ' ' . (($params['currency_symbol_position'] == 1) ? $params['currency_symbol'] : '') . '</center></div>';
@@ -1744,7 +1744,7 @@ function front_end_catalog_thumb($rows, $params, $page_num, $prod_count, $prod_i
                 echo '<div style="background-image:url(' . plugins_url("Front_images/kaperk.png", __FILE__) . ');background-repeat: no-repeat;background-size:'.($params['cell_tumble_all_width']-138).'px 32px;padding-left:10px;color:'.$params['cell_tumble_price_text_color'].';font-size:'.$params['cell_tumble_price_size'].'px;">' . (($params['currency_symbol_position'] == 0) ? ($params['currency_symbol']) : '') . ' ' . $row->cost . ' ' . (($params['currency_symbol_position'] == 1) ? $params['currency_symbol'] : '') . '</div>';
 
             $description = explode('<!--more-->', stripslashes($row->description));
-            echo	'<span id="spanman" style="font-size:'.$params['cell_tumble_text_size'].'px;color:'.$params['cell_tumble_text_color'].';">'.$description[0].'</span>';
+            echo	'<span id="spanman" style="font-size:'.$params['cell_tumble_text_size'].'px;color:'.$params['cell_tumble_text_color'].';">'.htmlspecialchars_decode($description[0]).'</span>';
 
             echo'</td></tr></table></div></td>';
         }
@@ -2115,7 +2115,7 @@ function front_end_catalog_wcells($rows, $params, $page_num, $prod_count, $prod_
             echo '</table>';
 
             $description = explode('<!--more-->', stripslashes($row->description));
-            echo '<div id="spanman" style="color:'.$params['single_cell_text_color_2'].' !important;padding-left:7px;background-color:'.$params['single_cell_background_color_1'].';font-size:'.$params['single_cell_font_1_size'].'px !important;" id="prodDescription">' . $description[0] . ' </div>';
+            echo '<div id="spanman" style="color:'.$params['single_cell_text_color_2'].' !important;padding-left:7px;background-color:'.$params['single_cell_background_color_1'].';font-size:'.$params['single_cell_font_1_size'].'px !important;" id="prodDescription">' . htmlspecialchars_decode($description[0]) . ' </div>';
             echo '<div  style="background-color:'.$params['wcells_more_background_color'].';width:70px;float:right;margin-bottom: 3px;;padding-left: 16px;position:relative;"><a style="color:'.$params['wcells_more_font_color'].';font-size:12pt;" href="'.$link.'">' . __('More', 'sp_catalog') . '</a></div>';
 
             echo '</td>';
@@ -2496,7 +2496,7 @@ function html_front_end_single_product($rows, $reviews_rows, $params, $category_
                                 }
                             }
 
-                        echo '<tr style="text-align:left;vertical-align:middle;"><td colspan="2"><div style="line-height: 1;padding:4px !important;' . (isset($bgcolor) ? $bgcolor : "") . '">' . $row->description . '</div></td></tr></table>';
+                        echo '<tr style="text-align:left;vertical-align:middle;"><td colspan="2"><div style="line-height: 1;padding:4px !important;' . (isset($bgcolor) ? $bgcolor : "") . '">' . htmlspecialchars_decode($row->description ). '</div></td></tr></table>';
 
                         echo '</td></tr><tr><td colspan="2">';
 
@@ -2876,7 +2876,7 @@ function html_categories($rows, $params, $page_num, $prod_count, $prod_in_page, 
               echo '&nbsp;';
           echo '</td></tr></table></td>';
         }
-        echo '<td style="vertical-align:top;word-break: break-word;line-height:1.5;">' . $cat_rows[0]->cat_description . '</td></tr></table>';
+        echo '<td style="vertical-align:top;word-break: break-word;line-height:1.5;">' . htmlspecialchars_decode($cat_rows[0]->cat_description) . '</td></tr></table>';
         if (count($child_ids) and $params7['show_sub'] == 1) {
           echo '<center><div id="prodTitle" style="width:190px;' . (($params[$from . 'button_color'] != '') ? ('color:' . $params[$from . 'button_color'] . ';') : '') . (($params[$from . 'button_background_color'] != '') ? ('background-color:' . $params[$from . 'button_background_color'] . ';') : '') . 'padding:10px;font-size:' . $params[$from . 'category_title_size'] . 'px;">' . __('Subcategories', 'sp_catalog') . '</div></center>';          
           echo '<table id="category" border="0" cellspacing="10" cellpadding="10"><tr style="background-color:' . $params[$from . 'categories_header_background_color'] . '; color:' . $params[$from . 'categories_header_color'] . '">';
@@ -2916,7 +2916,7 @@ function html_categories($rows, $params, $page_num, $prod_count, $prod_in_page, 
             }
             echo '</td><td style="width:160px; vertical-align: middle;">';
             echo '<div>' . '<center><a style="cursor:pointer; ' . (($params[$from . 'hyperlink_color'] != '') ? ('color:' . $params[$from . 'hyperlink_color'] . ';') : '') . '; font-size:inherit;" onclick="change_subcat_' . $ident . '(' . $chid->id . ')">' . esc_html(stripslashes($chid->name)) . '</a></center></div><br />';
-            echo '</td><td style="width:355px; background-repeat: no-repeat;background-image: url(' . $backgurl2 . '); background-size: 100% 5%;word-break: break-word;"><div>' . $chid->description . ' </div></td></tr>';
+            echo '</td><td style="width:355px; background-repeat: no-repeat;background-image: url(' . $backgurl2 . '); background-size: 100% 5%;word-break: break-word;"><div>' . htmlspecialchars_decode($chid->description) . ' </div></td></tr>';
           }
           echo '</table>';
         }
