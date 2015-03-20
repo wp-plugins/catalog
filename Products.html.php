@@ -57,7 +57,8 @@ function html_showProducts($rows, $pageNav, $sort, $cat_row)
 
     <form method="post" onkeypress="doNothing()" action="admin.php?page=Products_Spider_Catalog" id="admin_form"
           name="admin_form" enctype="multipart/form-data">
-        <table cellspacing="10" width="100%">
+        <?php $sp_cat_nonce = wp_create_nonce('nonce_sp_cat'); ?>
+		<table cellspacing="10" width="100%">
             <tr>
                 <td width="100%" style="font-size:14px; font-weight:bold"><a
                         href="http://web-dorado.com/spider-catalog-wordpress-guide-step-3.html" target="_blank"
@@ -237,22 +238,21 @@ function html_showProducts($rows, $pageNav, $sort, $cat_row)
                                                                    style="width:40px"
                                                                    value="<?php echo $rows[$i]->ordering; ?>"/></td>
                     <td>
-                        <a href="admin.php?page=Products_Spider_Catalog&task=unpublish_prad&id=<?php echo $rows[$i]->id ?>"<?php if (!$rows[$i]->published) { ?> style="color:#C00;" <?php } ?> ><?php if ($rows[$i]->published) echo "Yes"; else echo "No"; ?></a>
+                        <a href="admin.php?page=Products_Spider_Catalog&task=unpublish_prad&id=<?php echo $rows[$i]->id ?>&_wpnonce=<?php echo $sp_cat_nonce; ?>"<?php if (!$rows[$i]->published) { ?> style="color:#C00;" <?php } ?> ><?php if ($rows[$i]->published) echo "Yes"; else echo "No"; ?></a>
                     </td>
                     <td><a href="admin.php?page=Products_Spider_Catalog&task=edit_prad&id=<?php echo $rows[$i]->id ?>">Edit</a>
                     </td>
                     <td>
-                        <a href="admin.php?page=Products_Spider_Catalog&task=remove_prod&id=<?php echo $rows[$i]->id ?>">Delete</a>
+                        <a href="admin.php?page=Products_Spider_Catalog&task=remove_prod&id=<?php echo $rows[$i]->id ?>&_wpnonce=<?php echo $sp_cat_nonce; ?>">Delete</a>
                     </td>
                 </tr>
             <?php } ?>
             </tbody>
         </table>
+		<?php wp_nonce_field('nonce_sp_cat', 'nonce_sp_cat'); ?>
         <input type="hidden" name="oreder_move" id="oreder_move" value=""/>
-        <input type="hidden" name="asc_or_desc" id="asc_or_desc"
-               value="<?php if (isset($_POST['asc_or_desc'])) echo esc_html(stripslashes($_POST['asc_or_desc'])); ?>"/>
-        <input type="hidden" name="order_by" id="order_by"
-               value="<?php if (isset($_POST['order_by'])) echo esc_html(stripslashes($_POST['order_by'])); ?>"/>
+        <input type="hidden" name="asc_or_desc" id="asc_or_desc" value="<?php if (isset($_POST['asc_or_desc'])) echo esc_html(stripslashes($_POST['asc_or_desc'])); ?>"/>
+        <input type="hidden" name="order_by" id="order_by" value="<?php if (isset($_POST['order_by'])) echo esc_html(stripslashes($_POST['order_by'])); ?>"/>
         <input type="hidden" name="saveorder" id="saveorder" value=""/>
 
         <?php
@@ -755,7 +755,7 @@ echo $count_ord+1;
     </table>
 
     </fieldset>
-
+	<?php wp_nonce_field('nonce_sp_cat', 'nonce_sp_cat'); ?>
     </form>
 <?php
 
@@ -1119,14 +1119,11 @@ function html_addProduct($lists, $params, $rows1, $cat_row)
     </table>
 
     </fieldset>
+	<?php wp_nonce_field('nonce_sp_cat', 'nonce_sp_cat'); ?>
     <input type="hidden" name="id" value=""/>
     <input type="hidden" name="option" value=""/>
-
-
     <input type="hidden" name="controller" value="products"/>
-
-    <input type="hidden" name="task"
-           value=""/>
+    <input type="hidden" name="task" value=""/>
     </form>
 <?php
 
@@ -1179,7 +1176,8 @@ function html_spider_cat_prod_rev($rows, $pageNav, $sort, $id)
     </script>
     <form method="post" action="admin.php?page=Products_Spider_Catalog&id=<?php echo $id; ?>" onkeypress="doNothing()"
           id="admin_form" name="admin_form">
-        <table cellspacing="10" width="100%">
+        <?php $sp_cat_nonce = wp_create_nonce('nonce_sp_cat'); ?>
+		<table cellspacing="10" width="100%">
             <tr>
             </tr>
             <tr>
@@ -1230,22 +1228,17 @@ function html_spider_cat_prod_rev($rows, $pageNav, $sort, $id)
                     <td><?php echo esc_html(stripslashes($rows[$i]->name)); ?></td>
                     <td><?php echo esc_html(stripslashes($rows[$i]->content)); ?></td>
                     <td>
-                        <a href="admin.php?page=Products_Spider_Catalog&task=delete_review&id=<?php echo $id; ?>&del_id=<?php echo $rows[$i]->id ?>">Delete</a>
+                        <a href="admin.php?page=Products_Spider_Catalog&task=delete_review&id=<?php echo $id; ?>&del_id=<?php echo $rows[$i]->id ?>&_wpnonce=<?php echo $sp_cat_nonce; ?>">Delete</a>
                     </td>
                 </tr>
             <?php } ?>
             </tbody>
         </table>
-
-        <input type="hidden" name="asc_or_desc" id="asc_or_desc"
-               value="<?php if (isset($_POST['asc_or_desc'])) echo esc_html(stripslashes($_POST['asc_or_desc'])); ?>"/>
-        <input type="hidden" name="order_by" id="order_by"
-               value="<?php if (isset($_POST['order_by'])) echo esc_html(stripslashes($_POST['order_by'])); ?>"/>
-
+		<?php wp_nonce_field('nonce_sp_cat', 'nonce_sp_cat'); ?>
+        <input type="hidden" name="asc_or_desc" id="asc_or_desc" value="<?php if (isset($_POST['asc_or_desc'])) echo esc_html(stripslashes($_POST['asc_or_desc'])); ?>"/>
+        <input type="hidden" name="order_by" id="order_by" value="<?php if (isset($_POST['order_by'])) echo esc_html(stripslashes($_POST['order_by'])); ?>"/>
         <?php
         ?>
-
-
     </form>
 <?php
 
@@ -1301,7 +1294,8 @@ function html_spider_cat_prod_rating($rows, $pageNav, $sort, $id)
     </script>
     <form method="post" action="admin.php?page=Products_Spider_Catalog&id=<?php echo $id; ?>" onkeypress="doNothing()"
           id="admin_form" name="admin_form">
-        <table cellspacing="10" width="100%">
+        <?php $sp_cat_nonce = wp_create_nonce('nonce_sp_cat'); ?>
+		<table cellspacing="10" width="100%">
             <tr></tr>
             <tr>
                 <td style="width:100%">
@@ -1363,13 +1357,13 @@ function html_spider_cat_prod_rating($rows, $pageNav, $sort, $id)
                             </option>
                         </select></td>
                     <td>
-                        <a href="admin.php?page=Products_Spider_Catalog&task=delete_rating&id=<?php echo $id; ?>&del_id=<?php echo $rows[$i]->id ?>">Delete</a>
+                        <a href="admin.php?page=Products_Spider_Catalog&task=delete_rating&id=<?php echo $id; ?>&del_id=<?php echo $rows[$i]->id ?>&_wpnonce=<?php echo $sp_cat_nonce; ?>">Delete</a>
                     </td>
                 </tr>
             <?php } ?>
             </tbody>
         </table>
-
+		<?php wp_nonce_field('nonce_sp_cat', 'nonce_sp_cat'); ?>
         <input type="hidden" name="asc_or_desc" id="asc_or_desc"
                value="<?php if (isset($_POST['asc_or_desc'])) echo esc_html(stripslashes($_POST['asc_or_desc'])); ?>"/>
         <input type="hidden" name="order_by" id="order_by"

@@ -11,24 +11,6 @@ if(!function_exists('current_user_can')){
  //////////////////////////////////////////////////////                                             ///////////////////////////////////////////////////////
  //////////////////////////////////////////////////////                                             ///////////////////////////////////////////////////////
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 function html_showcategories( $rows,  $pageNav,$sort,$cat_row){
 	global $wpdb;
 	?>
@@ -68,7 +50,8 @@ var keyCode = event.keyCode ? event.keyCode : event.which ? event.which : event.
 }
 	</script>
     <form method="post"  onkeypress="doNothing()" action="admin.php?page=Categories_Spider_Catalog" id="admin_form" name="admin_form">
-<table cellspacing="10" width="100%">
+	<?php $sp_cat_nonce = wp_create_nonce('nonce_sp_cat'); ?>
+	<table cellspacing="10" width="100%">
                   <tr>   
 <td width="100%" style="font-size:14px; font-weight:bold"><a href="http://web-dorado.com/spider-catalog-wordpress-guide-step-2.html" target="_blank" style="color:blue; text-decoration:none;">User Manual</a><br />
 This section allows you to create categories of products. <a href="http://web-dorado.com/spider-catalog-wordpress-guide-step-2.html" target="_blank" style="color:blue; text-decoration:none;">More...</a></td> 
@@ -251,24 +234,22 @@ Get the full version&nbsp;&nbsp;&nbsp;&nbsp;
 		 <td><?php if(!($uncat)){echo 'Uncategory';} else{ echo $rows[$i]->par_name;}?></td>		 
 		 <td><a href="admin.php?page=Products_Spider_Catalog&categoryid=<?php echo $rows[$i]->id; ?>" alt="">(<?php if(!($pr_count)){echo '0';} else{ echo $rows[$i]->prod_count;} ?>)</a></td>
          <td ><?php echo  $move_up.$move_down; ?><input type="text" name="order_<?php echo $rows[$i]->id; ?>" style="width:40px" value="<?php echo $rows[$i]->ordering; ?>" /></td>
-         <td><a  href="admin.php?page=Categories_Spider_Catalog&task=unpublish_cat&id=<?php echo $rows[$i]->id?>"<?php if(!$rows[$i]->published){ ?> style="color:#C00;" <?php }?> ><?php if($rows[$i]->published)echo "Yes"; else echo "No"; ?></a></td>
+         <td><a  href="admin.php?page=Categories_Spider_Catalog&task=unpublish_cat&id=<?php echo $rows[$i]->id?>&_wpnonce=<?php echo $sp_cat_nonce; ?>"<?php if(!$rows[$i]->published){ ?> style="color:#C00;" <?php }?> ><?php if($rows[$i]->published)echo "Yes"; else echo "No"; ?></a></td>
          <td ><a  href="admin.php?page=Categories_Spider_Catalog&task=edit_cat&id=<?php echo $rows[$i]->id?>">Edit</a></td>
-         <td><a  href="admin.php?page=Categories_Spider_Catalog&task=remove_cat&id=<?php echo $rows[$i]->id?>">Delete</a></td>
+         <td><a  href="admin.php?page=Categories_Spider_Catalog&task=remove_cat&id=<?php echo $rows[$i]->id?>&_wpnonce=<?php echo $sp_cat_nonce; ?>">Delete</a></td>
 		
   </tr> 
  <?php } ?>
  </tbody>
  </table>
+ <?php wp_nonce_field('nonce_sp_cat', 'nonce_sp_cat'); ?>
  <input type="hidden" name="oreder_move" id="oreder_move" value="" />
  <input type="hidden" name="asc_or_desc" id="asc_or_desc" value="<?php if(isset($_POST['asc_or_desc'])) echo esc_html(stripslashes($_POST['asc_or_desc']));?>"  />
  <input type="hidden" name="order_by" id="order_by" value="<?php if(isset($_POST['order_by'])) echo esc_html(stripslashes($_POST['order_by']));?>"  />
  <input type="hidden" name="saveorder" id="saveorder" value="" />
 
  <?php
-?>
-    
-    
-   
+?>   
  </form>
     <?php
 
@@ -717,6 +698,7 @@ for($i=0;$i<$count_ord;$i++)
 </td>
 </tr>
 </table>
+<?php wp_nonce_field('nonce_sp_cat', 'nonce_sp_cat'); ?>
 <input type="hidden" name="task" value="" />
 </form>
 <?php
@@ -1139,7 +1121,7 @@ for($i=0;$i<$count_ord;$i++)
 </td>
 </tr>
 </table>
-
+<?php wp_nonce_field('nonce_sp_cat', 'nonce_sp_cat'); ?>
 </form>
 <?php
 
