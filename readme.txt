@@ -157,6 +157,9 @@ If any problem occurs with Spider [Wordpress Catalog](http://wordpress.org/exten
 
 == Changelog ==
 
+= 1.6.9 =
+security issue fixed
+
 = 1.6.8 =
 bug fixed in description html editor
 
