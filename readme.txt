@@ -1,34 +1,80 @@
 === WordPress Catalog ===  
 Contributors: webdorado  
 Donate link: http://web-dorado.com/products/wordpress-catalog.html  
-Tags: wordpress catalog, wordpress products list, wordpress products catalog  
+Tags: directory, product catalog ,catalog, product, products , product reviews, product review, product catalogue , wp catalog, catalogo, catalogue, product tabs, product feed, product portfolio, product management, blog catalog, catalog of goods, WP Catalogue
 Requires at least: 3.0  
-Tested up to: 3.5  
-Stable tag: trunk  
+Tested up to: 4.1  
+Stable tag: 1.6.9
 License: GPLv2 or later  
 License URI: http://www.gnu.org/licenses/gpl-2.0.html  
   
 Spider Catalog for WordPress is a convenient tool for organizing the products represented on your website into catalogs.
   
 == Description ==  
+Create easy customizable products catalog for FREE at your WordPress website with categories, subcategories and multiple view options.  
   
-###Spider  [WordPress Catalog](http://web-dorado.com/products/wordpress-catalog.html)  
+Spider  [WordPress Catalog](http://web-dorado.com/products/wordpress-catalog.html)   
+[Demo](http://wpdemo.web-dorado.com/catalog/)  
+[Demo Admin](http://wpdemo.web-dorado.com/wp-admin/admin.php?page=Categories_Spider_Catalog)  
+[User Manual](http://web-dorado.com/spider-catalog-wordpress-guide-step-1.html)  
+[Frequently Asked Questions](http://web-dorado.com/forum/spider-catalog-wordpress/1034-spider-catalog-faq.html) 
   
 Spider WordPress Product Catalog plugin is a convenient tool for organizing the products represented on your website into catalogs. Each product on the catalog is assigned with a relevant category, which makes it easier for the customers to search and identify the needed products within the WordPress catalog. It is possible to add an unlimited number of parameters for each of the categories in the catalog in order to allow a detailed representation of the product on the catalog. Moreover, each product on the catalog can be accompanied with an image. Customers are provided with the possibility of rating the products available on the catalog, as well as writing customer reviews that will appear under the [WordPress Catalog Product](http://web-dorado.com/products/wordpress-catalog.html).
-###Possibility to organize items into categories and subcategories. 	
-###If you want to customize the design of the catalog, you can buy the commercial version [ here.](http://web-dorado.com/products/wordpress-catalog.html) Color, font, size and design of each element of the catalog are customizable in the commercial version.        
+The front end browsing will be available both for categories and subcategories for more convenient search.
+The possibility of importing/exporting products in CSV will allow the user to make quick changes and to update the catalog easily.    
+The view option for the catalog can be determined in advance. You are able to use different views for different pages of your website.   
+Captcha protection is added for the product reviews to avoid spam in your catalog.   
+ 
+###If you want to customize the design of the catalog, you can buy the commercial version [here](http://web-dorado.com/products/wordpress-catalog.html). Color, font size and design of each element of the catalog are customizable in the commercial version.         
   
-= Features of Spider WordPress Product Catalog :=  
-= Possibility to make the following customizations: =  
   
-* Enable/disable product ratings and customer reviews for the products on the catalog.  
-* Search products by name and category name on the catalog.  
-* Choose how the products are organized on the catalog: cells, lists or single product.  
-* Default 'Price' and 'Market Price' (appears as crossed out) parameters for each product on the catalog.  
   
+###Features of Spider [WordPress Catalog](http://web-dorado.com/products/wordpress-catalog.html)   
+  
+* Organize products into categories and subcategories.    
+* Export/Import Products.   
+* Search products by name, parameters, descrition and category name on the catalog.   
+* Possibility of adding multiple images for each product.  
+* Choose one of the view options to organize the catalog: Cells1, List, Cells2, Wide Cells, Thumbnails, Cells3 or Single Product.  
+* Filtering opportunity in the front end when selecting a specific category or subcategory.         
+* Possibility of displaying products either grouped within categories or as a single product per page.       
+* Possibility to add custom HTML in the description of the product.   
+* Possibility of providing detailed description for each category.   
+* Option of reordering the products both in the front end and back end.   
+* Possibility to disable categories and parameters for the Cells 1 and List Page options.  
+* Product image display in a lightbox for full view possibility.  
+* Add Default Price and Market Price to each product of the catalog. Market Price appears crossed out.   
+* "More" button for the redirection to the Product Page.  
+* Product page displaying the image thumbnail as the main product image when hovering over it.  
+* Possibility to add parameter specifications to a category and inherit them to the products under that category.   
+* Possibility to publish only specific category products for each page.   
+* Possibility to connect catalog with other pages including HTML links within the product description.    
+* Review editing possibility for the products in Products section.   
+* Catalog category filtering from the back end for easier management and editing possibilities  
+* Quick image display (lightbox) for each product in a category view  
+* Product listing feature based on a single or multiple categories  
+* Pagination support for placing specific amount of products per page.   
+
+Upgrade to [WordPress Catalog Pro](http://web-dorado.com/products/wordpress-catalog.html) to add features:  
+ 
+* Customize the product cell layout on the main page of the catalog and the product page separately.     
+* Enable/disable product ratings and customer reviews for the products on the catalog.     
+* Choose the background colors of practically all the fields of the catalog item cell.   
+* Customize the color of any text on the catalog.   
+* Select the text size for each of the fields on the catalog.   
+* Customize the width and height of the catalog product cell, as well as the style, color, width, and height of the product cell border.     
+* Choose the number of catalog products in the row and the number of rows in the catalog page.
+* Possibility of changing the color scheme and font color for the review section, as well as possibility to select the number of customer reviews per catalog page.      
+* Customize the design of the stars used to indicate customer ratings on the catalog.        
+* Customize the styles and colors of the catalog views in separate sections.    
+  
+
+
+ ###IMPORTANT: If you think you found a bug in Spider Catalog or have any problem/question concerning the plugin, please check out [Support Forum](http://web-dorado.com/forum/spider-catalog-wordpress.html) in our website. If you do not find a solution here, do not hesitate to contact us at [info@web-dorado.com](mailto:info@web-dorado.com).
+ 
 ### Supported languages  
   
- *If you need language which is not included in this list, please contact us and we will do the translation within 3 days. If you find some mistakes in the translation, please contact us and we will correct it within 3 days.*  
+ *If you need language which is not included in this list, please contact us and we will do the translation within 3 days. If you find any mistakes in the translation, please contact us and we will make relevant corrections within 3 days.*  
   
 Afrikaans (af)  
 Albanian (sq)  
@@ -93,6 +139,8 @@ After downloading the [Wordpress Product Catalog](http://wordpress.org/extend/pl
 2.  Click 'Add New'  
 3.  Choose the 'Upload' option  
 4.  Click **Choose file** (**Browse**) and select the Spider Catalog zip file.  
+*For Mac Users*     
+*Go to your Downloads folder and locate the folder with the gallery plugin. Right-click on the folder and select Compress. Now you have a newly created .zip file which can be installed as described here.* 
 5.  Click **Install Now** button.  
 6.  Once it is complete, activate the plugin.  
   
@@ -105,6 +153,40 @@ If any problem occurs with Spider [Wordpress Catalog](http://wordpress.org/exten
 3.  Spider [Wordpress Catalog](http://wordpress.org/extend/plugins/catalog/)  - Add a category  
 4.  Spider Catalog  - Global Options  
 5.  Spider [Wordpress Product Catalog](http://wordpress.org/extend/plugins/catalog/)  - Product Page Options
+
+
+
+== Changelog ==
+
+= 1.6.9 =
+security issue fixed
+
+= 1.6.8 =
+bug fixed in description html editor
+
+= 1.6.7 =
+bug fixed in export/ipmort
+
+= 1.6.5 =
+bug fixed in subcategories ordering
+
+= 1.6.4 =
+improve search
+
+= 1.6.3 =
+fix translation
+
+= 1.6.2 =
+bug fixed in wp 3.9 editor
+
+= 1.6 =
+change lightbox
+
+= 1.5.9 =
+bug fixed in show category search 
+
+= 1.0.0 =
+Initial version
 
 
 ==Spider Catalog Step by step guide Step 1 ==    
@@ -121,9 +203,15 @@ If any problem occurs with Spider [Wordpress Catalog](http://wordpress.org/exten
 1.	Log in to the administrator panel.	
 2.	Go to Plugins Add > New > Upload.	
 3.	Click **Choose file** (**Browse**) and select the [Spider Catalog](http://wordpress.org/extend/plugins/catalog) zip file.	
+*For Mac Users*     
+*Go to your Downloads folder and locate the folder with the gallery plugin. Right-click on the folder and select Compress. Now you have a newly created .zip file which can be installed as described here.*  
 4.	Click **Upload&Install** button.	
 5.	Click **Activate Plugin** button for activating the plugin. 	
-6.	If the installation succeeded you will see the message in the picture. If any problem occurs, please contact us info@web-dorado.com.		
+6.	If the installation succeeded you will see the message in the picture. If any problem occurs, please contact us info@web-dorado.com.	
+	
+1.3 Updating the Spider Catalog.  
+
+If you want to update the Spider Catalog while preserving your existing catalogs, you need to deactivate and delete the Spider Catalog from the list of installed plugins (Do not uninstall it using the Uninstall Spider Catalog option of the plugin, otherwise you will lose your initial data) and install the new plugin. 
 
 ==Spider Catalog Step by step guide Step  2 ==        
     
@@ -151,52 +239,59 @@ If any problem occurs with Spider [Wordpress Catalog](http://wordpress.org/exten
 
 =  Creating/Editing WordPress Catalog Items (Products). =  	
 
-3.1  On the left menu select Spider Catalog>Products>Add Product	
+Note:  WordPress Catalog already supports Import CSV and Export CSV possibilities. You can download existing catalog to Microsoft Excel form, manually edit the files and import the updated catalog.
 
-3.2  Name. Choose a name for the product that will appear in the catalog.	
+3.1 On the left menu select Spider Catalog > Products > Add Product
 
-3.3  Category. Choose the product’s category.		
+3.2 Name. Choose a name for the product that will appear in the catalog. 
 
-3.4  Price. Define the actual price of the product.	
+3.3 Category. Choose the category/categories for the product. 
 
-3.5  Market Price. Indicate the price of the product on the market. It will appear as crossed out. This parameter can also serve to show the initial price of the product or its price before the discount, etc.	
+3.4 Price. Define the actual price of the product. 
 
-3.6  Images. You can add any number of images of the product.		
+3.5 Market Price. Indicate the price of the product on the market. It will appear as crossed out. This parameter can also serve to show the initial price of the product or its price before the discount, etc. 
 
-3.7  Description. You can add a description of the product. After filling the short description, you can click on the "Read more" button below the editor and fill the full description of the product.		
+3.6 Images. You can add any number of images of the product. 
 
-3.8  Order. Choose the order of the given product inside its category.		
+3.7 Description. You can add a description of the product. After filling the short description, you can click on the "Read more" button below the editor and fill the full description of the product. 
 
-3.9  Show in Parent. If the product belongs to a subcategory, you can set it to appear as part of the parent category.		
+3.8 Order. Choose the order of the given product inside its category. 
 
-3.10  Published. Choose whether to publish the product or not.		
+3.9 Show in Parent. If the product belongs to a subcategory, you can set it to appear as part of the parent category.
+ 
+3.10 Published. Choose whether to publish the product or not.
+
+3.11 Edit Ratings. The product ratings can be edited or removed with this feature. You can find this relevant button on the top left corner.
+
+3.12 Edit Reviews. The product reviews can be removed in this section. You can find this relevant button on the top left corner.
+	
 
 
 ==Spider Catalog Step by step guide Step  4 ==  	
 
 = Catalog Options = 	
 
-4.1  Global options of the WordPress Catalog.		
+4.1 Global options of the WordPress Catalog.
 
-4.1.1  On the left menu select Spider Catalog>Global Options		
+4.1.1 On the left menu select Spider Catalog>Global Options.
 
-4.1.2  Category Details Width. Define the width of the category details.	
+4.1.2 Category Details Width. Define the width of the category details.
 
-4.1.3  Price. Choose whether the catalog has a price parameter or not.		
+4.1.3 Price. Choose whether the catalog has a price parameter or not.
 
-4.1.4  Market Price. Choose whether the catalog has a market price parameter or not.		
+4.1.4 Market Price. Choose whether the catalog has a market price parameter or not.
+		
+4.1.5 Currency symbol. Define the currency of the product price (e.g. $).		
 
-4.1.5  Currency symbol. Define the currency of the product price (e.g. ‘$’)		
+4.1.6 Currency Symbol Position. Choose whether the currency symbol appears before or after the price number.    
 
-4.1.6  Currency Symbol Position. Choose whether the currency symbol appears before or after the price number.		
+4.1.7 Product Ratings. Choose whether the users can rate the product or not.    
 
-4.1.7  Product Ratings. Choose whether the users can rate the product or not.		
+4.1.8 Customer Reviews. Choose whether the users can submit reviews or not.   
 
-4.1.8  Customer Reviews. Choose whether the users can submit reviews or not.		
+4.1.9 Search by Category. Choose whether there is a possibility to filter products by category using the "Choose Category" drop-down list or not.   
 
-4.1.9  Search by Category. Choose whether there is a possibility to filter products by category using the "Choose Category" drop-down list or not.		
-
-4.1.10  Search by Name. Choose whether there is a possibility to search products on the catalog by name or not.		
+4.1.10 Search by Name. Choose whether there is a possibility to search products on the catalog by name or not.   
 
 
 4.2  Styles and colors of the WordPress Catalog.	
@@ -320,7 +415,7 @@ In this section you can customize several parameters specifically for the one pr
 
 4.5.8  Color of Review Texts. Choose what color the submitted review texts appear.		
 
-4.5.9  Background Color of Review Author section. Choose the background color of the section where the reviewer’s name appears.		
+4.5.9  Background Color of Review Author section. Choose the background color of the section where the reviewer's name appears.		
 
 4.5.10  Background Color of Review text. Choose the background color of the submitted reviews.		
 
@@ -359,13 +454,13 @@ Single product
 
 Add the short code [Spider_Catalog_Product id="my id"] to the pages or posts and change the following point.		
 
-	*ID. Add the ID (Spider Catalog>Products>ID) of the single product to the appropriate place("my id") in the shortcode.		
+ID. Add the ID (Spider Catalog>Products>ID) of the single product to the appropriate place("my id") in the shortcode.		
 
 Products list		
 
 Add  the short code  [Spider_Catalog_Category id=" CategoryID" details="1" type="" showsub="1" showsubprod="2" showprod="1"] to the pages or posts and change the following points.		
-	ID. Add the ID (Spider Catalog> Category>ID) of the category which you want to show to the appropriate place("my id") in the shortcode. If the value of the ID is "All_CAT", the all categories will be shown.		
-	Details. If the value of the details is 1, the information about category won’t be shown. For showing the information change the value of the details into 0.		
+	ID. Add the ID of the category which you want to show to the appropriate place("ID") in the shortcode. If the value of the ID is "All_CAT", the all categories will be shown.		
+	Details. If the value of the details is 1, the information about category won't be shown. For showing the information change the value of the details into 0.		
 	Type. If the value of the type is empty, the products list will be shown with cells. If the value of the type is "list" the products list will be shown with lists.		
 	Showsub. Specify the value as "1" if you want the subcategories to be displayed. Specify the value as "0" if you do not want them to be displayed.		
 	Showsubprod. All: Value="1"; No: Value="0"; Chosen: Value="2".		
