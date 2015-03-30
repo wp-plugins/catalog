@@ -11,6 +11,7 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Spider Catalog for WordPress is a convenient tool for organizing the products represented on your website into catalogs.
   
 == Description ==  
+Create easy customizable products catalog for FREE at your WordPress website with categories, subcategories and multiple view options.  
   
 Spider  [WordPress Catalog](http://web-dorado.com/products/wordpress-catalog.html)   
 [Demo](http://wpdemo.web-dorado.com/catalog/)  
