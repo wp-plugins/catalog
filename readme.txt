@@ -1,7 +1,7 @@
 === WordPress Catalog ===  
 Contributors: webdorado  
 Donate link: http://web-dorado.com/products/wordpress-catalog.html  
-Tags: directory, product catalog ,catalog, product, products , product reviews, product review, product catalogue , wp catalog, catalogo, catalogue, product tabs, product feed, product portfolio, product management, blog catalog, catalog of goods, WP Catalogue
+Tags: directory, product catalog ,catalog, product, products , product reviews, product review, product catalogue , wp catalog, catalogo, catalogue, product tabs, product feed, product portfolio, product management, blog catalog, catalog of goods, WP Catalogue, product directory
 Requires at least: 3.0  
 Tested up to: 4.1  
 Stable tag: 1.6.9
@@ -11,8 +11,8 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Spider Catalog for WordPress is a convenient tool for organizing the products represented on your website into catalogs.
   
 == Description ==  
-Create easy customizable products catalog for FREE at your WordPress website with categories, subcategories and multiple view options.  
-  
+Create easy customizable products catalog for FREE at your WordPress website with categories, subcategories and multiple view options.    
+    
 Spider  [WordPress Catalog](http://web-dorado.com/products/wordpress-catalog.html)   
 [Demo](http://wpdemo.web-dorado.com/catalog/)  
 [Demo Admin](http://wpdemo.web-dorado.com/wp-admin/admin.php?page=Categories_Spider_Catalog)  
@@ -25,7 +25,7 @@ The possibility of importing/exporting products in CSV will allow the user to ma
 The view option for the catalog can be determined in advance. You are able to use different views for different pages of your website.   
 Captcha protection is added for the product reviews to avoid spam in your catalog.   
  
-###If you want to customize the design of the catalog, you can buy the commercial version [here](http://web-dorado.com/products/wordpress-catalog.html). Color, font size and design of each element of the catalog are customizable in the commercial version.         
+If you want to customize the design of the catalog, you can buy the commercial version [here](http://web-dorado.com/products/wordpress-catalog.html). Color, font size and design of each element of the catalog are customizable in the commercial version.         
   
   
   
