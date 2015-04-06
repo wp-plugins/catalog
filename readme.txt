@@ -25,7 +25,7 @@ The possibility of importing/exporting products in CSV will allow the user to ma
 The view option for the catalog can be determined in advance. You are able to use different views for different pages of your website.   
 Captcha protection is added for the product reviews to avoid spam in your catalog.   
  
-###If you want to customize the design of the catalog, you can buy the commercial version [here](http://web-dorado.com/products/wordpress-catalog.html). Color, font size and design of each element of the catalog are customizable in the commercial version.         
+If you want to customize the design of the catalog, you can buy the commercial version [here](http://web-dorado.com/products/wordpress-catalog.html). Color, font size and design of each element of the catalog are customizable in the commercial version.         
   
   
   
