@@ -29,7 +29,7 @@ If you want to customize the design of the catalog, you can buy the commercial v
   
   
   
-###Features of Spider [WordPress Catalog](http://web-dorado.com/products/wordpress-catalog.html)   
+Features of Spider [WordPress Catalog](http://web-dorado.com/products/wordpress-catalog.html)   
   
 * Organize products into categories and subcategories.    
 * Export/Import Products.   
