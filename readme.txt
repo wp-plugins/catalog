@@ -19,7 +19,7 @@ Spider  [WordPress Catalog](http://web-dorado.com/products/wordpress-catalog.htm
 [User Manual](http://web-dorado.com/spider-catalog-wordpress-guide-step-1.html)  
 [Frequently Asked Questions](http://web-dorado.com/forum/spider-catalog-wordpress/1034-spider-catalog-faq.html) 
   
-Spider WordPress Product Catalog plugin is a convenient tool for organizing the products represented on your website into catalogs. Each product on the catalog is assigned with a relevant category, which makes it easier for the customers to search and identify the needed products within the WordPress catalog. It is possible to add an unlimited number of parameters for each of the categories in the catalog in order to allow a detailed representation of the product on the catalog. Moreover, each product on the catalog can be accompanied with an image. Customers are provided with the possibility of rating the products available on the catalog, as well as writing customer reviews that will appear under the [WordPress Catalog Product](http://web-dorado.com/products/wordpress-catalog.html).
+Spider WordPress Product Catalog plugin is a convenient tool for organizing the products represented on your website into catalogs. Each product on the catalog is assigned with a relevant categories, which makes it easier for the customers to search and identify the needed products within the WordPress catalog. It is possible to add an unlimited number of parameters for each of the categories in the catalog in order to allow a detailed representation of the product on the catalog. Moreover, each product on the catalog can be accompanied with an image. Customers are provided with the possibility of rating the products available on the catalog, as well as writing customer reviews that will appear under the [WordPress Catalog Product](http://web-dorado.com/products/wordpress-catalog.html).
 The front end browsing will be available both for categories and subcategories for more convenient search.
 The possibility of importing/exporting products in CSV will allow the user to make quick changes and to update the catalog easily.    
 The view option for the catalog can be determined in advance. You are able to use different views for different pages of your website.   
@@ -34,7 +34,7 @@ Features of Spider [WordPress Catalog](http://web-dorado.com/products/wordpress-
 * Organize products into categories and subcategories.    
 * Export/Import Products.   
 * Search products by name, parameters, descrition and category name on the catalog.   
-* Possibility of adding multiple images for each product.  
+* Possibility of adding multiple images for each product and category.  
 * Choose one of the view options to organize the catalog: Cells1, List, Cells2, Wide Cells, Thumbnails, Cells3 or Single Product.  
 * Filtering opportunity in the front end when selecting a specific category or subcategory.         
 * Possibility of displaying products either grouped within categories or as a single product per page.       
