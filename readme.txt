@@ -2,7 +2,7 @@
 Contributors: webdorado  
 Donate link: http://web-dorado.com/products/wordpress-catalog.html  
 Tags: directory, product catalog ,catalog, product, products , product reviews, product review, product catalogue , wp catalog, catalogo, catalogue, product tabs, product feed, product portfolio, product management, blog catalog, catalog of goods, WP Catalogue, product directory, vote, review, inventory, list products, products catalog
-Requires at least: 3.0  
+Requires at least: 3.4  
 Tested up to: 4.2  
 Stable tag: 1.6.9
 License: GPLv2 or later  
@@ -36,7 +36,7 @@ Features of Spider [WordPress Catalog](http://web-dorado.com/products/wordpress-
 * Search products by name, parameters, descrition and category name on the catalog.   
 * Possibility of adding multiple images for each product and category.  
 * Choose one of the view options to organize the catalog: Cells1, List, Cells2, Wide Cells, Thumbnails, Cells3 or Single Product.  
-* Filtering opportunity in the front end when selecting a specific category or subcategory.         
+* Filtering opportunity in the front end .         
 * Possibility of displaying products either grouped within categories or as a single product per page.       
 * Possibility to add custom HTML in the description of the product.   
 * Possibility of providing detailed description for each category.   
@@ -50,9 +50,9 @@ Features of Spider [WordPress Catalog](http://web-dorado.com/products/wordpress-
 * Possibility to publish only specific category products for each page.   
 * Possibility to connect catalog with other pages including HTML links within the product description.    
 * Review editing possibility for the products in Products section.   
-* Catalog category filtering from the back end for easier management and editing possibilities  
-* Quick image display (lightbox) for each product in a category view  
-* Product listing feature based on a single or multiple categories  
+* Catalog category filtering from the back end for easier management and editing possibilities  .
+* Quick image display (lightbox) for each product in a category view.  
+* Product listing feature based on a single or multiple categories.  
 * Pagination support for placing specific amount of products per page.   
 
 Upgrade to [WordPress Catalog Pro](http://web-dorado.com/products/wordpress-catalog.html) to add features:  
