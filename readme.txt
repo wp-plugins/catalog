@@ -158,34 +158,34 @@ If any problem occurs with Spider [Wordpress Catalog](http://wordpress.org/exten
 == Changelog ==
 
 = 1.6.9 =
-security issue fixed
+* security issue fixed
 
 = 1.6.8 =
-bug fixed in description html editor
+* bug fixed in description html editor
 
 = 1.6.7 =
-bug fixed in export/ipmort
+* bug fixed in export/import
 
 = 1.6.5 =
-bug fixed in subcategories ordering
+* bug fixed in subcategories ordering
 
 = 1.6.4 =
-improve search
+* improve search
 
 = 1.6.3 =
-fix translation
+* fix translation
 
 = 1.6.2 =
-bug fixed in wp 3.9 editor
+* bug fixed in wp 3.9 editor
 
 = 1.6 =
-change lightbox
+* change lightbox
 
 = 1.5.9 =
-bug fixed in show category search 
+* bug fixed in show category search 
 
 = 1.0.0 =
-Initial version
+* Initial version
 
 
 ==Spider Catalog Step by step guide Step 1 ==    
