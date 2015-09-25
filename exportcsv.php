@@ -12,8 +12,11 @@ function echo_catalog_csv( $fields )
 {
     $pattern = "/par_([a-zA-Z0-9\-]*)@@:@@(([a-zA-Z0-9\-(),.\+_]|\x20)*)/";
     $separator = '';
-    foreach ( $fields as $field )
+    foreach ( $fields as $key=>$field )
     {
+		
+		if($key=='id')
+			continue;
         // if ( substr_count($field, '@@:@@'))
         // {
             // $string = '';
@@ -61,6 +64,8 @@ function echo_catalog_csv( $fields )
 
 function export_catalog_csv() {
 	global $wpdb;
+	
+	
 	$filename = 'export_'.date("d-m-y") . '.csv';
 
 	//JRequest::setVar('format','raw');
@@ -70,8 +75,11 @@ function export_catalog_csv() {
 	header( 'Content-Type: text/csv' );
 	header( 'Content-Disposition: attachment;filename='.$filename.'' );
 
-	$query = "SELECT " . $wpdb->prefix . "spidercatalog_products.name AS 'Name'," . $wpdb->prefix . "spidercatalog_products.category_id AS 'Category id'," . $wpdb->prefix . "spidercatalog_products.description AS 'Description', " . $wpdb->prefix . "spidercatalog_products.image_url AS 'Picture Url'," . $wpdb->prefix . "spidercatalog_products.cost AS 'Cost'," . $wpdb->prefix . "spidercatalog_products.market_cost AS 'Market Cost'," . $wpdb->prefix . "spidercatalog_products.param AS 'Parameters'," . $wpdb->prefix . "spidercatalog_products.ordering AS 'Ordering'," . $wpdb->prefix . "spidercatalog_products.published AS 'Published'," . $wpdb->prefix . "spidercatalog_products.published_in_parent AS 'Show in Parent',categories.name AS 'Category' FROM " . $wpdb->prefix . "spidercatalog_products LEFT JOIN " . $wpdb->prefix . "spidercatalog_product_categories  AS categories ON  " . $wpdb->prefix . "spidercatalog_products.category_id=categories.id";
+	$query = "SELECT " . $wpdb->prefix . "spidercatalog_products.id AS 'id', " . $wpdb->prefix . "spidercatalog_products.name AS 'Name'," . $wpdb->prefix . "spidercatalog_products.category_id AS 'Category id'," . $wpdb->prefix . "spidercatalog_products.description AS 'Description', " . $wpdb->prefix . "spidercatalog_products.image_url AS 'Picture Url'," . $wpdb->prefix . "spidercatalog_products.cost AS 'Cost'," . $wpdb->prefix . "spidercatalog_products.market_cost AS 'Market Cost'," . $wpdb->prefix . "spidercatalog_products.param AS 'Parameters'," . $wpdb->prefix . "spidercatalog_products.ordering AS 'Ordering'," . $wpdb->prefix . "spidercatalog_products.published AS 'Published'," . $wpdb->prefix . "spidercatalog_products.published_in_parent AS 'Show in Parent',categories.name AS 'Category' FROM " . $wpdb->prefix . "spidercatalog_products LEFT JOIN " . $wpdb->prefix . "spidercatalog_product_categories  AS categories ON  " . $wpdb->prefix . "spidercatalog_products.category_id=categories.id";
 	$result = $wpdb->get_results($query);
+	
+
+	
 	if (!$result)
 	{
 		echo "Unexpected error occured";
@@ -86,11 +94,33 @@ function export_catalog_csv() {
 	//
 	// output data rows (if atleast one row exists)
 	//
-
+$flag=true;
 	foreach ($result as $row1)
 	{
+		
+		if(isset($_POST['check_'.$row1->id]))
+		{
+
 		echo_catalog_csv( $row1 );
+		$flag=false;
+		}
+
 	}
+	
+	
+	if($flag==true)
+		{
+			
+			
+			foreach ($result as $row1)
+			{
+			echo_catalog_csv( $row1 );
+			
+			}
+		}
+	
+	
+	
 	die();
 }
   

@@ -24,7 +24,6 @@
 
 
 
-
 function front_end_catalog_list($rows, $params, $page_num, $prod_count, $prod_in_page, $ratings, $voted, $categories, $category_list, $params1, $cat_rows, $cat_id, $child_ids, $params7, $categor, $par, $cels_or_list, $ident)
 {
     ob_start();
@@ -102,20 +101,21 @@ $prod_name = html_search($rows, $params, $page_num, $prod_count, $prod_in_page, 
     
     
     if (isset($_POST['subcat_id_' . $cels_or_list . '_' . $ident . '']) && $_POST['subcat_id_' . $cels_or_list . '_' . $ident . ''] != "") {
-        $subcat_id = $_POST['subcat_id_' . $cels_or_list . '_' . $ident . ''];
+        $subcat_id = esc_js(esc_html(stripslashes($_POST['subcat_id_' . $cels_or_list . '_' . $ident . ''])));
     } else {
         if ($cat_id == 'ALL_CAT')
-            $cat_id = 0;
+            $cat_id = 0; 
         $subcat_id = $cat_id;
     }
 
-
+echo '<div class="sp_catalog_list" >';
     if ($params7['show_prod'] == 1) {
         if (count($rows)) {
             echo '<table border="0" cellspacing="0" cellpadding="0" id="productCartFull" style="border-width:' . $params['list_border_width'] . 'px;border-color:' . $params['list_border_color'] . ';border-style:' . $params['list_border_style'] . ';' . (($params['list_text_color'] != '') ? ('color:' . $params['list_text_color'] . ';') : '') . (($params['list_background_color'] != '') ? ('background-color:' . $params['list_background_color'] . ';') : '') . '">'
                 . '<tr>';
 
             $parameters_exist = 0;
+			echo "<thead>";
             foreach ($rows as $row) {
                 if ($row->param != "")
                     $parameters_exist++;
@@ -142,7 +142,7 @@ $prod_name = html_search($rows, $params, $page_num, $prod_count, $prod_in_page, 
 
             echo '</tr>';
         }
-
+echo "</thead><tbody>";
         foreach ($rows as $key=>$row) {
             $imgurl = explode(";;;", $row->image_url);
             $image_and_atach = explode('******', $imgurl[0]);
@@ -177,7 +177,7 @@ $prod_name = html_search($rows, $params, $page_num, $prod_count, $prod_in_page, 
 
               echo '<td style="vertical-align: middle;padding:0;width:' . ($params['list_list_picture_width']). 'px;height:' . ($params['list_list_picture_height']). 'px;border-right: solid 1px '.$params['list_list_border_color'].' !important;border-width:'.$params['list_border_width'].'px;border-color:'.$params['list_border_color'].';border-style:'.$params['list_border_style'].';border-top:none; border-left:none; "><a href="' . $image . '" target="_blank"><img style=" margin:10px; max-width:' . $params['list_list_picture_width'] . 'px; max-height:' . $params['list_list_picture_height'] . 'px;" src="' . $image . '" /></a></td>';
 
-            echo '<td style="vertical-align: middle;text-align: left !important;border-right: solid 1px '.$params['list_list_border_color'].' !important;border-width:'.$params['list_border_width'].'px;border-color:'.$params['list_border_color'].';border-style:'.$params['list_border_style'].';border-top:none; border-left:none;">';
+            echo '<td class="name_rating_td" style="vertical-align: middle;text-align: left;border-right: solid 1px '.$params['list_list_border_color'].' !important;border-width:'.$params['list_border_width'].'px;border-color:'.$params['list_border_color'].';border-style:'.$params['list_border_style'].';border-top:none; border-left:none;">';
 
             $categories_id=explode(',',$row->category_id);
             if ($params['list_show_category'])
@@ -245,7 +245,8 @@ $prod_name = html_search($rows, $params, $page_num, $prod_count, $prod_in_page, 
             echo '</td>';
 
             if ($parameters_exist and $params['list_show_parameters']) {
-                echo '<td style="vertical-align: middle;border-right: solid 1px '.$params['list_list_border_color'].' !important;padding:0px;border-width:'.$params['list_border_width'].'px;border-color:'.$params['list_border_color'].';border-style:'.$params['list_border_style'].';border-top:none; border-left:none;"><table border="0" cellspacing="0" cellpadding="0" width="100%"' . (($params['text_size_list'] != '') ? ('style="font-size:' . $params['text_size_list'] . 'px"') : '').'>';
+                echo '<td style="vertical-align: middle;border-right: solid 1px '.$params['list_list_border_color'].' !important;padding:0px;border-width:'.$params['list_border_width'].'px;border-color:'.$params['list_border_color'].';border-style:'.$params['list_border_style'].';border-top:none; border-left:none;">
+				<div class="sp_table" border="0" cellspacing="0" cellpadding="0" width="100%"' . (($params['text_size_list'] != '') ? ('style="font-size:' . $params['text_size_list'] . 'px"') : '').'>';
 
                 $par_data = explode("par_", $row->param);
 
@@ -262,27 +263,27 @@ $prod_name = html_search($rows, $params, $page_num, $prod_count, $prod_in_page, 
 
                         if ($countOfPar != 0)
                         {
-                            echo '<tr style="text-align:left !important; border-bottom: 1px solid '.$params['list_list_border_color'].' !important;"><td style="width:40%; border-bottom: 1px solid '.$params['list_list_border_color'].' !important;text-align: left !important;line-height: 1em;color:' . $params['list_page_text_color_1'] . '"><b>' . $par1_data[0] . ':</b></td>';
+                            echo '<div class="sp_tr" style="text-align:left !important; border-bottom: 1px solid '.$params['list_list_border_color'].' !important;"><div class="sp_td" style="width:40%; border-bottom: 1px solid '.$params['list_list_border_color'].' !important;text-align: left !important;line-height: 1em;color:' . $params['list_page_text_color_1'] . '"><b>' . $par1_data[0] . ':</b></div>';
 
 
-                            echo '<td style=" border-bottom: 1px solid '.$params['list_list_border_color'].' !important;text-align: left !important; width:' . $params['parameters_select_box_width'] . 'px;color:' . $params['list_page_text_color_2'] . '"><ul class="spidercatalogparamslist">';
+                            echo '<div class="sp_td" style=" border-bottom: 1px solid '.$params['list_list_border_color'].' !important;text-align: left !important; width:' . $params['parameters_select_box_width'] . 'px;color:' . $params['list_page_text_color_2'] . '"><ul class="spidercatalogparamslist">';
 
                             for ($k = 0; $k < count($par_values); $k++)
                                 if ($par_values[$k] != "")
                                     echo '<li>' . stripslashes($par_values[$k]) . '</li>';
 
-                            echo '</ul></td></tr>';
+                            echo '</ul></div></div>';
 
                         }
                     }
-                echo '</table></td>';
+                echo '</div></td>';
             }
 
             if($params['list_show_description'])
             {
-                $description = explode('<!--more-->', stripslashes($row->description));
+                $description = explode('<!--more-->', html_entity_decode(stripslashes($row->description)));
                 echo '<td style="vertical-align: middle;border-right: solid 1px '.$params['list_list_border_color'].' !important;border-width:'.$params['list_border_width'].'px;border-color:'.$params['list_border_color'].';border-style:'.$params['list_border_style'].';border-top:none; border-left:none;padding:10px">
-   <div id="prodDescription">' . htmlspecialchars_decode($description[0]) . ' </div>
+   <div id="prodDescription" style="word-break: break-all;">' . htmlspecialchars_decode($description[0]) . ' </div>
    <div id="prodMore"><a href="' . $link . '" style="' . (($params['list_hyperlink_color'] != '') ? ('color:' . $params['list_hyperlink_color'] . ';') : '') . '">' . __('More', 'sp_catalog') . '</a></div>
    </td>';
             }
@@ -303,11 +304,44 @@ $prod_name = html_search($rows, $params, $page_num, $prod_count, $prod_in_page, 
             echo '</tr>';
 
         }
+		echo "</tbody>";
 
         if (count($rows))
             echo '</table>';
-        ?>
+       
+$css_i=0;
+if(!$parameters_exist or !$params['list_show_parameters']){
+	$css_i++;
+	}
 
+if(!$params['list_show_description']){
+	$css_i++;
+	
+	}
+
+if($params['list_show_description'] AND $css_i==1){
+	$desc_num='3';
+	
+	}
+
+	
+	
+	
+	if($css_i==0)
+	{
+	$price_num='5';
+	$desc_num='4';
+	}
+	if($css_i==1)	
+	$price_num='4';
+
+	if($css_i==2)	
+	$price_num='3';
+
+
+
+	   ?>
+</div>
         <script>
             function submit_catal(page_link) {
                 if (document.getElementById('cat_form_page_nav1')) {
@@ -321,6 +355,94 @@ $prod_name = html_search($rows, $params, $page_num, $prod_count, $prod_in_page, 
 
         </script>
 
+		<style>
+	.sp_table
+	{
+		display:table;
+	}	
+	.sp_tr
+	{
+		display:table-row;
+	}	
+	.sp_td
+	{
+		display:table-cell;
+	}	
+		
+		@media 
+only screen and (max-width: 760px),
+(min-device-width: 768px) and (max-device-width: 1024px)  {
+	
+	.sp_catalog_list #productMainDiv
+	{
+		width:97% !important;
+	}
+	
+	.name_rating_td
+	{
+		text-align:center !important;
+	}
+
+	/* Force table to not be like tables anymore */
+	.sp_catalog_list table, .sp_catalog_list  thead, .sp_catalog_list tbody, .sp_catalog_list  th, .sp_catalog_list  td, .sp_catalog_list tr { 
+		display: block; 
+	}
+	
+	/* Hide table headers (but not display: none;, for accessibility) */
+	.sp_catalog_list thead tr { 
+		position: absolute;
+		top: -9999px;
+		left: -9999px;
+	}
+	
+	.sp_catalog_list tr { border: 1px solid #ccc; }
+	
+	 .sp_catalog_list td { 
+		/* Behave  like a "row" */
+		border: none;
+		border-bottom: 1px solid #eee; 
+		position: relative;
+		padding-left: 50% !important; 
+		width: 100% !important;
+    height: 100% !important;
+	}
+	
+	.sp_catalog_list td:before { 
+		/* Now like a table header */
+		position: absolute;
+		/* Top/left values mimic padding */
+		top: 50%;
+		left: 6px;
+		width: 45%; 
+		padding-right: 10px; 
+		white-space: nowrap;
+		font-size:12pt;
+	}
+	
+	/*
+	Label the data
+	*/
+	.sp_catalog_list td:nth-of-type(1):before { content: "<?php echo __('Product', 'sp_catalog') ?>"; }
+	.sp_catalog_list td:nth-of-type(2):before { content: "<?php echo __('Name', 'sp_catalog');  if ($params['enable_rating']) echo ' / '.__('Rating', 'sp_catalog') ?>"; }
+	
+	<?php
+	if($parameters_exist and $params['list_show_parameters']){ ?>
+	.sp_catalog_list td:nth-of-type(3):before { content: "<?php echo __('Parameters', 'sp_catalog') ?>"; }
+	<?php } ?>
+	
+	<?php if($params['list_show_description']){ ?>
+	.sp_catalog_list td:nth-of-type(<?php echo $desc_num ?>):before { content: "<?php echo __('Description', 'sp_catalog') ?>"; }
+	<?php } ?>
+	
+
+	.sp_catalog_list td:nth-of-type(<?php echo $price_num ?>):before { content: "<?php echo __('Price', 'sp_catalog') ?>"; }
+
+	
+	
+}
+		</style>
+		
+		
 
         <div id="spidercatalognavigation" style="text-align:center;">
         <?php
@@ -479,14 +601,15 @@ html_categories($rows, $params, $page_num, $prod_count, $prod_in_page, $ratings,
     
     
     if (isset($_POST['subcat_id_' . $cels_or_list . '_' . $ident . '']) && $_POST['subcat_id_' . $cels_or_list . '_' . $ident . ''] != "") {
-        $subcat_id = $_POST['subcat_id_' . $cels_or_list . '_' . $ident . ''];
+        $subcat_id = esc_js(esc_html(stripslashes($_POST['subcat_id_' . $cels_or_list . '_' . $ident . ''])));
     } else {
         if ($cat_id == 'ALL_CAT')
             $cat_id = 0;
         $subcat_id = $cat_id;
     }
-    if(count($rows))
-        echo '<table class="spider_catalog_style" cellpadding="0" cellspacing="0" id="productMainTable" style="width:'. ($params['cells1_count_of_product_in_the_row']*$params['product_cell_width']+$params['cells1_count_of_product_in_the_row']*4).'px"><tr>';
+
+   if(count($rows))
+        echo '<div class="spider_catalog_style" cellpadding="0" cellspacing="0" id="productMainTable"style="width:100%"><div style="position:relative;clear:both;">';
     if ($params7['show_prod'] == 1) {
         $urll = site_url();
         $perm = get_permalink();
@@ -494,7 +617,7 @@ html_categories($rows, $params, $page_num, $prod_count, $prod_in_page, $ratings,
 
         foreach ($rows as $row) {
             if (($prod_iterator % $params['cells1_count_of_product_in_the_row']) === 0 and $prod_iterator > 0)
-                echo "</tr><tr>";
+                echo "</div><div  class='prod_rows_div'>";
 
 
             $prod_iterator++;
@@ -505,7 +628,7 @@ html_categories($rows, $params, $page_num, $prod_count, $prod_in_page, $ratings,
             $array=explode(" ",esc_html(stripslashes($row->name)));
             $array2=str_replace("$array[0]","",esc_html(stripslashes($row->name)));
 
-            echo '<td><div id="productMain" style="overflow:hidden;margin:10px;' . (($params['cells1_text_color'] != '') ? ('color:' . $params['cells1_text_color'] . ';') : '') . (($params['cell_small_image_backround_color'] != '') ? ('background-color:' . $params['cell_small_image_backround_color'] . ';') : '') . ' width:' . $params['product_cell_width'] . 'px;height:' . ($params['product_cell_height'] - 20) . 'px;">
+            echo '<div id="productMain" class="spider_catalog_style" style="position:relative;overflow:hidden;margin:10px;' . (($params['cells1_text_color'] != '') ? ('color:' . $params['cells1_text_color'] . ';') : '') . (($params['cell_small_image_backround_color'] != '') ? ('background-color:' . $params['cell_small_image_backround_color'] . ';') : '') . ' width:' . $params['product_cell_width'] . 'px;height:' . ($params['product_cell_height'] - 20) . 'px;">
 
 <table style="height:100%;border-width:' . $params['cells1_border_width'] . 'px;border-color:' . $params['cells1_border_color'] . ';border-style:' . $params['cells1_border_style'] . ';"><tr><td>
 
@@ -684,25 +807,118 @@ html_categories($rows, $params, $page_num, $prod_count, $prod_in_page, $ratings,
             }
 
 
-            $description = explode('<!--more-->', stripslashes($row->description));
+            $description = explode('<!--more-->', html_entity_decode(stripslashes($row->description)));
             if (!isset($bgcolor)) {
               $bgcolor = (isset($params['params_background_color2']) && $params['params_background_color2'] != '') ? ('background-color:' . $params['params_background_color2'] . ';') : '';
-            }
+            } 
             
-            echo '<tr style="' . $bgcolor . 'text-align:left;border-bottom:solid 1px #d8d7d7;"><td style="color:'.$params['cell_params_text_color'].';padding-left:20px;font-size:'.$params['cell_parameters_left_size'].'px;" colspan="2">' . htmlspecialchars_decode($description[0]) . '</td></tr><tr style="height:100%;"><td colspan="2" style="vertical-align: bottom;height:100%;"><a href="' . $link . '" style="color:'.$params['cell_more_font_color'].';font-size:'.$params['cell_more_font_size'].'px;"><div style="float: right;bottom:5px;position: relative;"><span style="background-color:'.$params['cell_more_background_color'].';padding: 4px;padding-left: 11px;padding-right: 11px;">' . __('More', 'sp_catalog') . '</span></div></a></td></tr>';
+            echo '<tr style="' . $bgcolor . 'text-align:left;border-bottom:solid 1px #d8d7d7;"><td style="word-break: break-all;color:'.$params['cell_params_text_color'].';padding-left:20px;font-size:'.$params['cell_parameters_left_size'].'px;" colspan="2">' . htmlspecialchars_decode($description[0]) . '</td></tr>';
 
             echo '</table></td></tr>';            
             echo '</table></td></tr>
 </table>
-</td>
 
+
+<div style="">
+
+<div colspan="2" style="vertical-align: bottom;height:100%;">
+<a href="' . $link . '" style="color:'.$params['cell_more_font_color'].';font-size:'.$params['cell_more_font_size'].'px;">
+<div style="float: right;bottom:5px;    right: 0;position: absolute;"><span style="background-color:'.$params['cell_more_background_color'].';padding: 4px;padding-left: 11px;padding-right: 11px;">' . __('More', 'sp_catalog') . '
+</span>
+</div>
+</a>
+
+
+</div>
+</div>
+
+
+
+</div>
 ';
         }
     }
 
     if (count($rows))
-        echo '</tr></table>';
+        echo '</div></div>';
     ?>
+	
+	<style>
+	@media screen and (max-width: 320px) {
+    .spider_catalog_style {
+           width: 96% !important;
+    }
+}
+	</style>
+	<script>
+	
+	
+	jQuery(document).ready(function(){
+	
+	if(jQuery("#spider_catalog_wp").parent().width()><?php echo ($params['cells1_count_of_product_in_the_row']*$params['product_cell_width']+$params['cells1_count_of_product_in_the_row']*4) ?>)
+		
+		{
+			jQuery('.prod_rows_div').css('clear','both');
+			
+		}
+		
+	})
+	
+	
+	jQuery(window).resize(function(){
+	
+	if(jQuery("#spider_catalog_wp").parent().width()><?php echo ($params['cells2_count_of_product_in_the_row']*$params['new_cell_all_width']+$params['cells2_count_of_product_in_the_row']*20) ?>)
+		
+		{
+			jQuery('.prod_rows_div').css('clear','both');
+			
+		}
+		else
+		{
+			jQuery('.prod_rows_div').css('clear','none');
+		}
+		
+	})
+	
+	
+	
+	
+	</script>
+	<style>
+	
+		.spider_catalog_style
+	{
+		
+		float:left;
+		
+	}
+	
+	
+	.sp_table
+	{
+		display:table;
+	}
+	
+	.sp_tr{
+		display:table-row;
+	}
+	.sp_td
+	{
+		display:table-cell;
+	}
+	
+	@media only screen and (max-width: 600px) {
+		.sp_main_td
+		{
+			display:block;
+		}
+		.sp_main_table
+		{
+			width:100% !important;
+		}
+	}
+	</style>
+	
     <script>
         function submit_catal(page_link) {
             if (document.getElementById('cat_form_page_nav')) {
@@ -852,6 +1068,8 @@ function front_end_catalog_cells2($rows, $params, $page_num, $prod_count, $prod_
             $permalink_for_sp_cat = get_permalink() . "?s_p_c_t=1342";
         }
     }
+	
+
     $prod_iterator = 0;
     if ($params['enable_rating']):
         ?>
@@ -909,14 +1127,18 @@ function front_end_catalog_cells2($rows, $params, $page_num, $prod_count, $prod_
     
     
     if (isset($_POST['subcat_id_' . $cels_or_list . '_' . $ident . '']) && $_POST['subcat_id_' . $cels_or_list . '_' . $ident . ''] != "") {
-        $subcat_id = $_POST['subcat_id_' . $cels_or_list . '_' . $ident . ''];
+        $subcat_id = esc_js(esc_html(stripslashes($_POST['subcat_id_' . $cels_or_list . '_' . $ident . ''])));
     } else {
         if ($cat_id == 'ALL_CAT')
             $cat_id = 0;
         $subcat_id = $cat_id;
     }
-    if(count($rows))
-        echo '<table cellpadding="0" cellspacing="0" id="productMainTable" style="width:'. ($params['cells2_count_of_product_in_the_row']*$params['new_cell_all_width']+$params['cells2_count_of_product_in_the_row']*20).'px"><tr>';
+	
+
+
+
+ if(count($rows))
+        echo '<div cellpadding="0" cellspacing="0" id="productMainTable" style="width:100%"><div style="position:relative;clear:both;">';
     if ($params7['show_prod'] == 1) {
         $urll = site_url();
         $perm = get_permalink();
@@ -924,7 +1146,7 @@ function front_end_catalog_cells2($rows, $params, $page_num, $prod_count, $prod_
 
         foreach ($rows as $row) {
             if (($prod_iterator % $params['cells2_count_of_product_in_the_row']) === 0 and $prod_iterator > 0)
-                echo "</tr><tr>";
+                echo "</div><div class='prod_rows_div' style=''>";
 
 
             $prod_iterator++;
@@ -940,10 +1162,10 @@ function front_end_catalog_cells2($rows, $params, $page_num, $prod_count, $prod_
               $prz = $row->cost != 0 and $row->cost != '' and $row->market_cost != 0 and $row->market_cost != '';
             }
 
-            echo '<td><div id="productMainDiv" class="spider_catalog_style" style="padding:10px;' . ($prz ? 'background-image:url('.plugins_url("Front_images/tuxt.png", __FILE__).');' : '') . 'background-repeat:no-repeat;background-position: 100% 0;background-size: 150px 140px;' . (($params['cells2_text_color'] != '') ? ('color:' . $params['cells2_text_color'] . ';') : '') .  ' width:' . $params['new_cell_all_width'] . 'px; height:' . $params['new_cell_all_height'] . 'px;background-color:' . $params['cells2_cell_background_color'] . '">
-                <div style="height:' . ($params['new_cell_all_height'] - 20) . 'px;">
+            echo '<div id="productMainDiv" class="spider_catalog_style" style="position:relative;' . ($prz ? 'background-image:url('.plugins_url("Front_images/tuxt.png", __FILE__).');' : '') . 'background-repeat:no-repeat;background-position: 100% 0;background-size: 150px 140px;' . (($params['cells2_text_color'] != '') ? ('color:' . $params['cells2_text_color'] . ';') : '') .  ' width:' . $params['new_cell_all_width'] . 'px; height:' . $params['new_cell_all_height'] . 'px;background-color:' . $params['cells2_cell_background_color'] . '">
+                <div style="overflow:hidden;height:' . ($params['new_cell_all_height'] - 20) . 'px;">
 
-            <table style="height:100%; width: inherit;"><tr><td>
+            <table style="height:100%;"><tr><td>
 
             <div id="prodTitle" class="prodTitle" style="overflow:hidden;margin-bottom:4px;padding: 0 0 0 5px;height:100px;background-image:url('.plugins_url("Front_images/seriy.png", __FILE__).');background-size:'.($params['new_cell_all_width'] - ($prz ? 145 : 0)).'px 100px;background-repeat: no-repeat;"><table style="color:' . $params['cell_new_title_color'].'; width: inherit;"><tr><td style="word-break: break-word;width:'.($params['new_cell_all_width']-145).'px;"><font style="font-size: ' . $params['cell_new_big_title_size'] . 'px;">' . $array[0] . '</font><span style="font-size:' . $params['cell_new_title_size'] . 'px"><br>'.$array2.'&nbsp;&nbsp;&nbsp;</span></td><td style="width: 100px;">';
 
@@ -1118,16 +1340,115 @@ function front_end_catalog_cells2($rows, $params, $page_num, $prod_count, $prod_
             }
 
 
-            $description = explode('<!--more-->', stripslashes($row->description));
+            $description = explode('<!--more-->', html_entity_decode(stripslashes($row->description)));
 
-            echo '<tr style="height:100%;"><td colspan="2"><div style="height: 100%;color:'.$params['cell_new_text_color'].';font-size:'.$params['cell_new_text_size'].'px;padding-left:12px;padding-right:12px;background-color:' . $params['cell_new_text_back_color_2'] . ';"  id="spanman">' . htmlspecialchars_decode($description[0]) . '</div></td></tr><tr><td colspan="2"><a href="' . $link . '" style="position:relative;bottom: 0;display:block;color:' . $params['cell_new_more_font_color'] . ';text-align:center;text-decoration:none;min-height:20px; background-color:' . $params['cell_new_more_background_color'] . ';font-size:' . $params['new_cell_more_font_size'] . 'px !important;">' . __('More', 'sp_catalog') . '</a></td></tr>';
-            echo '</table></td></tr></table></td></tr></table></div></div></td>';                     
+            echo '<tr style="height:100%;"><td colspan="2"><div style="word-break: break-all;height: 100%;color:'.$params['cell_new_text_color'].';font-size:'.$params['cell_new_text_size'].'px;padding-left:12px;padding-right:12px;background-color:' . $params['cell_new_text_back_color_2'] . ';"  id="spanman">' . htmlspecialchars_decode($description[0]) . '</div></td></tr>';
+            echo '</table></td></tr></table></td></tr></table></div>
+			
+			
+			
+			<div style="position:relative;bottom: 10px;display:block;color:' . $params['cell_new_more_font_color'] . ';text-align:center;text-decoration:none;min-height:20px; background-color:' . $params['cell_new_more_background_color'] . ';font-size:' . $params['new_cell_more_font_size'] . 'px !important;"><a href="' . $link . '" style="color:' . $params['cell_new_more_font_color'] . '" >' . __('More', 'sp_catalog') . '</a></div>
+			
+			
+			</div>';                     
         }
 		if (count($rows))
-		  echo '</tr></table>';   
+		  echo '</div></div>';   
     }
     
     ?>
+	
+	<script>
+	
+	
+	jQuery(document).ready(function(){
+	
+	if(jQuery("#spider_catalog_wp").parent().width()><?php echo ($params['cells2_count_of_product_in_the_row']*$params['new_cell_all_width']+$params['cells2_count_of_product_in_the_row']*20) ?>)
+		
+		{
+			jQuery('.prod_rows_div').css('clear','both');
+			
+		}
+		
+	})
+	
+	
+	jQuery(window).resize(function(){
+	
+	if(jQuery("#spider_catalog_wp").parent().width()><?php echo ($params['cells2_count_of_product_in_the_row']*$params['new_cell_all_width']+$params['cells2_count_of_product_in_the_row']*20) ?>)
+		
+		{
+			jQuery('.prod_rows_div').css('clear','both');
+			
+		}
+		else
+		{
+			jQuery('.prod_rows_div').css('clear','none');
+		}
+		
+	})
+	
+	
+	
+	
+	</script>
+		<style>
+	@media screen and (max-width: 320px) {
+    .spider_catalog_style {
+           width: 100% !important;
+    }
+	.prodTitle
+	{
+		
+		    background-size: 50% 100px !important;
+	}
+}
+	</style>
+	<style>
+	
+	.spider_catalog_style
+	{
+		
+		float:left;
+		
+	}
+	
+	
+	.sp_table
+	{
+		display:table;
+	}
+	
+	.sp_tr
+	{
+		display:table-row;
+	}
+	
+	.sp_td
+	{
+		display:table-cell;
+	}
+	
+	@media only screen and (max-width: 768px) {
+		.sp_main_td
+		{
+			display:block;
+		}
+		
+		.sp_main_table
+		{
+			width:100% !important;
+			
+		}
+		
+		
+	}
+	
+	
+	</style>
+	
+	
+	
     <script>
         function submit_catal(page_link) {
             if (document.getElementById('cat_form_page_nav')) {
@@ -1317,14 +1638,17 @@ function front_end_catalog_cells3($rows, $params, $page_num, $prod_count, $prod_
     
     
     if (isset($_POST['subcat_id_' . $cels_or_list . '_' . $ident . '']) && $_POST['subcat_id_' . $cels_or_list . '_' . $ident . ''] != "") {
-        $subcat_id = $_POST['subcat_id_' . $cels_or_list . '_' . $ident . ''];
+        $subcat_id = esc_js(esc_html(stripslashes($_POST['subcat_id_' . $cels_or_list . '_' . $ident . ''])));
     } else {
         if ($cat_id == 'ALL_CAT')
             $cat_id = 0;
         $subcat_id = $cat_id;
     }
-    if(count($rows))
-        echo '<table cellpadding="0" cellspacing="0" id="productMainTable" style="width:'. ($params['cells3_count_of_product_in_the_row']*$params['all_cell_all_width']+$params['cells3_count_of_product_in_the_row']*20).'px"><tr>';
+	
+
+
+	if(count($rows))
+        echo '<div cellpadding="0" cellspacing="0" id="productMainTable" style="width:100%"><div  style="position:relative;clear:both;">';
     if ($params7['show_prod'] == 1) {
         $urll = site_url();
         $perm = get_permalink();
@@ -1332,7 +1656,7 @@ function front_end_catalog_cells3($rows, $params, $page_num, $prod_count, $prod_
 
         foreach ($rows as $row) {
             if (($prod_iterator % $params['cells3_count_of_product_in_the_row']) === 0 and $prod_iterator > 0)
-                echo "</tr><tr>";
+                echo "</div><div  class='prod_rows_div'>";
 
 
             $prod_iterator++;
@@ -1343,7 +1667,7 @@ function front_end_catalog_cells3($rows, $params, $page_num, $prod_count, $prod_
             $array=explode(" ",esc_html(stripslashes($row->name)));
             $array2=str_replace("$array[0]","",esc_html(stripslashes($row->name)));
 
-            echo '<td><div id="productMainDiv" class="spider_catalog_style" style="overflow: hidden; position: relative;border-width:' . $params['cells3_border_width'] . 'px;border-color:' . $params['cells3_border_color'] . ';border-style:' . $params['cells3_border_style'] . ';' . (($params['cells3_text_color'] != '') ? ('color:' . $params['cells3_text_color'] . ';') : '') . (($params['cells3_background_color'] != '') ? ('background-color:' . $params['cells3_background_color'] . ';') : '') . ' width:' . $params['all_cell_all_width'] . 'px; height:' . $params['all_cell_all_height'] . 'px;background-color:' . $params['cells3_cell_background_color'] . '">
+            echo '<div id="productMainDiv" class="spider_catalog_style" style="    margin: 2px;overflow: hidden; position: relative;border-width:' . $params['cells3_border_width'] . 'px;border-color:' . $params['cells3_border_color'] . ';border-style:' . $params['cells3_border_style'] . ';' . (($params['cells3_text_color'] != '') ? ('color:' . $params['cells3_text_color'] . ';') : '') . (($params['cells3_background_color'] != '') ? ('background-color:' . $params['cells3_background_color'] . ';') : '') . ' width:' . $params['all_cell_all_width'] . 'px; height:' . $params['all_cell_all_height'] . 'px;background-color:' . $params['cells3_cell_background_color'] . '">
 
             <div style="height:inherit;">';
 
@@ -1428,19 +1752,106 @@ function front_end_catalog_cells3($rows, $params, $page_num, $prod_count, $prod_
                 }
             }
 
-            $description = explode('<!--more-->', stripslashes($row->description));
-            echo '<span id="spanman" style="color:'.$params['all_cell_text_color'].';font-size:'.$params['all_cell_text_size'].'px !important;">'.htmlspecialchars_decode($description[0]).'</span></tr></table>';
+            $description = explode('<!--more-->', html_entity_decode(stripslashes($row->description)));
+            echo '<span id="spanman" style="line-height:1em;word-break: break-all;color:'.$params['all_cell_text_color'].';font-size:'.$params['all_cell_text_size'].'px !important;"><p>'.htmlspecialchars_decode($description[0]).'</p></span></tr></table>';
 
             if ($params['price'] and $row->cost != 0 and $row->cost != '')
-                echo '<div style="position: absolute;top: ' . ($params['all_cell_all_height'] - 35) . 'px;right: 5px;width:120px;background-image:url(' . plugins_url("Front_images/kapcal.png", __FILE__) . ');background-repeat: no-repeat;background-size:176px 32px;color:'.$params['all_cell_price_text_color'].';font-size:'.$params['all_cell_price_size'].'px !important;"><center>' . (($params['currency_symbol_position'] == 0) ? ($params['currency_symbol']) : '') . ' ' . $row->cost . ' ' . (($params['currency_symbol_position'] == 1) ? $params['currency_symbol'] : '') . '</center></div>';
+                echo '<div style="position: absolute;bottom: 0px;right: 0px;width:120px;background-image:url(' . plugins_url("Front_images/kapcal.png", __FILE__) . ');background-repeat: no-repeat;background-size:176px 32px;color:'.$params['all_cell_price_text_color'].';font-size:'.$params['all_cell_price_size'].'px !important;"><center>' . (($params['currency_symbol_position'] == 0) ? ($params['currency_symbol']) : '') . ' ' . $row->cost . ' ' . (($params['currency_symbol_position'] == 1) ? $params['currency_symbol'] : '') . '</center></div>';
 
-            echo'</div></td>';
+            echo'</div></div>';
         }
     }
 
     if (count($rows))
-        echo '</tr></table>';
-    ?>
+        echo '</div></div>';
+   ?>
+   <style>
+      	@media screen and (max-width: 320px) {
+    .spider_catalog_style {
+           width: 100% !important;
+    }}
+   </style>
+
+  
+   
+   	<script>
+	
+	
+	jQuery(document).ready(function(){
+	
+	if(jQuery("#spider_catalog_wp").parent().width()><?php echo  ($params['cells3_count_of_product_in_the_row']*$params['all_cell_all_width']+$params['cells3_count_of_product_in_the_row']*20) ?>)
+		
+		{
+			jQuery('.prod_rows_div').css('clear','both');
+			
+		}
+		
+	})
+	
+	
+	jQuery(window).resize(function(){
+	
+	if(jQuery("#spider_catalog_wp").parent().width()><?php echo ($params['cells3_count_of_product_in_the_row']*$params['all_cell_all_width']+$params['cells3_count_of_product_in_the_row']*20) ?>)
+		
+		{
+			jQuery('.prod_rows_div').css('clear','both');
+			
+		}
+		else
+		{
+			jQuery('.prod_rows_div').css('clear','none');
+		}
+		
+	})
+	
+	
+	
+	
+	</script>
+
+   
+	<style>
+	
+	.spider_catalog_style
+	{
+		
+		float:left;
+		
+	}
+	
+	.sp_table
+	{
+		display:table;
+	}
+	
+	.sp_tr
+	{
+		display:table-row;
+	}
+	
+	.sp_td
+	{
+		display:table-cell;
+	}
+	
+	@media only screen and (max-width: 600px) {
+		.sp_main_td
+		{
+			display:block;
+		}
+		
+		.sp_main_table
+		{
+			width:100% !important;
+			
+		}
+		
+		
+	}
+	
+	
+	</style>
+	
     <script>
         function submit_catal(page_link) {
             if (document.getElementById('cat_form_page_nav')) {
@@ -1631,14 +2042,16 @@ function front_end_catalog_thumb($rows, $params, $page_num, $prod_count, $prod_i
     
     
     if (isset($_POST['subcat_id_' . $cels_or_list . '_' . $ident . '']) && $_POST['subcat_id_' . $cels_or_list . '_' . $ident . ''] != "") {
-        $subcat_id = $_POST['subcat_id_' . $cels_or_list . '_' . $ident . ''];
+        $subcat_id = esc_js(esc_html(stripslashes($_POST['subcat_id_' . $cels_or_list . '_' . $ident . ''])));
     } else {
         if ($cat_id == 'ALL_CAT')
             $cat_id = 0;
         $subcat_id = $cat_id;
     }
+
+
     if(count($rows))
-        echo '<table cellpadding="0" cellspacing="0" id="productMainTable" style="width:'. ($params['thumb_count_of_product_in_the_row']*$params['product_cell_width']+$params['thumb_count_of_product_in_the_row']*20).'px"><tr>';
+        echo '<div cellpadding="0" cellspacing="0" id="productMainTable" style="width:100%"><div style="clear: both;">';
     if ($params7['show_prod'] == 1) {
         $urll = site_url();
         $perm = get_permalink();
@@ -1646,7 +2059,7 @@ function front_end_catalog_thumb($rows, $params, $page_num, $prod_count, $prod_i
 
         foreach ($rows as $row) {
             if (($prod_iterator % $params['thumb_count_of_product_in_the_row']) === 0 and $prod_iterator > 0)
-                echo "</tr><tr>";
+                echo "</div><div  class='prod_rows_div'>";
 
 
             $prod_iterator++;
@@ -1657,7 +2070,7 @@ function front_end_catalog_thumb($rows, $params, $page_num, $prod_count, $prod_i
             $array=explode(" ",esc_html(stripslashes($row->name)));
             $array2=str_replace("$array[0]","",esc_html(stripslashes($row->name)));
 
-            echo '<td style="padding-bottom: 10px !important;"><div id="productMainDivLittle" class="spider_catalog_style" style="overflow:hidden;padding-right: 0px !important;border-width:' . $params['thumb_border_width'] . 'px;border-color:' . $params['thumb_border_color'] . ';border-style:' . $params['thumb_border_style'] . ';' . (($params['thumb_text_color'] != '') ? ('color:' . $params['thumb_text_color'] . ';') : '') . (($params['thumb_cell_background_color'] != '') ? ('background-color:' . $params['thumb_cell_background_color'] . ';') : '') . ' width:' . $params['cell_tumble_all_width'] . 'px; height:' . $params['cell_tumble_all_height'] . 'px;">
+            echo '<div id="productMainDivLittle" class="spider_catalog_style" style="margin: 3px;margin-bottom: 10px !important;overflow:hidden;padding-right: 0px !important;border-width:' . $params['thumb_border_width'] . 'px;border-color:' . $params['thumb_border_color'] . ';border-style:' . $params['thumb_border_style'] . ';' . (($params['thumb_text_color'] != '') ? ('color:' . $params['thumb_text_color'] . ';') : '') . (($params['thumb_cell_background_color'] != '') ? ('background-color:' . $params['thumb_cell_background_color'] . ';') : '') . ' width:' . $params['cell_tumble_all_width'] . 'px; height:' . $params['cell_tumble_all_height'] . 'px;">
 
             <div><table style="margin: 4px !important;"><tr>';
 
@@ -1743,16 +2156,97 @@ function front_end_catalog_thumb($rows, $params, $page_num, $prod_count, $prod_i
             if ($params['price'] and $row->cost != 0 and $row->cost != '')
                 echo '<div style="background-image:url(' . plugins_url("Front_images/kaperk.png", __FILE__) . ');background-repeat: no-repeat;background-size:'.($params['cell_tumble_all_width']-138).'px 32px;padding-left:10px;color:'.$params['cell_tumble_price_text_color'].';font-size:'.$params['cell_tumble_price_size'].'px;">' . (($params['currency_symbol_position'] == 0) ? ($params['currency_symbol']) : '') . ' ' . $row->cost . ' ' . (($params['currency_symbol_position'] == 1) ? $params['currency_symbol'] : '') . '</div>';
 
-            $description = explode('<!--more-->', stripslashes($row->description));
-            echo	'<span id="spanman" style="font-size:'.$params['cell_tumble_text_size'].'px;color:'.$params['cell_tumble_text_color'].';">'.htmlspecialchars_decode($description[0]).'</span>';
+            $description = explode('<!--more-->', html_entity_decode(stripslashes($row->description)));
+            echo	'<span id="spanman" style="word-break: break-all;font-size:'.$params['cell_tumble_text_size'].'px;color:'.$params['cell_tumble_text_color'].';">'.htmlspecialchars_decode($description[0]).'</span>';
 
-            echo'</td></tr></table></div></td>';
+            echo'</td></tr></table></div></div>';
         }
     }
 
     if (count($rows))
-        echo '</tr></table>';
-    ?>
+        echo '</div></div>';
+   ?>
+   <script>
+   
+   
+   
+   	jQuery(document).ready(function(){
+	
+	if(jQuery("#spider_catalog_wp").parent().width()><?php echo ($params['thumb_count_of_product_in_the_row']*$params['product_cell_width']+$params['thumb_count_of_product_in_the_row']*20) ?>)
+		
+		{
+			jQuery('.prod_rows_div').css('clear','both');
+			
+		}
+		
+	})
+	
+	
+	jQuery(window).resize(function(){
+	
+	if(jQuery("#spider_catalog_wp").parent().width()><?php echo ($params['thumb_count_of_product_in_the_row']*$params['product_cell_width']+$params['thumb_count_of_product_in_the_row']*20) ?>)
+		
+		{
+			jQuery('.prod_rows_div').css('clear','both');
+			
+		}
+		else
+		{
+			jQuery('.prod_rows_div').css('clear','none');
+		}
+		
+	})
+	
+	
+   
+   </script>
+   
+   
+   <style>
+   	@media screen and (max-width: 320px) {
+    .spider_catalog_style {
+           width: 100% !important;
+    }}
+   .spider_catalog_style
+	{
+		
+		float:left;
+		
+	}
+   
+   
+   .sp_table
+   {
+	   display:table;
+   }
+   .sp_tr
+   {
+	   display:table-row;
+   }
+   .sp_td
+   {
+	   display:table-cell;
+	   vertical-align:top;
+   }
+   
+   	@media only screen and (max-width: 600px) {
+		.sp_main_td
+		{
+			display:block;
+		}
+		
+		.sp_main_table
+		{
+			width:100% !important;
+			
+		}
+		
+		
+	}
+
+   
+   
+   </style>
     <script>
         function submit_catal(page_link) {
             if (document.getElementById('cat_form_page_nav')) {
@@ -1939,14 +2433,14 @@ function front_end_catalog_wcells($rows, $params, $page_num, $prod_count, $prod_
     
     
     if (isset($_POST['subcat_id_' . $cels_or_list . '_' . $ident . '']) && $_POST['subcat_id_' . $cels_or_list . '_' . $ident . ''] != "") {
-        $subcat_id = $_POST['subcat_id_' . $cels_or_list . '_' . $ident . ''];
+        $subcat_id = esc_js(esc_html(stripslashes($_POST['subcat_id_' . $cels_or_list . '_' . $ident . ''])));
     } else {
         if ($cat_id == 'ALL_CAT')
             $cat_id = 0;
         $subcat_id = $cat_id;
     }
     if(count($rows))
-        echo '<table border="0" cellspacing="0" cellpadding="0" id="productCartFullcube" style="padding-bottom: 30px;border-width:'.$params['wcells_border_width'].'px;border-color:'.$params['wcells_border_color'].';border-style:'.$params['wcells_border_style'].';border-bottom:none; border-right:none;'.(($params['wcells_text_color']!='')?('color:'.$params['wcells_text_color'].';'):'').(($params['wcells_background_color']!='')?('background-color:'.$params['wcells_background_color'].';'):'').'">';
+        echo '<div border="0" cellspacing="0" cellpadding="0" id="productCartFullcube" style="padding-bottom: 30px;border-width:'.$params['wcells_border_width'].'px;border-color:'.$params['wcells_border_color'].';border-style:'.$params['wcells_border_style'].';border-bottom:none; border-right:none;'.(($params['wcells_text_color']!='')?('color:'.$params['wcells_text_color'].';'):'').(($params['wcells_background_color']!='')?('background-color:'.$params['wcells_background_color'].';'):'').'">';
     if ($params7['show_prod'] == 1) {
         $urll = site_url();
         $perm = get_permalink();
@@ -1959,11 +2453,12 @@ function front_end_catalog_wcells($rows, $params, $page_num, $prod_count, $prod_
             $imgurl = explode(";;;", $row->image_url);
             $array=explode(" ",esc_html(stripslashes($row->name)));
             $array2=str_replace("$array[0]","",esc_html(stripslashes($row->name)));
-            echo'<tr style="border-bottom:1px solid white !important;background-color:' . $params['wcells_cell_background_color'] . '">';
+            
+		echo'<div style="border-bottom:1px solid white !important;background-color:' . $params['wcells_cell_background_color'] . '">';	
 
             if (!($row->image_url != "" and $row->image_url != "******0")) {
                 $imgurl[0] = plugins_url("Front_images/noimage.jpg", __FILE__);
-                echo '<td style="text-align:center;vertical-align:middle;padding: 10px !important;border-width:'.$params['wcells_border_width'].'px;border-color:'.$params['wcells_border_color'].';border-style:'.$params['wcells_border_style'].';border-top:none; border-left:none;"><img  style="width:'.$params['single_cell_picture_width'].'px;height:'.$params['single_cell_picture_height'].'px;border: #CCC solid 1px;" src="'.$imgurl[0].'" /></td>';
+                echo '<div class="sp_td" style="text-align:center;vertical-align:middle;padding: 10px !important;border-width:'.$params['wcells_border_width'].'px;border-color:'.$params['wcells_border_color'].';border-style:'.$params['wcells_border_style'].';border-top:none; border-left:none;"><img  style="width:'.$params['single_cell_picture_width'].'px;height:'.$params['single_cell_picture_height'].'px;border: #CCC solid 1px;" src="'.$imgurl[0].'" /></div>';
             } else {
                 $image_and_atach = explode('******', $imgurl[0]);
                 $image = $image_and_atach[0];
@@ -1977,10 +2472,21 @@ function front_end_catalog_wcells($rows, $params, $page_num, $prod_count, $prod_
                 } else {
                     $attach_url = $image;
                 }
-                echo '<td style="text-align:center;vertical-align:middle;padding: 10px !important;border-width:'.$params['wcells_border_width'].'px;border-color:'.$params['wcells_border_color'].';border-style:'.$params['wcells_border_style'].';border-top:none; border-left:none;"><a href="' . $image . '" target="_blank"><img  style="max-width:'.$params['single_cell_picture_width'].'px;max-height:'.$params['single_cell_picture_height'].'px;border: #CCC solid 1px;" src="' . $attach_url . '" /></a></td>';                
+                echo '<div class="sp_td" style="text-align:center;vertical-align:middle;padding: 10px !important;border-width:'.$params['wcells_border_width'].'px;border-color:'.$params['wcells_border_color'].';border-style:'.$params['wcells_border_style'].';border-top:none; border-left:none;"><a href="' . $image . '" target="_blank"><img  style="max-width:'.$params['single_cell_picture_width'].'px;max-height:'.$params['single_cell_picture_height'].'px;border: #CCC solid 1px;" src="' . $attach_url . '" /></a></div>';                
             }
+			
+			
+			/////////////////////////////////////////
+			
+			
+		//////////////////////////////////////////	
+			
+			
+			
+			
+			
 
-            echo '<td style="vertical-align:top;padding: 0px 4px 2px 4px;border-width:'.$params['wcells_border_width'].'px;border-color:'.$params['wcells_border_color'].';border-style:'.$params['wcells_border_style'].';border-top:none; border-left:none;"><a href="' . $link . '" style="word-break: break-word;' . (($params['wcells_hyperlink_color'] != '') ? ('color:' . $params['wcells_hyperlink_color'] . ';') : '') . 'font-size:'.$params['single_cell_title_size'].'px !important;color:'.$params['single_cell_title_color'].';"><b>' . esc_html(stripslashes($row->name)) . '</b></a>';
+            echo '<div class="sp_td" style="vertical-align:top;padding: 0px 4px 2px 4px;border-width:'.$params['wcells_border_width'].'px;border-color:'.$params['wcells_border_color'].';border-style:'.$params['wcells_border_style'].';border-top:none; border-left:none;"><a href="' . $link . '" style="word-break: break-word;' . (($params['wcells_hyperlink_color'] != '') ? ('color:' . $params['wcells_hyperlink_color'] . ';') : '') . 'font-size:'.$params['single_cell_title_size'].'px !important;color:'.$params['single_cell_title_color'].';"><b>' . esc_html(stripslashes($row->name)) . '</b></a>';
             if ($params['price'] and $row->cost != 0 and $row->cost != '') {
                 echo '<div style="color:'.$params['wcells_price_color'].';float:right;font-size:'.$params['wcells_price_size'].'px;"><strong>' . (($params['currency_symbol_position'] == 0) ? ($params['currency_symbol']) : '') . ' ' . $row->cost . ' ' . (($params['currency_symbol_position'] == 1) ? $params['currency_symbol'] : '') . '</strong></div>';
             }
@@ -2086,11 +2592,11 @@ function front_end_catalog_wcells($rows, $params, $page_num, $prod_count, $prod_
                             {
                                 echo '<tr class="spidercatalogparamslist" >';
 
-                                echo '<td style="background-color:'.$params['single_cell_background_color_2'].';" ><span style="color:'.$params['single_cell_text_color_1'].';font-size:'.$params['single_cell_font_2_size'].'px !important;"><b>' . $par1_data[0] . ':&nbsp;&nbsp;&nbsp;</b></span>';
+                                echo '<td style="word-break: break-all;background-color:'.$params['single_cell_background_color_2'].';" ><span style="color:'.$params['single_cell_text_color_1'].';font-size:'.$params['single_cell_font_2_size'].'px !important;"><b>' . $par1_data[0] . ':&nbsp;&nbsp;&nbsp;</b></span>';
 
                                 for ($k = 0; $k < count($par_values); $k++)
                                     if ($par_values[$k] != "")
-                                        echo '<span style="color:'.$params['single_cell_text_color_2'].' !important;font-size:'.$params['single_cell_font_1_size'].'px !important;">' . $par_values[$k] . '</span>';
+                                        echo '<span style="color:'.$params['single_cell_text_color_2'].' !important;font-size:'.$params['single_cell_font_1_size'].'px !important;">' . $par_values[$k] . '&nbsp;</span>';
                                 echo '</td>';
                             }
                         }
@@ -2101,11 +2607,11 @@ function front_end_catalog_wcells($rows, $params, $page_num, $prod_count, $prod_
                             {
                                 echo '';
 
-                                echo '<td style="background-color:'.$params['single_cell_background_color_2'].';"><span style="color:'.$params['single_cell_text_color_1'].';font-size:'.$params['single_cell_font_2_size'].'px !important;"><b>' . $par1_data[0] . ':&nbsp;&nbsp;&nbsp;</b></span>';
+                                echo '<td style="word-break: break-all;background-color:'.$params['single_cell_background_color_2'].';"><span style="color:'.$params['single_cell_text_color_1'].';font-size:'.$params['single_cell_font_2_size'].'px !important;"><b>' . $par1_data[0] . ':&nbsp;&nbsp;&nbsp;</b></span>';
 
                                 for ($k = 0; $k < count($par_values); $k++)
                                     if ($par_values[$k] != "")
-                                        echo '<span style="color:'.$params['single_cell_text_color_2'].' !important;font-size:'.$params['single_cell_font_1_size'].'px !important;">' . $par_values[$k] . '</span>';
+                                        echo '<span style="color:'.$params['single_cell_text_color_2'].' !important;font-size:'.$params['single_cell_font_1_size'].'px !important;">' . $par_values[$k] . '&nbsp;</span>';
                                 echo '</td></tr>';
                             }
                         }
@@ -2114,18 +2620,20 @@ function front_end_catalog_wcells($rows, $params, $page_num, $prod_count, $prod_
             }
             echo '</table>';
 
-            $description = explode('<!--more-->', stripslashes($row->description));
-            echo '<div id="spanman" style="color:'.$params['single_cell_text_color_2'].' !important;padding-left:7px;background-color:'.$params['single_cell_background_color_1'].';font-size:'.$params['single_cell_font_1_size'].'px !important;" id="prodDescription">' . htmlspecialchars_decode($description[0]) . ' </div>';
-            echo '<div  style="background-color:'.$params['wcells_more_background_color'].';width:70px;float:right;margin-bottom: 3px;;padding-left: 16px;position:relative;"><a style="color:'.$params['wcells_more_font_color'].';font-size:12pt;" href="'.$link.'">' . __('More', 'sp_catalog') . '</a></div>';
+            $description = explode('<!--more-->', html_entity_decode(stripslashes($row->description)));
 
-            echo '</td>';
+			
+            echo '<div id="spanman" style="word-break: break-all;color:'.$params['single_cell_text_color_2'].' !important;padding-left:7px;background-color:'.$params['single_cell_background_color_1'].';font-size:'.$params['single_cell_font_1_size'].'px !important;" id="prodDescription" >' . htmlspecialchars_decode($description[0]) . ' </div>';
+            echo '<div  style="background-color:'.$params['wcells_more_background_color'].';width:70px;float:right;margin-bottom: 3px;;padding-left: 16px;position:relative;"><a style="color:'.$params['wcells_more_font_color'].';font-size:12pt;" href="'.$link.'">' . __('More', 'sp_catalog') . '</a></div><div style="clear:both;"></div>';
 
-            echo '</tr>';
+            echo '</div>';
+
+            echo '</div>';
         }
     }
 
     if (count($rows))
-        echo '</table>';
+        echo '</div>';
     ?>
     <script>
         function submit_catal(page_link) {
@@ -2139,6 +2647,21 @@ function front_end_catalog_wcells($rows, $params, $page_num, $prod_count, $prod_
         }
     </script>
 
+	<style>
+	.sp_td
+	{
+		display:table-cell;
+	}
+	
+	@media screen and (max-width: 600px) {
+.sp_td
+	{
+		display:block;
+	}
+}
+	</style>
+	
+	
     <div id="spidercatalognavigation" style="text-align:center;">
 
         <?php
@@ -2237,6 +2760,7 @@ function html_front_end_single_product($rows, $reviews_rows, $params, $category_
   ob_start();
   global $ident;
   ?>
+
   <div id="spider_catalog_div" style="background-color:<?php echo $params['single_background_color']; ?>; border-width:<?php echo $params['single_border_width']; ?>px; border-color:<?php echo $params['single_border_color']; ?>; border-style:<?php echo $params['single_border_style']; ?>; color:<?php echo $params['single_text_color']; ?>; font-size:<?php echo $params['text_size_big']; ?>px;">
   <?php if ($params['enable_rating']): ?>
     <style type="text/css">
@@ -2311,24 +2835,21 @@ function html_front_end_single_product($rows, $reviews_rows, $params, $category_
     $array = explode(" ", esc_html(stripslashes($row->name)));
     $array2 = str_replace("$array[0]", "", esc_html(stripslashes($row->name)));
     ?>
-    <table id="prodMiddle" class="spider_catalog_style" style="border:inherit !important" cellspacing="0" cellpadding="0">
-      <tbody>
-        <tr>
-          <td colspan="2">
+
+      
+	 
+
           <?php
             $prz = $params['price'] and $params['market_price'];
             if ($prz) {
               $prz = $row->cost != 0 and $row->cost != '' and $row->market_cost != 0 and $row->market_cost != '';
             }
-            echo 
-            '<div id="prodTitle" style="' . (($params['single_title_color'] != '') ? ('color:' . $params['single_title_color'] . ';') : '') . (($params['single_title_background_color'] != '') ? ('background-color:' . $params['single_title_background_color'] . ';') : '') . 'padding:0px;">
-              <table width="100%">
-                <tr>
-                  <td  style="padding:0px 0px 0px 10px !important;line-height:1em; font-size:' . $params['title_size_big'] . 'px;">
-                    <font size="7" style="margin-left: 10px !important;font-size: ' . $params['product_big_title_size'] . 'px;">' . $array[0] . '</font><br/>
-                    <span style="margin-left: 10px !important;line-height: 2;">' . $array2 . ' </span>
-                  </td>
-                  <td style="border: 5px solid transparent !important;padding-right:40px !important; text-align:right; ' . ($prz ? 'background:' . $params['product_price_background_color'] : '') . ';width:180px;">';
+			
+			
+                 
+
+
+				echo '<div class="sp_td sp_prod_price" style="float:right;border: 5px solid transparent !important;padding-right:40px !important; text-align:right; ' . ($prz ? 'background:' . $params['product_price_background_color'] : '') . ';width:180px;">';
 
                   if ($params['price'] and $row->cost != 0 and $row->cost != '') {
                     echo '<div id="prodCost" style="font-size:' . $params['price_size_big'] . 'px; color:' . $params['single_price_color'] . ';">' . (($params['currency_symbol_position'] == 0) ? ($params['currency_symbol']) : '') . ' ' . $row->cost . ' ' . (($params['currency_symbol_position'] == 1) ? $params['currency_symbol'] : '') . '</div>';
@@ -2338,9 +2859,23 @@ function html_front_end_single_product($rows, $reviews_rows, $params, $category_
                             <span style="color:' . $params['single_market_price_color'] . ';">' . __('Market Price:', 'sp_catalog') . ' </span><br>
                             <span style=" text-decoration:line-through;color:' . $params['single_market_price_color'] . ';"> ' . (($params['currency_symbol_position'] == 0) ? ($params['currency_symbol']) : '') . ' ' . $row->market_cost . ' ' . (($params['currency_symbol_position'] == 1) ? $params['currency_symbol'] : '') . '</span></div>';
                   }
+				  echo '</div>';
+				  
+			
+			
+            echo 
+            '<div id="prodTitle" style="' . (($params['single_title_color'] != '') ? ('color:' . $params['single_title_color'] . ';') : '') . (($params['single_title_background_color'] != '') ? ('background-color:' . $params['single_title_background_color'] . ';') : '') . 'padding:0px;">
+              <div class="" width="100%">
+                <div class="">
+                  <div class="sp_td sp_prod_title"  style="float:left;padding:0px 0px 0px 10px !important;line-height:1em; font-size:' . $params['title_size_big'] . 'px;">
+                    <font size="7" style="margin-left: 10px !important;font-size: ' . $params['product_big_title_size'] . 'px;">' . $array[0] . '</font><br/>
+                    <span style="margin-left: 10px !important;line-height: 2;">' . $array2 . ' </span>
+                  </div>';
+				  
+				  
                   if ($params['enable_rating']) {
-                    echo '</td></tr><tr>
-                    <td style="padding-right:10px;" colspan="2">
+                    echo '</div></div><div class="" style="clear:both">
+                    <div class="sp_td" style="padding-right:10px;" colspan="2">
                       <div style="overflow:hidden; vertical-align:top; height:25px;">
                         <div id="voting' . $row->id . '" class="rating_stars" style="width:130px; margin-left:15px !important;">';
                         if ($voted == 0) {
@@ -2373,20 +2908,24 @@ function html_front_end_single_product($rows, $reviews_rows, $params, $category_
                               <li><a title='" . $title . "' class='five-stars'>5</a></li>
                             </ul>";
                         }
-                        echo '</div></div></td>';
+                        echo '</div></div></div>';
                   }
 
-                  echo '</tr></table></div>
-              </td>
-          </tr>
-          <tr>
-            <td style="vertical-align:top;">
-              <table id="spider_catalog_image_table">';
+                  echo '</div></div></div>
+          
+		  
+		     <div class="sp_table" id="prodMiddle" class="spider_catalog_style" style="border:inherit !important" cellspacing="0" cellpadding="0">
+
+		  
+		  
+          <div class="sp_tr">
+            <div class="sp_td sp_main_td" style="vertical-align:top;">
+              <div class="sp_table" id="spider_catalog_image_table">';
                 $imgurl = explode(";;;", $row->image_url);
                 if (!($row->image_url != "" and $row->image_url != "******0")) {
                     $imgurl[0] = plugins_url("Front_images/noimage.jpg", __FILE__);
-                    echo '<tr>
-                                <td colspan="2" id="prod_main_picture_container">
+                    echo '<div class="sp_tr">
+                                <div class="sp_td  sp_main_picture_container" colspan="2" id="prod_main_picture_container">
                                   <div style="width:' . ($params['large_picture_width']  * 1.2) . 'px;height:' . ($params['large_picture_height']  * 1.2) . 'px;">
                                     <div style="width:' . ($params['large_picture_width']  * 1.2) . 'px;height:' . ($params['large_picture_height']  * 1.2) . 'px;
                                         background-image:url(' . plugins_url("Front_images/prodimgb.png", __FILE__) . ');
@@ -2400,12 +2939,12 @@ function html_front_end_single_product($rows, $reviews_rows, $params, $category_
                                             </a>
                                     </div>
                                   </div>
-                                </td>
-                            </tr>';
+                                </div>
+                            </div>';
                 } else {
                     $imgurl[0] = explode('******', $imgurl[0]);
-                    echo '<tr>
-                            <td colspan="2" id="prod_main_picture_container">
+                    echo '<div class="sp_tr">
+                            <div class="sp_td sp_main_picture_container" colspan="2" id="prod_main_picture_container">
                               <div style="width:' . ($params['large_picture_width'] * 1.2) . 'px;height:' . ($params['large_picture_height'] * 1.2) . 'px;">
                                 <div style="width:' . ($params['large_picture_width']  * 1.2) . 'px;height:' . ($params['large_picture_height'] * 1.2) . 'px;
                                     background-image:url(' . plugins_url("Front_images/prodimgb.png", __FILE__) . ');
@@ -2419,11 +2958,11 @@ function html_front_end_single_product($rows, $reviews_rows, $params, $category_
                                         </a>
                                 </div>
                               </div>
-                            </td>
-                          </tr>';
+                            </div>
+                          </div>';
                   }
                   echo '
-                    <tr><td style="text-align:center;">';
+                    <div class="sp_tr"><div class="sp_td" style="text-align:center;">';
 
                     $small_images_str = '';
                     $small_images_count = 0;
@@ -2450,14 +2989,14 @@ function html_front_end_single_product($rows, $reviews_rows, $params, $category_
                     else
                         echo '&nbsp;';
 
-                    echo '</td></tr>
-                </table></td>
-                    <td align="right" style="vertical-align: top;">';
-                      echo '<table style="width:99%;">';
+                    echo '</div></div>
+                </div></div>
+                    <div class="sp_td sp_main_td" align="right" style="vertical-align: top;">';
+                      echo '<div class="sp_table" style="width:99%;">';
 
                       $param_chan_color = 0;
                       if ($category_name != "") {
-                          echo '<tr style="border-bottom:solid 2px #e5e5e5;' . (($params['single_params_background_color1'] != '') ? ('background-color:' . $params['single_params_background_color1'] . ';') : '') . ' vertical-align:middle;"><td style="width:40%;padding:4px !important;"><b>' . __('Category:', 'sp_catalog') . '</b></td><td style="' . (($params['single_params_color'] != '') ? ('color:' . $params['single_params_color'] . ';') : '') . '"><span id="cat_' . $row->id . '">' . $category_name . '</span></td></tr>';
+                          echo '<div class="sp_tr" style="border-bottom:solid 2px #e5e5e5;' . (($params['single_params_background_color1'] != '') ? ('background-color:' . $params['single_params_background_color1'] . ';') : '') . ' vertical-align:middle;"><div class="sp_td" style="width:40%;padding:4px !important;"><b>' . __('Category:', 'sp_catalog') . '</b></div><div class="sp_td" style="' . (($params['single_params_color'] != '') ? ('color:' . $params['single_params_color'] . ';') : '') . '"><span id="cat_' . $row->id . '">' . $category_name . '</span></div></div>';
                           $param_chan_color++;
                       } else
                           echo '<span id="cat_' . $row->id . '"></span>';
@@ -2482,25 +3021,26 @@ function html_front_end_single_product($rows, $reviews_rows, $params, $category_
 
                                     $param_chan_color++;
 
-                                    echo '<tr style="border-bottom:solid 2px #e5e5e5;' . $bgcolor . 'text-align:left !important;"><td style="padding:4px !important;"><b>' . stripslashes($par1_data[0]) . ':</b></td>';
+                                    echo '<div class="sp_tr" style="border-bottom:solid 2px #e5e5e5;' . $bgcolor . 'text-align:left !important;"><div class="sp_td" style="padding:4px !important;"><b>' . stripslashes($par1_data[0]) . ':</b></div>';
 
 
-                                    echo '<td style="text-align:left !important;' . $bgcolor . (($params['single_params_color'] != '') ? ('color:' . $params['single_params_color'] . ';') : '') . '"><ul class="spidercatalogparamslist">';
+                                    echo '<div class="sp_td" style="text-align:left !important;' . $bgcolor . (($params['single_params_color'] != '') ? ('color:' . $params['single_params_color'] . ';') : '') . '"><ul class="spidercatalogparamslist">';
 
                                     for ($k = 0; $k < count($par_values); $k++)
                                         if ($par_values[$k] != "")
                                             echo '<li>' . stripslashes($par_values[$k]) . '</li>';
 
-                                    echo '</ul></td></tr>';
+                                    echo '</ul></div></div>';
 
                                 }
                             }
 
-                        echo '<tr style="text-align:left;vertical-align:middle;"><td colspan="2"><div style="line-height: 1;padding:4px !important;' . (isset($bgcolor) ? $bgcolor : "") . '">' . htmlspecialchars_decode($row->description ). '</div></td></tr></table>';
+                        echo '</div><div class="" style="text-align:left;vertical-align:middle;"><div class="" colspan="2"><div style="    word-break: break-all;line-height: 1;padding:4px !important;' . (isset($bgcolor) ? $bgcolor : "") . '">' . htmlspecialchars_decode($row->description) . '</div></div></div>';
 
-                        echo '</td></tr><tr><td colspan="2">';
+                        echo '</div></div></div><div class="">';
 
 
+						echo '<div class="" colspan="2">';
                         if ($params['enable_review'])
                         {
                         echo '<center><div style="margin-top: 10px;background-color:' . $params['product_back_add_your_review_here'] . ';width:240px;"><a name="rev" style="color:' . $params['product_color_add_your_review_here'] . ';text-decoration:inherit;font-size:150%">' . __('Add your review here', 'sp_catalog') . '</a></div></center>';
@@ -2555,26 +3095,26 @@ function html_front_end_single_product($rows, $reviews_rows, $params, $category_
 
                         ?>
 
-                        <table cellpadding="0" id="spider_catalog_captcha_table" cellspacing="10" border="0" valign="middle" width="100%">
-                            <tr>
-                                <td>
+                        <div class="sp_table" cellpadding="0" id="spider_catalog_captcha_table" cellspacing="10" border="0" valign="middle" width="100%">
+                            <div class="sp_tr">
+                                <div class="sp_td">
                                     <?php echo __('Please enter the code:', 'sp_catalog') ?>
-                                </td>
-                                <td style="width:120px !important;">
+                                </div>
+                                <div class="sp_td" style="width:120px !important;">
                                     <span id="wd_captcha"><img style="width:80px"
                                                                src="<?php echo admin_url('admin-ajax.php?action=spidercatalogwdcaptchae') ?>"
                                                                id="wd_captcha_img_<?php echo $ident; ?>" height="24" width="80"/></span><a
                                         href="javascript:refreshCaptcha(<?php echo $ident; ?>);" style="text-decoration:none">&nbsp;<img
                                             src="<?php echo plugins_url("", __FILE__) ?>/Front_images/refresh.png" border="0"
-                                            style="border:none"/></a>&nbsp;</td>
-                                <td><input type="text" name="code_<?php echo $ident; ?>" id="review_capcode_<?php echo $ident; ?>"
+                                            style="border:none"/></a>&nbsp;</div>
+                                <div class="sp_td"><input type="text" name="code_<?php echo $ident; ?>" id="review_capcode_<?php echo $ident; ?>"
                                            size="6"/><span style="display:none;" id="caphid_<?php echo $ident; ?>"></span>
-                                </td>
-                                <td style="text-align:right !important;" align="right">
+                                </div>
+                                <div class="sp_td" style="text-align:right !important;" align="right">
                                   <input type="button" class="spidercatalogbutton" style="<?php echo 'background-color:' . $params['product_back_add_your_review_here'] . '; color:' . $params['product_color_add_your_review_here'] ?>; width:inherit;margin-right:10px;" value="<?php echo __('Send', 'sp_catalog') ?>" onclick='prod_id=<?php echo $ident; ?>; submit_reveiw("<?php echo __('The Name field is required.', 'sp_catalog'); ?>","<?php echo __('The Message field is required.', 'sp_catalog'); ?>","<?php echo __('Sorry, the code you entered was invalid.', 'sp_catalog'); ?>");'/>
-                                </td>
-                            </tr>
-                        </table>
+                                </div>
+                            </div>
+                        </div>
 
                         </form>
                         </div>
@@ -2583,11 +3123,11 @@ function html_front_end_single_product($rows, $reviews_rows, $params, $category_
 
 
                         if (isset($_POST['code_' . $ident]))
-                            $code = $_POST['code_' . $ident];
+                            $code = esc_js(esc_html(stripslashes($_POST['code_' . $ident])));
                         else
                             $code = '';
                         if (isset($_POST['review_' . $ident]))
-                            $review = $_POST['review_' . $ident];
+                            $review = esc_js(esc_html(stripslashes($_POST['review_' . $ident])));
                         else
                             $review = '';
 
@@ -2694,11 +3234,61 @@ function html_front_end_single_product($rows, $reviews_rows, $params, $category_
     }
   }
   ?>
-  </td></tr></table></div><br/>
+  </div><br/>
   <script type="text/javascript">
     var SpiderCatOFOnLoad = window.onload;
     window.onload = SpiderCatAddToOnload;
   </script>
+  
+  <style>
+  .sp_table
+  {
+	  display:table;
+  }
+  .sp_tr
+  {
+	  display:table-row;
+  }
+  .sp_td
+  {
+	  display:table-cell;
+	  text-align:left;
+  }
+ 
+
+ @media only screen and (max-width: 600px) {
+		.sp_main_td
+		{
+			display:block;
+		}
+		
+		.sp_main_picture_container div
+		{
+			width:100% !important;
+			
+		}
+		
+		.sp_main_picture_container img
+		{
+			max-width:80% !important;
+			max-height:100% !important;
+			
+		}
+		
+		.sp_prod_title , .sp_prod_price
+		{
+			float:none !important;
+			display:block;
+		}
+		
+		.sp_prod_price
+		{
+		    margin-bottom: 6px;
+		}
+		
+		
+	}
+  </style>
   <?php
   $ident++;
   $content = ob_get_contents();
@@ -2712,7 +3302,7 @@ function html_search($rows, $params, $page_num, $prod_count, $prod_in_page, $rat
     if (isset($_POST['subcat_id_' . $cels_or_list . '_' . $ident . ''])) {
         if ($_POST['subcat_id_' . $cels_or_list . '_' . $ident . '']) {
             if ($_POST['subcat_id_' . $cels_or_list . '_' . $ident . ''] != 0)
-                $page_link = get_permalink($frontpage_id) . '&cat_id_' . $cels_or_list . '_' . $ident . '=' . $_POST['subcat_id_' . $cels_or_list . '_' . $ident . ''];
+                $page_link = get_permalink($frontpage_id) . '&cat_id_' . $cels_or_list . '_' . $ident . '=' . esc_js(esc_html(stripslashes($_POST['subcat_id_' . $cels_or_list . '_' . $ident . ''])));
             else
                 $page_link = get_permalink($frontpage_id);
         } else if (isset($_POST['prod_name_' . $cels_or_list . '_' . $ident . '']) or isset($_POST['page_num_' . $cels_or_list . '_' . $ident . '']))
@@ -2763,7 +3353,8 @@ function html_search($rows, $params, $page_num, $prod_count, $prod_in_page, $rat
               $page_link = get_permalink();
       }
   }
-  echo '<form action="' . $page_link . '" method="post" name="cat_form_' . $cels_or_list . '_' . $ident . '" id="cat_form_page_nav1"><input type="hidden" name="page_num_' . $cels_or_list . '_' . $ident . '"	value="1"><input type="hidden" name="subcat_id_' . $cels_or_list . '_' . $ident . '" id="subcat_id_' . $cels_or_list . '_' . $ident . '" value=""><div class="CatalogSearchBox" style="padding-top:10px;"><div class="spider_catalog_style" style="padding-bottom: 35px;">';
+
+  echo '<form action="' . $page_link . '" method="post" name="cat_form_' . $cels_or_list . '_' . $ident . '" id="cat_form_page_nav1"><input type="hidden" name="page_num_' . $cels_or_list . '_' . $ident . '"	value="1"><input type="hidden" name="subcat_id_' . $cels_or_list . '_' . $ident . '" id="subcat_id_' . $cels_or_list . '_' . $ident . '" value=""><div class="CatalogSearchBox" style="padding-top:10px;"><div class="spider_catalog_style" style="padding-bottom: 35px;float:none !important;">';
   if ($params["choose_category"])/* || $params1['categories'] > 0*/
   {
   ?>     
@@ -2822,7 +3413,9 @@ function html_search($rows, $params, $page_num, $prod_count, $prod_in_page, $rat
 }
 
 function html_categories($rows, $params, $page_num, $prod_count, $prod_in_page, $ratings, $voted, $categories, $category_list, $params1, $cat_rows, $cat_id, $child_ids, $params7, $categor, $par, $cels_or_list, $ident, $from) {
-  ?>
+
+//the_content( 'READ MORE'  );
+ ?>
     <script>
         function catt_idd_<?php echo $ident; ?>(id) {
             document.getElementById("subcat_id_<?php echo $cels_or_list."_".$ident; ?>").value = id;
@@ -2833,22 +3426,56 @@ function html_categories($rows, $params, $page_num, $prod_count, $prod_in_page, 
       #productMainDiv a {
         color:<?php echo $params[$from . 'hyperlink_color']; ?>;
       }
+	  
+	  .sp_table
+	{
+		display:table;
+	}
+	
+	.sp_tr{
+		display:table-row;
+	}
+	.sp_td
+	{
+		display:table-cell;
+	}
+	  
+	  @media only screen and (max-width: 600px) {
+		.sp_main_td
+		{
+			display:block !important;
+		}
+	
+	.sp_image_container,.sp_cat_title
+	{
+		width:100% !important;
+	}
+	
+	.sp_prod_image
+	{
+		max-width:100% !important;
+		max-height:100% !important;
+	}
+	
+	}
+	  
     </style>
     <?php
+	
     foreach ($categor as $chidd) {
         if ($par != 0 and $params1['show_category_details'] == 1 and ($cat_id != $chidd->id or (isset($_POST['cat_id_' . $cels_or_list . '_' . $ident . '']) && $_POST['cat_id_' . $cels_or_list . '_' . $ident . ''])  or (isset($_GET['cat_id_' . $cels_or_list . '_' . $ident . '']) && $_GET['cat_id_' . $cels_or_list . '_' . $ident . '']))) {
           echo '<a style="cursor:pointer;" onclick="catt_idd_' . $ident . '(' . $chidd->parent . ')" >' . __('Back to Catalog', 'sp_catalog') . '</a>';
-        }
+        } 
     }
-    echo '<div id="productMainDiv" class="spider_catalog_style" style="width: 100%;display: inline-block;border-width:' . $params[$from . 'border_width'] . 'px;border-color:' . $params[$from . 'border_color'] . ';border-style:' . $params[$from . 'border_style'] . ';' . (($params[$from . 'text_color'] != '') ? ('color:' . $params[$from . 'text_color'] . ';') : '') . (($params[$from . 'background_color'] != '') ? ('background-color:' . $params[$from . 'background_color'] . ';') : '') . '">'; 
+    echo '<div id="spider_catalog_wp" class="spider_catalog_style" style="width: 100%;display: inline-block;border-width:' . $params[$from . 'border_width'] . 'px;border-color:' . $params[$from . 'border_color'] . ';border-style:' . $params[$from . 'border_style'] . ';' . (($params[$from . 'text_color'] != '') ? ('color:' . $params[$from . 'text_color'] . ';') : '') . (($params[$from . 'background_color'] != '') ? ('background-color:' . $params[$from . 'background_color'] . ';') : '') . '">'; 
     if ($cat_id != 0 and $params1['show_category_details'] == 1) {
-        echo '<div id="prodTitle" style="text-align: right;width:370px;' . (($params[$from . 'button_color'] != '') ? ('color:' . $params[$from . 'button_color'] . ';') : '') . (($params[$from . 'button_background_color'] != '') ? ('background-color:' . $params[$from . 'button_background_color'] . ';') : '') . 'padding:20px;font-size:' . $params[$from . 'category_title_size'] . 'px;">' . $cat_rows[0]->cat_name . '</div>';
+        echo '<div class="sp_cat_title" id="prodTitle" style="text-align: right;width:370px;' . (($params[$from . 'button_color'] != '') ? ('color:' . $params[$from . 'button_color'] . ';') : '') . (($params[$from . 'button_background_color'] != '') ? ('background-color:' . $params[$from . 'button_background_color'] . ';') : '') . 'padding:20px;font-size:' . $params[$from . 'category_title_size'] . 'px;">' . $cat_rows[0]->cat_name . '</div>';
         $imgurl = explode(";;;", $cat_rows[0]->cat_image_url);
-        echo '<table id="category" border="0" cellspacing="10" cellpadding="10"><tr>';
+        echo '<div class="sp_table" id="category" border="0" cellspacing="10" cellpadding="10"><div class="sp_tr">';
         if ($cat_rows[0]->cat_image_url != "" and $cat_rows[0]->cat_image_url != "******0") {
           $url_for_image = explode('******', $imgurl[0]);
-          echo '<td style="vertical-align:top;width:' . ($params[$from . 'category_picture_width'] + 10) . 'px;height:' . ($params[$from . 'category_picture_height'] + 10) . 'px;"><table cellpadding="0" cellspacing="5" border="0" style="margin:0px;"><tr><td colspan="2" id="prod_main_picture_container" style="vertical-align:top;"><div style="display:table-cell;text-align:center;vertical-align:middle;width:' . ($params[$from . 'category_picture_width'] + 10) . 'px;height:' . ($params[$from . 'category_picture_height'] + 10) . 'px;border: #CCCCCC solid 2px;padding:3px;background-color:white;"><a href="' . $url_for_image[0] . '" target="_blank" id="prod_main_picture_a_' . $ident . '" style="text-decoration:none;"><img id="prod_main_picture_' . $ident . '" style="max-width:' . ($params[$from . 'category_picture_width']) . 'px;max-height:' . ($params[$from . 'category_picture_height']) . 'px;" src="' . $url_for_image[0] . '" /></a></div></td></tr>';
-          echo '<tr><td style="text-align:justify;">';
+          echo '<div class="sp_td sp_main_td sp_image_container" style="padding:10px;vertical-align:top;width:' . ($params[$from . 'category_picture_width'] + 10) . 'px;height:' . ($params[$from . 'category_picture_height'] + 10) . 'px;"><div class="sp_table" cellpadding="0" cellspacing="5" border="0" style="margin:0px;"><div class="sp_tr"><div class="sp_td" colspan="2" id="prod_main_picture_container" style="vertical-align:top;"><div  class="sp_image_container" style="text-align:center;vertical-align:middle;width:' . ($params[$from . 'category_picture_width'] + 10) . 'px;height:' . ($params[$from . 'category_picture_height'] + 10) . 'px;border: #CCCCCC solid 2px;padding:3px;background-color:white;"><a href="' . $url_for_image[0] . '" target="_blank" id="prod_main_picture_a_' . $ident . '" style="text-decoration:none;"><img class="sp_prod_image" id="prod_main_picture_' . $ident . '" style="max-width:' . ($params[$from . 'category_picture_width']) . 'px;max-height:' . ($params[$from . 'category_picture_height']) . 'px;" src="' . $url_for_image[0] . '" /></a></div></div></div>';
+          echo '<div class="sp_tr"><div class="sp_td" style="text-align:justify;">';
           $small_images_str = '';
           $small_images_count = 0;
           foreach ($imgurl as $img) {
@@ -2874,9 +3501,26 @@ function html_categories($rows, $params, $page_num, $prod_count, $prod_in_page, 
               echo $small_images_str;
           else
               echo '&nbsp;';
-          echo '</td></tr></table></td>';
+          echo '</div></div></div></div>';
         }
-        echo '<td style="vertical-align:top;word-break: break-word;line-height:1.5;">' . htmlspecialchars_decode($cat_rows[0]->cat_description) . '</td></tr></table>';
+		
+		
+		
+        echo '<div class="sp_td sp_main_td" id="sp_cat_description" style="padding:10px;font-size:14px;vertical-align:top;word-break: break-word;line-height:1.5;">
+		' . $cat_rows[0]->cat_description . '
+
+		
+		</div>
+		
+		
+		
+		
+		
+		</div></div>';
+		
+
+		
+		
         if (count($child_ids) and $params7['show_sub'] == 1) {
           echo '<center><div id="prodTitle" style="width:190px;' . (($params[$from . 'button_color'] != '') ? ('color:' . $params[$from . 'button_color'] . ';') : '') . (($params[$from . 'button_background_color'] != '') ? ('background-color:' . $params[$from . 'button_background_color'] . ';') : '') . 'padding:10px;font-size:' . $params[$from . 'category_title_size'] . 'px;">' . __('Subcategories', 'sp_catalog') . '</div></center>';          
           echo '<table id="category" border="0" cellspacing="10" cellpadding="10"><tr style="background-color:' . $params[$from . 'categories_header_background_color'] . '; color:' . $params[$from . 'categories_header_color'] . '">';

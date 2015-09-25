@@ -52,7 +52,9 @@ function front_end_single_product($id)
     $message_text = catal_secure_for_scripts('message_text_' . $ident . '');
 
 
+	if(!isset($_SESSION))
     @session_start();
+	
     if (isset($_POST['code_' . $ident]))
         $code = esc_html($_POST['code_' . $ident]);
     else

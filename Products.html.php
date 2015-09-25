@@ -68,8 +68,7 @@ function html_showProducts($rows, $pageNav, $sort, $cat_row)
                         style="color:blue; text-decoration:none;">More...</a></td>
               <td colspan="7" align="right" style="font-size:16px;">
                 <a href="http://web-dorado.com/files/fromSpiderCatalog.php" target="_blank" style="color:red; text-decoration:none;">
-                  <img src="<?php echo plugins_url("images/header.png",__FILE__) ?>" border="0" alt="http://web-dorado.com/files/fromSpiderCatalog.php" width="215"><br>
-                  Get the full version&nbsp;&nbsp;&nbsp;&nbsp;
+                  <img src="<?php echo plugins_url("images/header.png",__FILE__) ?>" border="0" alt="http://web-dorado.com/files/fromSpiderCatalog.php" width="215">
                 </a>
               </td>
             </tr>
@@ -104,15 +103,18 @@ function html_showProducts($rows, $pageNav, $sort, $cat_row)
 
                 </td>
             </tr>
-            <tr>
+           <tr>
                 <td colspan="2" style="text-align:right;">
-                    <input type="button" style="margin-bottom:9px" value="Export as CSV" onclick="window.location='<?php echo admin_url('admin-ajax.php?action=catalogexportcsv'); ?>'" />
+                    <input type="button" style="margin-bottom:9px" value="Export as CSV" onclick="
+					
+					document.getElementById('admin_form').action='<?php echo admin_url('admin-ajax.php?action=catalogexportcsv'); ?>'; document.getElementById('admin_form').submit();
+
+					" />
 					&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
                     <!--<form action="" method="post" enctype="multipart/form-data">-->
                         Import CSV:
                         <span style="position:relative;height:25px;width:auto;cursor:pointer;">
-                            <input type="button" style="cursor:pointer;" value="Choose file"/>
-                            <input style="width:82%;height:90%;position:absolute;top:-5px;left:0px;opacity:0;cursor:pointer;display:block;" type="file" id="csv_file" value="brrr" name="filename" size="20" />
+                            <input style="" type="file" id="csv_file" value="brrr" name="filename" size="5" />
                         </span>
                         <input type="hidden" name="uploaded" id="uploaded" value="chok" />
                         <input type="button" value="Upload" onclick="if (document.getElementById('csv_file').value=='') {
@@ -123,6 +125,7 @@ function html_showProducts($rows, $pageNav, $sort, $cat_row)
                                                                         return false;
                                                                       }
                                                                       else {
+																		 document.getElementById('admin_form').action='admin.php?page=Products_Spider_Catalog'
                                                                         if (document.getElementById('uploaded')) {
                                                                           document.getElementById('uploaded').value = 'ok';
                                                                         }
@@ -173,7 +176,7 @@ function html_showProducts($rows, $pageNav, $sort, $cat_row)
             <TR>
                 <th scope="col" id="id"
                     class="<?php if ($sort["sortid_by"] == "id") echo $sort["custom_style"]; else echo $sort["default_style"]; ?>"
-                    style="width:30px"><a
+                    style="width:44px"><a
                         href="javascript:ordering('id',<?php if ($sort["sortid_by"] == "id") echo $sort["1_or_2"]; else echo "1"; ?>)"><span>ID</span><span
                             class="sorting-indicator"></span></a></th>
                 <th class="manage-column column-cb check-column table_small_col"><input id="check_all" type="checkbox" style="margin:0;" /></th>
@@ -308,8 +311,7 @@ function html_editProduct($row, $lists, $votes, $params, $rows1, $cat_row, $pare
                     style="color:blue; text-decoration:none;">More...</a></td>
             <td colspan="7" align="right" style="font-size:16px;">
                 <a href="http://web-dorado.com/files/fromSpiderCatalog.php" target="_blank" style="color:red; text-decoration:none;">
-                  <img src="<?php echo plugins_url("images/header.png",__FILE__) ?>" border="0" alt="http://web-dorado.com/files/fromSpiderCatalog.php" width="215"><br>
-                  Get the full version&nbsp;&nbsp;&nbsp;&nbsp;
+                  <img src="<?php echo plugins_url("images/header.png",__FILE__) ?>" border="0" alt="http://web-dorado.com/files/fromSpiderCatalog.php" width="215">
                 </a>
               </td>
         </tr>
@@ -807,8 +809,7 @@ function html_addProduct($lists, $params, $rows1, $cat_row)
                     style="color:blue; text-decoration:none;">More...</a></td>
                     <td colspan="7" align="right" style="font-size:16px;">
                 <a href="http://web-dorado.com/files/fromSpiderCatalog.php" target="_blank" style="color:red; text-decoration:none;">
-                  <img src="<?php echo plugins_url("images/header.png",__FILE__) ?>" border="0" alt="http://web-dorado.com/files/fromSpiderCatalog.php" width="215"><br>
-                  Get the full version&nbsp;&nbsp;&nbsp;&nbsp;
+                  <img src="<?php echo plugins_url("images/header.png",__FILE__) ?>" border="0" alt="http://web-dorado.com/files/fromSpiderCatalog.php" width="215">
                 </a>
               </td>
         </tr>

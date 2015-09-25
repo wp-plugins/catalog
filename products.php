@@ -194,6 +194,8 @@ function  showProducts()
         $r = 0;
         while (($row = fgetcsv($file, 0, ",")) != FALSE) {
           $r++;
+		  if( $row[0]!='' OR $row[1]!='' OR $row[2]!='' OR $row[3]!='' OR $row[4]!='' OR $row[5]!='' OR $row[6]!='' OR $row[7]!='' OR $row[8]!='')  
+		{
           if($row[0] != 'Name' and $row[1] != 'Category id' ) {
             $row[0] = addslashes($row[0]);
             $row[1] = addslashes($row[1]);
@@ -208,6 +210,7 @@ function  showProducts()
             $ins="INSERT INTO `" . $wpdb->prefix . "spidercatalog_products` (`name`,`category_id`,`description`, `image_url`, `cost`, `market_cost`, `param`, `ordering`, `published`, `published_in_parent`) VALUES ('$row[0]', '$row[1]', '$row[2]', '$row[3]', '$row[4]', '$row[5]', '$row[6]', '$row[7]', '$row[8]', '$row[9]')";
             $wpdb->query($ins);
           }
+		}
         }
         fclose($file);
         echo '<script>window.location.href = "admin.php?page=Products_Spider_Catalog";</script>';
@@ -412,6 +415,9 @@ function  update_prad_cat($id)
 
     $script_cat = preg_replace('#<script(.*?)>(.*?)</script>#is', '', stripslashes($_POST["content"]));
 //var_dump($_POST['cat_search']);die();
+
+
+
     $savedd = $wpdb->update($wpdb->prefix . 'spidercatalog_products', array(
             'name' => esc_html($_POST['name']),
             'category_id' => $_POST['categ_search'],

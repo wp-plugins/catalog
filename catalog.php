@@ -4,7 +4,7 @@
 Plugin Name: Spider Catalog
 Plugin URI: http://web-dorado.com/products/wordpress-catalog.html
 Description: Spider Catalog is a convenient tool for organizing the products represented on your website into catalogs. Each product on the catalog is assigned with a relevant category, which makes it easier for the customers to search and identify the needed products within the catalog.
-Version: 1.6.9
+Version: 1.7.0
 Author: http://web-dorado.com/
 License: GNU/GPLv3 http://www.gnu.org/licenses/gpl-3.0.html
 */
@@ -1116,6 +1116,8 @@ function showPictureAnimated(href)
     if(darkBG) document.getElementById("showPictureAnimatedBg").style.display="block";
     SetOpacity(document.getElementById("showPictureAnimated"), 100);
     document.getElementById("showPictureAnimated").style.display="block";
+	    document.getElementById("showPictureAnimated").style.backgroundColor ="#FFF";
+
     newImg.src = href;
 }
 
@@ -1151,6 +1153,7 @@ function showPictureAnimatedInner(href, newImgheight, newImgwidth)
 
     FadeOpacity("showPictureAnimated", 0, 100, 500, 10);
     document.getElementById("showPictureAnimated").style.display="block";
+    document.getElementById("showPictureAnimated").style.backgroundColor ="#FFF";
 
     if(slideShowOn)
     {
@@ -1712,7 +1715,7 @@ INSERT INTO `$table_name` (`name`, `title`,`description`, `value`) VALUES
 
 ('parameters_select_box_width', 'Parameters Select Box Width', 'Parameters Select Box Width', '104'),
 ('params_color', 'Color of Parameter Values', 'Color of Parameter Values', '#2F699E'),
-('product_cell_width', 'Product Cell Width', 'Product Cell Width', '290'),
+('product_cell_width', 'Product Cell Width', 'Product Cell Width', '270'),
 ('product_cell_height', 'Product Cell Height', 'Product Cell Height', '750'),
 ('price_size_small', 'Price Size', 'Price Size', '20'),
 ('market_price_size_small', 'Market Price Size', 'Market Price Size', '12'),
@@ -1746,7 +1749,7 @@ INSERT INTO `$table_name` (`name`, `title`,`description`, `value`) VALUES
 ('cell_new_picture_width', 'Cell New Picture Width', 'Cell New Picture Width', '110'),
 ('cell_new_picture_height', 'Cell New Picture Height', 'Cell New Picture Height', '95'),
 ('cell_new_title_color', 'Cell New Title Color', 'Cell New Title Color', '#004372'),
-('new_cell_all_width', 'New Cell Width', 'New Cell Width', '290'),
+('new_cell_all_width', 'New Cell Width', 'New Cell Width', '270'),
 ('new_cell_all_height', 'New Cell All Height', 'New Cell All Height', '580'),
 ('cell_new_text_size', 'Cell New Text Size', 'Cell New Text Size', '12'),
 ('cell_new_text_back_color_1', 'Cell New Text Background Color 1', 'Cell New Text Background Color 1', '#F6F6F6'),
@@ -1763,7 +1766,7 @@ INSERT INTO `$table_name` (`name`, `title`,`description`, `value`) VALUES
 ('cell_tumble_picture_height', 'Picture Height', 'Picture Height', '120'),
 ('cell_tumble_text_size', 'Text Size', 'Text Size', '12'),
 ('cell_tumble_text_color', 'Text Color', 'Text Color', '#434242'),
-('cell_tumble_all_width', 'All Width', 'All Width', '290'),
+('cell_tumble_all_width', 'All Width', 'All Width', '270'),
 ('cell_tumble_all_height', 'All Height', 'All Height', '225'),
 ('all_cell_title_size', 'Title Size', 'Title Sizes', '18'),
 ('all_cell_title_color', 'Title Color', 'Title Color', '#004372'),
@@ -1773,7 +1776,7 @@ INSERT INTO `$table_name` (`name`, `title`,`description`, `value`) VALUES
 ('all_cell_picture_height', 'Picture Height', 'Picture Height', '200'),
 ('all_cell_text_size', 'Text Size', 'Text Size', '15'),
 ('all_cell_text_color', 'Text Color', 'Text Color', '#434242'),
-('all_cell_all_width', 'All Width', 'All Width', '290'),
+('all_cell_all_width', 'All Width', 'All Width', '270'),
 ('all_cell_all_height', 'All Height', 'All Height', '470'),
 ('single_cell_title_size', 'Title Size', 'Title Size', '18'),
 ('single_cell_title_color', 'Title Color', 'Title Color', '#004372'),
@@ -2195,7 +2198,7 @@ function spidercatalog()
 
             ('parameters_select_box_width', 'Parameters Select Box Width', 'Parameters Select Box Width', '104'),
             ('params_color', 'Color of Parameter Values', 'Color of Parameter Values', '#2F699E'),
-            ('product_cell_width', 'Product Cell Width', 'Product Cell Width', '290'),
+            ('product_cell_width', 'Product Cell Width', 'Product Cell Width', '270'),
             ('product_cell_height', 'Product Cell Height', 'Product Cell Height', '750'),
             ('price_size_small', 'Price Size', 'Price Size', '20'),
             ('market_price_size_small', 'Market Price Size', 'Market Price Size', '12'),
@@ -2229,7 +2232,7 @@ function spidercatalog()
             ('cell_new_picture_width', 'Cell New Picture Width', 'Cell New Picture Width', '110'),
             ('cell_new_picture_height', 'Cell New Picture Height', 'Cell New Picture Height', '95'),
             ('cell_new_title_color', 'Cell New Title Color', 'Cell New Title Color', '#004372'),
-            ('new_cell_all_width', 'New Cell Width', 'New Cell Width', '290'),
+            ('new_cell_all_width', 'New Cell Width', 'New Cell Width', '270'),
             ('new_cell_all_height', 'New Cell All Height', 'New Cell All Height', '580'),
             ('cell_new_text_size', 'Cell New Text Size', 'Cell New Text Size', '12'),
             ('cell_new_text_back_color_1', 'Cell New Text Background Color 1', 'Cell New Text Background Color 1', '#F6F6F6'),
@@ -2246,7 +2249,7 @@ function spidercatalog()
             ('cell_tumble_picture_height', 'Picture Height', 'Picture Height', '120'),
             ('cell_tumble_text_size', 'Text Size', 'Text Size', '12'),
             ('cell_tumble_text_color', 'Text Color', 'Text Color', '#434242'),
-            ('cell_tumble_all_width', 'All Width', 'All Width', '290'),
+            ('cell_tumble_all_width', 'All Width', 'All Width', '270'),
             ('cell_tumble_all_height', 'All Height', 'All Height', '225'),
             ('all_cell_title_size', 'Title Size', 'Title Sizes', '18'),
             ('all_cell_title_color', 'Title Color', 'Title Color', '#004372'),
@@ -2256,7 +2259,7 @@ function spidercatalog()
             ('all_cell_picture_height', 'Picture Height', 'Picture Height', '200'),
             ('all_cell_text_size', 'Text Size', 'Text Size', '15'),
             ('all_cell_text_color', 'Text Color', 'Text Color', '#434242'),
-            ('all_cell_all_width', 'All Width', 'All Width', '290'),
+            ('all_cell_all_width', 'All Width', 'All Width', '270'),
             ('all_cell_all_height', 'All Height', 'All Height', '470'),
             ('single_cell_title_size', 'Title Size', 'Title Size', '18'),
             ('single_cell_title_color', 'Title Color', 'Title Color', '#004372'),
@@ -2379,7 +2382,7 @@ function catalog_Featured_Plugins() {
     )
   );
   ?>
-  <div id="main_featured_plugins_page">
+  <div id="main_featured_plugins_page_catalog">
     <h3>Featured Plugins</h3>
     <ul id="featured-plugins-list">
       <?php

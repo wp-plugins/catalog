@@ -23,8 +23,7 @@ This section allows you to configure the global options. <a href="http://web-dor
 If you want to customize to the global options of your website,than you need to buy a license</td>   
 <td colspan="7" align="right" style="font-size:16px;">
   <a href="http://web-dorado.com/files/fromSpiderCatalog.php" target="_blank" style="color:red; text-decoration:none;">
-<img src="<?php echo plugins_url("images/header.png",__FILE__) ?>" border="0" alt="http://web-dorado.com/files/fromSpiderCatalog.php" width="215"><br>
-Get the full version&nbsp;&nbsp;&nbsp;&nbsp;
+<img src="<?php echo plugins_url("images/header.png",__FILE__) ?>" border="0" alt="http://web-dorado.com/files/fromSpiderCatalog.php" width="215">
 </a>
   </td>
         </tr>
@@ -55,8 +54,7 @@ This section allows you to configure the Styles and Colors. <a href="http://web-
 If you want to customize to the styles and colors of your website,than you need to buy a license</td>   
 <td colspan="7" align="right" style="font-size:16px;">
   <a href="http://web-dorado.com/files/fromSpiderCatalog.php" target="_blank" style="color:red; text-decoration:none;">
-<img src="<?php echo plugins_url("images/header.png",__FILE__) ?>" border="0" alt="http://web-dorado.com/files/fromSpiderCatalog.php" width="215"><br>
-Get the full version&nbsp;&nbsp;&nbsp;&nbsp;
+<img src="<?php echo plugins_url("images/header.png",__FILE__) ?>" border="0" alt="http://web-dorado.com/files/fromSpiderCatalog.php" width="215">
 </a>
   </td>
         </tr>

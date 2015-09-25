@@ -57,9 +57,8 @@ var keyCode = event.keyCode ? event.keyCode : event.which ? event.which : event.
 This section allows you to create categories of products. <a href="http://web-dorado.com/spider-catalog-wordpress-guide-step-2.html" target="_blank" style="color:blue; text-decoration:none;">More...</a></td> 
 <td colspan="7" align="right" style="font-size:16px;">
   <a href="http://web-dorado.com/files/fromSpiderCatalog.php" target="_blank" style="color:red; text-decoration:none;">
-<img src="<?php echo plugins_url("images/header.png",__FILE__) ?>" border="0" alt="http://web-dorado.com/files/fromSpiderCatalog.php" width="215"><br>
-Get the full version&nbsp;&nbsp;&nbsp;&nbsp;
-</a>
+<img src="<?php echo plugins_url("images/header.png",__FILE__) ?>" border="0" alt="http://web-dorado.com/files/fromSpiderCatalog.php" width="215">
+</a><br><br>
   </td>  
         </tr>
     <tr>
@@ -96,7 +95,7 @@ Get the full version&nbsp;&nbsp;&nbsp;&nbsp;
     <?php
 	$serch_value='';
 	if(isset($_POST['serch_or_not'])) {if($_POST['serch_or_not']=="search"){ $serch_value=esc_html(stripslashes($_POST['search_events_by_title'])); }else{$serch_value="";}} 
-	$serch_fields='<div class="alignleft actions" style="width:185px;">
+	$serch_fields='<div class="alignleft actions" style="">
     	<label for="search_events_by_title" style="font-size:14px">Filter: </label>
         <input type="text" name="search_events_by_title" value="'.$serch_value.'" id="search_events_by_title" onchange="clear_serch_texts()">
     </div>
@@ -134,11 +133,11 @@ Get the full version&nbsp;&nbsp;&nbsp;&nbsp;
    <th scope="col" id="id" class="<?php if($sort["sortid_by"]=="id") echo $sort["custom_style"]; else echo $sort["default_style"]; ?>" style="width:30px" ><a href="javascript:ordering('id',<?php if($sort["sortid_by"]=="id") echo $sort["1_or_2"]; else echo "1"; ?>)"><span>ID</span><span class="sorting-indicator"></span></a></th>
    <th class="manage-column column-cb check-column table_small_col"><input id="check_all" type="checkbox" style="margin:0;" /></th>
  <th scope="col" id="name" class="<?php if($sort["sortid_by"]=="name") echo $sort["custom_style"]; else echo $sort["default_style"]; ?>" style="width:85px" ><a href="javascript:ordering('name',<?php if($sort["sortid_by"]=="name") echo $sort["1_or_2"]; else echo "1"; ?>)"><span>Name</span><span class="sorting-indicator"></span></a></th>
-<th scope="col" id="description" class="<?php if($sort["sortid_by"]=="description") echo $sort["custom_style"]; else echo $sort["default_style"]; ?>" style="" ><a href="javascript:ordering('description',<?php if($sort["sortid_by"]=="description") echo $sort["1_or_2"]; else echo "1"; ?>)"><span>Description</span><span class="sorting-indicator"></span></a></th>
+<th scope="col" id="description" class="<?php if($sort["sortid_by"]=="description") echo $sort["custom_style"]; else echo $sort["default_style"]; ?>" style="width: 20%;" ><a href="javascript:ordering('description',<?php if($sort["sortid_by"]=="description") echo $sort["1_or_2"]; else echo "1"; ?>)"><span>Description</span><span class="sorting-indicator"></span></a></th>
 <th scope="col" id="count" class="<?php if($sort["sortid_by"]=="count") echo $sort["custom_style"]; else echo $sort["default_style"]; ?>" style="width: 102px;
 " ><a href="javascript:ordering('count',<?php if($sort["sortid_by"]=="count") echo $sort["1_or_2"]; else echo "1"; ?>)"><span>Subcategories</span><span class="sorting-indicator"></span></a></th>
 
-<th scope="col" id="par_name" class="<?php if($sort["sortid_by"]=="par_name") echo $sort["custom_style"]; else echo $sort["default_style"]; ?>" style="width: 76px;" ><a href="javascript:ordering('par_name',<?php if($sort["sortid_by"]=="par_name") echo $sort["1_or_2"]; else echo "1"; ?>)"><span>Parent</span><span class="sorting-indicator"></span></a></th>
+<th scope="col" id="par_name" class="<?php if($sort["sortid_by"]=="par_name") echo $sort["custom_style"]; else echo $sort["default_style"]; ?>" style="width: 88px;" ><a href="javascript:ordering('par_name',<?php if($sort["sortid_by"]=="par_name") echo $sort["1_or_2"]; else echo "1"; ?>)"><span>Parent</span><span class="sorting-indicator"></span></a></th>
 
 <th scope="col" id="prod_count" class="<?php if($sort["sortid_by"]=="prod_count") echo $sort["custom_style"]; else echo $sort["default_style"]; ?>" style="width: 75px;" ><a href="javascript:ordering('prod_count',<?php if($sort["sortid_by"]=="prod_count") echo $sort["1_or_2"]; else echo "1"; ?>)"><span>Products</span><span class="sorting-indicator"></span></a></th>
 
@@ -231,7 +230,7 @@ Get the full version&nbsp;&nbsp;&nbsp;&nbsp;
          <td><a  href="admin.php?page=Categories_Spider_Catalog&task=edit_cat&id=<?php echo $rows[$i]->id?>"><?php echo esc_html(stripslashes($rows[$i]->name)); ?></a></td>
          <td><?php echo $rows[$i]->description; ?></td>
 		 <td><a href="admin.php?page=Categories_Spider_Catalog&catid=<?php echo $rows[$i]->id; ?>" alt="Subcategories">(<?php echo $rows[$i]->count; ?>)</a></td>
-		 <td><?php if(!($uncat)){echo 'Uncategory';} else{ echo $rows[$i]->par_name;}?></td>		 
+		 <td><?php if(!($uncat)){echo 'Uncategorized';} else{ echo $rows[$i]->par_name;}?></td>		 
 		 <td><a href="admin.php?page=Products_Spider_Catalog&categoryid=<?php echo $rows[$i]->id; ?>" alt="">(<?php if(!($pr_count)){echo '0';} else{ echo $rows[$i]->prod_count;} ?>)</a></td>
          <td ><?php echo  $move_up.$move_down; ?><input type="text" name="order_<?php echo $rows[$i]->id; ?>" style="width:40px" value="<?php echo $rows[$i]->ordering; ?>" /></td>
          <td><a  href="admin.php?page=Categories_Spider_Catalog&task=unpublish_cat&id=<?php echo $rows[$i]->id?>&_wpnonce=<?php echo $sp_cat_nonce; ?>"<?php if(!$rows[$i]->published){ ?> style="color:#C00;" <?php }?> ><?php if($rows[$i]->published)echo "Yes"; else echo "No"; ?></a></td>
@@ -320,17 +319,18 @@ function change_select()
 
 <table width="95%">
   <tbody>
-                    <tr>   
+  
+   <tr>   
 <td width="100%" style="font-size:14px; font-weight:bold"><a href="http://web-dorado.com/spider-catalog-wordpress-guide-step-2.html" target="_blank" style="color:blue; text-decoration:none;">User Manual</a><br />
-This section allows you to create categories of products. <a href="http://web-dorado.com/spider-catalog-wordpress-guide-step-2.html" target="_blank" style="color:blue; text-decoration:none;">More...</a></td>   
+This section allows you to create categories of products. <a href="http://web-dorado.com/spider-catalog-wordpress-guide-step-2.html" target="_blank" style="color:blue; text-decoration:none;">More...</a></td>  
 <td colspan="7" align="right" style="font-size:16px;">
   <a href="http://web-dorado.com/files/fromSpiderCatalog.php" target="_blank" style="color:red; text-decoration:none;">
-<img src="<?php echo plugins_url("images/header.png",__FILE__) ?>" border="0" alt="http://web-dorado.com/files/fromSpiderCatalog.php" width="215"><br>
-Get the full version&nbsp;&nbsp;&nbsp;&nbsp;
+<img src="<?php echo plugins_url("images/header.png",__FILE__) ?>" border="0" alt="http://web-dorado.com/files/fromSpiderCatalog.php" width="215">
 </a>
-  </td>
+  </td> 
         </tr>
   <tr>
+              
   <td width="100%"><h2>Category - <?php echo esc_html(stripslashes($row->name)) ?></h2></td>
   <td align="right"><input type="button" onclick="submitbutton('save')" value="Save" class="button-secondary action"> </td>  
   <td align="right"><input type="button" onclick="submitbutton('apply')" value="Apply" class="button-secondary action"> </td> 
@@ -776,9 +776,8 @@ function change_select()
 This section allows you to create categories of products. <a href="http://web-dorado.com/spider-catalog-wordpress-guide-step-2.html" target="_blank" style="color:blue; text-decoration:none;">More...</a></td>  
 <td colspan="7" align="right" style="font-size:16px;">
   <a href="http://web-dorado.com/files/fromSpiderCatalog.php" target="_blank" style="color:red; text-decoration:none;">
-<img src="<?php echo plugins_url("images/header.png",__FILE__) ?>" border="0" alt="http://web-dorado.com/files/fromSpiderCatalog.php" width="215"><br>
-Get the full version&nbsp;&nbsp;&nbsp;&nbsp;
-</a>
+<img src="<?php echo plugins_url("images/header.png",__FILE__) ?>" border="0" alt="http://web-dorado.com/files/fromSpiderCatalog.php" width="215">
+</a><br><br>
   </td> 
         </tr>
   <tr>
