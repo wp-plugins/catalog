@@ -13,7 +13,7 @@ if (!function_exists('current_user_can')) {
 //////////////////////////////////////////////////////                                             ///////////////////////////////////////////////////////
 
 
-function html_showProducts($rows, $pageNav, $sort, $cat_row)
+function wdcat_html_showProducts($rows, $pageNav, $sort, $cat_row)
 {
 
 
@@ -269,7 +269,7 @@ function html_showProducts($rows, $pageNav, $sort, $cat_row)
 }
 
 
-function html_editProduct($row, $lists, $votes, $params, $rows1, $cat_row, $parent_cat)
+function wdcat_html_editProduct($row, $lists, $votes, $params, $rows1, $cat_row, $parent_cat)
 {
 
     ?>
@@ -765,7 +765,7 @@ echo $count_ord+1;
 }
 
 
-function html_addProduct($lists, $params, $rows1, $cat_row)
+function wdcat_html_addProduct($lists, $params, $rows1, $cat_row)
 {
 
 

@@ -9,7 +9,7 @@ if (!function_exists('current_user_can')) {
 }
 
 
-function showGloballll($op_type = "0")
+function wdcat_showGloballll($op_type = "0")
 {
     global $wpdb;
     $lists = array();
@@ -23,11 +23,11 @@ function showGloballll($op_type = "0")
         $param_values[$key] = $value;
     }
 
-    html_showGlobal($param_values, $op_type);
+    wdcat_html_showGlobal($param_values, $op_type);
 }
 
 
-function showStyles($op_type = "0")
+function wdcat_showStyles($op_type = "0")
 {
     global $wpdb;
     $query = "SELECT *  from " . $wpdb->prefix . "spidercatalog_params ";
@@ -40,11 +40,11 @@ function showStyles($op_type = "0")
         $value = $row->value;
         $param_values[$key] = $value;
     }
-    html_showStyles($param_values, $op_type);
+    wdcat_html_showStyles($param_values, $op_type);
 }
 
 
-function save_styles_options()
+function wdcat_save_styles_options()
 {
 
     global $wpdb;
@@ -63,7 +63,7 @@ function save_styles_options()
     }
 }
 
-function save_global_options()
+function wdcat_save_global_options()
 {
 
     global $wpdb;

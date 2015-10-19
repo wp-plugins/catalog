@@ -12,7 +12,7 @@ if(!function_exists('current_user_can')){
 //////////////////////////////////////////////////////                          ///////////////////////////////////////////////////////
 /////////////////// show categories
 
-function showCategory() {	  
+function wdcat_showCategory() {	  
   global $wpdb;  
   if(isset($_POST['search_events_by_title']))
   $_POST['search_events_by_title'] = esc_html(stripslashes($_POST['search_events_by_title']));
@@ -261,7 +261,7 @@ if(isset($sort["sortid_by"]))
 	}
 	}
 }
-$rows=open_cat_in_tree($rows);
+$rows=wdcat_open_cat_in_tree($rows);
 	$query ="SELECT  ".$wpdb->prefix."spidercatalog_product_categories.ordering,".$wpdb->prefix."spidercatalog_product_categories.id, COUNT( ".$wpdb->prefix."spidercatalog_products.category_id ) AS prod_count
 FROM ".$wpdb->prefix."spidercatalog_products, ".$wpdb->prefix."spidercatalog_product_categories
 WHERE ".$wpdb->prefix."spidercatalog_products.category_id = ".$wpdb->prefix."spidercatalog_product_categories.id
@@ -282,8 +282,8 @@ foreach($rows as $row)
 	
 	}
 	
-	$cat_row=open_cat_in_tree($cat_row);
-		html_showcategories( $rows, $pageNav,$sort,$cat_row);
+	$cat_row=wdcat_open_cat_in_tree($cat_row);
+		wdcat_html_showcategories( $rows, $pageNav,$sort,$cat_row);
   }
 
 
@@ -295,7 +295,7 @@ foreach($rows as $row)
 
 //////////////////////        edit or add categories
 
-function open_cat_in_tree($catt,$tree_problem='',$hihiih=1){
+function wdcat_open_cat_in_tree($catt,$tree_problem='',$hihiih=1){
 
 global $wpdb;
 global $glob_ordering_in_cat;
@@ -314,12 +314,12 @@ GROUP BY ".$wpdb->prefix."spidercatalog_products.category_id) AS c ON c.id = a.i
 (SELECT ".$wpdb->prefix."spidercatalog_product_categories.name AS par_name,".$wpdb->prefix."spidercatalog_product_categories.id FROM ".$wpdb->prefix."spidercatalog_product_categories) AS g
  ON a.parent=g.id WHERE a.name LIKE '%".$search_tag."%' AND a.parent=".$local_cat->id." group by a.id  ".$glob_ordering_in_cat; 
  $new_cat=$wpdb->get_results($new_cat_query);
- open_cat_in_tree($new_cat,$tree_problem. "— ",0);
+ wdcat_open_cat_in_tree($new_cat,$tree_problem. "— ",0);
 }
 return $trr_cat;
 }
 
-function editCategory($id) {	  
+function wdcat_editCategory($id) {	  
    global $wpdb;
    $query=$wpdb->prepare("SELECT * FROM ".$wpdb->prefix."spidercatalog_product_categories WHERE id=%d",$id);
    $row = $wpdb->get_row($query);
@@ -329,22 +329,22 @@ function editCategory($id) {
    $par = explode('	',$row->param);
    $count_ord = count($images);
    $cat_row = $wpdb->get_results("SELECT * FROM ".$wpdb->prefix."spidercatalog_product_categories WHERE id!=" .$id." and parent=0");
-   $cat_row = open_cat_in_tree($cat_row);
+   $cat_row = wdcat_open_cat_in_tree($cat_row);
    $query = "SELECT name,ordering FROM ".$wpdb->prefix."spidercatalog_product_categories WHERE parent=".$row->parent."  ORDER BY `ordering` ";
    $ord_elem = $wpdb->get_results($query);
-   Html_editCategory($ord_elem, $count_ord, $images, $row, $cat_row);
+   wdcat_Html_editCategory($ord_elem, $count_ord, $images, $row, $cat_row);
 }
   
-function add_category() {
+function wdcat_add_category() {
    global $wpdb;	
    $query="SELECT name,ordering FROM ".$wpdb->prefix."spidercatalog_product_categories WHERE parent=0 ORDER BY `ordering`";
    $ord_elem=$wpdb->get_results($query); ///////ordering elements list
    $cat_row=$wpdb->get_results("SELECT * FROM ".$wpdb->prefix."spidercatalog_product_categories where parent=0");
-   $cat_row=open_cat_in_tree($cat_row);	
-   html_add_category($ord_elem, $cat_row);	
+   $cat_row=wdcat_open_cat_in_tree($cat_row);	
+   wdcat_html_add_category($ord_elem, $cat_row);	
 }
 
-function save_cat()
+function wdcat_save_cat()
 {
 	
 	 global $wpdb;
@@ -451,7 +451,7 @@ function save_cat()
 
 
 
-function change_cat( $id ){
+function wdcat_change_cat( $id ){
   global $wpdb;
   
   $published=$wpdb->get_var($wpdb->prepare("SELECT published FROM ".$wpdb->prefix."spidercatalog_product_categories WHERE `id`=%d",$id) );
@@ -473,7 +473,7 @@ function change_cat( $id ){
     return true;
 }
 
-function publish_all($published) {
+function wdcat_publish_all($published) {
   global $wpdb;  
   $ids = $wpdb->get_col('SELECT id FROM ' . $wpdb->prefix . 'spidercatalog_product_categories');
   foreach ($ids as $id) {
@@ -487,7 +487,7 @@ function publish_all($published) {
   return true;
 }
 
-function delete_all() {
+function wdcat_delete_all() {
   global $wpdb;
   $ids = $wpdb->get_col('SELECT id FROM ' . $wpdb->prefix . 'spidercatalog_product_categories');
   foreach ($ids as $id) {
@@ -498,7 +498,7 @@ function delete_all() {
   return true;
 }
 
-function removeCategory($id)
+function wdcat_removeCategory($id)
 {
 	
 	
@@ -552,7 +552,7 @@ function removeCategory($id)
 
 
 
-function apply_cat($id) {	
+function wdcat_apply_cat($id) {	
   global $wpdb;
   if(!is_numeric($id)){
 	echo 'insert numerc id';

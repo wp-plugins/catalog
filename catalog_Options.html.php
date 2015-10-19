@@ -9,7 +9,7 @@ if (!function_exists('current_user_can')) {
 }
 
 
-function html_showGlobal($param_values, $op_type)
+function wdcat_html_showGlobal($param_values, $op_type)
 {
 
 
@@ -40,7 +40,7 @@ If you want to customize to the global options of your website,than you need to 
 }
 
 
-function      html_showStyles($param_values, $op_type)
+function      wdcat_html_showStyles($param_values, $op_type)
 {
 
 

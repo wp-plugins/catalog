@@ -4,7 +4,7 @@
 Plugin Name: Spider Catalog
 Plugin URI: http://web-dorado.com/products/wordpress-catalog.html
 Description: Spider Catalog is a convenient tool for organizing the products represented on your website into catalogs. Each product on the catalog is assigned with a relevant category, which makes it easier for the customers to search and identify the needed products within the catalog.
-Version: 1.7.0
+Version: 1.7.1
 Author: http://web-dorado.com/
 License: GNU/GPLv3 http://www.gnu.org/licenses/gpl-3.0.html
 */
@@ -347,69 +347,69 @@ function Categories_Spider_Catalog()
     switch ($task) {
 
         case 'add_cat':
-            add_category();
+            wdcat_add_category();
             break;
         case 'publish_cat':
 			$nonce_sp_cat = $_REQUEST['_wpnonce'];
 			if (! wp_verify_nonce($nonce_sp_cat, 'nonce_sp_cat') )
 			  die("Are you sure you want to do this?");
-            change_cat($id);
-            showCategory();
+            wdcat_change_cat($id);
+            wdcat_showCategory();
             break;
         case 'publish':
 		    check_admin_referer('nonce_sp_cat', 'nonce_sp_cat');
-            publish_all(TRUE);
-            showCategory();
+            wdcat_publish_all(TRUE);
+            wdcat_showCategory();
             break;
         case 'unpublish_cat':
 			$nonce_sp_cat = $_REQUEST['_wpnonce'];
 			if (! wp_verify_nonce($nonce_sp_cat, 'nonce_sp_cat') )
 			  die("Are you sure you want to do this?");
-            change_cat($id);
-            showCategory();
+            wdcat_change_cat($id);
+            wdcat_showCategory();
             break;
         case 'unpublish':
 			check_admin_referer('nonce_sp_cat', 'nonce_sp_cat');
-            publish_all(FALSE);
-            showCategory();
+            wdcat_publish_all(FALSE);
+            wdcat_showCategory();
             break;
 
         case 'edit_cat':
             if ($id)
-                editCategory($id);
+                wdcat_editCategory($id);
             else {
                 $id = $wpdb->get_var("SELECT MAX( id ) FROM " . $wpdb->prefix . "spidercatalog_product_categories");
-                editCategory($id);
+                wdcat_editCategory($id);
             }
             break;
 
         case 'save':
             if ($id) {
 				check_admin_referer('nonce_sp_cat', 'nonce_sp_cat');
-                apply_cat($id);
+                wdcat_apply_cat($id);
 			}
             else {
-                save_cat();
+                wdcat_save_cat();
 				check_admin_referer('nonce_sp_cat', 'nonce_sp_cat');
 			}
-            showCategory();
+            wdcat_showCategory();
             break;
 
         case 'apply':
             if ($id) {
 				check_admin_referer('nonce_sp_cat', 'nonce_sp_cat');
-                apply_cat($id);
-                editCategory($id);
+                wdcat_apply_cat($id);
+                wdcat_editCategory($id);
 
             } else {
 			  check_admin_referer('nonce_sp_cat', 'nonce_sp_cat');
-			  $true = save_cat();
+			  $true = wdcat_save_cat();
 			  if ($true) {
 				$id = $wpdb->get_var("SELECT MAX( id ) FROM " . $wpdb->prefix . "spidercatalog_product_categories");
-				editCategory($id);
+				wdcat_editCategory($id);
 			  } else {
 				?><h1>Database Error Please install plugin again</h1><?php
-				showCategory();
+				wdcat_showCategory();
 			  }
             }
 
@@ -420,17 +420,17 @@ function Categories_Spider_Catalog()
 			$nonce_sp_cat = $_REQUEST['_wpnonce'];
 			if (! wp_verify_nonce($nonce_sp_cat, 'nonce_sp_cat') )
 			  die("Are you sure you want to do this?");
-            removeCategory($id);
-            showCategory();
+            wdcat_removeCategory($id);
+            wdcat_showCategory();
             break;
         case 'delete':
 			check_admin_referer('nonce_sp_cat', 'nonce_sp_cat');
-            delete_all();
-            showCategory();
+            wdcat_delete_all();
+            wdcat_showCategory();
             break;
 
         default:
-            showCategory();
+            wdcat_showCategory();
             break;
     }
 
@@ -459,32 +459,32 @@ function Products_Spider_Catalog()
 
     switch ($task) {
         case 'edit_prad':
-            editProduct($id);
+            wdcat_editProduct($id);
             break;
         case 'add_prad':
-            addProduct();
+            wdcat_addProduct();
             break;
         case 'apply':
             if ($id) {
 			    check_admin_referer('nonce_sp_cat', 'nonce_sp_cat');
-                update_prad_cat($id);
+                wdcat_update_prad_cat($id);
             } else {
 			    check_admin_referer('nonce_sp_cat', 'nonce_sp_cat');
-                save_prad_cat();
+                wdcat_save_prad_cat();
                 $id = $wpdb->get_var("SELECT MAX(id) FROM " . $wpdb->prefix . "spidercatalog_products");
             }
-            editProduct($id);
+            wdcat_editProduct($id);
             break;
         case 'save':
             if ($id) {
 				check_admin_referer('nonce_sp_cat', 'nonce_sp_cat');
-                update_prad_cat($id);
+                wdcat_update_prad_cat($id);
 			}
             else {
                 check_admin_referer('nonce_sp_cat', 'nonce_sp_cat');
-				save_prad_cat();
+				wdcat_save_prad_cat();
 			}
-            showProducts();
+            wdcat_showProducts();
             break;
 
         case 'saveorder':
@@ -492,39 +492,39 @@ function Products_Spider_Catalog()
             break;
         case 'publish':
 		    check_admin_referer('nonce_sp_cat', 'nonce_sp_cat');
-            publish_all(TRUE);
-            showProducts();
+            wdcat_publish_all(TRUE);
+            wdcat_showProducts();
             break;
         case 'unpublish':
 		    check_admin_referer('nonce_sp_cat', 'nonce_sp_cat');
-            publish_all(FALSE);
-            showProducts();
+            wdcat_publish_all(FALSE);
+            wdcat_showProducts();
             break;
         case 'delete':
 		    check_admin_referer('nonce_sp_cat', 'nonce_sp_cat');
-            delete_all();
-            showProducts();
+            wdcat_delete_all();
+            wdcat_showProducts();
             break;
         case 'unpublish_prad':
 		    $nonce_sp_cat = $_REQUEST['_wpnonce'];
 			if (! wp_verify_nonce($nonce_sp_cat, 'nonce_sp_cat') )
 			  die("Are you sure you want to do this?");
-            change_prod($id);
-            showProducts();
+            wdcat_change_prod($id);
+            wdcat_showProducts();
             break;
         case 'unpublish_prad':
 		    $nonce_sp_cat = $_REQUEST['_wpnonce'];
 			if (! wp_verify_nonce($nonce_sp_cat, 'nonce_sp_cat') )
 			  die("Are you sure you want to do this?");
-            change_prod($id);
-            showProducts();
+            wdcat_change_prod($id);
+            wdcat_showProducts();
             break;
         case 'remove_prod':
 		    $nonce_sp_cat = $_REQUEST['_wpnonce'];
 			if (! wp_verify_nonce($nonce_sp_cat, 'nonce_sp_cat') )
 			  die("Are you sure you want to do this?");
-            removeProduct($id);
-            showProducts();
+            wdcat_removeProduct($id);
+            wdcat_showProducts();
             break;
         case 'edit_reviews':
             spider_cat_prod_rev($id);
@@ -533,7 +533,7 @@ function Products_Spider_Catalog()
 
         case 'delete_reviews':
 			check_admin_referer('nonce_sp_cat', 'nonce_sp_cat');
-            delete_rev($id);
+            wdcat_delete_rev($id);
             spider_cat_prod_rev($id);
 
             break;
@@ -541,7 +541,7 @@ function Products_Spider_Catalog()
 			$nonce_sp_cat = $_REQUEST['_wpnonce'];
 			if (! wp_verify_nonce($nonce_sp_cat, 'nonce_sp_cat') )
 			  die("Are you sure you want to do this?");
-            delete_single_review($id);
+            wdcat_delete_single_review($id);
             spider_cat_prod_rev($id);
 
             break;
@@ -552,7 +552,7 @@ function Products_Spider_Catalog()
 
         case 'delete_ratings':
 			check_admin_referer('nonce_sp_cat', 'nonce_sp_cat');
-            delete_ratings($id);
+            wdcat_delete_ratings($id);
             spider_cat_prod_rating($id);
 
             break;
@@ -560,25 +560,25 @@ function Products_Spider_Catalog()
 			$nonce_sp_cat = $_REQUEST['_wpnonce'];
 			if (! wp_verify_nonce($nonce_sp_cat, 'nonce_sp_cat') )
 			  die("Are you sure you want to do this?");
-            delete_single_rating($id);
+            wdcat_delete_single_rating($id);
             spider_cat_prod_rating($id);
 
             break;
         case 's_p_apply_rating':
             check_admin_referer('nonce_sp_cat', 'nonce_sp_cat');
-			update_s_c_rating($id);
+			wdcat_update_s_c_rating($id);
             spider_cat_prod_rating($id);
 
             break;
         case 's_p_save_rating':
             check_admin_referer('nonce_sp_cat', 'nonce_sp_cat');
-			update_s_c_rating($id);
-            editProduct($id);
+			wdcat_update_s_c_rating($id);
+            wdcat_editProduct($id);
 
             break;
 
         default:
-            showProducts();
+            wdcat_showProducts();
 
             break;
     }
@@ -594,8 +594,8 @@ function Options_Catalog_styles()
     require_once("catalog_Options.html.php");
     if (isset($_GET['task']))
         if ($_GET['task'] == 'save')
-            save_styles_options();
-    showStyles();
+            wdcat_save_styles_options();
+    wdcat_showStyles();
 
 
 }
@@ -607,8 +607,8 @@ function Options_Catalog_global()
     require_once("catalog_Options.html.php");
     if (isset($_GET['task']))
         if ($_GET['task'] == 'save')
-            save_global_options();
-    showGloballll();
+            wdcat_save_global_options();
+    wdcat_showGloballll();
 
 
 }
@@ -756,7 +756,7 @@ function spider_catalog_window()
 
     global $wpdb;
 
-    function open_cat_in_tree($catt, $tree_problem = '', $hihiih = 1)
+    function wdcat_open_cat_in_tree($catt, $tree_problem = '', $hihiih = 1)
     {
 
         global $wpdb;
@@ -774,7 +774,7 @@ GROUP BY " . $wpdb->prefix . "spidercatalog_products.category_id) AS c ON c.id =
 (SELECT " . $wpdb->prefix . "spidercatalog_product_categories.name AS par_name," . $wpdb->prefix . "spidercatalog_product_categories.id FROM " . $wpdb->prefix . "spidercatalog_product_categories) AS g
  ON a.parent=g.id WHERE a.name LIKE '%" . esc_html($search_tag) . "%' AND a.parent=" . $local_cat->id . " group by a.id";
             $new_cat = $wpdb->get_results($new_cat_query);
-            open_cat_in_tree($new_cat, $tree_problem . "— ", 0);
+            wdcat_open_cat_in_tree($new_cat, $tree_problem . "— ", 0);
         }
         return $trr_cat;
 
@@ -782,7 +782,7 @@ GROUP BY " . $wpdb->prefix . "spidercatalog_products.category_id) AS c ON c.id =
 
     $single_products = $wpdb->get_results('SELECT * FROM ' . $wpdb->prefix . 'spidercatalog_products WHERE published=\'1\'');
     $categories = $wpdb->get_results('SELECT * FROM ' . $wpdb->prefix . 'spidercatalog_product_categories WHERE parent=0 AND published=\'1\'');
-    $categories = open_cat_in_tree($categories);
+    $categories = wdcat_open_cat_in_tree($categories);
 
     ?>
     <html xmlns="http://www.w3.org/1999/xhtml">

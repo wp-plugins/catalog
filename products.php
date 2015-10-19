@@ -15,7 +15,7 @@ if (!function_exists('current_user_can')) {
 //////////////////////////////////////////////////////                                             ///////////////////////////////////////////////////////
 
 
-function  showProducts()
+function  wdcat_showProducts()
 {
 
 
@@ -172,7 +172,7 @@ function  showProducts()
     $rows = $wpdb->get_results($query);
     $cat_row_query = "SELECT id,name FROM " . $wpdb->prefix . "spidercatalog_product_categories where parent=0 ORDER BY `ordering`";
     $cat_row = $wpdb->get_results($cat_row_query);
-    $cat_row = open_cat_in_tree($cat_row);
+    $cat_row = wdcat_open_cat_in_tree($cat_row);
     
     $max_file_size = 5;
     if(isset($_POST['uploaded']) && $_POST['uploaded']=='ok') {
@@ -216,11 +216,11 @@ function  showProducts()
         echo '<script>window.location.href = "admin.php?page=Products_Spider_Catalog";</script>';
       }
     }    
-    html_showProducts($rows, $pageNav, $sort, $cat_row);
+    wdcat_html_showProducts($rows, $pageNav, $sort, $cat_row);
 }
 
 
-function open_cat_in_tree($catt, $tree_problem = '', $hihiih = 1)
+function wdcat_open_cat_in_tree($catt, $tree_problem = '', $hihiih = 1)
 {
 
     global $wpdb;
@@ -238,14 +238,14 @@ GROUP BY " . $wpdb->prefix . "spidercatalog_products.category_id) AS c ON c.id =
 (SELECT " . $wpdb->prefix . "spidercatalog_product_categories.name AS par_name," . $wpdb->prefix . "spidercatalog_product_categories.id FROM " . $wpdb->prefix . "spidercatalog_product_categories) AS g
  ON a.parent=g.id WHERE a.name LIKE '%" . esc_html($search_tag) . "%' AND a.parent=" . esc_html($local_cat->id) . " group by a.id";
         $new_cat = $wpdb->get_results($new_cat_query);
-        open_cat_in_tree($new_cat, $tree_problem . "— ", 0);
+        wdcat_open_cat_in_tree($new_cat, $tree_problem . "— ", 0);
     }
     return $trr_cat;
 
 }
 
 
-function change_prod($id)
+function wdcat_change_prod($id)
 {
     global $wpdb;
 
@@ -281,7 +281,7 @@ function publish_all($published) {
   return true;
 }
 
-function delete_all() {
+function wdcat_delete_all() {
   global $wpdb;
   $ids = $wpdb->get_col('SELECT id FROM ' . $wpdb->prefix . 'spidercatalog_products');
   foreach ($ids as $id) {
@@ -293,7 +293,7 @@ function delete_all() {
 }
 
 
-function editProduct($id)
+function wdcat_editProduct($id)
 {
     global $wpdb;
     $params = $wpdb->get_results("SELECT * FROM " . $wpdb->prefix . "spidercatalog_params");
@@ -347,14 +347,14 @@ function editProduct($id)
 
 
     $lists = $wpdb->get_results("SELECT ordering,name FROM " . $wpdb->prefix . "spidercatalog_products WHERE category_id='" . esc_html($cat_id_for_order) . "' order by ordering");
-    $cat_row = open_cat_in_tree($cat_row);
+    $cat_row = wdcat_open_cat_in_tree($cat_row);
 
 
-    html_editProduct($row, $lists, $votes, $params, $rows1, $cat_row, $parent_cat);
+    wdcat_html_editProduct($row, $lists, $votes, $params, $rows1, $cat_row, $parent_cat);
 }
 
 
-function  update_prad_cat($id)
+function  wdcat_update_prad_cat($id)
 {
     global $wpdb;
     $corent_ord = $wpdb->get_var($wpdb->prepare('SELECT `ordering` FROM ' . $wpdb->prefix . 'spidercatalog_products WHERE id=%d', $id));
@@ -454,7 +454,7 @@ function  update_prad_cat($id)
 }
 
 
-function save_prad_cat()
+function wdcat_save_prad_cat()
 {
 
 
@@ -545,7 +545,7 @@ function save_prad_cat()
 }
 
 
-function addProduct()
+function wdcat_addProduct()
 {
 
     global $wpdb;
@@ -568,19 +568,19 @@ function addProduct()
     $query = "SELECT ordering,name FROM " . $wpdb->prefix . "spidercatalog_products order by ordering";
     $rows1 = $wpdb->get_results($query);
     $cat_row = $wpdb->get_results("SELECT * FROM " . $wpdb->prefix . "spidercatalog_product_categories where parent=0");
-    $cat_row = open_cat_in_tree($cat_row);
+    $cat_row = wdcat_open_cat_in_tree($cat_row);
 
 
     $lists = $wpdb->get_results("SELECT ordering,name FROM " . $wpdb->prefix . "spidercatalog_products order by ordering");
 
 
-    html_addProduct($lists, $params, $rows1, $cat_row);
+    wdcat_html_addProduct($lists, $params, $rows1, $cat_row);
 
 
 }
 
 
-function removeProduct($id)
+function wdcat_removeProduct($id)
 {
 
 
@@ -687,7 +687,7 @@ function   spider_cat_prod_rev($id)
 }
 
 
-function delete_rev($id)
+function wdcat_delete_rev($id)
 {
 
     global $wpdb;
@@ -720,7 +720,7 @@ function delete_rev($id)
 }
 
 
-function delete_single_review($id)
+function wdcat_delete_single_review($id)
 {
     global $wpdb;
     $del_id = $_GET['del_id'];
@@ -804,7 +804,7 @@ function   spider_cat_prod_rating($id)
 }
 
 
-function delete_ratings($id)
+function wdcat_delete_ratings($id)
 {
 
     global $wpdb;
@@ -837,7 +837,7 @@ function delete_ratings($id)
 }
 
 
-function delete_single_rating($id)
+function wdcat_delete_single_rating($id)
 {
     global $wpdb;
     $del_id = $_GET['del_id'];
@@ -857,7 +857,7 @@ function delete_single_rating($id)
 }
 
 
-function update_s_c_rating($id)
+function wdcat_update_s_c_rating($id)
 {
     global $wpdb;
     $rows = $wpdb->get_col($wpdb->prepare("SELECT `id` FROM " . $wpdb->prefix . "spidercatalog_product_votes WHERE product_id=%d", $id));

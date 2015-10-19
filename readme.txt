@@ -4,7 +4,7 @@ Donate link: http://web-dorado.com/products/wordpress-catalog.html
 Tags: directory, product catalog ,catalog, product, products , product reviews, product review, product catalogue , wp catalog, catalogo, catalogue, product tabs, product feed, product portfolio, product management, blog catalog, catalog of goods, WP Catalogue, product directory, vote, review, inventory, list products, products catalog, attributes
 Requires at least: 3.4  
 Tested up to: 4.3   
-Stable tag: 1.7.0
+Stable tag: 1.7.1
 License: GPLv2 or later  
 License URI: http://www.gnu.org/licenses/gpl-2.0.html  
   
@@ -157,6 +157,9 @@ If any problem occurs with Spider [Wordpress Catalog](http://wordpress.org/exten
 
 
 == Changelog ==
+
+= 1.7.1 =
+* Minor bug fixed   
 
 = 1.7.0 =
 * responsive design  

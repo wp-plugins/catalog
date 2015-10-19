@@ -11,7 +11,7 @@ if(!function_exists('current_user_can')){
  //////////////////////////////////////////////////////                                             ///////////////////////////////////////////////////////
  //////////////////////////////////////////////////////                                             ///////////////////////////////////////////////////////
 
-function html_showcategories( $rows,  $pageNav,$sort,$cat_row){
+function wdcat_html_showcategories( $rows,  $pageNav,$sort,$cat_row){
 	global $wpdb;
 	?>
     <script language="javascript">
@@ -286,7 +286,7 @@ This section allows you to create categories of products. <a href="http://web-do
 
 
 
-function Html_editCategory($ord_elem, $count_ord,$images,$row,$cat_row)
+function wdcat_Html_editCategory($ord_elem, $count_ord,$images,$row,$cat_row)
 
 {
 	
@@ -740,7 +740,7 @@ for($i=0;$i<$count_ord;$i++)
 
 
 
-function html_add_category($ord_elem, $cat_row)
+function wdcat_html_add_category($ord_elem, $cat_row)
 {
 	
 	
