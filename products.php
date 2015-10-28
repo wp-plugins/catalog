@@ -286,7 +286,7 @@ function wdcat_delete_all() {
   $ids = $wpdb->get_col('SELECT id FROM ' . $wpdb->prefix . 'spidercatalog_products');
   foreach ($ids as $id) {
     if (isset($_POST['check_' . $id])) {
-      removeProduct($id);
+      wdcat_removeProduct($id);
     }
   }
   return true;
